@@ -6,4 +6,33 @@ export const en: Dictionary = {
   nav: { main: '', menu: '' },
   theme: { toggle: '' },
   footer: { label: '', social: '', rights: '' },
+  // US-029
+  legal: {
+    updated: '',
+    editor: '',
+    director: '',
+    host: '',
+    contactVia: '',
+    contactForm: '',
+    hostAddress: '',
+    hostPhone: '',
+  },
+  // US-008
+  contact: {
+    title: '',
+    intro: '',
+    name: '',
+    email: '',
+    motif: '',
+    message: '',
+    submit: '',
+    sending: '',
+    unavailableTitle: '',
+    unavailable: '',
+    privacyIntro: '',
+    privacyMore: '',
+    thanksTitle: '',
+    backHome: '',
+    linkedin: '',
+  },
 };

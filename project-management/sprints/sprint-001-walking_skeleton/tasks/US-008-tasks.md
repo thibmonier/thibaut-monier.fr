@@ -17,19 +17,19 @@
 
 | ID | Type | Tâche | Estimation | Responsable | Dépend de | Statut |
 |----|------|-------|------------|-------------|-----------|--------|
-| T-008-01 | [CONTENT] | Décisions et textes du contact : motifs, messages, repli, mode d'envoi | 2h | PO | - | 🔲 |
-| T-008-02 | [TEST] | Écrire les tests unitaires RED : validation, anti-spam, payload, gestion des réponses | 4h | Dev | T-001-13 | 🔲 |
-| T-008-03 | [TEST] | Écrire les tests e2e RED du formulaire (Web3Forms simulé par `page.route`) | 4h | Dev | T-001-13 | 🔲 |
-| T-008-04 | [FE-WEB] | Configuration du contact validée au build et `contact.ts` (GREEN) | 4h | Dev | T-008-01, T-008-02 | 🔲 |
-| T-008-05 | [FE-WEB] | Composant `ContactForm` accessible et lien de RDV | 5h | Dev | T-008-03, T-008-04, T-002-08 | 🔲 |
-| T-008-06 | [FE-WEB] | Script d'amélioration progressive : validation, envoi `fetch`, états | 4h | Dev | T-008-05 | 🔲 |
-| T-008-07 | [FE-WEB] | Pages `/contact/` et `/contact/merci/` (remplacent la page d'attente) | 2,5h | Dev | T-008-05 | 🔲 |
-| T-008-08 | [FE-WEB] | Mention RGPD courte sous le formulaire | 1h | Dev | T-008-05 | 🔲 |
-| T-008-09 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, envoi réel unique | 2,5h | Dev | T-008-06, T-008-07, T-008-08, T-029-06 | 🔲 |
-| T-008-10 | [OPS] | Variables de build, CSP et console propre | 1,5h | Dev | T-008-09, T-001-14 | 🔲 |
-| T-008-11 | [TEST] | Scénario inter-US : de l'accueil au formulaire avec le motif « Poste » | 1h | Dev | T-008-07, T-004-07 | 🔲 |
-| T-008-12 | [DOC] | Guide du contact et ADR-0011 | 1h | Dev | T-008-10 | 🔲 |
-| T-008-13 | [REV] | Revue d'US-008 (DoD §1, §3, §4, §6) | 2h | Dev | T-008-11, T-008-12 | 🔲 |
+| T-008-01 | [CONTENT] | Décisions et textes du contact : motifs, messages, repli, mode d'envoi | 2h | PO | - | 🔄 |
+| T-008-02 | [TEST] | Écrire les tests unitaires RED : validation, anti-spam, payload, gestion des réponses | 4h | Dev | T-001-13 | ✅ |
+| T-008-03 | [TEST] | Écrire les tests e2e RED du formulaire (Web3Forms simulé par `page.route`) | 4h | Dev | T-001-13 | ✅ |
+| T-008-04 | [FE-WEB] | Configuration du contact validée au build et `contact.ts` (GREEN) | 4h | Dev | T-008-01, T-008-02 | ✅ |
+| T-008-05 | [FE-WEB] | Composant `ContactForm` accessible et lien de RDV | 5h | Dev | T-008-03, T-008-04, T-002-08 | ✅ |
+| T-008-06 | [FE-WEB] | Script d'amélioration progressive : validation, envoi `fetch`, états | 4h | Dev | T-008-05 | ✅ |
+| T-008-07 | [FE-WEB] | Pages `/contact/` et `/contact/merci/` (remplacent la page d'attente) | 2,5h | Dev | T-008-05 | ✅ |
+| T-008-08 | [FE-WEB] | Mention RGPD courte sous le formulaire | 1h | Dev | T-008-05 | ✅ |
+| T-008-09 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, envoi réel unique | 2,5h | Dev | T-008-06, T-008-07, T-008-08, T-029-06 | ✅ |
+| T-008-10 | [OPS] | Variables de build, CSP et console propre | 1,5h | Dev | T-008-09, T-001-14 | 🔄 |
+| T-008-11 | [TEST] | Scénario inter-US : de l'accueil au formulaire avec le motif « Poste » | 1h | Dev | T-008-07, T-004-07 | 🔄 |
+| T-008-12 | [DOC] | Guide du contact et ADR-0011 | 1h | Dev | T-008-10 | ✅ |
+| T-008-13 | [REV] | Revue d'US-008 (DoD §1, §3, §4, §6) | 2h | Dev | T-008-11, T-008-12 | 🔄 |
 
 **Total estimé** : 34,5h (13 tâches)
 
@@ -103,7 +103,7 @@ graph TD
 - **Responsable** : PO
 - **Dépend de** : -
 - **Débloque** : T-008-04
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours
 
 **Description** :  
 Figer : motifs `mission | poste | autre` et libellés ; messages exacts (« Veuillez renseigner votre adresse e-mail. », « Merci, votre message est bien envoyé. Réponse sous 48 h ouvrées. », « L'envoi a échoué. Écrivez-moi directement à l'adresse ci-dessous. ») ; adresse e-mail publique de repli (dédiée) ; URL Calendly ; libellé « Réserver un créneau de 30 min ». **Décision à trancher** (point d'attention n°3) : envoi par `fetch` seul (recommandé par security.md, `form-action 'self'`) avec repli `mailto` dans `<noscript>`, au lieu d'un envoi natif sans JavaScript (qui exigerait `form-action https://api.web3forms.com`). Rédiger ADR-0011.
@@ -124,7 +124,7 @@ Figer : motifs `mission | poste | autre` et libellés ; messages exacts (« Veui
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-008-04
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/unit/lib/contact.test.ts` : `validateContact` (messages exacts par champ, e-mail invalide), `parseMotif` (valeurs connues, défaut), `isBot` (champ piège rempli ou délai < 3 s, horloge injectée), `buildPayload` (access_key, name, email, motif, message, botcheck vide, `subject` préfixé `[Mission]`/`[Poste]`/`[Autre]`), `interpretResponse` (200 succès ; 4xx message du service ; réseau/5xx → repli e-mail), `tests/unit/config/contact.test.ts` (schéma : motifs, URL de RDV https, e-mail de repli).
@@ -144,7 +144,7 @@ Figer : motifs `mission | poste | autre` et libellés ; messages exacts (« Veui
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-008-05
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/e2e/contact.spec.ts` : envoi nominal (requête simulée 200, redirection vers `/contact/merci/?motif=mission`, message de succès affiché en < 3 s) ; `?motif=poste` pré-sélectionne « Poste » ; lien RDV avec `target="_blank"` et `rel="noopener noreferrer"` ; champ e-mail vide : message sous le champ, focus sur le champ, aucune requête ; champ piège rempli ou envoi < 3 s : aucune requête, faux succès ; réponse 503 ou réseau coupé : message + lien `mailto` + saisie conservée ; étiquettes liées, `aria-describedby` ; mention RGPD avec lien `/vie-privee/#formulaire` ; aucune requête tierce au chargement ; cibles ≥ 44 px.
@@ -163,7 +163,7 @@ Figer : motifs `mission | poste | autre` et libellés ; messages exacts (« Veui
 - **Responsable** : Dev
 - **Dépend de** : T-008-01, T-008-02
 - **Débloque** : T-008-05
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Implémenter `src/config/contact.ts` (schéma Zod : motifs, URL Calendly, e-mail de repli ; clé `PUBLIC_WEB3FORMS_KEY` lue via `import.meta.env`, build en échec si absente en production) et `src/lib/contact.ts` (fonctions pures de T-008-02).
@@ -183,7 +183,7 @@ Implémenter `src/config/contact.ts` (schéma Zod : motifs, URL Calendly, e-mail
 - **Responsable** : Dev
 - **Dépend de** : T-008-03, T-008-04, T-002-08
 - **Débloque** : T-008-06, T-008-07, T-008-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `src/components/contact/ContactForm.astro` : champs Nom, E-mail, Motif (liste), Message ; étiquettes liées, zone d'erreur `aria-live`, `autocomplete` adapté, champ piège masqué (`aria-hidden`, `tabindex=-1`), horodatage d'ouverture, cibles ≥ 44 px, repli `<noscript>` avec `mailto` (selon ADR-0011) ; `RdvLink.astro` (nouvel onglet, `noopener noreferrer`, libellé « Réserver un créneau de 30 min »). Composants < 150 lignes.
@@ -204,7 +204,7 @@ Créer `src/components/contact/ContactForm.astro` : champs Nom, E-mail, Motif (l
 - **Responsable** : Dev
 - **Dépend de** : T-008-05
 - **Débloque** : T-008-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Écrire `src/components/contact/contact-form.ts` (module externe) : validation côté client avec focus sur le premier champ en erreur, anti-spam (champ piège, délai 3 s → faux succès sans envoi), `fetch` JSON vers `https://api.web3forms.com/submit`, redirection vers `/contact/merci/?motif=…`, gestion des erreurs 4xx/5xx/réseau avec repli, saisie conservée. Pas d'événement de mesure ici (US-026).
@@ -224,7 +224,7 @@ Créer `src/components/contact/ContactForm.astro` : champs Nom, E-mail, Motif (l
 - **Responsable** : Dev
 - **Dépend de** : T-008-05
 - **Débloque** : T-008-09, T-008-11
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Remplacer `src/pages/contact/index.astro` (h1, formulaire, RDV, motif pré-sélectionné via `?motif=`) et créer `src/pages/contact/merci/index.astro` (message de succès exact, `noindex`, motif relu dans l'URL). `Seo` avec title/description propres.
@@ -244,7 +244,7 @@ Remplacer `src/pages/contact/index.astro` (h1, formulaire, RDV, motif pré-séle
 - **Responsable** : Dev
 - **Dépend de** : T-008-05
 - **Débloque** : T-008-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `PrivacyNotice.astro` : finalité, sous-traitant Web3Forms (États-Unis), durée de conservation, lien « En savoir plus » vers `/vie-privee/#formulaire`. Textes alignés sur ceux de T-029-06 (contrat : ancre `formulaire`).
@@ -263,7 +263,7 @@ Créer `PrivacyNotice.astro` : finalité, sous-traitant Web3Forms (États-Unis),
 - **Responsable** : Dev
 - **Dépend de** : T-008-06, T-008-07, T-008-08, T-029-06
 - **Débloque** : T-008-10
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `make ci` complet (y compris vérification des ancres `#formulaire`). Un envoi réel unique avec la vraie clé depuis `preview` pour valider la bout-en-bout (réception de l'e-mail). Corriger les écarts.
@@ -283,7 +283,7 @@ Créer `PrivacyNotice.astro` : finalité, sous-traitant Web3Forms (États-Unis),
 - **Responsable** : Dev
 - **Dépend de** : T-008-09, T-001-14
 - **Débloque** : T-008-12
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours
 
 **Description** :  
 Vérifier `PUBLIC_WEB3FORMS_KEY` dans Railway et dans GitHub (variable, non secrète), dans `.env.example`, et que le conteneur `preview` n'émet aucune violation CSP (`connect-src` Web3Forms). Si un ajustement de la CSP est nécessaire, le signaler à l'orchestrateur (fichier réservé à US-001).
@@ -302,7 +302,7 @@ Vérifier `PUBLIC_WEB3FORMS_KEY` dans Railway et dans GitHub (variable, non secr
 - **Responsable** : Dev
 - **Dépend de** : T-008-07, T-004-07
 - **Débloque** : T-008-13
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours
 
 **Description** :  
 Ajouter à `contact.spec.ts` le scénario Gherkin « Parcours Me recruter » : clic sur « Me recruter » sur `/` → `/contact/` avec « Poste » pré-sélectionné en < 1 s. À exécuter une fois US-004 intégrée.
@@ -321,7 +321,7 @@ Ajouter à `contact.spec.ts` le scénario Gherkin « Parcours Me recruter » : c
 - **Responsable** : Dev
 - **Dépend de** : T-008-10
 - **Débloque** : T-008-13
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `docs/guides/contact.md` : services (Web3Forms, Calendly), variables, anti-spam, test local, procédure en cas de clé révoquée. Finaliser ADR-0011. Entrée CHANGELOG.
@@ -342,7 +342,7 @@ Ajouter à `contact.spec.ts` le scénario Gherkin « Parcours Me recruter » : c
 - **Responsable** : Dev
 - **Dépend de** : T-008-11, T-008-12
 - **Débloque** : -
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours
 
 **Description** :  
 Revue du code, de la sécurité (A05/A07 : aucun secret, honeypot, validation, CSP), de l'accessibilité du formulaire et du RGPD.

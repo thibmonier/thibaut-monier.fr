@@ -1,17 +1,27 @@
 ---
-// Page d'attente temporaire (walking skeleton) : remplacée par US-008. Évite un lien mort depuis l'accueil.
+import ContactForm from '../../components/contact/ContactForm.astro';
+import PrivacyNotice from '../../components/contact/PrivacyNotice.astro';
+import RdvLink from '../../components/contact/RdvLink.astro';
+import { contact } from '../../config/contact.ts';
+import { getTranslations } from '../../i18n/utils.ts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ui = getTranslations('fr').contact;
 ---
 
 <BaseLayout
-  title="Contact — Thibaut Monier"
-  description="Contacter Thibaut Monier : page en cours de construction."
+  title="Contact"
+  description="Écrire à Thibaut Monier pour une mission, un poste ou une autre demande, ou réserver un échange de 30 minutes."
 >
-  <h1 class="text-3xl font-bold">Contact</h1>
-  <p class="mt-4">Cette page arrive bientôt.</p>
-  <p class="mt-8">
-    <a class="text-accent underline underline-offset-4" href="/">
-      Retour à l'accueil
-    </a>
-  </p>
+  <div class="max-w-2xl">
+    <h1 class="text-3xl font-bold">{ui.title}</h1>
+    <p class="mt-4">{ui.intro}</p>
+    {contact.rdvUrl && (
+      <p class="mt-6">
+        <RdvLink />
+      </p>
+    )}
+    <ContactForm />
+    <PrivacyNotice />
+  </div>
 </BaseLayout>
