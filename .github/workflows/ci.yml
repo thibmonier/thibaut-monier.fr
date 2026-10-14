@@ -1,0 +1,175 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Valeurs factices : exercent le formulaire et le lien de RDV en e2e (Web3Forms simulé par page.route).
+env:
+  PUBLIC_WEB3FORMS_KEY: 00000000-0000-4000-8000-000000000000
+  PUBLIC_CALENDLY_URL: https://calendly.com/exemple/echange-decouverte
+  E2E_EXPECT_FULL_CONFIG: '1'
+
+# Docker uniquement sur le runner (ADR-0003) : aucun Node installé, cache BuildKit en mode GitHub Actions.
+jobs:
+  quality:
+    name: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      # Cible `test` : npm ci, build + contrôles, ESLint, Prettier, astro check, Vitest + couverture
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: test
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
+          cache-from: type=gha,scope=test
+          cache-to: type=gha,scope=test,mode=max
+      # Export de dist/ (cible `dist`) pour Lighthouse et les contrôles de l'étape e2e
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: dist
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
+          outputs: type=local,dest=dist
+          cache-from: type=gha,scope=test
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  e2e:
+    name: e2e
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - name: Build de l'image de production (preview)
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: runtime
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
+          load: true
+          tags: thibaut-monier-preview
+          cache-from: type=gha,scope=runtime
+          cache-to: type=gha,scope=runtime,mode=max
+      - name: Build de l'image e2e (Playwright)
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: e2e
+          load: true
+          tags: thibaut-monier-e2e
+          cache-from: type=gha,scope=e2e
+          cache-to: type=gha,scope=e2e,mode=max
+      - name: Playwright et axe contre preview
+        run: docker compose --profile e2e run --rm e2e
+      - name: Lighthouse (médiane de 3, seuil 0,95)
+        run: docker compose --profile e2e run --rm e2e node scripts/checks/lighthouse.ts
+      - name: Rapports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rapports-qualite
+          path: reports
+          if-no-files-found: ignore
+          retention-days: 14
+
+  dockerfile:
+    name: dockerfile
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Hadolint
+        run: docker run --rm -i hadolint/hadolint@sha256:32dac94127fd60b7b7e3fbfc65e1383b9b5e25c9bfd7b8536de7a539fe68a12d < Dockerfile
+
+  # Supply chain (ADR-0009, règle 11) : SBOM CycloneDX puis scan Trivy de l'image de production.
+  # Échec sur HIGH/CRITICAL ayant un correctif disponible (`ignore-unfixed`).
+  supply-chain:
+    name: supply-chain
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - name: Build de l'image de production
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: runtime
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
+          load: true
+          tags: thibaut-monier-scan
+          cache-from: type=gha,scope=runtime
+      # tag v0.36.0, postérieur à la compromission de mars 2026 des anciens tags ; épinglé par SHA
+      - name: SBOM CycloneDX
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: thibaut-monier-scan
+          format: cyclonedx
+          output: sbom.cdx.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sbom-cyclonedx
+          path: sbom.cdx.json
+          retention-days: 30
+      - name: Scan Trivy (HIGH et CRITICAL corrigeables)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: thibaut-monier-scan
+          format: table
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          vuln-type: os,library
+          exit-code: '1'
+
+  # Statut unique requis pour la protection de `main` et « Wait for CI » de Railway
+  ci:
+    name: ci
+    if: ${{ always() }}
+    needs: [quality, e2e, dockerfile, supply-chain]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Tous les jobs sont verts
+        run: |
+          test "${{ needs.quality.result }}" = success
+          test "${{ needs.e2e.result }}" = success
+          test "${{ needs.dockerfile.result }}" = success
+          test "${{ needs.supply-chain.result }}" = success

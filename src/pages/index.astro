@@ -1,0 +1,20 @@
+---
+import { getEntry } from 'astro:content';
+import CtaPair from '../components/ui/CtaPair.astro';
+import Hero from '../components/ui/Hero.astro';
+import ProofList from '../components/ui/ProofList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('home', 'accueil');
+if (!entry) throw new Error("Entrée 'accueil' introuvable dans la collection home");
+const { name, headline, valueProp, availability, metaTitle, metaDescription, ctas, proofs } =
+  entry.data;
+---
+
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <div class="flex flex-col gap-6 sm:gap-8">
+    <Hero name={name} headline={headline} valueProp={valueProp} availability={availability} />
+    <CtaPair ctas={ctas} />
+    <ProofList proofs={proofs} />
+  </div>
+</BaseLayout>

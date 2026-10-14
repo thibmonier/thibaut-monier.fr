@@ -1,0 +1,82 @@
+# Environnements entièrement dockerisés (ADR-0003). Aucun outil requis sur le poste hormis Docker.
+name: thibaut-monier
+
+x-public-args: &public-args
+  PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-}
+  PUBLIC_UMAMI_WEBSITE_ID: ${PUBLIC_UMAMI_WEBSITE_ID:-}
+  PUBLIC_WEB3FORMS_KEY: ${PUBLIC_WEB3FORMS_KEY:-}
+  PUBLIC_CALENDLY_URL: ${PUBLIC_CALENDLY_URL:-}
+
+services:
+  # Développement : rechargement à chaud, http://localhost:4321
+  dev:
+    build:
+      context: .
+      target: dev
+    ports:
+      - '4321:4321'
+    environment:
+      <<: *public-args
+      # macOS : activer le polling si les événements de fichiers ne remontent pas
+      CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING:-}
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    init: true
+
+  # Préproduction locale : image de production réelle (nginx), http://localhost:8080
+  preview:
+    build:
+      context: .
+      target: runtime
+      args:
+        <<: *public-args
+    ports:
+      - '8080:8080'
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '--spider', 'http://127.0.0.1:8080/']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  # npm ponctuel : lint, format, check, tests, ajout de dépendance
+  tools:
+    profiles: ['tools']
+    build:
+      context: .
+      target: dev
+    environment:
+      <<: *public-args
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    entrypoint: []
+    command: ['sh']
+    init: true
+
+  # Playwright, axe et Lighthouse contre `preview`
+  e2e:
+    profiles: ['e2e']
+    build:
+      context: .
+      target: e2e
+    depends_on:
+      preview:
+        condition: service_healthy
+    # Même pile réseau que preview : `localhost` est un contexte sécurisé pour Lighthouse (HTTPS requis sinon).
+    network_mode: 'service:preview'
+    environment:
+      E2E_BASE_URL: http://localhost:8080
+      # En CI : une configuration absente fait échouer les tests au lieu de les ignorer.
+      E2E_EXPECT_FULL_CONFIG: ${E2E_EXPECT_FULL_CONFIG:-}
+    volumes:
+      - .:/app
+      - e2e_node_modules:/app/node_modules
+    ipc: host
+    init: true
+    entrypoint: []
+    command: ['npx', 'playwright', 'test']
+
+volumes:
+  node_modules:
+  e2e_node_modules:

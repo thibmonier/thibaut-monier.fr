@@ -1,0 +1,15 @@
+---
+import { contact } from '../../config/contact.ts';
+---
+
+{contact.rdvUrl && (
+  <a
+    href={contact.rdvUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex min-h-11 items-center rounded-md border border-border bg-surface px-4 font-medium text-fg hover:border-accent hover:text-accent"
+  >
+    {contact.rdvLabel}
+    <span class="sr-only"> (s'ouvre dans un nouvel onglet)</span>
+  </a>
+)}

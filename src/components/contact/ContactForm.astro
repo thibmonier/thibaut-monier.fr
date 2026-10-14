@@ -1,0 +1,135 @@
+---
+import { contact } from '../../config/contact.ts';
+import { site } from '../../config/site.ts';
+import { getTranslations } from '../../i18n/utils.ts';
+import { subjectFor, type Motif } from '../../lib/contact.ts';
+
+interface Props {
+  motif?: Motif;
+}
+
+const { motif = 'mission' } = Astro.props;
+const ui = getTranslations('fr').contact;
+const redirect = new URL('/contact/merci/', Astro.site ?? Astro.url).href;
+const field =
+  'mt-1 block min-h-11 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg aria-[invalid=true]:border-4';
+const label = 'block font-medium';
+const error = 'mt-1 border-l-4 border-line pl-2 text-sm font-medium';
+const fields = [
+  { id: 'name', label: ui.name, type: 'text', autocomplete: 'name' },
+  { id: 'email', label: ui.email, type: 'email', autocomplete: 'email' },
+] as const;
+---
+
+{contact.web3formsKey ? (
+  <form
+    method="POST"
+    action="https://api.web3forms.com/submit"
+    data-contact-form
+    class="mt-8 space-y-6"
+  >
+    <input type="hidden" name="access_key" value={contact.web3formsKey} />
+    <input type="hidden" name="redirect" value={redirect} />
+    <input type="hidden" name="subject" value={subjectFor(motif)} />
+    <input
+      type="checkbox"
+      name="botcheck"
+      class="hidden"
+      tabindex="-1"
+      aria-hidden="true"
+      autocomplete="off"
+    />
+    {fields.map((f) => (
+      <div>
+        <label class={label} for={f.id}>
+          {f.label}
+        </label>
+        <input
+          class={field}
+          id={f.id}
+          name={f.id}
+          type={f.type}
+          autocomplete={f.autocomplete}
+          required
+          aria-describedby={`err-${f.id}`}
+        />
+        <p class={error} id={`err-${f.id}`} data-error-for={f.id} hidden />
+      </div>
+    ))}
+    <div>
+      <label class={label} for="motif">
+        {ui.motif}
+      </label>
+      <select class={field} id="motif" name="motif" required aria-describedby="err-motif">
+        {contact.motifs.map((m) => (
+          <option value={m.id} selected={m.id === motif}>
+            {m.label}
+          </option>
+        ))}
+      </select>
+      <p class={error} id="err-motif" data-error-for="motif" hidden />
+    </div>
+    <div>
+      <label class={label} for="message">
+        {ui.message}
+      </label>
+      <textarea
+        class={field}
+        id="message"
+        name="message"
+        rows="6"
+        maxlength="5000"
+        required
+        aria-describedby="err-message"
+      />
+      <p class={error} id="err-message" data-error-for="message" hidden />
+    </div>
+    <div role="alert" aria-live="assertive" data-alert hidden class="border-l-4 border-line pl-3">
+      <p class="font-medium" data-alert-message />
+      <p class="mt-1">
+        {contact.fallbackEmail ? (
+          <a
+            data-mailto
+            data-user={contact.fallbackEmail.split('@')[0]}
+            data-domain={contact.fallbackEmail.split('@')[1]}
+            class="text-accent underline underline-offset-4"
+          />
+        ) : (
+          <a
+            class="text-accent underline underline-offset-4"
+            href={site.social.linkedin}
+            rel="noopener noreferrer"
+          >
+            {ui.linkedin}
+          </a>
+        )}
+      </p>
+    </div>
+    <button
+      type="submit"
+      data-submit
+      data-sending={ui.sending}
+      class="inline-flex min-h-11 items-center rounded-md bg-accent px-6 font-semibold text-accent-fg hover:opacity-90 disabled:opacity-60"
+    >
+      {ui.submit}
+    </button>
+  </form>
+) : (
+  <div role="status" class="mt-8 border-l-4 border-line pl-3">
+    <p class="font-semibold">{ui.unavailableTitle}</p>
+    <p class="mt-1">{ui.unavailable}</p>
+    <p class="mt-2">
+      <a
+        class="text-accent underline underline-offset-4"
+        href={site.social.linkedin}
+        rel="noopener noreferrer"
+      >
+        {ui.linkedin}
+      </a>
+    </p>
+  </div>
+)}
+
+<script>
+  import './contact-form.ts';
+</script>

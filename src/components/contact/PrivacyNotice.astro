@@ -1,0 +1,12 @@
+---
+import { getTranslations } from '../../i18n/utils.ts';
+
+const ui = getTranslations('fr');
+---
+
+<p class="mt-6 text-sm text-muted" data-privacy-notice>
+  {ui.contact.privacyIntro}
+  <a class="text-accent underline underline-offset-4" href="/vie-privee/#formulaire">
+    {ui.contact.privacyMore}
+  </a>
+</p>

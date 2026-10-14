@@ -1,0 +1,27 @@
+---
+import ContactForm from '../../components/contact/ContactForm.astro';
+import PrivacyNotice from '../../components/contact/PrivacyNotice.astro';
+import RdvLink from '../../components/contact/RdvLink.astro';
+import { contact } from '../../config/contact.ts';
+import { getTranslations } from '../../i18n/utils.ts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ui = getTranslations('fr').contact;
+---
+
+<BaseLayout
+  title="Contact"
+  description="Écrire à Thibaut Monier pour une mission, un poste ou une autre demande, ou réserver un échange de 30 minutes."
+>
+  <div class="max-w-2xl">
+    <h1 class="text-3xl font-bold">{ui.title}</h1>
+    <p class="mt-4">{ui.intro}</p>
+    {contact.rdvUrl && (
+      <p class="mt-6">
+        <RdvLink />
+      </p>
+    )}
+    <ContactForm />
+    <PrivacyNotice />
+  </div>
+</BaseLayout>

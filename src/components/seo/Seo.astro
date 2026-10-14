@@ -1,0 +1,41 @@
+---
+import { site } from '../../config/site.ts';
+import { buildOpenGraph, buildTitle, canonicalUrl } from '../../lib/seo.ts';
+
+/**
+ * Métadonnées de page (US-024 les enrichira : hreflang, image Open Graph, JSON-LD).
+ *
+ * Contrat de props (figé pour les lots 3A et 3B) :
+ * - `title` : titre de la page, sans le nom du site (ajouté, 60 caractères au plus) ;
+ * - `description` : résumé de 50 à 160 caractères ;
+ * - `canonical?` : chemin ou URL canonique ; par défaut l'URL courante, rendue absolue ;
+ * - `noindex?` : `true` ajoute `robots noindex` et supprime la canonical ;
+ * - `ogType?` : type Open Graph (`website` par défaut).
+ */
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  noindex?: boolean;
+  ogType?: string;
+}
+
+const { title, description, canonical, noindex = false, ogType = 'website' } = Astro.props;
+const fullTitle = buildTitle(title, site.name);
+const url = canonicalUrl(canonical ?? Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const openGraph = buildOpenGraph({
+  title: fullTitle,
+  description,
+  url,
+  siteName: site.name,
+  locale: site.locale,
+  type: ogType,
+});
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={url} />}
+{openGraph.map((tag) => (
+  <meta property={tag.property} content={tag.content} />
+))}

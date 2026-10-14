@@ -1,0 +1,40 @@
+---
+import { getEntry, render } from 'astro:content';
+import LegalDocument from '../components/ui/LegalDocument.astro';
+import { legalConfig } from '../config/legal.ts';
+import { getTranslations } from '../i18n/utils.ts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('legal', 'mentions-legales');
+if (!entry) throw new Error("Entrée 'mentions-legales' introuvable dans la collection legal");
+const { Content } = await render(entry);
+const { title, description, updatedDate } = entry.data;
+const ui = getTranslations('fr');
+const { editor, publicationDirector, host } = legalConfig;
+---
+
+<BaseLayout title={title} description={description}>
+  <LegalDocument title={title} updatedDate={updatedDate}>
+    <div slot="before">
+      <h2 class="mt-8 text-2xl font-bold">{ui.legal.editor}</h2>
+      <p class="mt-3">
+        {editor.name}. {ui.legal.contactVia}
+        <a class="text-accent underline underline-offset-4" href={editor.contactUrl}>
+          {ui.legal.contactForm}
+        </a>
+        .
+      </p>
+      <h2 class="mt-8 text-2xl font-bold">{ui.legal.director}</h2>
+      <p class="mt-3">{publicationDirector}</p>
+      <h2 class="mt-8 text-2xl font-bold">{ui.legal.host}</h2>
+      <p class="mt-3">
+        <strong>{host.name}</strong>
+        {host.address && <br />}
+        {host.address && `${ui.legal.hostAddress} : ${host.address}`}
+        {host.phone && <br />}
+        {host.phone && `${ui.legal.hostPhone} : ${host.phone}`}
+      </p>
+    </div>
+    <Content />
+  </LegalDocument>
+</BaseLayout>

@@ -1,0 +1,35 @@
+# Page d'accueil (US-004). Voir docs/guides/page-accueil.md.
+# Typographie française : espace insécable ( ) avant « : ; ? ! » dans les chaînes entre guillemets doubles.
+accueil:
+  name: Thibaut Monier
+  headline: Direction technique et delivery augmenté par IA
+  valueProp: Je pilote vos livraisons logicielles, sécurise vos engagements et mets l'IA au service de vos équipes.
+  availability: Missions au forfait, depuis Nantes ou à distance.
+  metaTitle: Thibaut Monier, direction technique et IA
+  metaDescription: Directeur technique de transition, delivery augmenté par IA. 20 plugins Sylius 2 open source, 25 ans d'expérience.
+  ctas:
+    - label: Me confier une mission
+      motif: mission
+    - label: Me recruter
+      motif: poste
+  proofs:
+    - id: plugins-sylius
+      value: '20'
+      label: plugins open source pour Sylius 2
+      link: https://github.com/thibmonier
+      source: Dépôts GitHub
+    - id: pr-career-ops
+      value: '3'
+      label: correctifs mergés sur career-ops
+      link: https://github.com/career-ops-hq/career-ops/pulls?q=is%3Apr+is%3Amerged+author%3Athibmonier
+      source: Pull requests GitHub
+    - id: erp-agentique
+      value: '12'
+      label: modules d'ERP livrés en développement agentique
+      link: /parcours/
+      source: Parcours professionnel
+    - id: experience
+      value: 25+
+      label: ans d'expérience, de développeur à directeur technique
+      link: /parcours/
+      source: Parcours professionnel

@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from 'astro:content';
+import LegalDocument from '../components/ui/LegalDocument.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('legal', 'vie-privee');
+if (!entry) throw new Error("Entrée 'vie-privee' introuvable dans la collection legal");
+const { Content } = await render(entry);
+const { title, description, updatedDate } = entry.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <LegalDocument title={title} updatedDate={updatedDate}>
+    <Content />
+  </LegalDocument>
+</BaseLayout>

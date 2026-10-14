@@ -1,0 +1,11 @@
+company: 'Consultant indépendant (portage salarial)'
+role: 'Delivery et direction technique de transition'
+start: '2025-12'
+end: null
+location: 'Nantes / remote'
+context: "Projets au forfait autour du delivery, de la direction technique et de l'IA appliquée aux produits et à la production logicielle."
+achievements:
+  - "Déploiement d'un framework de delivery augmenté par IA (méthode BMAD, skills, rules et serveurs MCP) auprès d'une production de 48 personnes : 8 chefs de projet et 40 développeurs, lead devs et experts."
+  - "POC d'un ERP métier intégralement développé en agentique pour une société de recouvrement : 117 user stories sur 15 epics livrées en une semaine, 90 % de couverture de code, ADR documentés."
+  - "Reprise et redressement d'un projet en difficulté, vendu 300 000 euros et constaté au double : re-cadrage, replanification, V1 livrée en moins d'un mois et mise en ligne en avril 2026."
+featured: true

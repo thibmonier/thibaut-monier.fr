@@ -1,0 +1,25 @@
+---
+import { getTranslations } from '../../../i18n/utils.ts';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTACT_MESSAGES } from '../../../lib/contact.ts';
+
+const ui = getTranslations('fr').contact;
+---
+
+<BaseLayout
+  title={ui.thanksTitle}
+  description="Confirmation d'envoi du message de contact."
+  noindex
+>
+  <div class="max-w-2xl">
+    <h1 class="text-3xl font-bold">{ui.thanksTitle}</h1>
+    <p class="mt-4" role="status">
+      {CONTACT_MESSAGES.success}
+    </p>
+    <p class="mt-8">
+      <a class="text-accent underline underline-offset-4" href="/">
+        {ui.backHome}
+      </a>
+    </p>
+  </div>
+</BaseLayout>

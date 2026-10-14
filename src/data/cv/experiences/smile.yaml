@@ -1,0 +1,12 @@
+company: 'Smile'
+role: 'Chef de projet senior, architecte SI puis responsable de pôle'
+start: '2007-09'
+end: '2016-12'
+location: 'Nantes'
+context: 'Un seul contrat de neuf ans, avec évolutions de poste par avenants : de chef de projet senior et architecte SI à responsable de pôle et directeur de projet.'
+summaryOnly: 'Neuf ans chez Smile : de chef de projet senior et architecte SI à responsable de pôle (15 collaborateurs), en e-commerce, PIM et CMS.'
+achievements:
+  - "Responsable de pôle (15 collaborateurs) et directeur de projet : refonte d'un portail de retraite de 750 jours-homme, soit environ 770 000 euros sur 1,5 an."
+  - 'Architecte SI : architectures B2B/B2C complexes (e-commerce, PIM, CMS), dont un socle multi-établissements servant 1 000 établissements, chacun avec son catalogue.'
+  - 'Reprise de données de santé vers un hébergement certifié HDS via ETL Pentaho ; POC de marketplace Akeneo vers Sylius par Logstash, sur une cible de 10 millions de références.'
+featured: false

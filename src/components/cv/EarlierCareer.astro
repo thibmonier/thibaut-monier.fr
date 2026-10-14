@@ -1,0 +1,50 @@
+---
+import { formatPeriod } from '../../lib/experiences.ts';
+
+interface Item {
+  slug: string;
+  company: string;
+  role: string;
+  start: string;
+  end: string | null;
+  summaryOnly: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<details data-earlier data-collapsible class="mt-12 border-t border-border pt-4">
+  <summary class="inline-flex min-h-11 cursor-pointer items-center rounded-md text-xl font-semibold tracking-tight">
+    Avant 2016
+  </summary>
+  <ul class="mt-4 space-y-6">
+    {items.map((item) => (
+      <li data-earlier-item={item.slug}>
+        <p class="font-semibold">{item.company}</p>
+        <p class="text-muted">
+          {item.role}, {formatPeriod(item.start, item.end)}
+        </p>
+        <p class="mt-1">{item.summaryOnly}</p>
+      </li>
+    ))}
+  </ul>
+</details>
+
+<style>
+  @media print {
+    details::details-content {
+      content-visibility: visible;
+      display: block;
+    }
+    li {
+      break-inside: avoid;
+    }
+    details {
+      margin-top: 1rem;
+    }
+  }
+</style>

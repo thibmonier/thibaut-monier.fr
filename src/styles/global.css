@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Variante « js » : actif quand public/theme-init.js a posé la classe .js sur <html>. */
+@custom-variant js (.js &);
+
+/* Polices auto-hébergées : WOFF2 latin, variables (SIL OFL, voir docs/guides/design-system.md). */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+@layer base {
+  html {
+    background-color: var(--c-bg);
+    color: var(--c-fg);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--c-bg);
+    line-height: 1.6;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--c-focus);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--c-accent);
+    color: var(--c-accent-fg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

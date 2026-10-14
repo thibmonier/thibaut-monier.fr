@@ -10,12 +10,12 @@ EPIC-002 : Profil et CV
 
 ### Carte
 **En tant que** P-001 : Claire, DG d'une scale-up qui recrute
-**Je veux** parcourir une frise de 8 expériences avec rôle, période, contexte et réalisations chiffrées
+**Je veux** parcourir une frise de 7 expériences avec rôle, période, contexte et réalisations chiffrées
 **Afin de** vérifier la cohérence du parcours de direction et l'expérience de pilotage, de SQLI à aujourd'hui
 
 ### Conversation
-- Source unique : une collection `experiences` (8 entrées : consultant indépendant, Gingerminds, DTA Ingénierie, Digital Garden, Orange Applications for Business, Smile (2 postes), SQLI) qui alimentera aussi le CV PDF (US-007).
-- Smile compte deux rôles dans le CV source : **fusion par défaut en une entrée à deux rôles** (revue de conception du 2026-10-14), soit 8 entrées ; antérieure à 2016, elle est de toute façon résumée selon D-6.
+- Source unique : une collection `experiences` (7 entrées après fusion de Smile : consultant indépendant, Gingerminds, DTA Ingénierie, Digital Garden, Orange Applications for Business, Smile (2 postes), SQLI) qui alimentera aussi le CV PDF (US-007).
+- Smile compte deux rôles dans le CV source : **fusion par défaut en une entrée à deux rôles** (revue de conception du 2026-10-14), soit 7 entrées ; antérieure à 2016, elle est de toute façon résumée selon D-6.
 - **Décision PO (2026-10-14, risque R-07)** : la frise met en avant les **10 dernières années** (expériences détaillées). Les expériences antérieures sont résumées dans un bloc « Avant 2016 » repliable (rôles et employeurs, sans détail). Aucune date de naissance ni âge.
 - Liste blanche de champs publics : le téléphone, l'âge et l'adresse du CV source ne sont jamais importés.
 - Les réalisations chiffrées doivent être sourcées ; les noms de clients cités le sont-ils avec leur accord ?
@@ -26,16 +26,16 @@ EPIC-002 : Profil et CV
 - [x] Valuable : cœur de la lecture du recruteur
 - [x] Estimable : contenu connu (CV source)
 - [x] Sized : 5 points (≤ 8)
-- [x] Testable : 8 entrées, champs obligatoires, rendu vérifiables
+- [x] Testable : 7 entrées, champs obligatoires, rendu vérifiables
 
 ## Critères d'acceptance (Format Gherkin + SMART)
 
 ### Scénario nominal
 ```gherkin
 Scenario: Frise complète du parcours
-GIVEN la collection "experiences" contenant 8 entrées valides
+GIVEN la collection "experiences" contenant 7 entrées valides
 WHEN P-001 ouvre la page "Parcours"
-THEN 8 jalons sont affichés du plus récent au plus ancien
+THEN les 7 expériences sont présentes du plus récent au plus ancien, celles antérieures à 2016 regroupées dans le bloc « Avant 2016 »
 AND chaque jalon affiche rôle, entreprise, période, contexte et au moins 2 réalisations
 AND la première expérience est la plus récente
 ```
