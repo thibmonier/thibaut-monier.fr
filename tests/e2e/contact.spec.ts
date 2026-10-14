@@ -77,6 +77,24 @@ test.describe('Scénario : motif pré-sélectionné', () => {
   });
 });
 
+// T-008-11 : scénario inter-US (US-004 produit les CTA, US-008 lit le paramètre `motif`).
+test.describe("Scénario : de l'accueil au formulaire de contact", () => {
+  for (const [cta, motif] of [
+    ['Me recruter', 'poste'],
+    ['Me confier une mission', 'mission'],
+  ] as const) {
+    test(`le bouton « ${cta} » ouvre /contact/ avec le motif « ${motif} » pré-sélectionné`, async ({
+      page,
+    }) => {
+      await page.goto('/');
+      await page.getByRole('link', { name: cta }).click();
+      await expect(page).toHaveURL(new RegExp(`/contact/\\?motif=${motif}$`));
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      await expect(page.getByLabel('Motif')).toHaveValue(motif);
+    });
+  }
+});
+
 test.describe('Scénario : prise de rendez-vous', () => {
   test('le lien de RDV, quand il est configuré, s’ouvre dans un nouvel onglet sûr', async ({
     page,
