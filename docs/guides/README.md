@@ -10,5 +10,6 @@ Un guide par sujet, rédigé par l'US qui l'introduit (un fichier par US pour é
 | [parcours-experiences.md](parcours-experiences.md) | Frise du parcours professionnel | US-005 |
 | [pages-legales.md](pages-legales.md) | Mentions légales et politique de vie privée | US-029 |
 | [contact.md](contact.md) | Formulaire de contact, anti-spam, rendez-vous | US-008 |
+| [projets-open-source.md](projets-open-source.md) | Pages de projets (career-ops, tailsfadmin), collecte des métriques, liens externes | US-021, US-022, US-023 |
 
 Le démarrage, les commandes `make` et le déploiement sont dans le [README](../../README.md).

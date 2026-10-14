@@ -1,0 +1,120 @@
+---
+import type { ProjectData } from '../content/schemas/projects.ts';
+import { site } from '../config/site.ts';
+import { PROFILE_PATH, breadcrumbTrail, packagistUrl, repoUrl } from '../lib/projects.ts';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  project: ProjectData;
+}
+
+const { project } = Astro.props;
+const hubAvailable = site.nav.main.some((item) => item.id === 'open-source' && item.enabled);
+const trail = breadcrumbTrail(project.name, hubAvailable);
+const summary = [
+  { key: 'project', label: 'Le projet', text: project.summary },
+  { key: 'role', label: 'Mon rôle', text: project.role },
+  ...(project.result ? [{ key: 'result', label: 'Le résultat', text: project.result }] : []),
+];
+const facts = [
+  project.version ? { key: 'version', text: `Version ${project.version}` } : null,
+  project.license ? { key: 'license', text: `Licence ${project.license}` } : null,
+].filter((fact) => fact !== null);
+const links = [
+  { key: 'repo', label: 'Voir le dépôt sur GitHub', href: repoUrl(project.repo) },
+  project.packagist
+    ? { key: 'packagist', label: 'Voir sur Packagist', href: packagistUrl(project.packagist) }
+    : null,
+  project.readmeUrl ? { key: 'readme', label: 'Lire le README', href: project.readmeUrl } : null,
+].filter((link) => link !== null);
+---
+
+<BaseLayout title={project.title} description={project.description}>
+  <nav aria-label="Fil d’Ariane" data-breadcrumb class="text-sm text-muted">
+    <ol class="flex flex-wrap items-center gap-x-2">
+      {trail.map((crumb, index) => (
+        <li class="flex items-center gap-x-2">
+          {index > 0 && <span aria-hidden="true">/</span>}
+          {crumb.href ? (
+            <a href={crumb.href} class="rounded-md underline underline-offset-4">
+              {crumb.label}
+            </a>
+          ) : (
+            <span aria-current={index === trail.length - 1 ? 'page' : undefined}>
+              {crumb.label}
+            </span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+
+  <p class="mt-3">
+    <a
+      data-back
+      href={PROFILE_PATH}
+      class="inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4"
+    >
+      ← Retour au profil
+    </a>
+  </p>
+
+  <h1 class="mt-2 text-3xl font-bold tracking-tight">{project.title}</h1>
+
+  <dl data-project-summary class="mt-4 grid max-w-3xl gap-3 text-lg">
+    {summary.map((row) => (
+      <div data-summary-row={row.key}>
+        <dt class="text-sm font-semibold tracking-wide text-muted uppercase">{row.label}</dt>
+        <dd>{row.text}</dd>
+      </div>
+    ))}
+  </dl>
+
+  {facts.length > 0 && (
+    <ul data-project-facts class="mt-4 flex flex-wrap gap-x-6 gap-y-1 font-semibold">
+      {facts.map((fact) => (
+        <li data-fact={fact.key}>{fact.text}</li>
+      ))}
+    </ul>
+  )}
+
+  <ul data-project-links class="mt-2 flex flex-wrap gap-x-6">
+    {links.map((link) => (
+      <li>
+        <a
+          data-link={link.key}
+          href={link.href}
+          rel="noopener noreferrer"
+          class="inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4"
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <slot />
+</BaseLayout>
+
+<script>
+  import '../scripts/experience-toggle.ts';
+</script>
+
+<style is:global>
+  @media print {
+    @page {
+      margin: 12mm;
+    }
+    html {
+      font-size: 10pt !important;
+    }
+    header,
+    footer,
+    .sr-only {
+      display: none !important;
+    }
+    main {
+      padding: 0 !important;
+    }
+  }
+</style>

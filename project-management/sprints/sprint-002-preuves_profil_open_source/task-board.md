@@ -6,10 +6,10 @@
 
 | Statut | Tâches | Heures |
 |--------|--------|--------|
-| 🔲 À faire | 109 | 303h |
+| 🔲 À faire | 79 | 224h |
 | 🔄 En cours | 0 | 0h |
-| 👀 Review | 0 | 0h |
-| ✅ Done | 0 | 0h |
+| 👀 Review | 2 | 3h |
+| ✅ Done | 28 | 76h |
 | 🚫 Bloqué | 0 | 0h |
 
 ## 🔲 À faire
@@ -22,9 +22,6 @@
 | T-007-01 | [CONTENT] | Cadrer le CV public et trancher les choix de forme | 1,5h | 1 |
 | T-006-01 | [CONTENT] | Arbitrages et sélection des réalisations | 2h | 1 |
 | T-019-01 | [CONTENT] | Trancher les décisions du catalogue (slugs, thèmes, hub, captures) | 2h | 2 |
-| T-021-01 | [CONTENT] | Décisions : jeton, rythme de rafraîchissement, liste des dépôts | 1h | 3 |
-| T-023-01 | [CONTENT] | Vérifier les faits au jour de la rédaction et rédiger le résumé | 3h | 3 |
-| T-022-01 | [CONTENT] | Rassembler les faits du bundle et planifier la capture | 3h | 3 |
 
 ### US-007 : CV PDF téléchargeable généré au build
 
@@ -111,14 +108,8 @@
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-021-02 | [TEST] | Écrire les tests unitaires RED : collecte, repli et schéma des métriques | 5h | 3 |
 | T-021-03 | [TEST] | Écrire les tests e2e RED : bloc de métriques d’une fiche | 2,5h | 2 |
-| T-021-04 | [FE-WEB] | Schéma `oss-metrics`, lib de lecture et de présentation | 3h | 3 |
-| T-021-05 | [OPS] | Script `fetch-oss-metrics.ts` : collecte, délais, repli, cible `make metrics` | 6h | 3 |
-| T-021-06 | [OPS] | Première collecte réelle et enregistrement du JSON | 1,5h | 3 |
 | T-021-07 | [FE-WEB] | Composant `LiveStats` et branchement dans `PluginLayout` | 3,5h | 2 |
-| T-021-08 | [OPS] | Workflow `metrics.yml` : collecte planifiée et PR automatique | 3,5h | 3 |
-| T-021-09 | [OPS] | Contrôle de contenu `oss-metrics` (schéma, péremption, clés manquantes) | 2h | 3 |
 | T-021-10 | [TEST] | Vérification GREEN | 2h | 2 |
 | T-021-11 | [DOC] | Guide des données open source et variables | 1,5h | 2 |
 | T-021-12 | [REV] | Revue d’US-021 (sécurité du jeton et des permissions) | 2h | 2 |
@@ -127,18 +118,6 @@
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-023-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (contribution) et comptage de mots | 3h | 3 |
-| T-023-03 | [TEST] | Écrire les tests e2e RED de l’étude de cas | 3,5h | 3 |
-| T-023-04 | [FE-WEB] | Schéma `projects`, collection et lib `projects.ts` | 3h | 3 |
-| T-023-05 | [OPS] | Contrôle de contenu `projects` | 2,5h | 3 |
-| T-023-06 | [TEST] | Écrire les tests RED du contrôle de liens externes de la vitrine | 2h | 3 |
-| T-023-07 | [OPS] | Contrôle externe bloquant et job CI `external-links` | 4h | 3 |
-| T-023-08 | [CONTENT] | Rédiger l’étude de cas `career-ops.mdx` | 4h | 3 |
-| T-023-09 | [FE-WEB] | Composant `ContributionCard` et `ProjectLayout` | 4h | 3 |
-| T-023-10 | [FE-WEB] | Page `/open-source/career-ops/` | 2h | 3 |
-| T-023-11 | [TEST] | Vérification GREEN | 1,5h | 3 |
-| T-023-12 | [DOC] | Guide des pages de projets open source | 1h | 3 |
-| T-023-13 | [REV] | Revue d’US-023 | 1,5h | 3 |
 | T-023-14 | [FE-WEB] | Phase 4 : mention « Contributeur career-ops » sur `/parcours/` | 1,5h | 4 |
 | T-023-15 | [CONTENT] | Phase 4 : re-pointer la preuve « pr-career-ops » de l’accueil vers l’étude de cas | 0,5h | 4 |
 
@@ -146,15 +125,6 @@
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-022-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (bundle) | 2h | 3 |
-| T-022-03 | [TEST] | Écrire les tests e2e RED de la page tailsfadmin | 3h | 3 |
-| T-022-04 | [FE-WEB] | Étendre le schéma `projects` pour les bundles | 2h | 3 |
-| T-022-05 | [CONTENT] | Produire et optimiser la capture de la démo | 1,5h | 3 |
-| T-022-06 | [CONTENT] | Rédiger `tailsfadmin.mdx` | 3h | 3 |
-| T-022-07 | [FE-WEB] | Page `/open-source/tailsfadmin/` | 3,5h | 3 |
-| T-022-08 | [TEST] | Vérification GREEN | 1,5h | 3 |
-| T-022-09 | [DOC] | Compléter le guide des projets et CHANGELOG | 1h | 3 |
-| T-022-10 | [REV] | Revue d’US-022 | 1,5h | 3 |
 | T-022-11 | [FE-WEB] | Phase 4 : section « Autres projets » sur `/open-source/` | 2,5h | 4 |
 
 ### T-900 : transverse
@@ -174,11 +144,47 @@ _(aucune tâche)_
 
 ## 👀 Review
 
-_(aucune tâche)_
+### Lot 3 (W3)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-023-13 | [REV] | Revue d’US-023 | 1,5h | 3 |
+| T-022-10 | [REV] | Revue d’US-022 | 1,5h | 3 |
 
 ## ✅ Done
 
-_(aucune tâche)_
+### Lot 3 (W3 : US-023, collecte d’US-021, US-022)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-021-01 | [CONTENT] | Décisions : jeton, rythme de rafraîchissement, liste des dépôts | 1h | 3 |
+| T-023-01 | [CONTENT] | Vérifier les faits au jour de la rédaction et rédiger le résumé | 3h | 3 |
+| T-022-01 | [CONTENT] | Rassembler les faits du bundle et planifier la capture | 3h | 3 |
+| T-021-02 | [TEST] | Écrire les tests unitaires RED : collecte, repli et schéma des métriques | 5h | 3 |
+| T-021-04 | [FE-WEB] | Schéma `oss-metrics`, lib de lecture et de présentation | 3h | 3 |
+| T-021-05 | [OPS] | Script `fetch-oss-metrics.ts` : collecte, délais, repli, cible `make metrics` | 6h | 3 |
+| T-021-06 | [OPS] | Première collecte réelle et enregistrement du JSON | 1,5h | 3 |
+| T-021-08 | [OPS] | Workflow `metrics.yml` : collecte planifiée et PR automatique | 3,5h | 3 |
+| T-021-09 | [OPS] | Contrôle de contenu `oss-metrics` (schéma, péremption, clés manquantes) | 2h | 3 |
+| T-023-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (contribution) et comptage de mots | 3h | 3 |
+| T-023-03 | [TEST] | Écrire les tests e2e RED de l’étude de cas | 3,5h | 3 |
+| T-023-04 | [FE-WEB] | Schéma `projects`, collection et lib `projects.ts` | 3h | 3 |
+| T-023-05 | [OPS] | Contrôle de contenu `projects` | 2,5h | 3 |
+| T-023-06 | [TEST] | Écrire les tests RED du contrôle de liens externes de la vitrine | 2h | 3 |
+| T-023-07 | [OPS] | Contrôle externe bloquant et job CI `external-links` | 4h | 3 |
+| T-023-08 | [CONTENT] | Rédiger l’étude de cas `career-ops.mdx` | 4h | 3 |
+| T-023-09 | [FE-WEB] | Composant `ContributionCard` et `ProjectLayout` | 4h | 3 |
+| T-023-10 | [FE-WEB] | Page `/open-source/career-ops/` | 2h | 3 |
+| T-023-11 | [TEST] | Vérification GREEN | 1,5h | 3 |
+| T-023-12 | [DOC] | Guide des pages de projets open source | 1h | 3 |
+| T-022-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (bundle) | 2h | 3 |
+| T-022-03 | [TEST] | Écrire les tests e2e RED de la page tailsfadmin | 3h | 3 |
+| T-022-04 | [FE-WEB] | Étendre le schéma `projects` pour les bundles | 2h | 3 |
+| T-022-05 | [CONTENT] | Produire et optimiser la capture de la démo | 1,5h | 3 |
+| T-022-06 | [CONTENT] | Rédiger `tailsfadmin.mdx` | 3h | 3 |
+| T-022-07 | [FE-WEB] | Page `/open-source/tailsfadmin/` | 3,5h | 3 |
+| T-022-08 | [TEST] | Vérification GREEN | 1,5h | 3 |
+| T-022-09 | [DOC] | Compléter le guide des projets et CHANGELOG | 1h | 3 |
 
 ## 🚫 Bloqué
 

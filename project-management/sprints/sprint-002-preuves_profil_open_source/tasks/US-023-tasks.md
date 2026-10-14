@@ -17,19 +17,19 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-023-01 | [CONTENT] | Vérifier les faits au jour de la rédaction et rédiger le résumé | 3h | - | 3 | 🔲 |
-| T-023-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (contribution) et comptage de mots | 3h | - | 3 | 🔲 |
-| T-023-03 | [TEST] | Écrire les tests e2e RED de l’étude de cas | 3,5h | - | 3 | 🔲 |
-| T-023-04 | [FE-WEB] | Schéma `projects`, collection et lib `projects.ts` | 3h | T-023-02 | 3 | 🔲 |
-| T-023-05 | [OPS] | Contrôle de contenu `projects` | 2,5h | T-023-02, T-023-04 | 3 | 🔲 |
-| T-023-06 | [TEST] | Écrire les tests RED du contrôle de liens externes de la vitrine | 2h | - | 3 | 🔲 |
-| T-023-07 | [OPS] | Contrôle externe bloquant et job CI `external-links` | 4h | T-023-06 | 3 | 🔲 |
-| T-023-08 | [CONTENT] | Rédiger l’étude de cas `career-ops.mdx` | 4h | T-023-01, T-023-04 | 3 | 🔲 |
-| T-023-09 | [FE-WEB] | Composant `ContributionCard` et `ProjectLayout` | 4h | T-023-03, T-023-08 | 3 | 🔲 |
-| T-023-10 | [FE-WEB] | Page `/open-source/career-ops/` | 2h | T-023-09 | 3 | 🔲 |
-| T-023-11 | [TEST] | Vérification GREEN | 1,5h | T-023-05, T-023-07, T-023-10 | 3 | 🔲 |
-| T-023-12 | [DOC] | Guide des pages de projets open source | 1h | T-023-11 | 3 | 🔲 |
-| T-023-13 | [REV] | Revue d’US-023 | 1,5h | T-023-12 | 3 | 🔲 |
+| T-023-01 | [CONTENT] | Vérifier les faits au jour de la rédaction et rédiger le résumé | 3h | - | 3 | ✅ |
+| T-023-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (contribution) et comptage de mots | 3h | - | 3 | ✅ |
+| T-023-03 | [TEST] | Écrire les tests e2e RED de l’étude de cas | 3,5h | - | 3 | ✅ |
+| T-023-04 | [FE-WEB] | Schéma `projects`, collection et lib `projects.ts` | 3h | T-023-02 | 3 | ✅ |
+| T-023-05 | [OPS] | Contrôle de contenu `projects` | 2,5h | T-023-02, T-023-04 | 3 | ✅ |
+| T-023-06 | [TEST] | Écrire les tests RED du contrôle de liens externes de la vitrine | 2h | - | 3 | ✅ |
+| T-023-07 | [OPS] | Contrôle externe bloquant et job CI `external-links` | 4h | T-023-06 | 3 | ✅ |
+| T-023-08 | [CONTENT] | Rédiger l’étude de cas `career-ops.mdx` | 4h | T-023-01, T-023-04 | 3 | ✅ |
+| T-023-09 | [FE-WEB] | Composant `ContributionCard` et `ProjectLayout` | 4h | T-023-03, T-023-08 | 3 | ✅ |
+| T-023-10 | [FE-WEB] | Page `/open-source/career-ops/` | 2h | T-023-09 | 3 | ✅ |
+| T-023-11 | [TEST] | Vérification GREEN | 1,5h | T-023-05, T-023-07, T-023-10 | 3 | ✅ |
+| T-023-12 | [DOC] | Guide des pages de projets open source | 1h | T-023-11 | 3 | ✅ |
+| T-023-13 | [REV] | Revue d’US-023 | 1,5h | T-023-12 | 3 | 👀 |
 | T-023-14 | [FE-WEB] | Phase 4 : mention « Contributeur career-ops » sur `/parcours/` | 1,5h | T-023-10, T-007-13 | 4 | 🔲 |
 | T-023-15 | [CONTENT] | Phase 4 : re-pointer la preuve « pr-career-ops » de l’accueil vers l’étude de cas | 0,5h | T-023-10, T-019-14 | 4 | 🔲 |
 

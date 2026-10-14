@@ -17,15 +17,15 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-021-01 | [CONTENT] | Décisions : jeton, rythme de rafraîchissement, liste des dépôts | 1h | - | 3 | 🔲 |
-| T-021-02 | [TEST] | Écrire les tests unitaires RED : collecte, repli et schéma des métriques | 5h | - | 3 | 🔲 |
+| T-021-01 | [CONTENT] | Décisions : jeton, rythme de rafraîchissement, liste des dépôts | 1h | - | 3 | ✅ |
+| T-021-02 | [TEST] | Écrire les tests unitaires RED : collecte, repli et schéma des métriques | 5h | - | 3 | ✅ |
 | T-021-03 | [TEST] | Écrire les tests e2e RED : bloc de métriques d’une fiche | 2,5h | - | 2 | 🔲 |
-| T-021-04 | [FE-WEB] | Schéma `oss-metrics`, lib de lecture et de présentation | 3h | T-021-02 | 3 | 🔲 |
-| T-021-05 | [OPS] | Script `fetch-oss-metrics.ts` : collecte, délais, repli, cible `make metrics` | 6h | T-021-01, T-021-02, T-021-04 | 3 | 🔲 |
-| T-021-06 | [OPS] | Première collecte réelle et enregistrement du JSON | 1,5h | T-021-05, T-019-07 | 3 | 🔲 |
+| T-021-04 | [FE-WEB] | Schéma `oss-metrics`, lib de lecture et de présentation | 3h | T-021-02 | 3 | ✅ |
+| T-021-05 | [OPS] | Script `fetch-oss-metrics.ts` : collecte, délais, repli, cible `make metrics` | 6h | T-021-01, T-021-02, T-021-04 | 3 | ✅ |
+| T-021-06 | [OPS] | Première collecte réelle et enregistrement du JSON | 1,5h | T-021-05, T-019-07 | 3 | ✅ |
 | T-021-07 | [FE-WEB] | Composant `LiveStats` et branchement dans `PluginLayout` | 3,5h | T-021-03, T-021-04, T-021-06, T-020-12 | 2 | 🔲 |
-| T-021-08 | [OPS] | Workflow `metrics.yml` : collecte planifiée et PR automatique | 3,5h | T-021-05 | 3 | 🔲 |
-| T-021-09 | [OPS] | Contrôle de contenu `oss-metrics` (schéma, péremption, clés manquantes) | 2h | T-021-04 | 3 | 🔲 |
+| T-021-08 | [OPS] | Workflow `metrics.yml` : collecte planifiée et PR automatique | 3,5h | T-021-05 | 3 | ✅ |
+| T-021-09 | [OPS] | Contrôle de contenu `oss-metrics` (schéma, péremption, clés manquantes) | 2h | T-021-04 | 3 | ✅ |
 | T-021-10 | [TEST] | Vérification GREEN | 2h | T-021-07, T-021-08, T-021-09 | 2 | 🔲 |
 | T-021-11 | [DOC] | Guide des données open source et variables | 1,5h | T-021-10 | 2 | 🔲 |
 | T-021-12 | [REV] | Revue d’US-021 (sécurité du jeton et des permissions) | 2h | T-021-11 | 2 | 🔲 |

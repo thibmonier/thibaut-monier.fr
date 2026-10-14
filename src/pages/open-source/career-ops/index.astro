@@ -1,0 +1,41 @@
+---
+import { getEntry, render } from 'astro:content';
+import ContributionCard from '../../../components/oss/ContributionCard.astro';
+import ProjectLayout from '../../../layouts/ProjectLayout.astro';
+import { formatLongDate, projectEntryId } from '../../../lib/projects.ts';
+
+const entry = await getEntry('projects', projectEntryId('career-ops'));
+if (!entry) throw new Error('Étude de cas « career-ops » introuvable dans la collection projects');
+const { Content } = await render(entry);
+const project = entry.data;
+---
+
+<ProjectLayout project={project}>
+  <section aria-labelledby="correctifs" class="mt-10">
+    <h2 id="correctifs" class="text-2xl font-semibold tracking-tight">
+      Les trois correctifs
+    </h2>
+    <div class="mt-4 grid gap-6">
+      {project.contributions.map((contribution) => (
+        <ContributionCard contribution={contribution} />
+      ))}
+    </div>
+  </section>
+
+  <div
+    data-body
+    class="mt-10 max-w-3xl [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_p]:mt-3"
+  >
+    <Content />
+  </div>
+
+  {project.verifiedAt && (
+    <p class="mt-10 text-sm text-muted">
+      Faits vérifiés sur GitHub le{' '}
+      <time datetime={project.verifiedAt.toISOString().slice(0, 10)}>
+        {formatLongDate(project.verifiedAt)}
+      </time>
+      .
+    </p>
+  )}
+</ProjectLayout>

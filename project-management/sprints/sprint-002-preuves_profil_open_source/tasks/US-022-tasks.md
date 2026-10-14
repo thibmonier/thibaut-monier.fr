@@ -17,16 +17,16 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-022-01 | [CONTENT] | Rassembler les faits du bundle et planifier la capture | 3h | - | 3 | 🔲 |
-| T-022-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (bundle) | 2h | T-023-04 | 3 | 🔲 |
-| T-022-03 | [TEST] | Écrire les tests e2e RED de la page tailsfadmin | 3h | - | 3 | 🔲 |
-| T-022-04 | [FE-WEB] | Étendre le schéma `projects` pour les bundles | 2h | T-022-02 | 3 | 🔲 |
-| T-022-05 | [CONTENT] | Produire et optimiser la capture de la démo | 1,5h | T-022-01, T-020-06 | 3 | 🔲 |
-| T-022-06 | [CONTENT] | Rédiger `tailsfadmin.mdx` | 3h | T-022-01, T-022-04 | 3 | 🔲 |
-| T-022-07 | [FE-WEB] | Page `/open-source/tailsfadmin/` | 3,5h | T-022-03, T-022-05, T-022-06, T-023-09, T-020-10, T-021-07 | 3 | 🔲 |
-| T-022-08 | [TEST] | Vérification GREEN | 1,5h | T-022-07 | 3 | 🔲 |
-| T-022-09 | [DOC] | Compléter le guide des projets et CHANGELOG | 1h | T-022-08 | 3 | 🔲 |
-| T-022-10 | [REV] | Revue d’US-022 | 1,5h | T-022-09 | 3 | 🔲 |
+| T-022-01 | [CONTENT] | Rassembler les faits du bundle et planifier la capture | 3h | - | 3 | ✅ |
+| T-022-02 | [TEST] | Écrire les tests unitaires RED : schéma `projects` (bundle) | 2h | T-023-04 | 3 | ✅ |
+| T-022-03 | [TEST] | Écrire les tests e2e RED de la page tailsfadmin | 3h | - | 3 | ✅ |
+| T-022-04 | [FE-WEB] | Étendre le schéma `projects` pour les bundles | 2h | T-022-02 | 3 | ✅ |
+| T-022-05 | [CONTENT] | Produire et optimiser la capture de la démo | 1,5h | T-022-01, T-020-06 | 3 | ✅ |
+| T-022-06 | [CONTENT] | Rédiger `tailsfadmin.mdx` | 3h | T-022-01, T-022-04 | 3 | ✅ |
+| T-022-07 | [FE-WEB] | Page `/open-source/tailsfadmin/` | 3,5h | T-022-03, T-022-05, T-022-06, T-023-09, T-020-10, T-021-07 | 3 | ✅ |
+| T-022-08 | [TEST] | Vérification GREEN | 1,5h | T-022-07 | 3 | ✅ |
+| T-022-09 | [DOC] | Compléter le guide des projets et CHANGELOG | 1h | T-022-08 | 3 | ✅ |
+| T-022-10 | [REV] | Revue d’US-022 | 1,5h | T-022-09 | 3 | 👀 |
 | T-022-11 | [FE-WEB] | Phase 4 : section « Autres projets » sur `/open-source/` | 2,5h | T-019-10, T-022-07, T-023-10 | 4 | 🔲 |
 
 **Total estimé** : 24,5h (11 tâches)
