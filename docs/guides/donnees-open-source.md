@@ -10,7 +10,9 @@ Chaque fiche affiche la dernière version, la date de release, les étoiles GitH
 
 ## Affichage
 
-`src/lib/live-stats.ts` lit le JSON de façon tolérante : une métrique absente ou invalide est masquée seule, une entrée sans aucune métrique supprime le bloc, la fiche s’affiche sans lui. `LiveStats.astro` rend une liste de définitions avec libellés textuels (pas de badge image) ; il est réutilisable par la page tailsfadmin. Aucune métrique n’entre dans les données structurées.
+`src/lib/oss-metrics.ts` lit le JSON avec le schéma partagé de la collecte : une métrique absente est masquée seule, une entrée invalide ou sans aucune métrique supprime le bloc, la fiche s’affiche sans lui. `LiveStats.astro` rend une liste de définitions avec libellés textuels (pas de badge image) ; il est réutilisable par la page tailsfadmin. Aucune métrique n’entre dans les données structurées.
+
+La date de release n’est affichée que si le tag de la dernière release GitHub est la version affichée ; sinon (tag sans release) elle est masquée plutôt que d’afficher la date d’une autre version.
 
 Plugin non publié sur Packagist (Agentic Feeds) : pas de téléchargements, la version vient de la release GitHub.
 

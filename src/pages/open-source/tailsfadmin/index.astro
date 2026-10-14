@@ -4,7 +4,7 @@ import InstallSnippet from '../../../components/oss/InstallSnippet.astro';
 import LiveStats from '../../../components/oss/LiveStats.astro';
 import metrics from '../../../data/oss-metrics.json';
 import ProjectLayout from '../../../layouts/ProjectLayout.astro';
-import { getLiveStats } from '../../../lib/live-stats.ts';
+import { getLiveStats } from '../../../lib/oss-metrics.ts';
 import { formatLongDate, projectEntryId } from '../../../lib/projects.ts';
 
 const entry = await getEntry('projects', projectEntryId('tailsfadmin'));

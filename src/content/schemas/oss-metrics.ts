@@ -4,7 +4,7 @@ import { z } from 'astro/zod';
 // n'est obligatoire : le build lit ce fichier sans réseau et masque ce qui manque.
 const count = z.number().int().nonnegative();
 
-const metric = z.strictObject({
+export const ossMetricSchema = z.strictObject({
   fetchedAt: z.coerce.date(),
   github: z
     .strictObject({
@@ -20,8 +20,8 @@ const metric = z.strictObject({
 
 export const ossMetricsSchema = z.strictObject({
   generatedAt: z.coerce.date(),
-  entries: z.record(z.string().regex(/^[\w.-]+\/[\w.-]+$/), metric), // « owner/repo »
+  entries: z.record(z.string().regex(/^[\w.-]+\/[\w.-]+$/), ossMetricSchema), // « owner/repo »
 });
 
 export type OssMetrics = z.infer<typeof ossMetricsSchema>;
-export type OssMetric = z.infer<typeof metric>;
+export type OssMetric = z.infer<typeof ossMetricSchema>;

@@ -107,6 +107,24 @@ test.describe('Scénario : métriques', () => {
   });
 });
 
+test.describe('Scénario : version et date de release cohérentes', () => {
+  test('la date de release n’est affichée que pour la version affichée', async ({ page }) => {
+    const entry = JSON.parse(readFileSync('src/data/oss-metrics.json', 'utf8')).entries[
+      'thibmonier/tailsfadmin'
+    ] as {
+      github: { latestRelease: { tag: string } | null };
+      packagist: { latestVersion: string };
+    };
+    await page.goto(PATH);
+    const version = await page.locator('[data-live-stats] [data-stat="version"] dd').innerText();
+    expect(version.replace(/^v/, '')).toBe(entry.packagist.latestVersion.replace(/^v/, ''));
+    const sameTag = entry.github.latestRelease?.tag.replace(/^v/, '') === version.replace(/^v/, '');
+    await expect(page.locator('[data-live-stats] [data-stat="release"]')).toHaveCount(
+      sameTag ? 1 : 0,
+    );
+  });
+});
+
 test.describe('Scénario : visiteur non technique', () => {
   test('l’encadré « En bref » de 2 phrases précède l’installation', async ({ page }) => {
     await page.goto(PATH);
