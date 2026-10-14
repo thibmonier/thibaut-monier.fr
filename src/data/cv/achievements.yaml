@@ -1,0 +1,91 @@
+# Réalisations publiques (US-006), 10 à 15 entrées ; source : Key Achievements du CV et expériences.
+# `clients` vide = « Référence confidentielle » (arbitrage E12) ; `year` = année de fin ou de livraison (à valider par le PO).
+
+- id: b2b-sylius-suite
+  title: "Suite B2B pour Sylius 2 : comptes entreprise, circuit d'approbation, paiement en compte, devis, tarifs dégressifs"
+  domains: [e-commerce]
+  year: 2026
+  proofUrl: 'https://packagist.org/packages/tmonier/'
+  skills: [plugins-sylius, sylius, e-commerce-b2b, symfony]
+
+- id: conformite-ue-sylius
+  title: 'Plugins Sylius de conformité UE : facture électronique Factur-X, sécurité des produits GPSR, bouton de rétractation'
+  domains: [e-commerce]
+  year: 2026
+  proofUrl: 'https://packagist.org/packages/tmonier/'
+  skills: [plugins-sylius, sylius, symfony]
+
+- id: commerce-agentique-mcp
+  title: 'Commerce agentique : outils B2B pour le serveur MCP de Sylius et flux produits pour assistants IA'
+  domains: [ia-appliquee, e-commerce]
+  year: 2026
+  proofUrl: 'https://packagist.org/packages/tmonier/'
+  skills: [commerce-agentique, serveurs-mcp, sylius]
+
+- id: delivery-augmente-ia
+  title: "Framework de delivery augmenté par IA déployé auprès d'une production de 48 personnes"
+  domains: [delivery, ia-appliquee]
+  year: 2026
+  experienceId: consultant-independant
+  skills: [delivery-augmente-ia, serveurs-mcp, agile-scrum]
+
+- id: erp-agentique-poc
+  title: "POC d'un ERP métier développé en agentique : 117 user stories sur 15 epics livrées en une semaine, 90 % de couverture"
+  domains: [ia-appliquee, architecture]
+  year: 2026
+  experienceId: consultant-independant
+  skills: [developpement-agentique, clean-architecture-ddd, symfony]
+
+- id: redressement-projet
+  title: "Reprise d'un projet vendu 300 000 euros et constaté au double : V1 livrée en moins d'un mois"
+  domains: [delivery]
+  year: 2026
+  experienceId: consultant-independant
+  skills: [redressement-projets, gestion-projets-it]
+
+- id: hot-ones-saas
+  title: "SaaS B2B de gestion d'agence en 12 modules, réalisé à environ 95 % en solo par méthode agentique"
+  domains: [ia-appliquee, architecture]
+  year: 2025
+  experienceId: gingerminds
+  skills: [developpement-agentique, integration-llm, symfony]
+
+- id: migration-magento-sylius
+  title: "Migration d'une plateforme B2C de Magento vers Sylius : 10 millions d'euros de chiffre d'affaires annuel"
+  domains: [e-commerce, donnees-migrations]
+  year: 2024
+  experienceId: gingerminds
+  skills: [magento, sylius, migration-donnees]
+
+- id: migrations-systeme-agence
+  title: "Deux migrations du système de gestion d'une agence de 40 personnes : données RH, projets, temps et finances"
+  domains: [donnees-migrations, delivery]
+  year: 2024
+  experienceId: gingerminds
+  skills: [migration-donnees, gestion-projets-it]
+
+- id: reconciliation-donnees-volumineuses
+  title: 'Réconciliation de données depuis une base non relationnelle à forte volumétrie pour un industriel'
+  domains: [donnees-migrations]
+  year: 2024
+  experienceId: gingerminds
+  skills: [migration-donnees, bases-de-donnees]
+
+- id: portefeuille-projets-equipes
+  title: "Pilotage d'une vingtaine de projets simultanés et d'une équipe de 24 à 26 personnes dans une agence à 3 M€"
+  domains: [delivery]
+  year: 2025
+  experienceId: gingerminds
+  skills: [gestion-projets-it, management-equipes, pilotage-financier]
+
+- id: avant-ventes-chiffrage
+  title: "Chiffrages d'avant-vente de l'agence validés, avec un taux de transformation d'environ 50 % sur 2021-2024"
+  domains: [delivery]
+  year: 2024
+  experienceId: gingerminds
+  skills: [avant-vente, pilotage-financier]
+
+- id: contributions-career-ops
+  title: 'Trois correctifs de parsing silencieux fusionnés en une semaine dans career-ops, outil open source en Node.js'
+  domains: [architecture]
+  year: 2026

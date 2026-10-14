@@ -1,0 +1,142 @@
+# Compétences publiques (US-006), un domaine par compétence ; source : Core Competencies et Technical Skills du CV.
+# Les identifiants (kebab-case) sont référencés par `achievements[].skills`. Aucun niveau déclaré tant que le PO ne l'a pas validé.
+
+- id: gestion-projets-it
+  label: 'Direction de projets IT complexes et transverses'
+  domain: delivery
+
+- id: redressement-projets
+  label: 'Redressement de projets en difficulté'
+  domain: delivery
+
+- id: avant-vente
+  label: "Avant-ventes, chiffrage et appels d'offres"
+  domain: delivery
+
+- id: agile-scrum
+  label: 'Agile, Scrum et Kanban'
+  domain: delivery
+
+- id: cycle-en-v
+  label: 'Cycle en V : WBS et jalons'
+  domain: delivery
+
+- id: management-equipes
+  label: "Management d'équipes techniques (10 à 26 personnes)"
+  domain: delivery
+
+- id: recrutement-staffing
+  label: 'Recrutement, staffing et suivi de carrière'
+  domain: delivery
+
+- id: pilotage-financier
+  label: 'Pilotage financier des projets'
+  domain: delivery
+
+- id: architecture-logicielle
+  label: 'Architectures logicielles B2B/B2C à forte volumétrie'
+  domain: architecture
+
+- id: urbanisation-si
+  label: "Urbanisation du système d'information"
+  domain: architecture
+
+- id: symfony
+  label: 'Symfony et API Platform'
+  domain: architecture
+
+- id: php-java
+  label: 'PHP et Java/J2EE'
+  domain: architecture
+
+- id: microservices-soa
+  label: 'Microservices, SOA et monolithes'
+  domain: architecture
+
+- id: clean-architecture-ddd
+  label: 'Clean architecture et DDD'
+  domain: architecture
+
+- id: tests-performance
+  label: 'Tests de montée en charge (JMeter, OpenSTA)'
+  domain: architecture
+
+- id: securite-sso
+  label: 'Sécurité et SSO (CAS, Keycloak, LDAP)'
+  domain: architecture
+
+- id: ci-cd-qualite
+  label: 'CI/CD et qualité : GitHub, GitLab, Jenkins, SonarQube'
+  domain: architecture
+
+- id: sylius
+  label: 'Sylius'
+  domain: e-commerce
+
+- id: plugins-sylius
+  label: 'Plugins Sylius 2 : B2B et conformité UE'
+  domain: e-commerce
+
+- id: e-commerce-b2b
+  label: 'E-commerce B2B et B2C'
+  domain: e-commerce
+
+- id: magento
+  label: 'Magento'
+  domain: e-commerce
+
+- id: prestashop-orocommerce
+  label: 'Prestashop et OroCommerce'
+  domain: e-commerce
+
+- id: akeneo-pim
+  label: 'PIM : Akeneo'
+  domain: e-commerce
+
+- id: cms
+  label: 'CMS : Drupal, Jahia, eZ Publish'
+  domain: e-commerce
+
+- id: migration-donnees
+  label: 'Migration et reprise de données'
+  domain: donnees-migrations
+
+- id: etl-pentaho
+  label: 'ETL Pentaho'
+  domain: donnees-migrations
+
+- id: synchronisation-multi-sources
+  label: 'Synchronisation multi-sources (fichiers plats, ERP)'
+  domain: donnees-migrations
+
+- id: hds
+  label: 'Hébergement de données de santé (HDS)'
+  domain: donnees-migrations
+
+- id: recherche-indexation
+  label: 'Elasticsearch, Apache Solr et Algolia'
+  domain: donnees-migrations
+
+- id: bases-de-donnees
+  label: 'MySQL, PostgreSQL, Oracle et MongoDB'
+  domain: donnees-migrations
+
+- id: delivery-augmente-ia
+  label: 'Delivery augmenté par IA : méthode BMAD'
+  domain: ia-appliquee
+
+- id: developpement-agentique
+  label: 'Développement agentique'
+  domain: ia-appliquee
+
+- id: integration-llm
+  label: 'Intégration de LLM : Claude'
+  domain: ia-appliquee
+
+- id: serveurs-mcp
+  label: 'Skills, rules et serveurs MCP'
+  domain: ia-appliquee
+
+- id: commerce-agentique
+  label: 'Commerce agentique : flux produits et MCP'
+  domain: ia-appliquee
