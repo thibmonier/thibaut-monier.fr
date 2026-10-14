@@ -25,9 +25,12 @@ Sur macOS, si les modifications de fichiers ne sont pas détectées : `CHOKIDAR_
 | `make checks`     | Build complet : contrôles de contenu, `astro build`, contrôles de `dist/`  |
 | `make e2e`        | Playwright et axe (WCAG 2.2 AA) contre `preview`                           |
 | `make lighthouse` | Lighthouse mobile : 3 exécutions, médiane, seuil 0,95 sur les 4 axes       |
+| `make smoke URL=` | Contrôle de fumée d'un site déployé (statuts, en-têtes, 404, 405)          |
 | `make ci`         | Enchaîne exactement les étapes de la CI                                    |
 | `make shell`      | Shell dans le conteneur d'outils (`docker compose run --rm tools npm ...`) |
 | `make clean`      | Arrête tout, supprime volumes et sorties de build                          |
+
+Détail des contrôles, de la CI et des seuils : [`docs/guides/qualite-ci.md`](docs/guides/qualite-ci.md). Pour viser l'image locale : `make preview && make smoke URL=http://preview:8080` (le conteneur d'outils rejoint le réseau de compose).
 
 Ajouter une dépendance : `docker compose run --rm tools npm install <paquet>` (versions exactes, `.npmrc` : `save-exact=true`).
 
@@ -42,14 +45,24 @@ Variables de build publiques, toutes optionnelles (voir `.env.example`) :
 | `PUBLIC_WEB3FORMS_KEY`    | Clé publique du formulaire de contact                         |
 | `PUBLIC_CALENDLY_URL`     | Prise de rendez-vous                                          |
 
+## Déploiement (Railway)
+
+Railway construit la dernière étape (`runtime`) du `Dockerfile` à chaque push sur `main`, une fois la CI verte (option _Wait for CI_ de Railway à activer sur le statut `ci`). Détails : ADR-0002.
+
+- **Variables** : les quatre `PUBLIC_*` ci-dessus se définissent comme variables du service Railway (elles sont inlinées au build, donc publiques par conception). Pour la CI, `PUBLIC_WEB3FORMS_KEY` et `PUBLIC_CALENDLY_URL` reçoivent des valeurs factices dans `ci.yml`.
+- **Redéploiement quotidien** : `scheduled.yml` (06:00 UTC) publie les contenus datés. Il demande le secret GitHub `RAILWAY_TOKEN` et les variables `RAILWAY_SERVICE_ID` et `RAILWAY_ENVIRONMENT_ID`.
+- **Contrôle de fumée** : après ce redéploiement, si la variable GitHub `SMOKE_URL` est définie (par exemple `https://thibaut-monier.fr`). À la main : `make smoke URL=https://thibaut-monier.fr`.
+- **Déploiement manuel de repli** : workflow `deploy.yml` (`workflow_dispatch`, secret `RAILWAY_TOKEN`), à n'utiliser que si le déploiement depuis GitHub est indisponible.
+- **Retour arrière** : dans Railway, onglet Deployments, redéployer la version précédente (aucune migration, aucun état).
+
 ## Architecture
 
 - `Dockerfile` multi-étapes : `base`, `deps`, `dev`, `typst`, `build`, `test`, `dist`, `e2e`, `runtime` (dernière étape, celle que Railway construit). Images de base épinglées par tag et digest.
 - `compose.yaml` : `dev` (:4321), `preview` (:8080), `tools` et `e2e` (profils).
 - `nginx.conf` et `nginx/snippets/security-headers.conf` : CSP stricte sans `unsafe-inline`, HSTS, COOP, CORP, pas de COEP (ADR-0009).
 - `scripts/checks/` : exécuteur de contrôles. Déposer `<nom>.content.check.ts` (avant le build) ou `<nom>.dist.check.ts` (sur `dist/`) suffit, sans modifier `run.ts`.
-- `.github/workflows/` : `ci.yml` (PR et `main`), `scheduled.yml` (redéploiement quotidien à 06:00 UTC si `RAILWAY_TOKEN` est défini).
-- Décisions : `docs/adr/`. Spécification : `project-management/tech-spec.md`.
+- `.github/workflows/` : `ci.yml` (PR et `main` : qualité, e2e, Hadolint, Trivy et SBOM), `scheduled.yml` (redéploiement quotidien à 06:00 UTC si `RAILWAY_TOKEN` est défini, puis contrôle de fumée si `SMOKE_URL` l'est), `deploy.yml` (déploiement manuel de repli).
+- Guides : `docs/guides/`. Décisions : `docs/adr/`. Spécification : `project-management/tech-spec.md`.
 
 ## Versions (relevé du 2026-10-14)
 

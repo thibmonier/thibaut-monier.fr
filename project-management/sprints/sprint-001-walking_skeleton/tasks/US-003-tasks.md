@@ -24,10 +24,10 @@
 | T-003-05 | [TEST] | Test axe sur toutes les pages découvertes et assistant de découverte des routes | 2,5h | Dev | T-001-13 | ✅ |
 | T-003-06 | [OPS] | Makefile et scripts npm : cibles lint, test, build-check, lighthouse, e2e, ci | 2,5h | Dev | T-003-02, T-003-03, T-003-04, T-003-05 | ✅ |
 | T-003-07 | [OPS] | Workflow GitHub Actions `ci.yml` | 5h | Dev | T-003-06 | ✅ |
-| T-003-08 | [OPS] | Hadolint, Trivy et SBOM CycloneDX dans la CI | 2,5h | Dev | T-003-07 | 🔲 |
+| T-003-08 | [OPS] | Hadolint, Trivy et SBOM CycloneDX dans la CI | 2,5h | Dev | T-003-07 | 👀 |
 | T-003-09 | [OPS] | Protection de `main` et PR de test à échec volontaire | 3h | Dev | T-003-07 | 🔲 |
-| T-003-10 | [OPS] | Mesurer la durée de la CI et le gain du cache | 1,5h | Dev | T-003-07 | 🔲 |
-| T-003-11 | [DOC] | Guide qualité et CI, CHANGELOG | 1h | Dev | T-003-09, T-003-10 | 🔲 |
+| T-003-10 | [OPS] | Mesurer la durée de la CI et le gain du cache | 1,5h | Dev | T-003-07 | 👀 |
+| T-003-11 | [DOC] | Guide qualité et CI, CHANGELOG | 1h | Dev | T-003-09, T-003-10 | ✅ |
 | T-003-12 | [REV] | Revue d'US-003 (DoD §1, §3, §6) | 1,5h | Dev | T-003-08, T-003-11 | 🔲 |
 
 **Total estimé** : 35h (12 tâches)
@@ -249,7 +249,7 @@ Créer `.github/workflows/ci.yml` (PR et `main`) : `permissions: contents: read`
 - **Responsable** : Dev
 - **Dépend de** : T-003-07
 - **Débloque** : T-003-12
-- **Statut** : 🔲 À faire
+- **Statut** : 👀 Review (job `supply-chain` ajouté à `ci.yml` : SBOM CycloneDX en artefact, Trivy bloquant HIGH/CRITICAL corrigeables, actions épinglées par SHA ; Hadolint existait déjà. YAML valide, mais le job n'a pas encore tourné sur GitHub : résultat réel au prochain push)
 
 **Description** :  
 Issu d'ADR-0009 et de la règle 11 (hors critères d'acceptance d'US-003, arbitrage PO possible) : ajouter à `ci.yml` un job `supply-chain` (hadolint sur le Dockerfile, `trivy image` bloquant sur HIGH/CRITICAL corrigeables, SBOM CycloneDX en artefact, rétention 90 jours).
@@ -289,7 +289,7 @@ Activer la protection de `main` : CI requise, PR obligatoire, squash merge uniqu
 - **Responsable** : Dev
 - **Dépend de** : T-003-07
 - **Débloque** : T-003-11
-- **Statut** : 🔲 À faire
+- **Statut** : 👀 Review (durées des 4 runs verts consignées dans `docs/guides/qualite-ci.md` : < 8 min tenu, maximum 7 min 51 s ; gain ≥ 30 % du second passage non démontré proprement, voir le guide)
 
 **Description** :  
 Exécuter la CI deux fois de suite sur le même `package-lock.json` : durée totale < 8 min, gain du second passage ≥ 30 %. Ajuster le cache BuildKit si nécessaire (risque : Lighthouse × 3 par page). Consigner les mesures.
@@ -309,7 +309,7 @@ Exécuter la CI deux fois de suite sur le même `package-lock.json` : durée tot
 - **Responsable** : Dev
 - **Dépend de** : T-003-09, T-003-10
 - **Débloque** : T-003-12
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done (`docs/guides/qualite-ci.md`, index `docs/guides/README.md`, CHANGELOG)
 
 **Description** :  
 Rédiger `docs/guides/qualite-ci.md` : commandes `make`, convention d'ajout d'un contrôle (`*.content.check.ts`, `*.dist.check.ts`), seuils, lecture des rapports, procédure en cas d'échec. Entrée CHANGELOG (zone append-only).

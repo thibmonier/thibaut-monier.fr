@@ -26,8 +26,8 @@
 | T-002-07 | [FE-WEB] | En-tête, menu mobile accessible et lien d'évitement | 5h | Dev | T-002-03, T-002-06 | ✅ |
 | T-002-08 | [FE-WEB] | Pied de page, composant `Seo` et `BaseLayout` final | 4h | Dev | T-002-07 | ✅ |
 | T-002-09 | [FE-WEB] | Configuration i18n Astro et dictionnaire d'interface minimal | 2h | Dev | T-002-04 | ✅ |
-| T-002-10 | [FE-WEB] | Pages d'attente pour les destinations de la navigation et du pied de page | 1,5h | Dev | T-002-08 | 🔲 |
-| T-002-11 | [TEST] | Vérification GREEN : responsive, JS désactivé, mouvement réduit, axe, Lighthouse | 2,5h | Dev | T-002-09, T-002-10, T-003-06 | 🔄 |
+| T-002-10 | [FE-WEB] | Pages d'attente pour les destinations de la navigation et du pied de page | 1,5h | Dev | T-002-08 | 🚫 |
+| T-002-11 | [TEST] | Vérification GREEN : responsive, JS désactivé, mouvement réduit, axe, Lighthouse | 2,5h | Dev | T-002-09, T-002-10, T-003-06 | ✅ |
 | T-002-12 | [DOC] | Guide du design system et ADR-0010 | 1,5h | Dev | T-002-11 | 🔄 |
 | T-002-13 | [REV] | Revue d'US-002 (DoD §1, §4, §5, §7) | 2h | Dev | T-002-12 | 🔲 |
 
@@ -296,7 +296,7 @@ Ajouter à `astro.config.mjs` le bloc i18n d'ADR-0008 (`locales: [fr, en]`, `def
 - **Responsable** : Dev
 - **Dépend de** : T-002-08
 - **Débloque** : T-002-11
-- **Statut** : 🔲 À faire (non réalisé : arbitrage A4, pages remplacées par des drapeaux `enabled` dans `src/config/nav.ts`)
+- **Statut** : 🚫 Annulée — remplacée par l'arbitrage A4 (pas de page d'attente : drapeaux `enabled` dans `src/config/nav.ts`)
 
 **Description** :  
 Pour que `main` reste verte (vérification de liens de US-003) : créer des pages minimales `noindex` (« Page en cours de construction ») pour `/parcours/`, `/contact/`, `/mentions-legales/`, `/vie-privee/` et `/blog/`. Les US-005, US-008 et US-029 remplacent leur page ; `/blog/` reste jusqu'à US-009 (sprint 3). Point d'attention n°4 du README.
@@ -319,7 +319,7 @@ Pour que `main` reste verte (vérification de liens de US-003) : créer des page
 - **Responsable** : Dev
 - **Dépend de** : T-002-09, T-002-10, T-003-06
 - **Débloque** : T-002-12
-- **Statut** : 🔄 En cours (e2e 102/102, axe, Lighthouse 1,00 sur 4 axes ; `make ci` complet et captures de PR restent à faire)
+- **Statut** : ✅ Done (e2e complet, axe clair et sombre, Lighthouse verts ; `tests/e2e/pages-matrix.spec.ts` couvre toutes les pages à 360, 768 et 1280 px, sans JavaScript, en mouvement réduit)
 
 **Description** :  
 Exécuter `make ci` : layout, axe et Lighthouse sur toutes les pages (accueil + 5 pages d'attente). Contrôle manuel du rendu clair/sombre à 360, 768, 1280 px et sans JavaScript. Corriger les écarts.

@@ -7,6 +7,7 @@
 > **Mise à jour W3A (2026-10-14)** : ✅ T-004-02 à T-004-09 et T-005-02 à T-005-11 (US-004 et US-005 livrées, non commitées ; e2e, axe clair et sombre et Lighthouse verts avec un Chromium Alpine). 👀 T-004-01, T-005-01 (contenu rédigé depuis `cv.md`, décisions à faire valider par le PO) et T-004-10, T-005-12 (revues : contenu et confidentialité à valider par le PO).
 
 > **Mise à jour W3B (2026-10-14)** : ✅ T-029-02 à T-029-09, T-008-02 à T-008-09 et T-008-12 (US-029 et US-008 livrées, non commitées ; e2e, axe et Lighthouse verts avec un Chromium Alpine). 🔄 T-029-01 et T-008-01 (décisions PO : adresse Railway, adresse e-mail de repli, durée de conservation), T-029-10 et T-008-13 (revues), T-008-10 (variables Railway/GitHub, hors worktree), T-008-11 (attend US-004).
+> **Mise à jour W4 (2026-10-14, finitions)** : ✅ T-001-15, T-001-17 (version minimale), T-001-19, T-003-11, T-002-11, T-008-11. 👀 T-003-08 (job CI non encore exécuté sur GitHub), T-003-10 (gain de cache ≥ 30 % non démontré), T-008-10 (reste la saisie des variables Railway/GitHub par le PO). 🚫 T-002-10 annulée (arbitrage A4). Restent : T-001-01, 14, 16, 20 ; T-003-09, 12 ; revues T-002-13, T-004-10, T-005-12, T-029-10, T-008-13.
 
 **Sprint Goal** : mettre en production un site minimal mais complet où un recruteur ou un client comprend le positionnement, parcourt le parcours professionnel et peut prendre contact.
 

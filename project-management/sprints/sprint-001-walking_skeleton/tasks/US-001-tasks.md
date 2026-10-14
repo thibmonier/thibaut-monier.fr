@@ -31,11 +31,11 @@
 | T-001-12 | [OPS] | nginx.conf durci et snippet d'en-têtes de sécurité | 4h | Dev | T-001-03, T-001-07 | ✅ |
 | T-001-13 | [OPS] | Valider le squelette en préproduction locale (jalon J1) | 2h | Dev | T-001-04, T-001-11, T-001-12 | 🔄 |
 | T-001-14 | [OPS] | Configurer Railway : build du Dockerfile, variables, domaine, « Wait for CI » | 3h | Dev | T-001-01, T-001-13, T-003-07 | 🔲 |
-| T-001-15 | [OPS] | Script de contrôle de fumée post-déploiement | 2h | Dev | T-001-12 | 🔲 |
+| T-001-15 | [OPS] | Script de contrôle de fumée post-déploiement | 2h | Dev | T-001-12 | ✅ |
 | T-001-16 | [OPS] | Premier déploiement en production et vérification des scénarios | 2,5h | Dev | T-001-14, T-001-15 | 🔲 |
-| T-001-17 | [OPS] | Workflow de déploiement de repli `deploy.yml` (conditionnel) | 2h | Dev | T-001-14 | 🔲 |
+| T-001-17 | [OPS] | Workflow de déploiement de repli `deploy.yml` (conditionnel) | 2h | Dev | T-001-14 | ✅ |
 | T-001-18 | [OPS] | Renovate : configuration et épinglage des digests | 1h | Dev | T-001-02 | ✅ |
-| T-001-19 | [DOC] | README, CHANGELOG et guide de développement | 2h | Dev | T-001-16 | 🔲 |
+| T-001-19 | [DOC] | README, CHANGELOG et guide de développement | 2h | Dev | T-001-16 | ✅ |
 | T-001-20 | [REV] | Revue d'US-001 (DoD §1, §6, §9, §10) | 2h | Dev | T-001-18, T-001-19 | 🔲 |
 
 **Total estimé** : 47h (20 tâches)
@@ -426,7 +426,7 @@ Dans Railway : source GitHub (branche `main`), build du `Dockerfile` (étape fin
 - **Responsable** : Dev
 - **Dépend de** : T-001-12
 - **Débloque** : T-001-16
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done (`scripts/checks/smoke.ts` + `lib/smoke.ts`, 10 tests unitaires dont un serveur HTTP réel sans en-têtes ; `make smoke URL=http://preview:8080` : OK ; étape ajoutée à `scheduled.yml`, ignorée sans `SMOKE_URL`. Implémenté en TypeScript et non en `.mjs`, comme les autres contrôles ; la redirection 301 est couverte par `headers.spec.ts`)
 
 **Description** :  
 Écrire `scripts/smoke.mjs` (Node dans le conteneur `tools`) : statut 200 sur `/`, 404 réel sur une URL inexistante, présence de l'en-tête CSP, redirection 301 http→https quand l'URL est publique. Cible `make smoke URL=…`. Sera réutilisé par `scheduled.yml` (sprint ultérieur).
@@ -468,7 +468,7 @@ Fusionner sur `main`, mesurer le délai fusion → HTTP 200 en HTTPS (< 10 min),
 - **Responsable** : Dev
 - **Dépend de** : T-001-14
 - **Débloque** : -
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done (réalisée en version minimale : `deploy.yml`, `workflow_dispatch` seul, `railway up --service web` via la CLI 5.68.0 dans `node:26-alpine` épinglé par digest, secret `RAILWAY_TOKEN`. Pas de `workflow_run` : Railway déploie déjà depuis GitHub avec *Wait for CI* ; le repli n'est qu'une sortie de secours manuelle. Non testable sans jeton Railway)
 
 **Description** :  
 **Conditionnelle** : à réaliser seulement si l'option *Wait for CI* de Railway est absente ou peu fiable. Créer `.github/workflows/deploy.yml` déclenché par `workflow_run` sur le succès de `ci.yml` (branche `main`), qui exécute `railway up` avec `RAILWAY_TOKEN`. Actions épinglées par SHA, `permissions: contents: read`. Désactiver le déclencheur automatique de Railway.
@@ -507,7 +507,7 @@ Créer `renovate.json` : preset de base, `pinDigests` pour Docker, `helpers:pinG
 - **Responsable** : Dev
 - **Dépend de** : T-001-16
 - **Débloque** : T-001-20
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done (README : démarrage, commandes, variables, déploiement Railway, contrôle de fumée, retour arrière ; CHANGELOG ; `docs/guides/README.md`. Réserve : la procédure de déploiement sera confirmée après T-001-16)
 
 **Description** :  
 Créer `README.md` (prérequis : Docker uniquement ; commandes `make` ; tableau des variables de build ; relevé de versions daté du 2026-10-14 ; procédure de déploiement et de retour arrière), `CHANGELOG.md` (Keep a Changelog, zone `[Unreleased]` append-only) et `docs/guides/README.md` (index des guides par US, un fichier par US pour éviter les conflits).

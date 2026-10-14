@@ -26,8 +26,8 @@
 | T-008-07 | [FE-WEB] | Pages `/contact/` et `/contact/merci/` (remplacent la page d'attente) | 2,5h | Dev | T-008-05 | ✅ |
 | T-008-08 | [FE-WEB] | Mention RGPD courte sous le formulaire | 1h | Dev | T-008-05 | ✅ |
 | T-008-09 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, envoi réel unique | 2,5h | Dev | T-008-06, T-008-07, T-008-08, T-029-06 | ✅ |
-| T-008-10 | [OPS] | Variables de build, CSP et console propre | 1,5h | Dev | T-008-09, T-001-14 | 🔄 |
-| T-008-11 | [TEST] | Scénario inter-US : de l'accueil au formulaire avec le motif « Poste » | 1h | Dev | T-008-07, T-004-07 | 🔄 |
+| T-008-10 | [OPS] | Variables de build, CSP et console propre | 1,5h | Dev | T-008-09, T-001-14 | 👀 |
+| T-008-11 | [TEST] | Scénario inter-US : de l'accueil au formulaire avec le motif « Poste » | 1h | Dev | T-008-07, T-004-07 | ✅ |
 | T-008-12 | [DOC] | Guide du contact et ADR-0011 | 1h | Dev | T-008-10 | ✅ |
 | T-008-13 | [REV] | Revue d'US-008 (DoD §1, §3, §4, §6) | 2h | Dev | T-008-11, T-008-12 | 🔄 |
 
@@ -283,7 +283,7 @@ Créer `PrivacyNotice.astro` : finalité, sous-traitant Web3Forms (États-Unis),
 - **Responsable** : Dev
 - **Dépend de** : T-008-09, T-001-14
 - **Débloque** : T-008-12
-- **Statut** : 🔄 En cours
+- **Statut** : 👀 Review (variables `PUBLIC_*` documentées dans `.env.example` et le README, 0 violation CSP ni erreur de console sur toutes les pages en `preview`, favicon ajouté pour supprimer un 404 ; reste au PO : saisir `PUBLIC_WEB3FORMS_KEY` dans Railway et GitHub)
 
 **Description** :  
 Vérifier `PUBLIC_WEB3FORMS_KEY` dans Railway et dans GitHub (variable, non secrète), dans `.env.example`, et que le conteneur `preview` n'émet aucune violation CSP (`connect-src` Web3Forms). Si un ajustement de la CSP est nécessaire, le signaler à l'orchestrateur (fichier réservé à US-001).
@@ -302,7 +302,7 @@ Vérifier `PUBLIC_WEB3FORMS_KEY` dans Railway et dans GitHub (variable, non secr
 - **Responsable** : Dev
 - **Dépend de** : T-008-07, T-004-07
 - **Débloque** : T-008-13
-- **Statut** : 🔄 En cours
+- **Statut** : ✅ Done (`contact.spec.ts` : « Me recruter » → `/contact/?motif=poste` avec « Poste » sélectionné, et variante « Me confier une mission »)
 
 **Description** :  
 Ajouter à `contact.spec.ts` le scénario Gherkin « Parcours Me recruter » : clic sur « Me recruter » sur `/` → `/contact/` avec « Poste » pré-sélectionné en < 1 s. À exécuter une fois US-004 intégrée.
