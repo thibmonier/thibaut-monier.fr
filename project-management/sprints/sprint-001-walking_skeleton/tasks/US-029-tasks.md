@@ -17,16 +17,16 @@
 
 | ID | Type | Tâche | Estimation | Responsable | Dépend de | Statut |
 |----|------|-------|------------|-------------|-----------|--------|
-| T-029-01 | [CONTENT] | Cadrage factuel des pages légales avec le PO | 2h | PO | - | 🔲 |
-| T-029-02 | [TEST] | Écrire les tests unitaires RED : config légale, frontmatter, données interdites | 2,5h | Dev | T-001-13 | 🔲 |
-| T-029-03 | [TEST] | Écrire les tests e2e RED : contenus légaux et liens du pied de page | 3h | Dev | T-001-13, T-003-05 | 🔲 |
-| T-029-04 | [FE-WEB] | Collection `legal`, configuration `legal.ts`, composant et pages (remplacent les pages d'attente) | 4h | Dev | T-029-02, T-002-08 | 🔲 |
-| T-029-05 | [CONTENT] | Rédiger `mentions-legales.md` | 2h | Dev | T-029-01, T-029-04 | 🔲 |
-| T-029-06 | [CONTENT] | Rédiger `vie-privee.md` (section `#formulaire`, droits, cookies) | 3h | Dev | T-029-01, T-029-04 | 🔲 |
-| T-029-07 | [OPS] | Contrôle de build des pages légales : données personnelles interdites | 1,5h | Dev | T-029-02, T-003-03 | 🔲 |
-| T-029-08 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, ancres | 1,5h | Dev | T-029-05, T-029-06, T-029-07, T-029-03 | 🔲 |
-| T-029-09 | [DOC] | Guide « mettre à jour les informations légales » et CHANGELOG | 0,5h | Dev | T-029-08 | 🔲 |
-| T-029-10 | [REV] | Revue d'US-029 (juridique, DoD §1, §2, §6) | 1h | Dev | T-029-09 | 🔲 |
+| T-029-01 | [CONTENT] | Cadrage factuel des pages légales avec le PO | 2h | PO | - | 🔄 |
+| T-029-02 | [TEST] | Écrire les tests unitaires RED : config légale, frontmatter, données interdites | 2,5h | Dev | T-001-13 | ✅ |
+| T-029-03 | [TEST] | Écrire les tests e2e RED : contenus légaux et liens du pied de page | 3h | Dev | T-001-13, T-003-05 | ✅ |
+| T-029-04 | [FE-WEB] | Collection `legal`, configuration `legal.ts`, composant et pages (remplacent les pages d'attente) | 4h | Dev | T-029-02, T-002-08 | ✅ |
+| T-029-05 | [CONTENT] | Rédiger `mentions-legales.md` | 2h | Dev | T-029-01, T-029-04 | ✅ |
+| T-029-06 | [CONTENT] | Rédiger `vie-privee.md` (section `#formulaire`, droits, cookies) | 3h | Dev | T-029-01, T-029-04 | ✅ |
+| T-029-07 | [OPS] | Contrôle de build des pages légales : données personnelles interdites | 1,5h | Dev | T-029-02, T-003-03 | ✅ |
+| T-029-08 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, ancres | 1,5h | Dev | T-029-05, T-029-06, T-029-07, T-029-03 | ✅ |
+| T-029-09 | [DOC] | Guide « mettre à jour les informations légales » et CHANGELOG | 0,5h | Dev | T-029-08 | ✅ |
+| T-029-10 | [REV] | Revue d'US-029 (juridique, DoD §1, §2, §6) | 1h | Dev | T-029-09 | 🔄 |
 
 **Total estimé** : 21h (10 tâches)
 
@@ -89,7 +89,7 @@ graph TD
 - **Responsable** : PO
 - **Dépend de** : -
 - **Débloque** : T-029-05, T-029-06
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours
 
 **Description** :  
 Réunir les informations : statut de l'éditeur (particulier ou portage salarial) et moyen de contact **sans adresse ni téléphone** (`contactUrl`), directeur de la publication, hébergeur Railway (raison sociale, adresse, téléphone publics), finalité et base légale du formulaire, durée de conservation des e-mails, sous-traitants (Web3Forms, Umami Cloud, Calendly), contact pour exercer les droits. Prévoir la relecture par la société de portage.
@@ -109,7 +109,7 @@ Réunir les informations : statut de l'éditeur (particulier ou portage salarial
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-029-04, T-029-07
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/unit/config/legal.test.ts` (`legalSchema` : éditeur sans adresse ni téléphone, `host` requis), `tests/unit/content/legal-schema.test.ts` (frontmatter : `title`, `description`, `updatedDate` obligatoires), `tests/unit/checks/legal-pii.test.ts` (message « Donnée personnelle interdite dans <fichier> : <type> » pour téléphone, adresse).
@@ -130,7 +130,7 @@ Réunir les informations : statut de l'éditeur (particulier ou portage salarial
 - **Responsable** : Dev
 - **Dépend de** : T-001-13, T-003-05
 - **Débloque** : T-029-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/e2e/legal.spec.ts` : sur toutes les routes découvertes (`discoverRoutes`), les liens « Mentions légales » et « Vie privée » sont présents (message « Liens légaux absents sur <URL> ») ; `/mentions-legales/` affiche éditeur, directeur de la publication, hébergeur ; `/vie-privee/` affiche droits, lien CNIL, « Ce site ne dépose aucun cookie », ancre `#formulaire`, `dateModified` visible ; pages indexables (pas de `noindex`) ; hiérarchie des titres.
@@ -149,7 +149,7 @@ Réunir les informations : statut de l'éditeur (particulier ou portage salarial
 - **Responsable** : Dev
 - **Dépend de** : T-029-02, T-002-08
 - **Débloque** : T-029-05, T-029-06
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `src/content/schemas/legal.ts` et enregistrer la collection `legal` (loader `glob` sur `src/content/legal`, ajout d'une ligne dans `content.config.ts`, zone append-only) ; `src/config/legal.ts` validé par `legalSchema` (éditeur, directeur de publication, hébergeur) ; `src/components/ui/LegalDocument.astro` (rendu Markdown, ancres de titres, « Mis à jour le … ») ; remplacer `mentions-legales.astro` et `vie-privee.astro`. Le pied de page est déjà fourni par US-002 : ne pas le modifier.
@@ -174,7 +174,7 @@ Créer `src/content/schemas/legal.ts` et enregistrer la collection `legal` (load
 - **Responsable** : Dev
 - **Dépend de** : T-029-01, T-029-04
 - **Débloque** : T-029-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Rédiger `src/content/legal/mentions-legales.md` : éditeur, directeur de la publication, hébergeur (raison sociale, adresse, téléphone de l'hébergeur), propriété intellectuelle, contact. Frontmatter avec `updatedDate`. Français juridique clair, accents et espaces insécables.
@@ -194,7 +194,7 @@ Rédiger `src/content/legal/mentions-legales.md` : éditeur, directeur de la pub
 - **Responsable** : Dev
 - **Dépend de** : T-029-01, T-029-04
 - **Débloque** : T-008-09, T-029-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Rédiger `src/content/legal/vie-privee.md` : finalité, base légale, sous-traitants (Web3Forms aux États-Unis, Umami Cloud sans cookie, Calendly lien sortant), durée de conservation, droits (accès, rectification, effacement), contact, recours CNIL, « Ce site ne dépose aucun cookie ». Section titrée de sorte que l'ancre **`#formulaire`** existe (contrat avec T-008-08).
@@ -214,7 +214,7 @@ Rédiger `src/content/legal/vie-privee.md` : finalité, base légale, sous-trait
 - **Responsable** : Dev
 - **Dépend de** : T-029-02, T-003-03
 - **Débloque** : T-029-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Écrire `scripts/checks/legal-pii.content.check.ts` : scan de `src/content/legal/*.md` et `src/config/legal.ts` avec `detectPii`, message « Donnée personnelle interdite dans <fichier> : <type> ». Les coordonnées publiques de l'hébergeur (clé `host`) sont explicitement exclues du scan.
@@ -233,7 +233,7 @@ Rédiger `src/content/legal/vie-privee.md` : finalité, base légale, sous-trait
 - **Responsable** : Dev
 - **Dépend de** : T-029-05, T-029-06, T-029-07, T-029-03
 - **Débloque** : T-029-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `make ci` complet : `legal.spec.ts` vert, axe, Lighthouse ≥ 95 sur les deux pages, LCP < 1,5 s, vérification de l'ancre `#formulaire`.
@@ -252,7 +252,7 @@ Rédiger `src/content/legal/vie-privee.md` : finalité, base légale, sous-trait
 - **Responsable** : Dev
 - **Dépend de** : T-029-08
 - **Débloque** : T-029-10
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `docs/guides/pages-legales.md` : où modifier `legal.ts` et les Markdown, règle de `updatedDate`, rappel de relecture. Entrée CHANGELOG.
@@ -272,7 +272,7 @@ Rédiger `src/content/legal/vie-privee.md` : finalité, base légale, sous-trait
 - **Responsable** : Dev
 - **Dépend de** : T-029-09
 - **Débloque** : -
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours
 
 **Description** :  
 Revue du contenu (LCEN, RGPD, cohérence avec les intégrations réelles : Web3Forms, Umami, Calendly), de l'absence de donnée personnelle et de l'accessibilité.

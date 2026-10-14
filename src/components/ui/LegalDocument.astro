@@ -1,0 +1,59 @@
+---
+import type { Locale } from '../../i18n/utils.ts';
+import { getTranslations } from '../../i18n/utils.ts';
+
+interface Props {
+  title: string;
+  updatedDate: Date;
+  locale?: Locale;
+}
+
+const { title, updatedDate, locale = 'fr' } = Astro.props;
+const ui = getTranslations(locale);
+const isoDate = updatedDate.toISOString().slice(0, 10);
+const longDate = updatedDate.toLocaleDateString('fr-FR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<article class="legal max-w-3xl">
+  <h1 class="text-3xl font-bold">{title}</h1>
+  <p class="mt-2 text-sm text-muted">
+    {ui.legal.updated} <time datetime={isoDate}>{longDate}</time>
+  </p>
+  <slot name="before" />
+  <div class="mt-8">
+    <slot />
+  </div>
+</article>
+
+<style>
+  /* Mise en forme du Markdown rendu (balises sans classes) */
+  .legal :global(h2) {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    scroll-margin-top: 1rem;
+  }
+  .legal :global(h3) {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .legal :global(p),
+  .legal :global(ul) {
+    margin-top: 0.75rem;
+  }
+  .legal :global(ul) {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+  .legal :global(a) {
+    color: var(--c-accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

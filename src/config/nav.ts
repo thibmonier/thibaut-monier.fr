@@ -54,8 +54,8 @@ const main: NavItem[] = [
 ];
 
 const footer: NavItem[] = [
-  { id: 'mentions-legales', href: '/mentions-legales/', label: 'Mentions légales', enabled: false },
-  { id: 'vie-privee', href: '/vie-privee/', label: 'Vie privée', enabled: false },
+  { id: 'mentions-legales', href: '/mentions-legales/', label: 'Mentions légales', enabled: true },
+  { id: 'vie-privee', href: '/vie-privee/', label: 'Vie privée', enabled: true },
 ];
 
 export const nav = parseNav({ main, footer });
