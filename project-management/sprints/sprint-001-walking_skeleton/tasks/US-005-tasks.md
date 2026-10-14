@@ -17,18 +17,18 @@
 
 | ID | Type | Tâche | Estimation | Responsable | Dépend de | Statut |
 |----|------|-------|------------|-------------|-----------|--------|
-| T-005-01 | [CONTENT] | Inventaire des expériences et décisions de contenu avec le PO | 2h | PO | - | 🔲 |
-| T-005-02 | [CONTENT] | Rédiger les expériences détaillées (`featured`) en YAML | 5h | Dev | T-005-01 | 🔲 |
-| T-005-03 | [CONTENT] | Rédiger les expériences antérieures à 2016 (`summaryOnly`) | 2h | Dev | T-005-01 | 🔲 |
-| T-005-04 | [TEST] | Écrire les tests unitaires RED : tri, fenêtre de 10 ans, période, schéma, données interdites | 3,5h | Dev | T-001-13 | 🔲 |
-| T-005-05 | [TEST] | Écrire les tests e2e RED de la page Parcours | 3,5h | Dev | T-001-13 | 🔲 |
-| T-005-06 | [FE-WEB] | Implémenter le schéma `experiences` et `experiences.ts` (GREEN) | 4h | Dev | T-005-04, T-001-06 | 🔲 |
-| T-005-07 | [OPS] | Contrôle de build des expériences : données personnelles, règle des 10 ans, décompte | 2,5h | Dev | T-005-04, T-003-03 | 🔲 |
-| T-005-08 | [FE-WEB] | Composants `Timeline`, `ExperienceCard`, `EarlierCareer` et styles d'impression | 6h | Dev | T-005-05, T-005-06, T-002-08 | 🔲 |
-| T-005-09 | [FE-WEB] | Page `/parcours/` (remplace la page d'attente) | 2,5h | Dev | T-005-08, T-005-02, T-005-03 | 🔲 |
-| T-005-10 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, impression, responsive | 2,5h | Dev | T-005-09, T-005-07 | 🔲 |
-| T-005-11 | [DOC] | Guide « ajouter ou modifier une expérience » et CHANGELOG | 1h | Dev | T-005-10 | 🔲 |
-| T-005-12 | [REV] | Revue d'US-005 (code, contenu, confidentialité) | 2h | Dev | T-005-11 | 🔲 |
+| T-005-01 | [CONTENT] | Inventaire des expériences et décisions de contenu avec le PO | 2h | PO | - | 👀 |
+| T-005-02 | [CONTENT] | Rédiger les expériences détaillées (`featured`) en YAML | 5h | Dev | T-005-01 | ✅ |
+| T-005-03 | [CONTENT] | Rédiger les expériences antérieures à 2016 (`summaryOnly`) | 2h | Dev | T-005-01 | ✅ |
+| T-005-04 | [TEST] | Écrire les tests unitaires RED : tri, fenêtre de 10 ans, période, schéma, données interdites | 3,5h | Dev | T-001-13 | ✅ |
+| T-005-05 | [TEST] | Écrire les tests e2e RED de la page Parcours | 3,5h | Dev | T-001-13 | ✅ |
+| T-005-06 | [FE-WEB] | Implémenter le schéma `experiences` et `experiences.ts` (GREEN) | 4h | Dev | T-005-04, T-001-06 | ✅ |
+| T-005-07 | [OPS] | Contrôle de build des expériences : données personnelles, règle des 10 ans, décompte | 2,5h | Dev | T-005-04, T-003-03 | ✅ |
+| T-005-08 | [FE-WEB] | Composants `Timeline`, `ExperienceCard`, `EarlierCareer` et styles d'impression | 6h | Dev | T-005-05, T-005-06, T-002-08 | ✅ |
+| T-005-09 | [FE-WEB] | Page `/parcours/` (remplace la page d'attente) | 2,5h | Dev | T-005-08, T-005-02, T-005-03 | ✅ |
+| T-005-10 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, impression, responsive | 2,5h | Dev | T-005-09, T-005-07 | ✅ |
+| T-005-11 | [DOC] | Guide « ajouter ou modifier une expérience » et CHANGELOG | 1h | Dev | T-005-10 | ✅ |
+| T-005-12 | [REV] | Revue d'US-005 (code, contenu, confidentialité) | 2h | Dev | T-005-11 | 👀 |
 
 **Total estimé** : 36,5h (12 tâches)
 
@@ -94,7 +94,7 @@ graph TD
 - **Responsable** : PO
 - **Dépend de** : -
 - **Débloque** : T-005-02, T-005-03
-- **Statut** : 🔲 À faire
+- **Statut** : 👀 Review
 
 **Description** :  
 À partir du CV source : lister les expériences, lever les ambiguïtés (point d'attention n°2 du README) — décompte attendu **8** alors que la liste d'US-005 en cite 7 après fusion de Smile ; fusion de Smile ; fenêtre « 10 dernières années » (règle V7) et expériences `featured` ; entrées antérieures à 2016 en `summaryOnly` ; accord de citation des clients (`clientsCited`) ; sources des réalisations chiffrées. Ne jamais importer téléphone, âge ni adresse.
@@ -114,7 +114,7 @@ graph TD
 - **Responsable** : Dev
 - **Dépend de** : T-005-01
 - **Débloque** : T-005-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer un fichier `src/data/cv/experiences/<slug>.yaml` par expérience des 10 dernières années : `company`, `role`, `start`/`end` (AAAA-MM), `location` (ville ou « remote »), `context` ≤ 280 caractères, ≥ 2 `achievements` chiffrées et sourcées, `skills`, `featured: true`, `order` pour départager. Ordre décroissant respecté. Français soigné, espaces insécables.
@@ -134,7 +134,7 @@ Créer un fichier `src/data/cv/experiences/<slug>.yaml` par expérience des 10 d
 - **Responsable** : Dev
 - **Dépend de** : T-005-01
 - **Débloque** : T-005-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer les fichiers des expériences antérieures (rôles et employeurs, résumé ≤ 160 caractères, `featured: false`) destinés au bloc « Avant 2016 » repliable. Relecture manuelle anti-donnée personnelle.
@@ -153,7 +153,7 @@ Créer les fichiers des expériences antérieures (rôles et employeurs, résum�
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-005-06, T-005-07
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/unit/lib/experiences.test.ts` : tri décroissant (poste en cours d'abord, départage par `order`), `splitFeatured` avec horloge injectée (règle V7 : toute expérience terminée après année-10 est `featured`), `formatPeriod('2019-03','2023-06')` → « mars 2019 – juin 2023 », schéma `experiences` (champ manquant → message `experiences/<fichier> : champ '<champ>' requis`, `strictObject` rejette `phone`, `end` ≥ `start`, `summaryOnly` requis si non featured). Note : l'AC cite `startDate`, le modèle de contenu `start` ; le test suit le modèle (point d'attention n°2).
@@ -173,7 +173,7 @@ Créer les fichiers des expériences antérieures (rôles et employeurs, résum�
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-005-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/e2e/parcours.spec.ts` : liste ordonnée `ol`, jalons du plus récent au plus ancien (nombre attendu lu depuis les données), chaque jalon avec rôle, entreprise, période, contexte, ≥ 2 réalisations ; dépliage au clavier et au toucher, `aria-expanded` à `true` ; bloc « Avant 2016 » repliable ; impression : tous les jalons dépliés sur ≤ 2 pages A4 (`page.pdf()` et décompte des pages) ; colonne unique sous 768 px ; fonctionne sans JavaScript.
@@ -192,7 +192,7 @@ Créer les fichiers des expériences antérieures (rôles et employeurs, résum�
 - **Responsable** : Dev
 - **Dépend de** : T-005-04, T-001-06
 - **Débloque** : T-005-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `src/content/schemas/experiences.ts` (content-model §3.1 : `strictObject`, `safeText`, refinements), enregistrer la collection dans `src/content.config.ts` (loader `glob` sur `src/data/cv/experiences`, ajout d'une ligne en zone append-only) et implémenter `src/lib/experiences.ts` (tri, fenêtre de 10 ans, format de période en français).
@@ -214,7 +214,7 @@ Créer `src/content/schemas/experiences.ts` (content-model §3.1 : `strictObject
 - **Responsable** : Dev
 - **Dépend de** : T-005-04, T-003-03
 - **Débloque** : T-005-10
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Écrire `scripts/checks/experiences.content.check.ts` (phase `content`, avant `astro build`) : `detectPii` sur chaque YAML (message « Donnée personnelle interdite détectée dans <fichier> »), règle V7, décompte V8 (`EXPECTED_EXPERIENCES` issu de T-005-01), unicité des slugs.
@@ -235,7 +235,7 @@ Créer `src/content/schemas/experiences.ts` (content-model §3.1 : `strictObject
 - **Responsable** : Dev
 - **Dépend de** : T-005-05, T-005-06, T-002-08
 - **Débloque** : T-005-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `src/components/cv/Timeline.astro` (`ol`, ligne verticale, une colonne sous 768 px), `ExperienceCard.astro` (`details`/`summary` « Voir le détail » avec petit script qui synchronise `aria-expanded`, fonctionne sans JavaScript), `EarlierCareer.astro` (`details` « Avant 2016 »). `@media print` dans les styles scopés des composants : tout déplié, 2 pages A4 maximum. Chaque composant < 150 lignes. Ne pas modifier `global.css`.
@@ -257,7 +257,7 @@ Créer `src/components/cv/Timeline.astro` (`ol`, ligne verticale, une colonne so
 - **Responsable** : Dev
 - **Dépend de** : T-005-08, T-005-02, T-005-03
 - **Débloque** : T-005-10
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Remplacer `src/pages/parcours.astro` : `getCollection('experiences')`, tri/partition via `experiences.ts`, `Seo` (title et description propres), `h1`, introduction courte. Données prêtes pour le JSON-LD de US-024 (aucun JSON-LD ici).
@@ -276,7 +276,7 @@ Remplacer `src/pages/parcours.astro` : `getCollection('experiences')`, tri/parti
 - **Responsable** : Dev
 - **Dépend de** : T-005-09, T-005-07
 - **Débloque** : T-005-11
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `make ci` complet ; contrôle visuel à 360, 768, 1280 px ; impression sur 2 pages A4 vérifiée ; correction des écarts.
@@ -296,7 +296,7 @@ Remplacer `src/pages/parcours.astro` : `getCollection('experiences')`, tri/parti
 - **Responsable** : Dev
 - **Dépend de** : T-005-10
 - **Débloque** : T-005-12
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `docs/guides/parcours-experiences.md` : schéma, règle des 10 ans, `summaryOnly`, liste blanche de données, procédure de validation. Entrée CHANGELOG.
@@ -316,7 +316,7 @@ Remplacer `src/pages/parcours.astro` : `getCollection('experiences')`, tri/parti
 - **Responsable** : Dev
 - **Dépend de** : T-005-11
 - **Débloque** : -
-- **Statut** : 🔲 À faire
+- **Statut** : 👀 Review
 
 **Description** :  
 Revue du code, de l'accessibilité (liste ordonnée, boutons), de la liste blanche (aucune donnée personnelle), de l'accord de citation des clients et de la relecture du français.

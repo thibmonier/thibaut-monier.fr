@@ -49,7 +49,7 @@ export function parseNav(input: unknown): Nav {
 
 const main: NavItem[] = [
   { id: 'accueil', href: '/', label: 'Accueil', enabled: true },
-  { id: 'parcours', href: '/parcours/', label: 'Parcours', enabled: false },
+  { id: 'parcours', href: '/parcours/', label: 'Parcours', enabled: true },
   { id: 'contact', href: '/contact/', label: 'Contact', enabled: true },
 ];
 

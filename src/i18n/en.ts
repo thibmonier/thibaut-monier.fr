@@ -6,4 +6,6 @@ export const en: Dictionary = {
   nav: { main: '', menu: '' },
   theme: { toggle: '' },
   footer: { label: '', social: '', rights: '' },
+  // US-004
+  home: { proofsHeading: '' },
 };

@@ -1,0 +1,65 @@
+---
+import { formatPeriod } from '../../lib/experiences.ts';
+
+interface Props {
+  slug: string;
+  company: string;
+  role: string;
+  start: string;
+  end: string | null;
+  context: string;
+  achievements: string[];
+}
+
+const { slug, company, role, start, end, context, achievements } = Astro.props;
+---
+
+<li
+  data-experience={slug}
+  id={`exp-${slug}`}
+  class="relative pb-10 last:pb-0 md:grid md:grid-cols-[11rem_1fr] md:gap-6 print:pb-3"
+>
+  <span
+    aria-hidden="true"
+    class="absolute top-2 -left-[31px] size-3 rounded-full border-2 border-bg bg-accent md:-left-[39px]"
+  ></span>
+  <p data-period class="text-sm font-medium text-muted md:pt-1.5">
+    {formatPeriod(start, end)}
+  </p>
+  <div>
+    <h2 data-role class="text-xl font-semibold tracking-tight">
+      {role}
+    </h2>
+    <p data-company class="font-medium text-muted">
+      {company}
+    </p>
+    <p data-context class="mt-2">
+      {context}
+    </p>
+    <details data-collapsible class="mt-2">
+      <summary class="inline-flex min-h-11 cursor-pointer items-center rounded-md font-medium text-accent underline underline-offset-4">
+        Voir le détail
+      </summary>
+      <ul data-achievements class="mt-1 list-disc space-y-2 pl-5 print:space-y-0.5">
+        {achievements.map((achievement) => (
+          <li>{achievement}</li>
+        ))}
+      </ul>
+    </details>
+  </div>
+</li>
+
+<style>
+  @media print {
+    details::details-content {
+      content-visibility: visible;
+      display: block;
+    }
+    summary {
+      display: none;
+    }
+    ul > li {
+      break-inside: avoid;
+    }
+  }
+</style>

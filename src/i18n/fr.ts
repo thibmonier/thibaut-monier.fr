@@ -13,6 +13,10 @@ export const fr = {
     social: 'Réseaux',
     rights: 'Tous droits réservés',
   },
+  // US-004
+  home: {
+    proofsHeading: 'Quelques preuves',
+  },
 } as const;
 
 type Widen<T> = { -readonly [K in keyof T]: T[K] extends string ? string : Widen<T[K]> };

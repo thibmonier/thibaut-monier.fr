@@ -1,0 +1,11 @@
+company: 'DTA Ingénierie'
+role: 'Chief Digital Officer'
+start: '2019-09'
+end: '2020-06'
+location: 'Nantes'
+context: 'Groupe de 250 collaborateurs ; poste arrêté par la crise du COVID.'
+achievements:
+  - "Définition de la stratégie 2020 et lancement d'offres : e-commerce, recrutement IT, expatriation."
+  - "Direction d'une équipe de 2 personnes à temps plein, complétée par un pool de contributeurs mobilisables parmi les 250 collaborateurs du groupe."
+  - "Création d'un POC B2B e-commerce pour l'industrie agroalimentaire et déploiement d'une solution de GED et de signature électronique."
+featured: true

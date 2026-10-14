@@ -1,0 +1,11 @@
+company: 'SQLI'
+role: 'Ingénieur concepteur développeur puis lead developer'
+start: '2000-09'
+end: '2007-09'
+location: 'Nantes et Paris'
+context: "Sept ans de conception et de développement PHP et Java/J2EE dans une société de services numériques, jusqu'au poste de lead developer."
+summaryOnly: "Conception et développement PHP et Java/J2EE, puis responsable d'architecture et pilote d'équipes techniques sur des projets de grands comptes."
+achievements:
+  - "Responsable de l'architecture et pilote d'équipes techniques sur des projets de grands comptes (aérospatial, collectivités, culture)."
+  - 'Audit et optimisation de bases de données PostgreSQL ; formateur J2EE/Java, Symfony et PHP.'
+featured: false
