@@ -67,7 +67,7 @@ THEN la CI échoue avec le message « Lien cassé sur /open-source/tailsfadmin/ 
 ```
 
 ### Critères techniques (site statique)
-- [ ] Contenu en MDX, métadonnées validées par le schéma (réutilisation du gabarit de fiche d'US-020 si possible, DRY)
+- [ ] Contenu en Markdown (`.md`, collection `projects`), métadonnées validées par le schéma (réutilisation du gabarit de fiche d'US-020 si possible, DRY)
 - [ ] Responsive, WCAG 2.2 AA ; si une capture est fournie, elle a une alternative textuelle décrivant l'écran ; sans capture, aucun visuel provisoire
 - [ ] SEO : title, description, JSON-LD `SoftwareSourceCode` reporté à US-024 (sprint 3), lien depuis la page d'ensemble de la vitrine
 - [ ] Performance : Lighthouse ≥ 95

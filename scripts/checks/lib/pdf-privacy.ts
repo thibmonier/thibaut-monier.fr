@@ -87,6 +87,7 @@ export function evaluateCvPdf(facts: CvPdfFacts): string[] {
     }
   }
   if (!facts.info.title) errors.push('CV PDF : titre absent des métadonnées');
+  if (!facts.info.tagged) errors.push('CV PDF : PDF non balisé (lecture accessible impossible)');
   if (facts.info.lang !== 'fr') errors.push('CV PDF : langue « fr » absente des métadonnées');
   return errors;
 }

@@ -30,8 +30,8 @@
 | T-023-11 | [TEST] | Vérification GREEN | 1,5h | T-023-05, T-023-07, T-023-10 | 3 | ✅ |
 | T-023-12 | [DOC] | Guide des pages de projets open source | 1h | T-023-11 | 3 | ✅ |
 | T-023-13 | [REV] | Revue d’US-023 | 1,5h | T-023-12 | 3 | 👀 |
-| T-023-14 | [FE-WEB] | Phase 4 : mention « Contributeur career-ops » sur `/parcours/` | 1,5h | T-023-10, T-007-13 | 4 | 🔲 |
-| T-023-15 | [CONTENT] | Phase 4 : re-pointer la preuve « pr-career-ops » de l’accueil vers l’étude de cas | 0,5h | T-023-10, T-019-14 | 4 | 🔲 |
+| T-023-14 | [FE-WEB] | Phase 4 : mention « Contributeur career-ops » sur `/parcours/` | 1,5h | T-023-10, T-007-13 | 4 | ✅ |
+| T-023-15 | [CONTENT] | Phase 4 : re-pointer la preuve « pr-career-ops » de l’accueil vers l’étude de cas | 0,5h | T-023-10, T-019-14 | 4 | ✅ |
 
 **Total estimé** : 37h (15 tâches)
 

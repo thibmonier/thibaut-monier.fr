@@ -27,7 +27,7 @@
 | T-022-08 | [TEST] | Vérification GREEN | 1,5h | T-022-07 | 3 | ✅ |
 | T-022-09 | [DOC] | Compléter le guide des projets et CHANGELOG | 1h | T-022-08 | 3 | ✅ |
 | T-022-10 | [REV] | Revue d’US-022 | 1,5h | T-022-09 | 3 | 👀 |
-| T-022-11 | [FE-WEB] | Phase 4 : section « Autres projets » sur `/open-source/` | 2,5h | T-019-10, T-022-07, T-023-10 | 4 | 🔲 |
+| T-022-11 | [FE-WEB] | Phase 4 : section « Autres projets » sur `/open-source/` | 2,5h | T-019-10, T-022-07, T-023-10 | 4 | ✅ |
 
 **Total estimé** : 24,5h (11 tâches)
 

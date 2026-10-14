@@ -30,7 +30,7 @@
 | T-019-11 | [TEST] | Vérification GREEN | 2h | T-019-06, T-019-10 | 2 | ✅ |
 | T-019-12 | [DOC] | Guide « ajouter ou modifier un plugin » | 1,5h | T-019-11 | 2 | ✅ |
 | T-019-13 | [REV] | Revue d’US-019 | 2h | T-019-12 | 2 | 👀 |
-| T-019-14 | [CONTENT] | Phase 4 : re-pointer la preuve « plugins-sylius » de l’accueil vers `/open-source/` | 0,5h | T-019-13 | 4 | 🔲 |
+| T-019-14 | [CONTENT] | Phase 4 : re-pointer la preuve « plugins-sylius » de l’accueil vers `/open-source/` | 0,5h | T-019-13 | 4 | ✅ |
 
 **Total estimé** : 39,5h (14 tâches)
 

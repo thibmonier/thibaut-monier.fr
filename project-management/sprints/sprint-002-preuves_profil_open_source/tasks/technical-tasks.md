@@ -5,7 +5,7 @@ Tâches qui ne relèvent d’aucune US en particulier : prérequis (phase 0) et 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
 | T-900-00 | [OPS] | Phase 0 : prérequis hors backlog (publication Packagist et dépôts) | 1,5h | - | 0 | 🔲 |
-| T-900-01 | [OPS] | Phase 4 : contrôle de fumée étendu (PDF, vitrine, compétences) | 2h | T-007-12, T-019-10, T-006-10 | 4 | 🔲 |
+| T-900-01 | [OPS] | Phase 4 : contrôle de fumée étendu (PDF, vitrine, compétences) | 2h | T-007-12, T-019-10, T-006-10 | 4 | 🔄 |
 | T-900-02 | [TEST] | Phase 4 : scénarios e2e inter-US | 3,5h | T-007-13, T-019-14, T-023-14, T-023-15, T-022-11 | 4 | 🔲 |
 | T-900-03 | [TEST] | Phase 4 : porte du sprint (`/gate:validate-sprint 002`) et budgets | 3h | T-900-01, T-900-02, T-007-16, T-006-13, T-019-13, T-020-21, T-021-12, T-023-13, T-022-10 | 4 | 🔲 |
 | T-900-04 | [OPS] | Phase 4 : build Railway (Typst, poppler, images) et déploiement | 2,5h | T-900-03 | 4 | 🔲 |

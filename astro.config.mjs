@@ -9,7 +9,7 @@ export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
-  // US-019 : collections `plugins` et `projects` en MDX (ADR-0001).
+  // US-019 : collection `plugins` en MDX (ADR-0001) ; les projets (`projects`) sont en Markdown simple, sans composant.
   integrations: [mdx()],
   // Locales fr/en, le français sans préfixe (ADR-0008). Les pages en anglais arrivent au sprint 5.
   i18n: {

@@ -107,6 +107,13 @@ describe('evaluateCvPdf', () => {
     );
   });
 
+  it('refuse un PDF non balisé (lecture accessible)', () => {
+    const errors = evaluateCvPdf(
+      facts({ info: { pages: 2, title: 't', lang: 'fr', tagged: false } }),
+    );
+    expect(errors).toEqual(['CV PDF : PDF non balisé (lecture accessible impossible)']);
+  });
+
   it('refuse un fichier de plus de 500 Ko', () => {
     expect(evaluateCvPdf(facts({ sizeBytes: 500 * 1024 + 1 })).join()).toMatch(/500 Ko/);
   });
