@@ -26,10 +26,18 @@ async function fill(
 
 // Les scénarios du formulaire exigent PUBLIC_WEB3FORMS_KEY au build (valeur factice suffisante : les appels sont
 // simulés). Sans clé, seul le scénario « [sans-clé] » s'exécute.
+// En CI (E2E_EXPECT_FULL_CONFIG=1), une variable de build absente est une erreur, pas un test ignoré.
+function skipUnlessConfigured(missing: boolean, reason: string): void {
+  if (missing && process.env.E2E_EXPECT_FULL_CONFIG === '1') {
+    throw new Error(`Configuration attendue en CI : ${reason}`);
+  }
+  test.skip(missing, reason);
+}
+
 test.beforeEach(async ({ page }, info) => {
   if (info.title.includes('[sans-clé]')) return;
   await page.goto('/contact/');
-  test.skip(
+  skipUnlessConfigured(
     (await page.locator('form[data-contact-form]').count()) === 0,
     'PUBLIC_WEB3FORMS_KEY absente au build',
   );
@@ -101,7 +109,7 @@ test.describe('Scénario : prise de rendez-vous', () => {
   }) => {
     await page.goto('/contact/');
     const link = page.getByRole('link', { name: /Réserver un créneau de 30 min/ });
-    test.skip((await link.count()) === 0, 'PUBLIC_CALENDLY_URL absente : bouton masqué');
+    skipUnlessConfigured((await link.count()) === 0, 'PUBLIC_CALENDLY_URL absente : bouton masqué');
     await expect(link).toHaveAttribute('target', '_blank');
     await expect(link).toHaveAttribute('rel', /noopener/);
     await expect(link).toHaveAttribute('rel', /noreferrer/);
@@ -256,7 +264,7 @@ test.describe('Scénario : amélioration progressive', () => {
   }) => {
     await page.goto('/contact/');
     const form = page.locator('form[data-contact-form]');
-    test.skip(
+    skipUnlessConfigured(
       (await form.count()) === 0,
       'PUBLIC_WEB3FORMS_KEY absente : message de repli affiché',
     );

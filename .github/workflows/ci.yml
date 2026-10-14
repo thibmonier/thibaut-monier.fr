@@ -16,6 +16,7 @@ concurrency:
 env:
   PUBLIC_WEB3FORMS_KEY: 00000000-0000-4000-8000-000000000000
   PUBLIC_CALENDLY_URL: https://calendly.com/exemple/echange-decouverte
+  E2E_EXPECT_FULL_CONFIG: '1'
 
 # Docker uniquement sur le runner (ADR-0003) : aucun Node installé, cache BuildKit en mode GitHub Actions.
 jobs:
@@ -33,6 +34,9 @@ jobs:
         with:
           context: .
           target: test
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           cache-from: type=gha,scope=test
           cache-to: type=gha,scope=test,mode=max
       # Export de dist/ (cible `dist`) pour Lighthouse et les contrôles de l'étape e2e
@@ -40,6 +44,9 @@ jobs:
         with:
           context: .
           target: dist
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           outputs: type=local,dest=dist
           cache-from: type=gha,scope=test
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -67,6 +74,9 @@ jobs:
         with:
           context: .
           target: runtime
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           load: true
           tags: thibaut-monier-preview
           cache-from: type=gha,scope=runtime
@@ -122,6 +132,9 @@ jobs:
         with:
           context: .
           target: runtime
+          build-args: |
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           load: true
           tags: thibaut-monier-scan
           cache-from: type=gha,scope=runtime
