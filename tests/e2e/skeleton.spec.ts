@@ -1,15 +1,15 @@
 import { expect, test } from '@playwright/test';
 
 test.describe("Scénario : Page d'accueil minimale servie en HTTPS après fusion", () => {
-  test("l'accueil répond 200 avec nom, titre du profil et lien contact", async ({ page }) => {
+  test("l'accueil répond 200 avec nom, titre du profil et liens de contact", async ({ page }) => {
     const response = await page.goto('/');
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('h1')).toHaveText('Thibaut Monier');
-    await expect(page.getByText('Direction technique et delivery augmenté par IA')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Me contacter' })).toHaveAttribute(
+    await expect(page.locator('h1')).toHaveText('Direction technique et delivery augmenté par IA');
+    await expect(page.getByText('Thibaut Monier').first()).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Me recruter' })).toHaveAttribute(
       'href',
-      '/contact/',
+      '/contact/?motif=poste',
     );
   });
 

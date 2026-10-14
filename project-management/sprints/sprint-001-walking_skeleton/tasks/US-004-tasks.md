@@ -17,16 +17,16 @@
 
 | ID | Type | Tâche | Estimation | Responsable | Dépend de | Statut |
 |----|------|-------|------------|-------------|-----------|--------|
-| T-004-01 | [CONTENT] | Rédiger la proposition de valeur, les CTA et les 4 preuves | 2,5h | PO | - | 🔲 |
-| T-004-02 | [TEST] | Écrire les tests unitaires RED : preuves, schéma `home`, nombre de mots | 2,5h | Dev | T-001-13 | 🔲 |
-| T-004-03 | [TEST] | Écrire les tests e2e RED de la page d'accueil | 3h | Dev | T-001-13 | 🔲 |
-| T-004-04 | [FE-WEB] | Étendre le schéma `home` et implémenter `proofs.ts` / `text.ts` (GREEN) | 3h | Dev | T-004-02 | 🔲 |
-| T-004-05 | [OPS] | Contrôle de build `proof-links` sur `dist/` | 2h | Dev | T-004-02, T-003-03 | 🔲 |
-| T-004-06 | [CONTENT] | Enregistrer les données de la page d'accueil dans `home.yaml` | 1h | Dev | T-004-01, T-004-04 | 🔲 |
-| T-004-07 | [FE-WEB] | Composants `Hero`, `CtaPair`, `ProofList` et page d'accueil | 4h | Dev | T-004-03, T-004-06, T-002-08 | 🔲 |
-| T-004-08 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, contrôle des preuves | 1,5h | Dev | T-004-07, T-004-05 | 🔲 |
-| T-004-09 | [DOC] | Guide « modifier la page d'accueil » et CHANGELOG | 1h | Dev | T-004-08 | 🔲 |
-| T-004-10 | [REV] | Revue d'US-004 (DoD §1, §2, §4, §5) | 1,5h | Dev | T-004-09 | 🔲 |
+| T-004-01 | [CONTENT] | Rédiger la proposition de valeur, les CTA et les 4 preuves | 2,5h | PO | - | 👀 |
+| T-004-02 | [TEST] | Écrire les tests unitaires RED : preuves, schéma `home`, nombre de mots | 2,5h | Dev | T-001-13 | ✅ |
+| T-004-03 | [TEST] | Écrire les tests e2e RED de la page d'accueil | 3h | Dev | T-001-13 | ✅ |
+| T-004-04 | [FE-WEB] | Étendre le schéma `home` et implémenter `proofs.ts` / `text.ts` (GREEN) | 3h | Dev | T-004-02 | ✅ |
+| T-004-05 | [OPS] | Contrôle de build `proof-links` sur `dist/` | 2h | Dev | T-004-02, T-003-03 | ✅ |
+| T-004-06 | [CONTENT] | Enregistrer les données de la page d'accueil dans `home.yaml` | 1h | Dev | T-004-01, T-004-04 | ✅ |
+| T-004-07 | [FE-WEB] | Composants `Hero`, `CtaPair`, `ProofList` et page d'accueil | 4h | Dev | T-004-03, T-004-06, T-002-08 | ✅ |
+| T-004-08 | [TEST] | Vérification GREEN : e2e, axe, Lighthouse, contrôle des preuves | 1,5h | Dev | T-004-07, T-004-05 | ✅ |
+| T-004-09 | [DOC] | Guide « modifier la page d'accueil » et CHANGELOG | 1h | Dev | T-004-08 | ✅ |
+| T-004-10 | [REV] | Revue d'US-004 (DoD §1, §2, §4, §5) | 1,5h | Dev | T-004-09 | 👀 |
 
 **Total estimé** : 22h (10 tâches)
 
@@ -85,7 +85,7 @@ graph TD
 - **Responsable** : PO
 - **Dépend de** : -
 - **Débloque** : T-004-06
-- **Statut** : 🔲 À faire
+- **Statut** : 👀 Review
 
 **Description** :  
 Proposer et faire valider : `headline`, phrase de valeur ≤ 25 mots, libellés « Me confier une mission » / « Me recruter », statut de disponibilité (question ouverte n°5), `title` ≤ 60 et `description` ≤ 160 caractères. Les 4 preuves (20 plugins Sylius 2, PR mergées sur career-ops, ERP de 12 modules livré en agentique, 25 ans d'expérience) : libellé, valeur, **source consultable** et destination. Destinations provisoires au sprint 1 : liens externes https (profil Packagist, PR GitHub) ou `/parcours/` ; aucune preuve vers une 404.
@@ -106,7 +106,7 @@ Proposer et faire valider : `headline`, phrase de valeur ≤ 25 mots, libellés 
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-004-04, T-004-05
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/unit/lib/proofs.test.ts` : `validateProofs` (exactement 4 preuves ; lien interne ∈ routes connues ; lien externe en https ; message « Lien de preuve invalide : <identifiant> »), `tests/unit/lib/text.test.ts` (`countWords`), `tests/unit/content/home-schema.test.ts` étendu (headline, valueProp ≤ 25 mots, ctas[2], proofs[4] ; message « Champ 'headline' requis dans la collection home »).
@@ -127,7 +127,7 @@ Proposer et faire valider : `headline`, phrase de valeur ≤ 25 mots, libellés 
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-004-07
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/e2e/home.spec.ts` : à 1280 × 720, `h1`, phrase de valeur, 2 boutons et 4 preuves entièrement visibles sans défilement (bas de boîte ≤ 720 px) ; à 375 × 667, boutons visibles, preuves en une colonne, aucun défilement horizontal ; hauteur des boutons ≥ 44 px ; `href` = `/contact/?motif=poste` et `/contact/?motif=mission` ; un seul `h1` ; `title` ≤ 60, description ≤ 160. Le clic bout-en-bout vers le formulaire est testé dans T-008-11.
@@ -146,7 +146,7 @@ Proposer et faire valider : `headline`, phrase de valeur ≤ 25 mots, libellés 
 - **Responsable** : Dev
 - **Dépend de** : T-004-02
 - **Débloque** : T-004-06
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Étendre `src/content/schemas/home.ts` (headline, valueProp, ctas[2], proofs[4] avec libellé, valeur, lien), messages d'erreur en français ; implémenter `src/lib/proofs.ts` et `src/lib/text.ts`.
@@ -168,7 +168,7 @@ Proposer et faire valider : `headline`, phrase de valeur ≤ 25 mots, libellés 
 - **Responsable** : Dev
 - **Dépend de** : T-004-02, T-003-03
 - **Débloque** : T-004-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Écrire `scripts/checks/proof-links.dist.check.ts` : lit `src/data/home.yaml`, vérifie que chaque lien interne de preuve correspond à une route de `dist/` et que chaque lien externe est en https. Utilise `validateProofs` de T-004-04. Message : « Lien de preuve invalide : <identifiant> ».
@@ -188,7 +188,7 @@ Proposer et faire valider : `headline`, phrase de valeur ≤ 25 mots, libellés 
 - **Responsable** : Dev
 - **Dépend de** : T-004-01, T-004-04
 - **Débloque** : T-004-07
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Reporter le contenu validé de T-004-01 dans `src/data/home.yaml` (headline, valueProp, 2 CTA, 4 preuves) en respectant le schéma étendu. Typographie française (espaces insécables avant `: ; ? !`).
@@ -207,7 +207,7 @@ Reporter le contenu validé de T-004-01 dans `src/data/home.yaml` (headline, val
 - **Responsable** : Dev
 - **Dépend de** : T-004-03, T-004-06, T-002-08
 - **Débloque** : T-004-08, T-008-11
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `Hero.astro`, `CtaPair.astro` (boutons ≥ 44 px, libellés explicites, liens `/contact/?motif=…`), `ProofList.astro` (une colonne mobile, grille ≥ 768 px, chaque preuve cliquable) et recomposer `src/pages/index.astro`. Aucune image bloquante ; `Seo` avec title/description de `home.yaml`. Chaque composant < 150 lignes.
@@ -230,7 +230,7 @@ Créer `Hero.astro`, `CtaPair.astro` (boutons ≥ 44 px, libellés explicites, l
 - **Responsable** : Dev
 - **Dépend de** : T-004-07, T-004-05
 - **Débloque** : T-004-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `make ci` complet ; contrôle visuel à 360, 768, 1280 px, thème clair et sombre. Corriger les écarts.
@@ -249,7 +249,7 @@ Créer `Hero.astro`, `CtaPair.astro` (boutons ≥ 44 px, libellés explicites, l
 - **Responsable** : Dev
 - **Dépend de** : T-004-08
 - **Débloque** : T-004-10
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `docs/guides/page-accueil.md` : schéma `home`, règles des preuves (sourcées, lien valide), contrat du motif de contact. Entrée CHANGELOG.
@@ -269,7 +269,7 @@ Créer `Hero.astro`, `CtaPair.astro` (boutons ≥ 44 px, libellés explicites, l
 - **Responsable** : Dev
 - **Dépend de** : T-004-09
 - **Débloque** : -
-- **Statut** : 🔲 À faire
+- **Statut** : 👀 Review
 
 **Description** :  
 Revue du code, du contenu (preuves sourcées, accents, aucune donnée personnelle), de l'accessibilité et des performances.
