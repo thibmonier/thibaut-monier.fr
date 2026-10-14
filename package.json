@@ -21,7 +21,9 @@
     "test": "vitest run --coverage",
     "test:unit": "vitest run",
     "e2e": "playwright test",
-    "lighthouse": "node scripts/checks/lighthouse.ts"
+    "lighthouse": "node scripts/checks/lighthouse.ts",
+    "metrics": "node scripts/fetch-oss-metrics.ts",
+    "checks:external": "node scripts/checks/external-links.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.3.3",
