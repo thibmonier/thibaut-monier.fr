@@ -104,11 +104,54 @@ jobs:
       - name: Hadolint
         run: docker run --rm -i hadolint/hadolint@sha256:32dac94127fd60b7b7e3fbfc65e1383b9b5e25c9bfd7b8536de7a539fe68a12d < Dockerfile
 
+  # Supply chain (ADR-0009, règle 11) : SBOM CycloneDX puis scan Trivy de l'image de production.
+  # Échec sur HIGH/CRITICAL ayant un correctif disponible (`ignore-unfixed`).
+  supply-chain:
+    name: supply-chain
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - name: Build de l'image de production
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: runtime
+          load: true
+          tags: thibaut-monier-scan
+          cache-from: type=gha,scope=runtime
+      # tag v0.36.0, postérieur à la compromission de mars 2026 des anciens tags ; épinglé par SHA
+      - name: SBOM CycloneDX
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: thibaut-monier-scan
+          format: cyclonedx
+          output: sbom.cdx.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sbom-cyclonedx
+          path: sbom.cdx.json
+          retention-days: 30
+      - name: Scan Trivy (HIGH et CRITICAL corrigeables)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: thibaut-monier-scan
+          format: table
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          vuln-type: os,library
+          exit-code: '1'
+
   # Statut unique requis pour la protection de `main` et « Wait for CI » de Railway
   ci:
     name: ci
     if: ${{ always() }}
-    needs: [quality, e2e, dockerfile]
+    needs: [quality, e2e, dockerfile, supply-chain]
     runs-on: ubuntu-24.04
     steps:
       - name: Tous les jobs sont verts
@@ -116,3 +159,4 @@ jobs:
           test "${{ needs.quality.result }}" = success
           test "${{ needs.e2e.result }}" = success
           test "${{ needs.dockerfile.result }}" = success
+          test "${{ needs.supply-chain.result }}" = success
