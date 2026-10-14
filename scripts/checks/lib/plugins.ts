@@ -4,6 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { z } from 'astro/zod';
 import { parse } from 'yaml';
 import { createPluginSchema } from '../../../src/content/schemas/plugins.ts';
+import { findCompatibilityErrors } from '../../../src/lib/compatibility.ts';
 import { findDependencyErrors } from '../../../src/lib/plugin-deps.ts';
 import { THEMES, formatPluginIssue, type PluginTheme } from '../../../src/lib/plugins.ts';
 import { detectPii, formatPiiError } from '../../../src/lib/privacy.ts';
@@ -62,6 +63,8 @@ async function checkFile(root: string, name: string, loaded: Loaded[]): Promise<
     ];
   }
   const plugin = result.data;
+  for (const message of findCompatibilityErrors(plugin.compatibility.matrix))
+    errors.push(`${prefix} : compatibilité : ${message}`);
   for (const shot of plugin.screenshots) {
     if (!existsSync(resolve(root, DIR, dirname(shot.src), shot.src.split('/').pop() ?? ''))) {
       errors.push(`${prefix} : capture introuvable « ${shot.src} »`);

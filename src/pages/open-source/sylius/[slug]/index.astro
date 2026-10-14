@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import PluginLayout from '../../../../layouts/PluginLayout.astro';
 import metrics from '../../../../data/oss-metrics.json';
-import { getLiveStats } from '../../../../lib/live-stats.ts';
+import { getLiveStats } from '../../../../lib/oss-metrics.ts';
 import { computeDependencies } from '../../../../lib/plugin-deps.ts';
 
 export async function getStaticPaths() {

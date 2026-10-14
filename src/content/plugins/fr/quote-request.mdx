@@ -18,8 +18,13 @@ features:
   - 'Workflow Symfony complet, expiration par tâche planifiée, événements et limitation de débit.'
 compatibility:
   matrix:
-    - sylius: '2.2.9+ et 2.3'
+    - sylius: '2.2.9+'
       php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
       symfony:
         - '6.4'
         - '7.4'
