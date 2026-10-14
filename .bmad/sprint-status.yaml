@@ -4,7 +4,7 @@ current_sprint: 1
 sprints:
   - number: 1
     name: sprint-001-walking_skeleton
-    status: ready
+    status: review
     points: 24
     metadata:
       sprint_id: sprint-001
@@ -17,7 +17,7 @@ sprints:
         title: "Squelette du site publié en production"
         epic: EPIC-001
         points: 5
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: []
         file: project-management/backlog/user-stories/US-001-squelette-site-production.md
@@ -25,7 +25,7 @@ sprints:
         title: "Design system et layout"
         epic: EPIC-001
         points: 3
-        status: ready-for-dev
+        status: done
         blocked_by: [US-001]
         depends_on: [US-001]
         file: project-management/backlog/user-stories/US-002-design-system-layout.md
@@ -33,7 +33,7 @@ sprints:
         title: "Pipeline CI qualité"
         epic: EPIC-001
         points: 3
-        status: ready-for-dev
+        status: done
         blocked_by: [US-001]
         depends_on: [US-001]
         file: project-management/backlog/user-stories/US-003-pipeline-ci-qualite.md
@@ -41,7 +41,7 @@ sprints:
         title: "Page d'accueil : proposition de valeur et double parcours"
         epic: EPIC-002
         points: 3
-        status: ready-for-dev
+        status: done
         blocked_by: [US-002]
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-004-page-accueil-double-parcours.md
@@ -49,7 +49,7 @@ sprints:
         title: "Parcours professionnel en frise"
         epic: EPIC-002
         points: 5
-        status: ready-for-dev
+        status: done
         blocked_by: [US-002]
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-005-parcours-professionnel-frise.md
@@ -57,7 +57,7 @@ sprints:
         title: "Page contact avec motif, anti-spam et prise de RDV"
         epic: EPIC-002
         points: 3
-        status: ready-for-dev
+        status: done
         blocked_by: [US-002]
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-008-page-contact-formulaire.md
@@ -65,7 +65,7 @@ sprints:
         title: "Mentions légales et politique de vie privée"
         epic: EPIC-001
         points: 2
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-002]
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-029-mentions-legales-vie-privee.md

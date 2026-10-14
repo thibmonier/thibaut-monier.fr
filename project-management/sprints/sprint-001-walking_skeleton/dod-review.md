@@ -166,3 +166,13 @@ Limite de la revue : les tests Playwright n'ont pas été exécutés en local (p
 ### Réserves PO (repli fonctionnel présent)
 
 Domaine et DNS, ou `PUBLIC_SITE_URL` provisoire (canonical, redirection du formulaire) ; clé Web3Forms sur Railway (repli LinkedIn) ; URL Calendly (bouton masqué) ; adresse e-mail de repli (repli LinkedIn) ; *Wait for CI*, fusion sur `main` et redéploiement (favicon) ; Umami (US-026) ; validation des contenus T-004-01, T-005-01, T-029-01, T-008-01 ; validation PO sur la production.
+
+
+## Suite donnée (orchestrateur, 2026-10-14)
+
+| Correctif | Statut | Preuve |
+|-----------|--------|--------|
+| B1 — variables de build absentes en CI, 47 tests ignorés | ✅ Corrigé | `build-args` sur les builds test, dist et runtime ; mode strict `E2E_EXPECT_FULL_CONFIG=1` (une configuration absente fait échouer le test). Run `5aeff95` : **215 passés, 3 ignorés** (2 scénarios « sans clé » et 1 PDF limité au desktop, tous voulus) |
+| B2 — « à vérifier » publié dans les mentions légales | ✅ Corrigé | Marqueur retiré ; adresse de l'hébergeur optionnelle (à renseigner par le PO depuis sa facture Railway) ; nouveau contrôle `placeholders.dist.check.ts` qui bloque tout marqueur provisoire dans dist (tests unitaires) |
+
+**Verdicts révisés** : US-002, US-003, US-004, US-005, US-008 → **Done**. US-001 et US-029 → **Done sous réserve PO** (domaine et DNS ; option Railway « Wait for CI » et source `main` ; secrets `RAILWAY_TOKEN` et `SMOKE_URL` ; clés Web3Forms, Umami et Calendly réelles ; coordonnées de l'hébergeur ; relecture juridique).
