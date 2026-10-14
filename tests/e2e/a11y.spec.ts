@@ -12,19 +12,24 @@ test('axe : aucune violation serious ou critical sur les pages découvertes', as
 }) => {
   const routes = await discoverRoutes(request, baseURL as string);
   expect(routes).toContain('/');
+  // Le site grandit à chaque sprint (20 fiches plugins au sprint 2) : délai proportionnel au nombre de pages.
+  test.setTimeout(30_000 + routes.length * 2 * 5_000);
 
+  const blocking: string[] = [];
   for (const colorScheme of ['light', 'dark'] as const) {
     const context = await browser.newContext({ baseURL, colorScheme });
     const page = await context.newPage();
     for (const route of routes) {
       await page.goto(route);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
-      const blocking = violations.filter((v) => ['serious', 'critical'].includes(v.impact ?? ''));
-      expect(
-        blocking.map((v) => `${route} [${colorScheme}] ${v.id}: ${v.help}`),
-        `Violations axe sur ${route} (${colorScheme})`,
-      ).toEqual([]);
+      for (const v of violations) {
+        if (['serious', 'critical'].includes(v.impact ?? '')) {
+          blocking.push(`${route} [${colorScheme}] ${v.id}: ${v.help}`);
+        }
+      }
     }
     await context.close();
   }
+  // Toutes les violations sont rapportées en une fois, pas seulement celles de la première page fautive.
+  expect(blocking, 'Violations axe serious ou critical').toEqual([]);
 });
