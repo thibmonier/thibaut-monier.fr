@@ -32,6 +32,8 @@ Sur macOS, si les modifications de fichiers ne sont pas détectées : `CHOKIDAR_
 
 Détail des contrôles, de la CI et des seuils : [`docs/guides/qualite-ci.md`](docs/guides/qualite-ci.md). Pour viser l'image locale : `make preview && make smoke URL=http://preview:8080` (le conteneur d'outils rejoint le réseau de compose).
 
+Métriques open source : `GITHUB_TOKEN=$(gh auth token) make metrics` relève GitHub et Packagist dans `src/data/oss-metrics.json` (le build ne lit que ce fichier) ; `make external-links` (après `make checks`) vérifie les liens externes de `/open-source/`. Voir [`docs/guides/projets-open-source.md`](docs/guides/projets-open-source.md).
+
 Ajouter une dépendance : `docker compose run --rm tools npm install <paquet>` (versions exactes, `.npmrc` : `save-exact=true`).
 
 ## Configuration

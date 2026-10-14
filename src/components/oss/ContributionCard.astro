@@ -1,0 +1,93 @@
+---
+import type { Contribution } from '../../content/schemas/projects.ts';
+import {
+  STATUS_LABELS,
+  contributionLabel,
+  formatLongDate,
+  splitInlineCode,
+} from '../../lib/projects.ts';
+
+interface Props {
+  contribution: Contribution;
+}
+
+const { contribution } = Astro.props;
+const label = contributionLabel(contribution);
+const status = STATUS_LABELS[contribution.status];
+---
+
+<article
+  data-contribution={contribution.number}
+  class="rounded-lg border border-border bg-surface p-5 sm:p-6"
+>
+  <h3 class="text-xl font-semibold tracking-tight">
+    <span data-label>{label}</span>
+    <span class="font-normal text-muted"> : {contribution.title}</span>
+  </h3>
+  <p class="mt-1 text-sm text-muted" data-status>
+    {status}
+    {contribution.mergedAt && (
+      <>
+        {' le '}
+        <time datetime={contribution.mergedAt.toISOString().slice(0, 10)}>
+          {formatLongDate(contribution.mergedAt)}
+        </time>
+      </>
+    )}
+  </p>
+
+  <dl class="mt-4 space-y-4">
+    <div data-block="problem">
+      <dt class="font-semibold">Le problème</dt>
+      <dd class="mt-1">{contribution.problem}</dd>
+    </div>
+    <div data-block="fix">
+      <dt class="font-semibold">Le correctif</dt>
+      <dd class="mt-1">{contribution.fix}</dd>
+    </div>
+    <div data-block="tests">
+      <dt class="font-semibold">Les tests de non-régression</dt>
+      <dd class="mt-1">{contribution.tests}</dd>
+    </div>
+    <div data-block="link">
+      <dt class="font-semibold">Le lien</dt>
+      <dd class="mt-1">
+        <a
+          href={contribution.url}
+          rel="noopener noreferrer"
+          class="inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4"
+        >
+          Voir {contribution.type === 'pr' ? 'la PR' : "l'issue"} #{contribution.number} sur GitHub
+        </a>
+      </dd>
+    </div>
+  </dl>
+
+  {contribution.technical && (
+    <details data-technical data-collapsible class="mt-3 border-t border-border pt-2">
+      <summary class="inline-flex min-h-11 cursor-pointer items-center rounded-md font-medium text-accent underline underline-offset-4">
+        Détail technique
+      </summary>
+      <p class="mt-2 text-sm">
+        {splitInlineCode(contribution.technical).map((part) =>
+          part.code ? <code class="font-mono text-[0.9em]">{part.text}</code> : part.text,
+        )}
+      </p>
+    </details>
+  )}
+</article>
+
+<style>
+  @media print {
+    details::details-content {
+      content-visibility: visible;
+      display: block;
+    }
+    summary {
+      display: none;
+    }
+    article {
+      break-inside: avoid;
+    }
+  }
+</style>

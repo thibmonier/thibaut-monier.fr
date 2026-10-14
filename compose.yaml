@@ -47,6 +47,8 @@ services:
       target: dev
     environment:
       <<: *public-args
+      # Collecte des métriques (make metrics) : lu dans l'environnement du poste, jamais écrit dans un fichier
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
     volumes:
       - .:/app
       - node_modules:/app/node_modules

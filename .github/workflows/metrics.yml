@@ -1,0 +1,78 @@
+name: metrics
+
+# Collecte hebdomadaire des métriques open source (ADR-0006, E13) : met à jour src/data/oss-metrics.json
+# et ouvre une pull request. Le build, lui, ne lit que ce JSON commité et ne fait aucun appel réseau.
+on:
+  schedule:
+    - cron: '0 5 * * 1' # lundi 05:00 UTC
+  workflow_dispatch:
+
+# Aucun droit par défaut : seul le job `collect` reçoit ce dont il a besoin.
+permissions: {}
+
+concurrency:
+  group: metrics
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    name: collect
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write # pousser la branche chore/metrics-<date>
+      pull-requests: write # ouvrir la pull request
+      actions: write # déclencher `ci` sur la branche (voir l'étape « Lancer la CI »)
+    env:
+      # Jeton éphémère du dépôt (1 000 requêtes/h) : passé au conteneur par son nom, jamais écrit dans un fichier.
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NODE_IMAGE: node:26-alpine@sha256:143494b1da2945f061539253adc65e4f1569ddf07da2d384c022c791a9d90a4a
+    steps:
+      # Sans `persist-credentials` : le jeton n'est pas laissé dans .git/config, que le conteneur peut lire.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Node uniquement via Docker (ADR-0003). Dépendances installées SANS jeton ni scripts d'installation.
+      - name: Dépendances (sans jeton)
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp -e npm_config_cache=/tmp/.npm \
+            -v "$PWD:/app" -w /app "$NODE_IMAGE" npm ci --ignore-scripts
+      - name: Collecte GitHub et Packagist
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" -e GITHUB_TOKEN="$GH_TOKEN" \
+            -v "$PWD:/app" -w /app "$NODE_IMAGE" node scripts/fetch-oss-metrics.ts
+      - name: Pull request
+        id: pr
+        env:
+          REPO: ${{ github.repository }}
+          BASE: ${{ github.event.repository.default_branch }}
+        run: |
+          if git diff --quiet -- src/data/oss-metrics.json; then
+            echo "Aucune modification : aucune pull request."
+            exit 0
+          fi
+          branch="chore/metrics-$(date -u +%F)"
+          if gh pr list --repo "$REPO" --head "$branch" --state open --json number --jq 'length' | grep -qx 0; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git switch -c "$branch"
+            git add src/data/oss-metrics.json
+            git commit -m 'chore(metrics): rafraîchit les métriques open source'
+            # En-tête d'authentification passé par l'environnement (ni argument de commande, ni fichier).
+            export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0='http.https://github.com/.extraheader'
+            export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+            git push --force "https://github.com/$REPO.git" "$branch"
+            gh pr create --repo "$REPO" --base "$BASE" --head "$branch" \
+              --title 'chore(metrics): rafraîchit les métriques open source' \
+              --body 'Collecte automatique (workflow `metrics`) : étoiles, versions et téléchargements des dépôts de la vitrine. Seul `src/data/oss-metrics.json` change. La CI est lancée par le workflow ; en cas d’absence de statut, relancer `ci` sur la branche (Actions > ci > Run workflow).'
+          fi
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      # Une pull request ouverte avec GITHUB_TOKEN ne déclenche pas les workflows `pull_request` (limite
+      # GitHub), mais `workflow_dispatch` fait exception : `ci` est lancé sur la branche, ses statuts
+      # s'attachent au commit et satisfont la protection de `main`, sans jeton personnel à gérer.
+      - name: Lancer la CI sur la branche
+        if: ${{ steps.pr.outputs.branch != '' }}
+        env:
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ steps.pr.outputs.branch }}
+        run: gh workflow run ci.yml --repo "$REPO" --ref "$BRANCH"
