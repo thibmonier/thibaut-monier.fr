@@ -14,8 +14,9 @@ USER 1000
 # ---- deps : dépendances (lockfile strict, sans scripts d'installation) -------
 FROM base AS deps
 COPY --chown=node:node package.json package-lock.json .npmrc ./
-RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 \
-    npm ci --ignore-scripts
+# Pas de montage de cache BuildKit : Railway exige un id lié au service (ADR-0002) ;
+# la CI s'appuie sur le cache de couches.
+RUN npm ci --ignore-scripts && npm cache clean --force
 
 # ---- dev : serveur de développement avec rechargement à chaud ----------------
 FROM deps AS dev
@@ -59,8 +60,7 @@ ENV ASTRO_TELEMETRY_DISABLED=1 \
     NPM_CONFIG_UPDATE_NOTIFIER=false \
     CI=true
 COPY package.json package-lock.json .npmrc ./
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --ignore-scripts
+RUN npm ci --ignore-scripts && npm cache clean --force
 
 # ---- runtime : nginx non root servant dist/ ----------------------------------
 FROM nginxinc/nginx-unprivileged:1.30.5-alpine@sha256:56b8272e43a0525f67aed68d1e0794a712d10e3e45a563e118e9a77c817e6f86 AS runtime
