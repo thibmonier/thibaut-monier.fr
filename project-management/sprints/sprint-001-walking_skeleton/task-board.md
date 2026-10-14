@@ -3,6 +3,7 @@
 > Statuts : 🔲 À faire · 🔄 En cours · 👀 Review · ✅ Done · 🚫 Bloqué
 > Mis à jour par l'orchestrateur (écrivain unique). État initial : tout est à faire.
 > **Mise à jour W1 (2026-10-14)** : ✅ T-001-02 à T-001-12 et T-001-18 ; T-003-01 à T-003-07 (livrés, CI non encore exécutée sur GitHub). 🔄 T-001-13 (e2e et Lighthouse validés avec un Chromium Alpine faute de place disque pour l'image Playwright). Restent : T-001-01, 14 à 17, 19, 20 ; T-003-08 à 12.
+> **Mise à jour W2 (2026-10-14)** : ✅ T-002-01 à T-002-09 et T-002-12 (US-002 livrée, non commitée). 🔄 T-002-11 (e2e, axe, Lighthouse verts avec un Chromium Alpine). 🔲 T-002-10 (remplacée par les drapeaux `enabled` de `src/config/nav.ts`, arbitrage A4) et T-002-13 (revue).
 
 **Sprint Goal** : mettre en production un site minimal mais complet où un recruteur ou un client comprend le positionnement, parcourt le parcours professionnel et peut prendre contact.
 

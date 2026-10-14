@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+import Seo from '../components/seo/Seo.astro';
+import Footer from '../components/ui/Footer.astro';
+import Header from '../components/ui/Header.astro';
+import { site } from '../config/site.ts';
+
+/** Props de `Seo` (contrat figé) ; seules ces quatre sont acceptées par le layout. */
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  canonical?: string;
+}
+
+const { title, description, noindex, canonical } = Astro.props;
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bloquant et externe (CSP sans script inline) : pose le thème avant le premier rendu. -->
+    <script is:inline src="/theme-init.js"></script>
+    <Seo title={title} description={description} noindex={noindex} canonical={canonical} />
+    <link
+      rel="preload"
+      href="/fonts/inter-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-screen flex-col bg-bg text-fg">
+    <Header />
+    <main
+      id="contenu"
+      tabindex="-1"
+      class="mx-auto w-full max-w-5xl grow px-4 py-12 focus:outline-none sm:px-6"
+    >
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

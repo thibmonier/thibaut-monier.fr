@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0 --port 4321",
     "astro": "astro",
+    "tokens": "node scripts/gen-tokens.ts",
     "checks:content": "node scripts/checks/run.ts --phase=content",
     "checks:dist": "node scripts/checks/run.ts --phase=dist",
     "build": "npm run checks:content && astro build && npm run checks:dist",

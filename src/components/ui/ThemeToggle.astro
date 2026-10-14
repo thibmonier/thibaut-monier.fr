@@ -1,0 +1,37 @@
+---
+import { t, type Locale } from '../../i18n/utils.ts';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'fr' } = Astro.props;
+---
+
+<!-- Masqué sans JavaScript : le thème suit alors la préférence système (CSS). -->
+<button
+  type="button"
+  data-theme-toggle
+  aria-pressed="false"
+  aria-label={t(locale, 'theme.toggle')}
+  class="hidden size-11 items-center justify-center rounded-md text-fg hover:bg-surface js:inline-flex"
+>
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    viewBox="0 0 24 24"
+    class="size-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"></path>
+  </svg>
+</button>
+
+<script>
+  import '../../scripts/theme-toggle.ts';
+</script>

@@ -1,0 +1,63 @@
+/* Fichier généré depuis src/data/tokens.json : ne pas modifier (npm run tokens). */
+:root {
+  color-scheme: light;
+  --c-bg: #ffffff;
+  --c-surface: #f3f5f8;
+  --c-fg: #14171c;
+  --c-muted: #4a5262;
+  --c-border: #d5dae2;
+  --c-line: #6b7585;
+  --c-accent: #1d4ed8;
+  --c-accent-fg: #ffffff;
+  --c-focus: #1d4ed8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --c-bg: #0d1117;
+    --c-surface: #161b22;
+    --c-fg: #e6edf3;
+    --c-muted: #a1abb8;
+    --c-border: #2b323c;
+    --c-line: #79869a;
+    --c-accent: #7ca7ff;
+    --c-accent-fg: #0d1117;
+    --c-focus: #7ca7ff;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --c-bg: #0d1117;
+  --c-surface: #161b22;
+  --c-fg: #e6edf3;
+  --c-muted: #a1abb8;
+  --c-border: #2b323c;
+  --c-line: #79869a;
+  --c-accent: #7ca7ff;
+  --c-accent-fg: #0d1117;
+  --c-focus: #7ca7ff;
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-fg: var(--c-fg);
+  --color-muted: var(--c-muted);
+  --color-border: var(--c-border);
+  --color-line: var(--c-line);
+  --color-accent: var(--c-accent);
+  --color-accent-fg: var(--c-accent-fg);
+  --color-focus: var(--c-focus);
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+}

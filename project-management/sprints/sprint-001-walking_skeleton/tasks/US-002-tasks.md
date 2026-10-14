@@ -17,18 +17,18 @@
 
 | ID | Type | Tâche | Estimation | Responsable | Dépend de | Statut |
 |----|------|-------|------------|-------------|-----------|--------|
-| T-002-01 | [CONTENT] | Décisions de design : palette, typographie, tokens clair et sombre | 3h | Dev | - | 🔲 |
-| T-002-02 | [TEST] | Écrire les tests unitaires RED : contraste, tokens, SEO, navigation, thème, config du site | 4h | Dev | T-001-13 | 🔲 |
-| T-002-03 | [TEST] | Écrire les tests e2e RED du layout (clavier, thème, no-JS, mouvement réduit) | 4h | Dev | T-001-13 | 🔲 |
-| T-002-04 | [FE-WEB] | Implémenter les bibliothèques et la configuration du site (GREEN) | 4h | Dev | T-002-01, T-002-02 | 🔲 |
-| T-002-05 | [FE-WEB] | Feuille de style globale Tailwind 4 : tokens, polices, focus, mouvement réduit | 4h | Dev | T-002-01, T-002-04 | 🔲 |
-| T-002-06 | [FE-WEB] | Script d'initialisation du thème externe et `ThemeToggle` | 3h | Dev | T-002-04, T-002-05 | 🔲 |
-| T-002-07 | [FE-WEB] | En-tête, menu mobile accessible et lien d'évitement | 5h | Dev | T-002-03, T-002-06 | 🔲 |
-| T-002-08 | [FE-WEB] | Pied de page, composant `Seo` et `BaseLayout` final | 4h | Dev | T-002-07 | 🔲 |
-| T-002-09 | [FE-WEB] | Configuration i18n Astro et dictionnaire d'interface minimal | 2h | Dev | T-002-04 | 🔲 |
+| T-002-01 | [CONTENT] | Décisions de design : palette, typographie, tokens clair et sombre | 3h | Dev | - | ✅ |
+| T-002-02 | [TEST] | Écrire les tests unitaires RED : contraste, tokens, SEO, navigation, thème, config du site | 4h | Dev | T-001-13 | ✅ |
+| T-002-03 | [TEST] | Écrire les tests e2e RED du layout (clavier, thème, no-JS, mouvement réduit) | 4h | Dev | T-001-13 | ✅ |
+| T-002-04 | [FE-WEB] | Implémenter les bibliothèques et la configuration du site (GREEN) | 4h | Dev | T-002-01, T-002-02 | ✅ |
+| T-002-05 | [FE-WEB] | Feuille de style globale Tailwind 4 : tokens, polices, focus, mouvement réduit | 4h | Dev | T-002-01, T-002-04 | ✅ |
+| T-002-06 | [FE-WEB] | Script d'initialisation du thème externe et `ThemeToggle` | 3h | Dev | T-002-04, T-002-05 | ✅ |
+| T-002-07 | [FE-WEB] | En-tête, menu mobile accessible et lien d'évitement | 5h | Dev | T-002-03, T-002-06 | ✅ |
+| T-002-08 | [FE-WEB] | Pied de page, composant `Seo` et `BaseLayout` final | 4h | Dev | T-002-07 | ✅ |
+| T-002-09 | [FE-WEB] | Configuration i18n Astro et dictionnaire d'interface minimal | 2h | Dev | T-002-04 | ✅ |
 | T-002-10 | [FE-WEB] | Pages d'attente pour les destinations de la navigation et du pied de page | 1,5h | Dev | T-002-08 | 🔲 |
-| T-002-11 | [TEST] | Vérification GREEN : responsive, JS désactivé, mouvement réduit, axe, Lighthouse | 2,5h | Dev | T-002-09, T-002-10, T-003-06 | 🔲 |
-| T-002-12 | [DOC] | Guide du design system et ADR-0010 | 1,5h | Dev | T-002-11 | 🔲 |
+| T-002-11 | [TEST] | Vérification GREEN : responsive, JS désactivé, mouvement réduit, axe, Lighthouse | 2,5h | Dev | T-002-09, T-002-10, T-003-06 | 🔄 |
+| T-002-12 | [DOC] | Guide du design system et ADR-0010 | 1,5h | Dev | T-002-11 | 🔄 |
 | T-002-13 | [REV] | Revue d'US-002 (DoD §1, §4, §5, §7) | 2h | Dev | T-002-12 | 🔲 |
 
 **Total estimé** : 40,5h (13 tâches)
@@ -95,7 +95,7 @@ graph TD
 - **Responsable** : Dev
 - **Dépend de** : -
 - **Débloque** : T-002-04, T-002-05
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Proposer au PO deux jeux de tokens sobres « direction technique » (couleurs clair/sombre, échelle d'espacements, deux familles de polices libres, OFL de préférence — proposition : une sans-serif variable + une mono, sous-ensemble latin WOFF2) puis figer le choix. Rédiger `src/data/tokens.json` conforme à `tokensSchema` (content-model §3.8) : source unique partagée avec Typst (US-007). Préparer les fichiers de polices.
@@ -117,7 +117,7 @@ Proposer au PO deux jeux de tokens sobres « direction technique » (couleurs cl
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-002-04
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 TDD : `tests/unit/lib/contrast.test.ts` (ratio WCAG ; toutes les paires texte/fond de `tokens.json` ≥ 4,5:1 en clair et en sombre, composants UI ≥ 3:1), `tests/unit/lib/tokens.test.ts` (validation par `tokensSchema` + parité avec les variables de `global.css`), `tests/unit/lib/seo.test.ts` (`buildTitle` ≤ 60 caractères, `canonicalUrl` absolue avec barre finale, métadonnées Open Graph), `tests/unit/lib/navigation.test.ts` (`isActive` : `aria-current="page"` sur l'URL exacte et les sous-chemins), `tests/unit/lib/theme.test.ts` (`resolveTheme(stored, systemDark)`), `tests/unit/config/site.test.ts` (schéma : nom, 4 liens de navigation, LinkedIn et GitHub).
@@ -141,7 +141,7 @@ TDD : `tests/unit/lib/contrast.test.ts` (ratio WCAG ; toutes les paires texte/fo
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-002-07
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 `tests/e2e/layout.spec.ts` : en-tête avec nom + 4 liens (Accueil, Parcours, Blog, Contact) et `aria-current="page"` ; pied de page avec mentions légales, vie privée, LinkedIn, GitHub ; thème sombre via `emulateMedia({colorScheme:'dark'})` sans flash (attribut/fond relevés avant le premier rendu) ; menu à 375 px : ouverture, Tab piégé, Échap referme, cibles ≥ 24 × 24 px ; `javaScriptEnabled:false` : liens visibles et thème selon la préférence ; `reducedMotion:'reduce'` : durées de transition à 0 ; aucun défilement horizontal à 320, 768, 1280, 1920 px.
@@ -160,7 +160,7 @@ TDD : `tests/unit/lib/contrast.test.ts` (ratio WCAG ; toutes les paires texte/fo
 - **Responsable** : Dev
 - **Dépend de** : T-002-01, T-002-02
 - **Débloque** : T-002-05, T-002-06, T-002-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Implémenter `src/lib/contrast.ts`, `src/lib/seo.ts`, `src/lib/navigation.ts`, `src/lib/theme.ts` (fonctions pures) et `src/config/site.ts` validé par un schéma Zod au build (nom, navigation, réseaux ; données de navigation en source unique). Ajouter `tokensSchema` dans `src/content/schemas/tokens.ts`.
@@ -185,7 +185,7 @@ Implémenter `src/lib/contrast.ts`, `src/lib/seo.ts`, `src/lib/navigation.ts`, `
 - **Responsable** : Dev
 - **Dépend de** : T-002-01, T-002-04
 - **Débloque** : T-002-06
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Réécrire `src/styles/global.css` : `@import "tailwindcss"`, `@theme` alimenté par les tokens (variables CSS), thème clair par défaut et sombre via `prefers-color-scheme` ET `[data-theme]`, `@font-face` auto-hébergés (WOFF2 latin, `font-display: swap`), préchargement de la police principale, `:focus-visible` marqué, `@media (prefers-reduced-motion: reduce)` qui neutralise animations et transitions, cibles tactiles ≥ 24 px. Les étapes suivantes n'éditent plus ce fichier (styles dans les composants).
@@ -206,7 +206,7 @@ Réécrire `src/styles/global.css` : `@import "tailwindcss"`, `@theme` alimenté
 - **Responsable** : Dev
 - **Dépend de** : T-002-04, T-002-05
 - **Débloque** : T-002-07
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 La CSP interdit les scripts inline (security.md §3.1) : l'initialisation du thème s'écrit donc dans `public/theme-init.js` chargé en `<script src>` synchrone dans le `<head>` (lit `localStorage` sous try/catch, pose `data-theme` et la classe `js`). Créer `ThemeToggle.astro` (bouton, `aria-pressed`, libellé explicite, choix mémorisé, masqué sans JavaScript). Décision consignée dans ADR-0010.
@@ -228,7 +228,7 @@ La CSP interdit les scripts inline (security.md §3.1) : l'initialisation du th�
 - **Responsable** : Dev
 - **Dépend de** : T-002-03, T-002-06
 - **Débloque** : T-002-08
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `Header.astro` (nom du site, navigation depuis `site.ts`, `aria-current`), `MobileMenu` (îlot JavaScript < 5 Ko : bouton « Menu », `aria-expanded`, piège du focus, Échap, retour du focus), `SkipLink.astro` (« Aller au contenu »). Sans JavaScript, la navigation reste visible et utilisable (amélioration progressive).
@@ -250,7 +250,7 @@ Créer `Header.astro` (nom du site, navigation depuis `site.ts`, `aria-current`)
 - **Responsable** : Dev
 - **Dépend de** : T-002-07
 - **Débloque** : T-002-10, T-004-07, T-005-08, T-008-05, T-029-04
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Créer `Footer.astro` (liens `/mentions-legales/` et `/vie-privee/`, LinkedIn, GitHub avec `rel="noopener noreferrer"`), `src/components/seo/Seo.astro` (props : `title`, `description`, `canonical?`, `noindex?`, `ogType?` ; Open Graph, canonical absolue) et réécrire `BaseLayout.astro` (landmarks `header`/`main`/`footer`, `lang="fr"`, thème, Seo, SkipLink). Ce contrat de props est figé pour les lots 3A/3B.
@@ -272,7 +272,7 @@ Créer `Footer.astro` (liens `/mentions-legales/` et `/vie-privee/`, LinkedIn, G
 - **Responsable** : Dev
 - **Dépend de** : T-002-04
 - **Débloque** : T-002-11
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Ajouter à `astro.config.mjs` le bloc i18n d'ADR-0008 (`locales: [fr, en]`, `defaultLocale: fr`, `prefixDefaultLocale: false`, `fallback: {en: fr}`) et créer `src/i18n/{fr.ts,en.ts,utils.ts}` (libellés d'interface actuels ; `en.ts` vide de traduction, structure seulement ; aucune page `/en/` générée).
@@ -296,7 +296,7 @@ Ajouter à `astro.config.mjs` le bloc i18n d'ADR-0008 (`locales: [fr, en]`, `def
 - **Responsable** : Dev
 - **Dépend de** : T-002-08
 - **Débloque** : T-002-11
-- **Statut** : 🔲 À faire
+- **Statut** : 🔲 À faire (non réalisé : arbitrage A4, pages remplacées par des drapeaux `enabled` dans `src/config/nav.ts`)
 
 **Description** :  
 Pour que `main` reste verte (vérification de liens de US-003) : créer des pages minimales `noindex` (« Page en cours de construction ») pour `/parcours/`, `/contact/`, `/mentions-legales/`, `/vie-privee/` et `/blog/`. Les US-005, US-008 et US-029 remplacent leur page ; `/blog/` reste jusqu'à US-009 (sprint 3). Point d'attention n°4 du README.
@@ -319,7 +319,7 @@ Pour que `main` reste verte (vérification de liens de US-003) : créer des page
 - **Responsable** : Dev
 - **Dépend de** : T-002-09, T-002-10, T-003-06
 - **Débloque** : T-002-12
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours (e2e 102/102, axe, Lighthouse 1,00 sur 4 axes ; `make ci` complet et captures de PR restent à faire)
 
 **Description** :  
 Exécuter `make ci` : layout, axe et Lighthouse sur toutes les pages (accueil + 5 pages d'attente). Contrôle manuel du rendu clair/sombre à 360, 768, 1280 px et sans JavaScript. Corriger les écarts.
@@ -339,7 +339,7 @@ Exécuter `make ci` : layout, axe et Lighthouse sur toutes les pages (accueil + 
 - **Responsable** : Dev
 - **Dépend de** : T-002-11
 - **Débloque** : T-002-13
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Done
 
 **Description** :  
 Rédiger `docs/guides/design-system.md` (tokens, thème, composants, contrat `Seo`, règle « pas de script inline ») et finaliser ADR-0010. Entrée CHANGELOG (append-only).

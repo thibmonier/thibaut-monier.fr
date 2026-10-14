@@ -1,0 +1,73 @@
+---
+import { site } from '../../config/site.ts';
+import { getTranslations, type Locale } from '../../i18n/utils.ts';
+import { enabledItems, isActive } from '../../lib/navigation.ts';
+import SkipLink from './SkipLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'fr' } = Astro.props;
+const ui = getTranslations(locale);
+const items = enabledItems(site.nav.main);
+const path = Astro.url.pathname;
+---
+
+<SkipLink locale={locale} />
+<header class="border-b border-border bg-bg" data-menu-scope>
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-2 px-4 py-2 sm:px-6">
+    <a
+      href="/"
+      class="order-1 inline-flex min-h-11 items-center rounded-md pr-2 text-lg font-semibold tracking-tight text-fg"
+    >
+      {site.name}
+    </a>
+    <div class="order-2 ml-auto flex items-center gap-1 md:order-3 md:ml-0">
+      <button
+        type="button"
+        data-menu-button
+        aria-expanded="false"
+        aria-controls="site-nav"
+        class="hidden min-h-11 items-center rounded-md px-3 font-medium text-fg hover:bg-surface js:max-md:inline-flex"
+      >
+        {ui.nav.menu}
+      </button>
+      <ThemeToggle locale={locale} />
+    </div>
+    <nav
+      id="site-nav"
+      data-site-nav
+      aria-label={ui.nav.main}
+      class="site-nav order-3 w-full md:order-2 md:ml-auto md:w-auto"
+    >
+      <ul class="flex flex-col pb-2 md:flex-row md:gap-1 md:pb-0">
+        {items.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isActive(path, item.href) ? 'page' : undefined}
+              class="inline-flex min-h-11 w-full items-center rounded-md px-3 text-fg hover:bg-surface aria-[current=page]:font-semibold aria-[current=page]:text-accent aria-[current=page]:underline aria-[current=page]:underline-offset-8 md:w-auto"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Amélioration progressive : le menu n'est replié que si JavaScript est actif. */
+  @media (max-width: 47.99rem) {
+    :global(.js) .site-nav:not([data-open='true']) {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import '../../scripts/mobile-menu.ts';
+</script>

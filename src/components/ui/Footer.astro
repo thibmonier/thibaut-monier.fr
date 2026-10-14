@@ -1,0 +1,45 @@
+---
+import { site } from '../../config/site.ts';
+import { getTranslations, type Locale } from '../../i18n/utils.ts';
+import { enabledItems } from '../../lib/navigation.ts';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'fr' } = Astro.props;
+const ui = getTranslations(locale);
+const legal = enabledItems(site.nav.footer);
+const social = [
+  { label: 'LinkedIn', href: site.social.linkedin },
+  { label: 'GitHub', href: site.social.github },
+];
+const link =
+  'inline-flex min-h-11 items-center rounded-md px-1 text-fg underline underline-offset-4 hover:text-accent';
+---
+
+<footer class="mt-16 border-t border-border bg-surface">
+  <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 text-sm sm:px-6 md:flex-row md:items-center md:justify-between">
+    <p class="text-muted">
+      © {new Date().getFullYear()} {site.name}. {ui.footer.rights}.
+    </p>
+    <nav aria-label={ui.footer.label}>
+      <ul class="flex flex-wrap gap-x-4">
+        {legal.map((item) => (
+          <li>
+            <a class={link} href={item.href}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+        {social.map((item) => (
+          <li>
+            <a class={link} href={item.href} rel="noopener noreferrer">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</footer>
