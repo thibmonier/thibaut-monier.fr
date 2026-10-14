@@ -4,7 +4,7 @@ COMPOSE ?= docker compose
 TOOLS   := $(COMPOSE) run --rm tools
 E2E     := $(COMPOSE) --profile e2e run --rm e2e
 
-.PHONY: help dev preview build shell down clean install lint format check test checks e2e lighthouse smoke ci
+.PHONY: help dev preview build shell down clean install cv lint format check test checks e2e lighthouse smoke ci
 
 help: ## Affiche les cibles
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -30,6 +30,9 @@ down: ## Arrête tous les conteneurs
 clean: ## Arrête tout et supprime volumes et sorties de build
 	$(COMPOSE) --profile tools --profile e2e down -v --remove-orphans
 	rm -rf dist .astro coverage reports test-results playwright-report
+
+cv: ## Génère dist/thibaut-monier-cv.pdf (Typst, US-007)
+	$(TOOLS) npm run build:cv
 
 lint: ## ESLint + Prettier (vérification)
 	$(TOOLS) npm run lint

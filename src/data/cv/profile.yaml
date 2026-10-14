@@ -1,0 +1,14 @@
+# Contenu public du CV PDF (US-007, ADR-0005) : source unique lue par Astro (collection `profile`) et par le
+# gabarit Typst via `src/lib/cv-data.ts`. Jamais de téléphone, d'âge ni d'adresse (liste blanche, arbitrage A1).
+fr:
+  name: 'Thibaut Monier'
+  title: 'Directeur de projets IT, delivery manager et architecte e-commerce'
+  tagline: 'Solutions open source (Symfony, Sylius, PHP, Java/J2EE) et IA appliquée au delivery et aux produits.'
+  summary: "Plus de 25 ans d'expérience en développement logiciel, architecture applicative, gestion de projets IT et management d'équipes. Parcours de développeur senior à directeur de projets complexes, delivery manager et CTO, au carrefour de la technique, du management et de la stratégie IT. Secteurs : e-commerce B2B/B2C, banque, assurance, industrie, services publics. Depuis fin 2025, consultant indépendant sur des projets au forfait, spécialisé en IA appliquée au delivery et aux produits."
+  links:
+    - kind: linkedin
+      url: 'https://www.linkedin.com/in/thibautmonier/'
+    - kind: github
+      url: 'https://github.com/thibmonier'
+    - kind: packagist
+      url: 'https://packagist.org/packages/tmonier/'

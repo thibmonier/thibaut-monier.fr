@@ -50,6 +50,8 @@ export function parseNav(input: unknown): Nav {
 const main: NavItem[] = [
   { id: 'accueil', href: '/', label: 'Accueil', enabled: true },
   { id: 'parcours', href: '/parcours/', label: 'Parcours', enabled: true },
+  // US-006
+  { id: 'competences', href: '/competences/', label: 'Compétences', enabled: true },
   { id: 'contact', href: '/contact/', label: 'Contact', enabled: true },
 ];
 

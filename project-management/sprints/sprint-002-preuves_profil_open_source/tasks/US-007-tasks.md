@@ -17,22 +17,22 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-007-01 | [CONTENT] | Cadrer le CV public et trancher les choix de forme | 1,5h | - | 1 | 🔲 |
-| T-007-02 | [TEST] | Écrire les tests unitaires RED : assemblage des données du CV, schéma profile, contrôle de confidentialité du PDF | 3,5h | - | 1 | 🔲 |
-| T-007-03 | [TEST] | Écrire les tests e2e RED : lien de téléchargement et en-têtes du PDF | 3,5h | - | 1 | 🔲 |
-| T-007-04 | [OPS] | Dockerfile : binaire Typst et extraction de texte dans l’image des dépendances | 3h | T-007-01 | 1 | 🔲 |
-| T-007-05 | [FE-WEB] | Schéma `profile`, enregistrement de la collection et assemblage des données du CV (`cv-data`) | 4h | T-007-02 | 1 | 🔲 |
-| T-007-06 | [CONTENT] | Rédiger `profile.yaml` (titre, accroche, résumé, liens) | 1h | T-007-01, T-007-05 | 1 | 🔲 |
-| T-007-07 | [CONTENT] | Ajouter les polices Inter statiques (TTF) du CV et leur licence | 1h | T-007-01 | 1 | 🔲 |
-| T-007-08 | [FE-WEB] | Gabarit Typst `cv/cv.typ` : structure et contenu sur 2 pages A4 | 5h | T-007-04, T-007-05, T-007-07 | 1 | 🔲 |
-| T-007-09 | [FE-WEB] | Gabarit Typst : charte du site, métadonnées et balisage du PDF | 4h | T-007-08 | 1 | 🔲 |
-| T-007-10 | [OPS] | Intégrer la génération au build : `build-cv.ts`, script npm, cible `make cv` | 3,5h | T-007-05, T-007-09, T-007-04 | 1 | 🔲 |
-| T-007-11 | [OPS] | Contrôle de build `cv-pdf` sur `dist/` (texte, pages, taille, métadonnées) | 3,5h | T-007-02, T-007-10 | 1 | 🔲 |
-| T-007-12 | [OPS] | nginx : revalidation et en-têtes dédiés du PDF | 1,5h | T-007-03 | 1 | 🔲 |
-| T-007-13 | [FE-WEB] | Composant `CvDownload` et intégration à `/parcours/` et `/contact/` | 3h | T-007-03, T-007-10 | 1 | 🔲 |
-| T-007-14 | [TEST] | Vérification GREEN : `make ci` et contrôle manuel du PDF | 3h | T-007-11, T-007-12, T-007-13 | 1 | 🔲 |
-| T-007-15 | [DOC] | Guide du CV PDF, amendement d’ADR-0005, CHANGELOG | 2h | T-007-14 | 1 | 🔲 |
-| T-007-16 | [REV] | Revue d’US-007 | 2h | T-007-15 | 1 | 🔲 |
+| T-007-01 | [CONTENT] | Cadrer le CV public et trancher les choix de forme | 1,5h | - | 1 | 👀 |
+| T-007-02 | [TEST] | Écrire les tests unitaires RED : assemblage des données du CV, schéma profile, contrôle de confidentialité du PDF | 3,5h | - | 1 | ✅ |
+| T-007-03 | [TEST] | Écrire les tests e2e RED : lien de téléchargement et en-têtes du PDF | 3,5h | - | 1 | ✅ |
+| T-007-04 | [OPS] | Dockerfile : binaire Typst et extraction de texte dans l’image des dépendances | 3h | T-007-01 | 1 | ✅ |
+| T-007-05 | [FE-WEB] | Schéma `profile`, enregistrement de la collection et assemblage des données du CV (`cv-data`) | 4h | T-007-02 | 1 | ✅ |
+| T-007-06 | [CONTENT] | Rédiger `profile.yaml` (titre, accroche, résumé, liens) | 1h | T-007-01, T-007-05 | 1 | ✅ |
+| T-007-07 | [CONTENT] | Ajouter les polices Inter statiques (TTF) du CV et leur licence | 1h | T-007-01 | 1 | ✅ |
+| T-007-08 | [FE-WEB] | Gabarit Typst `cv/cv.typ` : structure et contenu sur 2 pages A4 | 5h | T-007-04, T-007-05, T-007-07 | 1 | ✅ |
+| T-007-09 | [FE-WEB] | Gabarit Typst : charte du site, métadonnées et balisage du PDF | 4h | T-007-08 | 1 | ✅ |
+| T-007-10 | [OPS] | Intégrer la génération au build : `build-cv.ts`, script npm, cible `make cv` | 3,5h | T-007-05, T-007-09, T-007-04 | 1 | ✅ |
+| T-007-11 | [OPS] | Contrôle de build `cv-pdf` sur `dist/` (texte, pages, taille, métadonnées) | 3,5h | T-007-02, T-007-10 | 1 | ✅ |
+| T-007-12 | [OPS] | nginx : revalidation et en-têtes dédiés du PDF | 1,5h | T-007-03 | 1 | ✅ |
+| T-007-13 | [FE-WEB] | Composant `CvDownload` et intégration à `/parcours/` et `/contact/` | 3h | T-007-03, T-007-10 | 1 | ✅ |
+| T-007-14 | [TEST] | Vérification GREEN : `make ci` et contrôle manuel du PDF | 3h | T-007-11, T-007-12, T-007-13 | 1 | ✅ |
+| T-007-15 | [DOC] | Guide du CV PDF, amendement d’ADR-0005, CHANGELOG | 2h | T-007-14 | 1 | ✅ |
+| T-007-16 | [REV] | Revue d’US-007 | 2h | T-007-15 | 1 | 👀 |
 
 **Total estimé** : 45h (16 tâches)
 

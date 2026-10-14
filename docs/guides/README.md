@@ -10,5 +10,7 @@ Un guide par sujet, rédigé par l'US qui l'introduit (un fichier par US pour é
 | [parcours-experiences.md](parcours-experiences.md) | Frise du parcours professionnel | US-005 |
 | [pages-legales.md](pages-legales.md) | Mentions légales et politique de vie privée | US-029 |
 | [contact.md](contact.md) | Formulaire de contact, anti-spam, rendez-vous | US-008 |
+| [cv-pdf.md](cv-pdf.md) | CV PDF généré par Typst, décisions, contrôles | US-007 |
+| [competences.md](competences.md) | Compétences et réalisations filtrables | US-006 |
 
 Le démarrage, les commandes `make` et le déploiement sont dans le [README](../../README.md).
