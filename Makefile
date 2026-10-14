@@ -4,7 +4,7 @@ COMPOSE ?= docker compose
 TOOLS   := $(COMPOSE) run --rm tools
 E2E     := $(COMPOSE) --profile e2e run --rm e2e
 
-.PHONY: help dev preview build shell down clean install lint format check test checks e2e lighthouse ci
+.PHONY: help dev preview build shell down clean install lint format check test checks e2e lighthouse smoke ci
 
 help: ## Affiche les cibles
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -52,6 +52,10 @@ e2e: preview ## Playwright + axe contre preview
 
 lighthouse: preview ## Lighthouse (3 exécutions, médiane, seuil 0,95)
 	$(E2E) node scripts/checks/lighthouse.ts
+
+smoke: ## Contrôle de fumée post-déploiement : make smoke URL=https://thibaut-monier.fr
+	@test -n "$(URL)" || { echo 'Usage : make smoke URL=<url>'; exit 2; }
+	$(COMPOSE) run --rm --no-deps -e SMOKE_URL="$(URL)" tools node scripts/checks/smoke.ts
 
 ci: ## Enchaîne exactement les étapes de la CI
 	$(MAKE) lint

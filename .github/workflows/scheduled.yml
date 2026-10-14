@@ -29,3 +29,31 @@ jobs:
             '{query: "mutation($e: String!, $s: String!) { serviceInstanceRedeploy(environmentId: $e, serviceId: $s) }", variables: {e: $e, s: $s}}' \
           | curl --fail-with-body -sS -X POST https://backboard.railway.com/graphql/v2 \
               -H "Project-Access-Token: $RAILWAY_TOKEN" -H "Content-Type: application/json" --data @-
+
+  # Contrôle de fumée après le redéploiement (T-001-15). Désactivé tant que la variable SMOKE_URL
+  # (Settings > Variables, ex. https://thibaut-monier.fr) n'est pas définie. Node via Docker (ADR-0003),
+  # même image que le Dockerfile ; le script n'utilise que la bibliothèque standard.
+  smoke:
+    needs: redeploy
+    if: ${{ vars.SMOKE_URL != '' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Le redéploiement est asynchrone : jusqu'à 20 essais espacés de 30 s (10 min) avant d'échouer.
+      - name: Contrôle de fumée
+        env:
+          SMOKE_URL: ${{ vars.SMOKE_URL }}
+        run: |
+          for attempt in $(seq 1 20); do
+            if docker run --rm -e SMOKE_URL -v "$PWD:/app:ro" -w /app \
+                node:26-alpine@sha256:143494b1da2945f061539253adc65e4f1569ddf07da2d384c022c791a9d90a4a \
+                node scripts/checks/smoke.ts; then
+              exit 0
+            fi
+            echo "Essai $attempt/20 en échec, nouvelle tentative dans 30 s"
+            sleep 30
+          done
+          exit 1
