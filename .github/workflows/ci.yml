@@ -76,9 +76,9 @@ jobs:
           cache-from: type=gha,scope=e2e
           cache-to: type=gha,scope=e2e,mode=max
       - name: Playwright et axe contre preview
-        run: docker compose --profile e2e run --rm --no-build e2e
+        run: docker compose --profile e2e run --rm e2e
       - name: Lighthouse (médiane de 3, seuil 0,95)
-        run: docker compose --profile e2e run --rm --no-build e2e node scripts/checks/lighthouse.ts
+        run: docker compose --profile e2e run --rm e2e node scripts/checks/lighthouse.ts
       - name: Rapports
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
