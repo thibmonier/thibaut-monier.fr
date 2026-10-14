@@ -24,7 +24,8 @@ export const legalConfigSchema = z.strictObject({
   publicationDirector: z.string().min(1),
   host: z.strictObject({
     name: z.string().min(1),
-    address: z.string().min(1),
+    // Optionnelle tant que les coordonnées officielles ne sont pas confirmées : jamais de valeur provisoire.
+    address: z.string().min(1).optional(),
     phone: z.string().min(1).optional(),
     website: httpsUrl.optional(),
   }),

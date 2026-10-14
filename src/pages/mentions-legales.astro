@@ -29,8 +29,8 @@ const { editor, publicationDirector, host } = legalConfig;
       <h2 class="mt-8 text-2xl font-bold">{ui.legal.host}</h2>
       <p class="mt-3">
         <strong>{host.name}</strong>
-        <br />
-        {ui.legal.hostAddress} : {host.address}
+        {host.address && <br />}
+        {host.address && `${ui.legal.hostAddress} : ${host.address}`}
         {host.phone && <br />}
         {host.phone && `${ui.legal.hostPhone} : ${host.phone}`}
       </p>
