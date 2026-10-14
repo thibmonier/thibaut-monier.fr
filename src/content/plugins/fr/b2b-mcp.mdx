@@ -1,0 +1,56 @@
+---
+name: 'B2B MCP'
+tagline: 'Outils B2B pour le serveur MCP officiel de Sylius : commandes, recommande, devis et crédit lus depuis Claude ou ChatGPT, avec OAuth 2.1.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-b2b-mcp-plugin
+packagist: tmonier/sylius-b2b-mcp-plugin
+license: MIT
+features:
+  - 'Serveur d’autorisation OAuth 2.1 avec PKCE (S256), jetons de rafraîchissement rotatifs et enregistrement dynamique de clients.'
+  - 'Outils de lecture et de recommande : liste des commandes, détail d’une commande, ajout au panier au prix du jour.'
+  - 'Outils optionnels selon les plugins installés : commande rapide, devis, relevé de crédit, approbations.'
+  - 'Lien de paiement vers la boutique : le client règle sur le site, avec le même compte.'
+  - 'Une connexion par client, assistant et canal, listée dans « Mon compte » et révocable en administration.'
+  - 'Journal de chaque appel d’outil (client, assistant, résultat, durée) et limites de débit.'
+  - 'Portées par outil : lecture, panier avec clé d’idempotence, décision d’approbation désactivée par défaut.'
+  - 'Outils invité et paiement du serveur officiel masqués par défaut.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '7.4'
+        - '8.x (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+complements:
+  - quick-order
+  - quote-request
+  - trade-credit
+  - company-accounts
+  - purchase-approval
+  - audit-log
+externalRequires:
+  - sylius/mcp-server-plugin
+installSteps:
+  - "Enregistrer les bundles dans `config/bundles.php` : `Symfony\\AI\\McpBundle\\McpBundle`, `Sylius\\McpServerPlugin\\SyliusMcpServerPlugin` puis `Tmonier\\SyliusB2bMcpPlugin\\TmonierSyliusB2bMcpPlugin`."
+  - 'Importer les configurations et les routes des deux plugins (`@SyliusMcpServerPlugin` et `@TmonierSyliusB2bMcpPlugin`) dans `config/packages/tmonier_sylius_b2b_mcp.yaml` et `config/routes/tmonier_sylius_b2b_mcp.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin seulement).'
+  - 'Définir une clé de chiffrement dédiée dans la variable `TMONIER_B2B_MCP_ENCRYPTION_KEY` et planifier chaque jour `bin/console tmonier:b2b-mcp:purge`.'
+  - 'La boutique doit être joignable en HTTPS sur un nom d’hôte public ; le point d’entrée MCP est `/_mcp`. Symfony 6.4 n’est pas pris en charge.'
+screenshots:
+  - src: ../../../assets/plugins/b2b-mcp/assistants-ia.webp
+    alt: 'Page « Assistants IA » du compte client : assistant connecté, permissions accordées et bouton de déconnexion.'
+  - src: ../../../assets/plugins/b2b-mcp/consentement.webp
+    alt: 'Page de consentement OAuth : ce que l’assistant pourra lire et faire, boutons Autoriser et Refuser.'
+---
+
+Les acheteurs professionnels demandent de plus en plus à leur assistant IA de retrouver une commande ou de la recommander. Ce plugin expose des outils MCP restreints à l’acheteur connecté, avec un serveur d’autorisation OAuth 2.1 et une page de consentement. Aucun outil ne passe commande, ne paie ni ne modifie le compte : le paiement reste sur la boutique.

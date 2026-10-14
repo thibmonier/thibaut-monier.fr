@@ -14,6 +14,8 @@ Format [Keep a Changelog](https://keepachangelog.com/). Zone `[Unreleased]` en a
 - US-004 : page d'accueil à double parcours (`Hero`, `CtaPair`, `ProofList`), schéma `home` étendu (headline, valueProp de 25 mots au plus, 2 appels à l'action avec motif de contact, 4 preuves sourcées), `proofs.ts`, `text.ts` et contrôle de build `proof-links`.
 - US-005 : parcours professionnel en frise (`/parcours/`, 7 expériences, bloc « Avant 2016 » repliable, impression sur 2 pages A4), collection `experiences` et son schéma, `experiences.ts`, contrôle de contenu des expériences (données personnelles, règle des 10 ans, décompte).
 - Finitions du sprint 1 : contrôle de fumée post-déploiement (`make smoke URL=...`, étape dans `scheduled.yml` si `SMOKE_URL` est définie), workflow manuel de repli `deploy.yml`, job CI `supply-chain` (SBOM CycloneDX en artefact, scan Trivy de l'image de production), guides `docs/guides/qualite-ci.md` et index, README (déploiement Railway, variables), scénarios e2e transverses (toutes les pages à 360/768/1280 px, sans JavaScript, mouvement réduit, console sans violation CSP) et scénario accueil vers contact.
+- US-019, US-020 : catalogue des 20 plugins Sylius 2 sur `/open-source/` (filtre par thème et recherche sans dépendance, `?theme=` partageable, rendu sans JavaScript) et fiches `/open-source/sylius/<slug>/` (matrice de compatibilité, dépendances « Nécessite / Complété par / Utilisé par », installation copiable, captures WebP), collection `plugins` en MDX (`@astrojs/mdx` 8.0.3), contrôle de contenu des plugins.
+- US-021 (affichage) : bloc `LiveStats` des fiches lu depuis `src/data/oss-metrics.json`, masquage métrique par métrique.
 
 ### Fixed
 

@@ -1,0 +1,56 @@
+---
+name: 'AI Catalog Copilot'
+tagline: 'Copilote IA du catalogue pour Sylius 2 : descriptions, métadonnées et traductions proposées, relues avant publication.'
+theme: ia-integrations
+repo:
+  owner: thibmonier
+  name: sylius-ai-catalog-copilot-plugin
+packagist: tmonier/sylius-ai-catalog-copilot-plugin
+license: MIT
+features:
+  - 'Barre d’outils dans l’onglet « Traductions » : générer la description, la description courte, la méta-description ou les mots-clés.'
+  - 'Traduction champ par champ depuis la langue par défaut.'
+  - 'Suggestions en attente à accepter ou rejeter, avec comparaison côte à côte, aussi en masse.'
+  - 'Jamais d’écrasement d’un texte humain : une suggestion périmée est refusée.'
+  - 'Allégations environnementales génériques signalées, allégations de neutralité carbone supprimées.'
+  - 'Sortie nettoyée : texte brut, longueurs respectées, HTML assaini.'
+  - 'Marqueurs de provenance : modèle, date et badge pour chaque champ issu d’une suggestion.'
+  - 'Générateur de démonstration sans clé d’API, génération en masse plafonnée avec reprise.'
+compatibility:
+  matrix:
+    - sylius: '2.2'
+      php: '>=8.2'
+      symfony:
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+complements:
+  - audit-log
+installSteps:
+  - 'Installer aussi le pont Symfony AI de votre fournisseur (Mistral, OpenAI, Anthropic ou Ollama) : `composer require symfony/ai-mistral-platform`, par exemple.'
+  - "Enregistrer les bundles `Symfony\\AI\\AiBundle\\AiBundle` et `Tmonier\\SyliusAiCatalogCopilotPlugin\\TmonierSyliusAiCatalogCopilotPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusAiCatalogCopilotPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_ai_catalog_copilot.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusAiCatalogCopilotPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_ai_catalog_copilot.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (deux tables). Le générateur de démonstration fonctionne aussitôt ; brancher un vrai modèle pour des textes réels.'
+configExcerpt: |
+  tmonier_sylius_ai_catalog_copilot:
+      generator:
+          type: demo        # demo | platform | service
+      max_products_per_run: 50
+      environmental_claims:
+          mode: flag        # flag | remove
+      provenance:
+          enabled: true
+      rate_limit:
+          enabled: true
+          per_admin: 30
+---
+
+Rédiger et traduire des centaines de fiches produit est long, et laisser une IA écrire seule dans le catalogue est risqué. Ce plugin propose des textes sous forme de suggestions en attente, que l’équipe compare et accepte ou rejette. L’IA ne reçoit que les faits du produit, jamais de données clients.

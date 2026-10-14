@@ -1,0 +1,47 @@
+---
+name: 'GPSR'
+tagline: 'Sécurité des produits (règlement UE 2023/988, art. 19) pour Sylius 2 : fabricants, personnes responsables, avertissements.'
+theme: conformite-ue
+repo:
+  owner: thibmonier
+  name: sylius-gpsr-plugin
+packagist: tmonier/sylius-gpsr-plugin
+license: MIT
+features:
+  - 'Fabricants avec marque, adresse, pays, e-mail et site web, liés aux produits.'
+  - 'Personnes responsables dans l’UE (importateur, mandataire, prestataire) avec valeur par défaut par fabricant.'
+  - 'Identification du produit : type ou modèle et autre identifiant, par exemple un GTIN.'
+  - 'Avertissements et informations de sécurité traduisibles, avec repli sur la langue par défaut.'
+  - 'Section « Sécurité du produit » affichée directement sur la fiche, sans clic.'
+  - 'Onglet du formulaire produit, sans modification de l’entité produit.'
+  - 'Aides : badges hors UE, avertissement sans personne responsable, filtre « Données GPSR manquantes ».'
+compatibility:
+  matrix:
+    - sylius: '2.2 et 2.3'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusGpsrPlugin\\TmonierSyliusGpsrPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusGpsrPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_gpsr.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusGpsrPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_gpsr.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Créer les personnes responsables et les fabricants dans l’administration, puis remplir l’onglet « Sécurité du produit » de chaque produit.'
+configExcerpt: |
+  tmonier_sylius_gpsr:
+      resources:
+          manufacturer:
+              classes:
+                  model: App\Entity\Gpsr\Manufacturer
+          responsible_person:
+              classes:
+                  model: App\Entity\Gpsr\ResponsiblePerson
+---
+
+Depuis le règlement européen sur la sécurité générale des produits, une boutique doit afficher le fabricant, une personne responsable dans l’Union et les consignes de sécurité. Ce plugin ajoute ces données au catalogue sans modifier l’entité produit. La section de sécurité s’affiche sur la fiche, et un filtre repère les produits dont les données manquent.

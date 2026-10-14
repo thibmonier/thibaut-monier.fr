@@ -1,0 +1,43 @@
+---
+name: 'Withdrawal'
+tagline: 'Bouton de rétractation (directive UE 2023/2673, art. 11 bis) pour Sylius 2 : déclaration en deux étapes et accusé de réception.'
+theme: conformite-ue
+repo:
+  owner: thibmonier
+  name: sylius-withdrawal-plugin
+packagist: tmonier/sylius-withdrawal-plugin
+license: MIT
+features:
+  - 'Lien « se rétracter du contrat ici » dans le pied de page de chaque page et sur la page commande, sans connexion.'
+  - 'Formulaire prérempli pour les clients connectés, puis page de confirmation avec un seul bouton.'
+  - 'Accusé de réception immédiat par e-mail avec la déclaration complète et l’horodatage du serveur.'
+  - 'Déclarations jamais refusées : le respect du délai est calculé et affiché au marchand.'
+  - 'Rétractation partielle : choix des articles pour les clients connectés, texte libre pour les invités.'
+  - 'Back-office « Ventes > Rétractations » : liste filtrable, détail, acceptation ou rejet, indicateur d’échéance.'
+  - 'Rapprochement avec la commande sans énumération possible, et notification au marchand.'
+  - 'Libellés officiels dans sept langues, vérifiés par des tests.'
+compatibility:
+  matrix:
+    - sylius: '2.2 et 2.3'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusWithdrawalPlugin\\TmonierSyliusWithdrawalPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusWithdrawalPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_withdrawal.yaml`.'
+  - 'Importer les routes avec `@TmonierSyliusWithdrawalPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_withdrawal.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Renseigner l’adresse e-mail de contact de chaque canal pour recevoir les notifications du marchand.'
+configExcerpt: |
+  tmonier_sylius_withdrawal:
+      period_days: 14
+      notify_merchant: true
+---
+
+La directive européenne impose une fonction « se rétracter du contrat ici » toujours accessible. Ce plugin ajoute le lien en pied de page, un formulaire puis une étape de confirmation, et envoie un accusé de réception sur support durable. Le marchand traite les déclarations dans le back-office, sans jamais en refuser une à la saisie.

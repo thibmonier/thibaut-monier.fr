@@ -1,0 +1,47 @@
+---
+name: 'Audit Log'
+tagline: 'Journal d’audit du back-office Sylius 2 : qui a modifié quoi et quand, avec le détail champ par champ.'
+theme: back-office
+repo:
+  owner: thibmonier
+  name: sylius-audit-log-plugin
+packagist: tmonier/sylius-audit-log-plugin
+license: MIT
+features:
+  - 'Diff champ par champ, date en UTC, acteur (administrateur, client, système) et source (admin, API, boutique, console).'
+  - 'Page « Journal d’audit » filtrable par période, ressource, action, acteur et requête.'
+  - 'Carte « Historique » sur les pages produit, commande, client et promotion.'
+  - 'Identifiant de requête pour retrouver tous les changements d’une même requête.'
+  - 'Mots de passe, jetons et configuration de passerelle masqués : seul le changement est visible.'
+  - 'Rétention configurable avec purge, et anonymisation d’un client sur demande.'
+  - 'Ressources supplémentaires ajoutables par configuration, avec libellé et propriétaire personnalisés.'
+compatibility:
+  matrix:
+    - sylius: '2.2 et 2.3'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+complements:
+  - timeline
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusAuditLogPlugin\\TmonierSyliusAuditLogPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusAuditLogPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_audit_log.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusAuditLogPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_audit_log.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Planifier la purge, par exemple chaque jour : `bin/console tmonier:audit-log:purge`.'
+configExcerpt: |
+  tmonier_sylius_audit_log:
+      enabled: true
+      sources: [admin, admin_api, cli]
+      max_value_length: 500
+      store_ip: false
+      retention_days: 365
+---
+
+Quand un prix ou une adresse change, l’équipe veut savoir par qui et pourquoi, sans fouiller les journaux du serveur. Ce plugin enregistre chaque création, modification et suppression des ressources suivies, avec l’ancienne et la nouvelle valeur. Les secrets sont masqués et les données personnelles se purgent ou s’anonymisent.

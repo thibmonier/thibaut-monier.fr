@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import PluginGrid from '../../components/oss/PluginGrid.astro';
+import ThemeFilter from '../../components/oss/ThemeFilter.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  THEME_LABELS,
+  THEMES,
+  buildSearchEntry,
+  countLabel,
+  groupByTheme,
+  syliusVersions,
+  themeCounts,
+} from '../../lib/plugins.ts';
+
+const entries = (await getCollection('plugins', ({ data }) => !data.draft)).map((entry) => ({
+  slug: entry.id.replace(/^fr\//, ''),
+  ...entry.data,
+}));
+const groups = groupByTheme(entries).map((group) => ({
+  ...group,
+  plugins: group.plugins.map((plugin) => ({
+    slug: plugin.slug,
+    name: plugin.name,
+    tagline: plugin.tagline,
+    syliusVersions: syliusVersions(plugin.compatibility.matrix),
+    search: buildSearchEntry({
+      id: plugin.slug,
+      name: plugin.name,
+      tagline: plugin.tagline,
+      keywords: [group.label, plugin.slug, ...plugin.features],
+    }),
+  })),
+}));
+const counts = themeCounts(entries);
+---
+
+<BaseLayout
+  title="Plugins Sylius 2 open source : B2B, UE, IA"
+  description="Vingt plugins Sylius 2 open source : B2B, conformité UE, back-office, IA et intégrations. Filtrez par thème, ouvrez la fiche, installez avec Composer."
+>
+  <h1 class="text-3xl font-bold tracking-tight">Plugins Sylius 2 open source</h1>
+  <p class="mt-3 max-w-3xl text-lg text-muted">
+    {countLabel(entries.length)} publiés sur GitHub, que j’ai conçus et maintenus pour des boutiques
+    Sylius 2 : vente entre professionnels, conformité européenne, outils d’administration, IA et
+    intégrations.
+  </p>
+
+  <aside
+    aria-labelledby="intro-titre"
+    class="mt-6 max-w-3xl rounded-lg border border-border bg-surface p-4"
+  >
+    <h2 id="intro-titre" class="font-semibold">
+      En clair
+    </h2>
+    <p class="mt-1">
+      Sylius est une plateforme libre pour créer une boutique en ligne. Un plugin y ajoute une
+      fonction précise, par exemple la facture électronique ou l’approbation des achats, sans
+      réécrire la boutique. Chaque fiche explique le besoin couvert, la compatibilité et comment
+      l’installer.
+    </p>
+  </aside>
+
+  <nav data-anchors aria-label="Thèmes du catalogue" class="mt-8">
+    <ul class="flex flex-wrap gap-2">
+      {THEMES.map((theme) => (
+        <li>
+          <a
+            href={`#theme-${theme}`}
+            class="inline-flex min-h-11 items-center rounded-md border border-border px-4 font-medium hover:border-accent"
+          >
+            {THEME_LABELS[theme]} ({counts[theme]})
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="mt-8" data-catalogue>
+    <ThemeFilter total={entries.length} />
+    <PluginGrid groups={groups} />
+  </div>
+</BaseLayout>
+
+<script>
+  import '../../scripts/plugin-filter.ts';
+</script>

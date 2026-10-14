@@ -1,0 +1,51 @@
+---
+name: 'Quick Order'
+tagline: 'Commande rapide B2B pour Sylius 2 : lignes SKU et quantité collées ou CSV, aperçu, ajout groupé au panier et recommande.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-quick-order-plugin
+packagist: tmonier/sylius-quick-order-plugin
+license: MIT
+features:
+  - 'Page de commande rapide : lignes `CODE;quantité` collées depuis un tableur ou fichier CSV (UTF-8, Windows-1252, séparateur détecté).'
+  - 'Aperçu avec un statut par ligne : prête, stock insuffisant, code inconnu, sans prix, quantité hors règle.'
+  - 'Un seul bouton pour ajouter les lignes valides, en mode partiel ou « tout ou rien ».'
+  - 'Rapport d’erreurs CSV à corriger et réimporter, avec neutralisation des formules.'
+  - 'Matrice de commande sur la fiche produit : une quantité par variante, estimation du montant, sans JavaScript.'
+  - 'Recommander depuis la liste des commandes, avec les variantes retirées signalées.'
+  - 'API `POST /api/v2/shop/orders/{tokenValue}/bulk-items` pour un ERP ou une application monopage.'
+  - 'Variantes chargées en une requête, commande traitée et flushée une seule fois.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusQuickOrderPlugin\\TmonierSyliusQuickOrderPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusQuickOrderPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_quick_order.yaml`.'
+  - 'Importer les routes avec `@TmonierSyliusQuickOrderPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_quick_order.yaml`.'
+  - 'Aucune migration : le plugin n’a pas de table.'
+  - 'Vider le cache. L’opération d’API est enregistrée automatiquement quand API Platform est activé.'
+screenshots:
+  - src: ../../../assets/plugins/quick-order/formulaire.webp
+    alt: 'Page de commande rapide : zone de collage des lignes SKU et quantité, envoi d’un fichier CSV, options.'
+  - src: ../../../assets/plugins/quick-order/apercu-erreurs.webp
+    alt: 'Aperçu d’une commande rapide avec un statut par ligne : prête, stock insuffisant, code inconnu, sans prix.'
+  - src: ../../../assets/plugins/quick-order/matrice-commande.webp
+    alt: 'Matrice de commande sur une fiche produit : une quantité par variante, prix et estimation du total.'
+---
+
+Un acheteur professionnel connaît ses références et veut commander des dizaines de lignes sans parcourir le catalogue. Ce plugin accepte un copier-coller de tableur ou un fichier CSV, contrôle chaque ligne puis ajoute tout au panier en une passe. Il ajoute aussi une matrice de commande sur la fiche produit et la recommande depuis les anciennes commandes.

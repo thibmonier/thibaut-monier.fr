@@ -17,19 +17,19 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-019-01 | [CONTENT] | Trancher les décisions du catalogue (slugs, thèmes, hub, captures) | 2h | - | 2 | 🔲 |
-| T-019-02 | [OPS] | Ajouter `@astrojs/mdx` (et `sharp` si nécessaire) et l’intégration Astro | 2,5h | T-019-01 | 2 | 🔲 |
-| T-019-03 | [TEST] | Écrire les tests unitaires RED : schéma core et `plugins.ts` | 3,5h | - | 2 | 🔲 |
-| T-019-04 | [TEST] | Écrire les tests e2e RED du catalogue | 4h | - | 2 | 🔲 |
-| T-019-05 | [FE-WEB] | Schéma `plugins` (noyau), collection et `lib/plugins.ts` | 3,5h | T-019-02, T-019-03 | 2 | 🔲 |
-| T-019-06 | [OPS] | Contrôle de contenu `plugins` (décompte, thèmes, slugs, références) | 3h | T-019-03, T-019-05 | 2 | 🔲 |
-| T-019-07 | [CONTENT] | Renseigner le noyau des 20 plugins (nom, accroche, thème, dépôt, paquet) | 4h | T-019-01, T-019-05 | 2 | 🔲 |
-| T-019-08 | [FE-WEB] | Composants `PluginCard` et `PluginGrid` (groupés par thème) | 3,5h | T-019-04, T-019-07 | 2 | 🔲 |
-| T-019-09 | [FE-WEB] | Filtre par thème et recherche (`ThemeFilter`, `plugin-filter.ts`) | 4,5h | T-019-08 | 2 | 🔲 |
-| T-019-10 | [FE-WEB] | Page `/open-source/` (catalogue), entrée de navigation et SEO | 3h | T-019-09 | 2 | 🔲 |
-| T-019-11 | [TEST] | Vérification GREEN | 2h | T-019-06, T-019-10 | 2 | 🔲 |
-| T-019-12 | [DOC] | Guide « ajouter ou modifier un plugin » | 1,5h | T-019-11 | 2 | 🔲 |
-| T-019-13 | [REV] | Revue d’US-019 | 2h | T-019-12 | 2 | 🔲 |
+| T-019-01 | [CONTENT] | Trancher les décisions du catalogue (slugs, thèmes, hub, captures) | 2h | - | 2 | ✅ |
+| T-019-02 | [OPS] | Ajouter `@astrojs/mdx` (et `sharp` si nécessaire) et l’intégration Astro | 2,5h | T-019-01 | 2 | ✅ |
+| T-019-03 | [TEST] | Écrire les tests unitaires RED : schéma core et `plugins.ts` | 3,5h | - | 2 | ✅ |
+| T-019-04 | [TEST] | Écrire les tests e2e RED du catalogue | 4h | - | 2 | ✅ |
+| T-019-05 | [FE-WEB] | Schéma `plugins` (noyau), collection et `lib/plugins.ts` | 3,5h | T-019-02, T-019-03 | 2 | ✅ |
+| T-019-06 | [OPS] | Contrôle de contenu `plugins` (décompte, thèmes, slugs, références) | 3h | T-019-03, T-019-05 | 2 | ✅ |
+| T-019-07 | [CONTENT] | Renseigner le noyau des 20 plugins (nom, accroche, thème, dépôt, paquet) | 4h | T-019-01, T-019-05 | 2 | ✅ |
+| T-019-08 | [FE-WEB] | Composants `PluginCard` et `PluginGrid` (groupés par thème) | 3,5h | T-019-04, T-019-07 | 2 | ✅ |
+| T-019-09 | [FE-WEB] | Filtre par thème et recherche (`ThemeFilter`, `plugin-filter.ts`) | 4,5h | T-019-08 | 2 | ✅ |
+| T-019-10 | [FE-WEB] | Page `/open-source/` (catalogue), entrée de navigation et SEO | 3h | T-019-09 | 2 | ✅ |
+| T-019-11 | [TEST] | Vérification GREEN | 2h | T-019-06, T-019-10 | 2 | ✅ |
+| T-019-12 | [DOC] | Guide « ajouter ou modifier un plugin » | 1,5h | T-019-11 | 2 | ✅ |
+| T-019-13 | [REV] | Revue d’US-019 | 2h | T-019-12 | 2 | 👀 |
 | T-019-14 | [CONTENT] | Phase 4 : re-pointer la preuve « plugins-sylius » de l’accueil vers `/open-source/` | 0,5h | T-019-13 | 4 | 🔲 |
 
 **Total estimé** : 39,5h (14 tâches)

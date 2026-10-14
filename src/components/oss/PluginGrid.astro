@@ -1,0 +1,40 @@
+---
+import { countLabel, type PluginTheme, type SearchEntry } from '../../lib/plugins.ts';
+import PluginCard from './PluginCard.astro';
+
+interface Card {
+  slug: string;
+  name: string;
+  tagline: string;
+  syliusVersions: string[];
+  search: SearchEntry;
+}
+interface Props {
+  groups: { theme: PluginTheme; label: string; plugins: Card[] }[];
+}
+
+const { groups } = Astro.props;
+---
+
+<div data-results-wrap hidden>
+  <h2 class="text-2xl font-semibold tracking-tight">Résultats de la recherche</h2>
+  <ul data-results class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></ul>
+</div>
+
+{groups.map((group) => (
+  <section
+    data-theme-section={group.theme}
+    aria-labelledby={`theme-${group.theme}`}
+    class="mt-10 scroll-mt-20 first:mt-0"
+  >
+    <h2 id={`theme-${group.theme}`} class="text-2xl font-semibold tracking-tight">
+      {group.label}
+      <span class="text-base font-normal text-muted"> ({countLabel(group.plugins.length)})</span>
+    </h2>
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {group.plugins.map((plugin) => (
+        <PluginCard {...plugin} theme={group.theme} themeLabel={group.label} />
+      ))}
+    </ul>
+  </section>
+))}

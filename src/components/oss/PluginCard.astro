@@ -1,0 +1,39 @@
+---
+import type { SearchEntry } from '../../lib/plugins.ts';
+
+interface Props {
+  slug: string;
+  theme: string;
+  name: string;
+  tagline: string;
+  themeLabel: string;
+  syliusVersions: string[];
+  search: SearchEntry;
+}
+
+const { slug, theme, name, tagline, themeLabel, syliusVersions, search } = Astro.props;
+---
+
+<li
+  data-plugin={slug}
+  data-theme={theme}
+  data-search-name={search.name}
+  data-search-tagline={search.tagline}
+  data-search-extra={search.extra}
+  class="relative flex flex-col rounded-lg border border-border bg-surface p-4 focus-within:border-accent hover:border-accent"
+>
+  <h3 class="text-lg font-semibold tracking-tight">
+    <a
+      href={`/open-source/sylius/${slug}/`}
+      class="after:absolute after:inset-0 after:content-[''] hover:text-accent"
+    >
+      {name}
+    </a>
+  </h3>
+  <p class="mt-1 grow text-base">{tagline}</p>
+  <p class="mt-3 text-sm text-muted">
+    <span data-card-theme>{themeLabel}</span>
+    <span aria-hidden="true"> · </span>
+    Sylius {syliusVersions.join(', ')}
+  </p>
+</li>

@@ -1,0 +1,54 @@
+---
+name: 'Company Accounts'
+tagline: 'Comptes entreprise pour Sylius 2 : sociétés, membres et rôles (admin, acheteur, approbateur), espace société et API.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-company-accounts-plugin
+packagist: tmonier/sylius-company-accounts-plugin
+license: MIT
+features:
+  - 'Sociétés avec code, numéro de TVA, numéro d’immatriculation et groupe de clients par défaut.'
+  - 'Membres rattachés à une seule société, avec un rôle (admin, acheteur, approbateur) et un statut actif.'
+  - 'Espace « Ma société » dans le compte client : membres, rôle et statut, commandes de la société en lecture seule.'
+  - 'Back-office : liste des sociétés, sous-liste des membres, rattachement par recherche, détachement.'
+  - 'Admin API et Shop API, avec des voters testés contre les autres sociétés et les membres désactivés.'
+  - 'Données minimisées : les collègues ne voient que les noms et les rôles, jamais l’e-mail ni le téléphone.'
+  - 'Événements après chaque changement, pour un webhook, une timeline ou un audit.'
+  - 'Compte partagé facultatif : la société devient propriétaire du compte des commandes de ses membres.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+complements:
+  - admin-order-creation
+  - order-hold
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusCompanyAccountsPlugin\\TmonierSyliusCompanyAccountsPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusCompanyAccountsPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_company_accounts.yaml`.'
+  - 'Importer les routes d’administration et de boutique avec `@TmonierSyliusCompanyAccountsPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_company_accounts.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (trois tables).'
+  - 'Facultatif : installer `tmonier/sylius-order-hold-plugin` pour que la société devienne propriétaire du compte de ses membres.'
+screenshots:
+  - src: ../../../assets/plugins/company-accounts/societe-edition.webp
+    alt: 'Formulaire d’édition d’une société dans le back-office Sylius : nom, TVA, groupe de clients par défaut.'
+  - src: ../../../assets/plugins/company-accounts/membres-boutique.webp
+    alt: 'Page « Membres » de l’espace société en boutique, avec le rôle et le statut de chaque collègue.'
+  - src: ../../../assets/plugins/company-accounts/commandes-societe.webp
+    alt: 'Page « Commandes de la société » en boutique, en lecture seule, avec le membre qui a commandé.'
+---
+
+Sylius sait servir un client, pas une société dont plusieurs collaborateurs commandent chacun avec leurs droits. Ce plugin rattache des clients existants à une société, avec un rôle et un statut, sans modifier les entités du cœur. Les administrateurs de la société gèrent leurs collègues, et le back-office garde la main sur l’ensemble.

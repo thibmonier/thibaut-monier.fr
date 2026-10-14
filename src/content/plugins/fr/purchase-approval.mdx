@@ -1,0 +1,55 @@
+---
+name: 'Purchase Approval'
+tagline: 'Approbation des achats pour les comptes société Sylius 2 : plafonds par membre, commandes en attente jusqu’à la décision d’un approbateur.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-purchase-approval-plugin
+packagist: tmonier/sylius-purchase-approval-plugin
+license: MIT
+features:
+  - 'Plafond de commande par membre (montant et devise) ; sans plafond, la boutique fonctionne comme avant.'
+  - 'Page « Approbations » pour les approbateurs : approuver ou rejeter avec un commentaire, jamais sa propre commande.'
+  - 'Aucun paiement, expédition ni facture avant approbation, y compris par l’API et les routes de paiement.'
+  - 'Accusé de réception pendant l’attente, puis confirmation habituelle envoyée une seule fois après approbation.'
+  - 'Expiration des demandes en attente (14 jours par défaut) avec annulation de la commande.'
+  - 'Back-office : carte d’approbation sur la commande, colonne et filtre dans la liste des commandes.'
+  - 'Shop API et Admin API, événements à chaque étape, webhooks avec webhook-outbox.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+requires:
+  - company-accounts
+  - order-hold
+complements:
+  - webhook-outbox
+installSteps:
+  - "Enregistrer les bundles dans `config/bundles.php`, dépendances d’abord : `Tmonier\\SyliusOrderHoldPlugin\\TmonierSyliusOrderHoldPlugin`, `Tmonier\\SyliusCompanyAccountsPlugin\\TmonierSyliusCompanyAccountsPlugin`, `Tmonier\\SyliusPurchaseApprovalPlugin\\TmonierSyliusPurchaseApprovalPlugin`."
+  - 'Importer la configuration `@TmonierSyliusPurchaseApprovalPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_purchase_approval.yaml`.'
+  - 'Importer les routes avec `@TmonierSyliusPurchaseApprovalPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_purchase_approval.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (deux tables).'
+  - 'Planifier l’expiration, par exemple chaque jour : `bin/console tmonier:approval:expire`.'
+screenshots:
+  - src: ../../../assets/plugins/purchase-approval/decision-approbation.webp
+    alt: 'Page de décision sur une commande en attente : demandeur, total, plafond et boutons Approuver et Rejeter.'
+  - src: ../../../assets/plugins/purchase-approval/commande-admin.webp
+    alt: 'Carte d’approbation sur la page commande du back-office avec la société, le plafond et la décision.'
+  - src: ../../../assets/plugins/purchase-approval/plafonds-achat.webp
+    alt: 'Page « Plafonds d’achat » de la société : un plafond de commande et d’approbation par membre.'
+---
+
+Dans une entreprise, un acheteur ne devrait pas engager seul n’importe quel montant. Ce plugin retient les commandes qui dépassent le plafond du membre jusqu’à ce qu’un approbateur de la société les accepte ou les rejette. Tant que la décision manque, aucun paiement, aucune expédition et aucune facture ne partent.
