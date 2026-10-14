@@ -20,9 +20,12 @@ graph TD
 | US-008 | US-002 | — | US-026 |
 | US-029 | US-002 | — | — |
 
-## Prérequis hors backlog (à lever avant ou pendant le Sprint Planning)
-- [ ] Choisir le nom de domaine et configurer le DNS (question ouverte n° 1 du PRD)
-- [ ] Initialiser le dépôt git et créer le dépôt GitHub
-- [ ] Créer le service d'hébergement selon l'ADR (Railway ou Cloudflare Workers)
+## Prérequis hors backlog
+Détail et suivi : voir `pre-sprint-checklist.md`.
+
+- [ ] Acheter le domaine thibaut-monier.fr / .com et configurer le DNS (non bloquant : sous-domaine `*.up.railway.app` provisoire)
+- [x] Initialiser le dépôt git et créer le dépôt GitHub (thibmonier/thibaut-monier.fr, branche `feature/sprint-001-walking_skeleton`)
+- [x] Hébergement selon l'ADR : Railway (CLI connecté ; service créé pendant US-001)
 - [x] Outil de prise de RDV : Calendly (décision du 2026-10-14)
-- [ ] Créer le compte Umami Cloud (région UE si disponible) et le type d'événement Calendly « Échange découverte (30 min) »
+- [ ] Créer le compte Umami Cloud (`PUBLIC_UMAMI_WEBSITE_ID`) et le type d'événement Calendly « Échange découverte (30 min) » (`PUBLIC_CALENDLY_URL`)
+- [ ] Créer la clé Web3Forms (`PUBLIC_WEB3FORMS_KEY`)

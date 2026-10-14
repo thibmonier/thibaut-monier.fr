@@ -6,6 +6,12 @@ sprints:
     name: sprint-001-walking_skeleton
     status: ready
     points: 24
+    metadata:
+      sprint_id: sprint-001
+      start_date: 2026-10-15
+      end_date: 2026-10-28
+      capacity_points: 24
+      goal: "Mettre en production un site minimal mais complet où un recruteur ou un client comprend le positionnement, parcourt le parcours professionnel et peut prendre contact."
     stories:
       - id: US-001
         title: "Squelette du site publié en production"
