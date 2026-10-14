@@ -21,6 +21,7 @@ EPIC-005 : Vitrine open source
   3. PR #3866 (issue #3865) : le champ archétype ne couvrait que 5 locales sur 12 ; graphies extraites des modes du dépôt plutôt que traduites.
 - Pour chaque PR : problème, correctif, tests de non-régression, durcissements demandés en revue (refus des en-têtes éclatés sur deux lignes, garde contre la capture d'une ligne de tableau de scoring). Vérifier que les trois PR sont toujours en statut « mergée » et que les liens sont valides.
 - Registre : accessible à un public non technique (« un défaut qui ne se voit pas » plutôt que « regex »), avec un encadré technique repliable.
+- Arbitrage sprint 2 (2026-10-14) : JSON-LD `Article` reporté à US-024 (sprint 3) ; title, description, canonical et fil d'Ariane visibles sont livrés ici (E15).
 - Le lien avec la thèse du site : un défaut silencieux est un risque de delivery ; la méthode (test avant correctif) est celle que le candidat demande à ses équipes.
 
 ### Validation INVEST
@@ -75,7 +76,7 @@ THEN le build échoue avec le message « Étude de cas « career-ops » : la PR 
 - [ ] Schéma d'étude de cas (projet, rôle, liste de contributions avec numéro, problème, correctif, tests, lien) validé au build
 - [ ] Composant `ContributionCard` et encadré repliable (`<details>`)
 - [ ] Responsive, WCAG 2.2 AA (contrastes, focus, structure de titres h1 à h3)
-- [ ] SEO : title, description, JSON-LD `Article` (à confirmer avec EPIC-006), lien depuis la page profil et la vitrine
+- [ ] SEO : title, description, JSON-LD `Article` reporté à US-024 (sprint 3), canonical, fil d'Ariane visible, lien depuis la page profil et la vitrine
 - [ ] Performance : Lighthouse ≥ 95 ; aucun script tiers
 
 ## Notes techniques (à confirmer en tech spec)

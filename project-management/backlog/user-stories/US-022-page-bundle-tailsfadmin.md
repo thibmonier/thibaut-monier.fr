@@ -14,9 +14,10 @@ EPIC-005 : Vitrine open source
 **Afin de** savoir en 2 minutes si ce thème d'administration Tailwind v4 convient à mon projet Symfony
 
 ### Conversation
-- Contenu : thème admin basé sur TailAdmin, bundle réutilisable (Symfony UX, Stimulus, AssetMapper, Tailwind CSS v4), paquet `tailsfadmin/tailsfadmin-bundle` sur Packagist, version courante 1.6 (à vérifier au moment de la rédaction), CI et licence MIT.
+- Contenu : thème admin basé sur TailAdmin, bundle réutilisable (Symfony UX, Stimulus, AssetMapper, Tailwind CSS v4), paquet `tailsfadmin/tailsfadmin-bundle` sur Packagist, version courante lue à la rédaction (v1.6.2), CI et licence MIT.
 - Installation : `composer require tailsfadmin/tailsfadmin-bundle` (activation automatique par Flex), puis assets/importmap, thème CSS hôte, menu de sidebar en YAML, layout de page : résumer en 4 étapes et renvoyer au README pour le détail (pas de duplication, règle Single Source of Truth).
 - Une capture de l'application de démo suffit (liée à une démo en ligne si elle existe : question ouverte).
+- Arbitrage sprint 2 (2026-10-14) : la capture est facultative ; sans capture fournie par le PO, la page est publiée sans image, sans visuel provisoire (E18). Version courante lue à la rédaction (v1.6.2) ; prérequis PHP ≥ 8.5. JSON-LD reporté à US-024 (E15).
 - Architecture : mentionner la structure en monorepo avec ADR (preuve de rigueur) sans la recopier.
 
 ### Validation INVEST
@@ -32,9 +33,9 @@ EPIC-005 : Vitrine open source
 ### Scénario nominal
 ```gherkin
 Scenario: Page du bundle
-GIVEN la page tailsfadmin renseignée avec description, installation en 4 étapes, une capture et les liens
+GIVEN la page tailsfadmin renseignée avec description, installation en 4 étapes, une capture si fournie par le PO (sinon page sans image) et les liens
 WHEN P-003 ouvre `/open-source/tailsfadmin/`
-THEN le nom, la version courante et la licence sont visibles sans défilement
+THEN le nom, la version courante (v1.6.2, lue à la rédaction) et la licence sont visibles sans défilement
 AND la commande `composer require tailsfadmin/tailsfadmin-bundle` est copiable
 AND les liens GitHub, Packagist et README s'ouvrent en un clic
 ```
@@ -67,13 +68,13 @@ THEN la CI échoue avec le message « Lien cassé sur /open-source/tailsfadmin/ 
 
 ### Critères techniques (site statique)
 - [ ] Contenu en MDX, métadonnées validées par le schéma (réutilisation du gabarit de fiche d'US-020 si possible, DRY)
-- [ ] Responsive, WCAG 2.2 AA ; la capture a une alternative textuelle décrivant l'écran
-- [ ] SEO : title, description, JSON-LD `SoftwareSourceCode` (à confirmer avec EPIC-006), lien depuis la page d'ensemble de la vitrine
+- [ ] Responsive, WCAG 2.2 AA ; si une capture est fournie, elle a une alternative textuelle décrivant l'écran ; sans capture, aucun visuel provisoire
+- [ ] SEO : title, description, JSON-LD `SoftwareSourceCode` reporté à US-024 (sprint 3), lien depuis la page d'ensemble de la vitrine
 - [ ] Performance : Lighthouse ≥ 95
 
 ## Notes techniques (à confirmer en tech spec)
 - Entrée de la collection `projects` (ADR-0008), et non de `plugins` : la vitrine Sylius garde son décompte de 20 plugins.
-- Peut être une entrée de la collection `plugins` avec un type « bundle », évitant un second schéma ; le catalogue des 20 plugins ne doit pas l'inclure dans son décompte (le filtre par thème d'US-019 compte 20).
+- Pas d'entrée dans la collection `plugins` (option « bundle » écartée) : un second schéma n'est pas nécessaire, le décompte de 20 plugins d'US-019 reste intact.
 
 ## Estimation
 - **Story Points** : 2

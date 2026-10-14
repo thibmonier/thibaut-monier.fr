@@ -17,6 +17,7 @@ EPIC-005 : Vitrine open source
 - Répartition actuelle du catalogue : B2B 9 (Company Accounts, Purchase Approval, Quick Order, Quote Request, Tier Pricing, Trade Credit, Container Fill, B2B MCP, Order Hold), conformité UE 3 (Factur-X, GPSR, Withdrawal), back-office 5 (Admin Order Creation, Audit Log, Bulk Actions, Command Palette, Timeline), IA et intégrations 3 (Agentic Feeds, AI Catalog Copilot, Webhook Outbox). Total 20. Un plugin n'a qu'un thème principal ; un second thème est-il utile ? Proposition : non (YAGNI).
 - Contenu d'une carte : nom, accroche d'une phrase, thème, versions Sylius supportées, lien vers la fiche. Le détail est dans US-020.
 - Source des données : catalogue du 2026-10-14 et README des dépôts ; une seule source de vérité par plugin (fichier de contenu), pas de saisie en double.
+- Arbitrage sprint 2 (2026-10-14) : `/open-source/` est le hub (catalogue filtrable des 20 plugins, puis section « Autres projets »), sans page `/open-source/sylius/` (E2) ; livrée et déployée avec US-020 (branche groupée, les cartes pointant vers les fiches ; E3). Punchout cXML exclu : 20 plugins (E4). Recherche par filtre JavaScript léger, sans Pagefind (E16). JSON-LD reporté à US-024 (E15).
 - Les plugins en cours de référencement sur la marketplace Sylius : afficher le statut ? À arbitrer plus tard.
 
 ### Validation INVEST
@@ -68,14 +69,14 @@ THEN le build échoue avec le message « Plugin « {slug} » invalide : thème d
 
 ### Critères techniques (site statique)
 - [ ] Collection `plugins` typée (slug, nom, accroche, thème, dépôt, paquet) validée au build ; un test CI vérifie le décompte de 20
-- [ ] Page de catalogue, carte `PluginCard`, filtre en amélioration progressive
+- [ ] Page de catalogue `/open-source/` (hub), carte `PluginCard`, filtre en amélioration progressive
 - [ ] Responsive (1 à 3 colonnes), WCAG 2.2 AA : filtres en boutons à bascule (`aria-pressed`), résultats annoncés (`aria-live`), focus visible
-- [ ] SEO : title « Plugins Sylius 2 open source : B2B, conformité UE, back-office, IA », `ItemList` en JSON-LD (à confirmer avec EPIC-006)
-- [ ] Performance : Lighthouse ≥ 95, aucun appel réseau à l'exécution
+- [ ] SEO : title « Plugins Sylius 2 open source : B2B, conformité UE, back-office, IA », meta description et canonical ; JSON-LD `ItemList` reporté à US-024 (sprint 3)
+- [ ] Performance : Lighthouse ≥ 95, aucun appel réseau à l'exécution ; script de filtre et de recherche < 5 Ko, sans dépendance
 
 ## Notes techniques (à confirmer en tech spec)
 - Import initial scripté depuis le catalogue Markdown, puis fichiers de contenu maintenus à la main.
-- Pagefind (recherche) peut couvrir la recherche en mot-clé ; sinon filtre JS léger sur les cartes.
+- Filtre JS léger sur les cartes (normalisation des accents, classement), script < 5 Ko ; Pagefind en sprint 3 (US-012).
 
 ## Estimation
 - **Story Points** : 5

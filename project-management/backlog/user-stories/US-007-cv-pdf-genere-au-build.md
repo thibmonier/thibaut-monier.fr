@@ -18,6 +18,9 @@ EPIC-002 : Profil et CV
 - **Décision d'analyse (2026-10-14) : Typst** génère le PDF à partir des **mêmes données YAML** que la collection `experiences` (Typst lit YAML et JSON nativement). Pas de navigateur headless : l'image de build reste légère et la typographie est de qualité professionnelle.
 - Mise en page : 2 pages A4 maximum ; version anglaise hors périmètre (EPIC-007).
 - Nom du fichier : `thibaut-monier-cv.pdf`, avec date de génération dans les métadonnées.
+- Arbitrage sprint 2 (2026-10-14) : la collection compte 7 expériences (arbitrage A2 du sprint 1, Smile fusionné) (E10).
+- Arbitrage sprint 2 (2026-10-14) : libellé statique « Télécharger mon CV (PDF, 2 pages) » ; nombre de pages et poids vérifiés par le contrôle de build, poids non affiché ; `X-Robots-Tag: noindex` sur le PDF (la page Parcours reste la version indexée) ; revalidation (`no-cache`) au lieu du cache de 30 jours des `.pdf` dans `nginx.conf` (E9).
+- Arbitrage sprint 2 (2026-10-14) : génération par Typst uniquement, sans gabarit d'impression HTML ni Chromium (ADR-0005).
 
 ### Validation INVEST
 - [x] Independent : dépend seulement de la collection d'US-005
@@ -32,11 +35,12 @@ EPIC-002 : Profil et CV
 ### Scénario nominal
 ```gherkin
 Scenario: Téléchargement du CV public
-GIVEN le site construit avec la collection "experiences" de 8 entrées
-WHEN P-001 clique sur "Télécharger mon CV (PDF)"
+GIVEN le site construit avec la collection "experiences" de 7 entrées
+WHEN P-001 clique sur "Télécharger mon CV (PDF, 2 pages)"
 THEN le fichier "thibaut-monier-cv.pdf" de moins de 500 Ko se télécharge
-AND il contient les 8 expériences et le résumé, sur 2 pages A4 maximum
+AND il contient les 7 expériences et le résumé, sur 2 pages A4 maximum
 AND le texte est sélectionnable
+AND la réponse HTTP porte `X-Robots-Tag: noindex` et une revalidation (`Cache-Control: no-cache`)
 ```
 
 ### Scénarios alternatifs
@@ -68,14 +72,14 @@ AND aucun PDF obsolète n'est publié
 
 ### Critères techniques (site statique)
 - [ ] Schéma `experiences` partagé avec US-005 ; liste blanche de champs publics validée au build
-- [ ] Gabarit d'impression dédié (feuille de style `@media print` ou page de rendu `/cv-print`)
+- [ ] Gabarit Typst `cv/cv.typ` (pas de gabarit d'impression HTML ni de navigateur headless)
 - [ ] Bouton de téléchargement visible sur la page Parcours et la page contact ; cible ≥ 44 px
 - [ ] WCAG 2.2 AA pour le lien (libellé « Télécharger mon CV (PDF, 2 pages) ») ; PDF balisé
-- [ ] SEO : lien avec attribut `download`, fichier exclu de l'indexation inutile (`X-Robots-Tag` à décider)
+- [ ] SEO : lien avec attribut `download`, fichier exclu de l'indexation par `X-Robots-Tag: noindex` ; revalidation (`no-cache`) du PDF dans `nginx.conf`, en réinjectant les en-têtes communs dans la `location`
 - [ ] Performance : PDF < 500 Ko ; génération < 60 s dans la CI
 
 ## Notes techniques (à confirmer en tech spec)
-- Étape dédiée du build multi-étapes Docker (image officielle Typst 0.15) : `typst compile cv.typ dist/thibaut-monier-cv.pdf` lisant `src/content/experiences/*.yaml` filtrés par liste blanche.
+- Étape dédiée du build multi-étapes Docker (image officielle Typst 0.15) : `typst compile cv.typ dist/thibaut-monier-cv.pdf` lisant `src/data/cv/experiences/*.yaml` filtrés par liste blanche.
 - Test automatisé : extraction de texte du PDF et recherche de motifs interdits.
 - Gabarit Typst versionné (`cv/cv.typ`), réutilisable pour des variantes de CV ciblées (opportunité O-04).
 - Accessibilité du PDF : métadonnées (titre, langue, auteur) et structure balisée selon les capacités de Typst 0.15, à vérifier.

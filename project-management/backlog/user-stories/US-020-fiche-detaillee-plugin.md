@@ -18,6 +18,9 @@ EPIC-005 : Vitrine open source
 - Exemple de matrice pour Company Accounts : PHP 8.2+ (Sylius 2.2) et 8.3+ (Sylius 2.3) ; Sylius 2.2.9+ et 2.3 ; Symfony 6.4 et 7.4 (2.2), 6.4, 7.4 et 8.0 (2.3, Symfony 8 exige PHP 8.4) ; MySQL, MariaDB, PostgreSQL.
 - Dépendances entre plugins : Order Hold sert de noyau à Purchase Approval et à Trade Credit ; Company Accounts est requis ou optionnel pour plusieurs plugins B2B. Représentation : liste « Nécessite / Complété par » plutôt qu'un graphe interactif (YAGNI). À valider contre les `composer.json` réels.
 - Captures : fournies pour les plugins disposant d'une interface ; les autres affichent un extrait de configuration.
+- Arbitrage sprint 2 (2026-10-14) : URL des fiches `/open-source/sylius/<slug>/` conformément à l'ADR-0008 (E1) ; slug = nom du dépôt sans `sylius-` ni `-plugin`, immuable (E5). Pas de page intermédiaire `/open-source/sylius/` : `/open-source/` est le hub (E2).
+- Arbitrage sprint 2 (2026-10-14) : JSON-LD (`SoftwareSourceCode`, `BreadcrumbList`) reporté à US-024 au sprint 3 (E15) ; title, description, canonical et fil d'Ariane visibles sont livrés ici.
+- Arbitrage sprint 2 (2026-10-14) : `sylius-agentic-feeds-plugin` n'est pas publié sur Packagist (vérifié le 2026-10-14) ; sa fiche s'affiche sans lien Packagist et sans métrique de téléchargements (E20).
 
 ### Validation INVEST
 - [x] Independent : seul le catalogue (US-019) est requis
@@ -33,7 +36,7 @@ EPIC-005 : Vitrine open source
 ```gherkin
 Scenario: Lecture de la fiche Purchase Approval
 GIVEN la fiche renseignée avec compatibilité, dépendances et liens
-WHEN P-003 ouvre `/open-source/purchase-approval/`
+WHEN P-003 ouvre `/open-source/sylius/purchase-approval/`
 THEN la matrice de compatibilité PHP, Sylius, Symfony est visible sans défilement sur desktop (1440 × 900)
 AND la section Dépendances liste « Nécessite : Company Accounts, Order Hold » avec un lien vers chaque fiche
 AND les liens GitHub et Packagist s'ouvrent dans un nouvel onglet avec `rel="noopener"`
@@ -46,6 +49,12 @@ Scenario: Plugin sans dépendance
 GIVEN la fiche Tier Pricing sans dépendance déclarée
 WHEN P-003 ouvre la fiche
 THEN la section Dépendances affiche « Aucune dépendance sur un autre plugin de la collection »
+
+Scenario: Plugin non publié sur Packagist
+GIVEN la fiche Agentic Feeds dont le paquet n'est pas publié sur Packagist
+WHEN P-003 ouvre la fiche
+THEN seul le lien GitHub est affiché, sans lien Packagist ni métrique de téléchargements
+AND la commande d'installation reste visible avec la mention « Paquet bientôt publié sur Packagist »
 
 Scenario: Navigation entre fiches liées
 GIVEN la fiche Trade Credit déclarant Order Hold comme dépendance
@@ -67,10 +76,12 @@ THEN le build échoue avec le message « Plugin « {slug} » invalide : compatib
 ```
 
 ### Critères techniques (site statique)
-- [ ] Schéma étendu : problème, fonctionnalités, compatibilité (php, sylius, symfony, bases), dépendances, installation, captures, liens ; références croisées validées au build
+- [ ] Schéma étendu : problème, fonctionnalités, compatibilité (php, sylius, symfony, bases), dépendances (`requires`, `complements`, `externalRequires` optionnel), installation, captures, liens (Packagist optionnel) ; références croisées validées au build
+- [ ] Livrée et déployée avec US-019 (branche groupée, E3)
 - [ ] Gabarit de fiche et composant `CompatibilityMatrix` (tableau sémantique)
 - [ ] Responsive : matrice défilable sans casser la page ; WCAG 2.2 AA (bouton copier étiqueté, annonce « Commande copiée »)
-- [ ] SEO : title unique, meta description, JSON-LD `SoftwareSourceCode` et `BreadcrumbList` (à confirmer avec EPIC-006), canonical
+- [ ] URL `/open-source/sylius/<slug>/` (barre finale obligatoire, ADR-0008)
+- [ ] SEO : title unique, meta description, canonical et fil d'Ariane visible ; JSON-LD reporté à US-024 (sprint 3)
 - [ ] Performance : Lighthouse ≥ 95, captures optimisées ≤ 200 Ko
 
 ## Notes techniques (à confirmer en tech spec)

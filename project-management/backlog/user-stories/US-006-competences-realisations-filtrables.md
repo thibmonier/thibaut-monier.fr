@@ -15,9 +15,11 @@ EPIC-002 : Profil et CV
 
 ### Conversation
 - Domaines retenus (PRD) : delivery, architecture, e-commerce, données et migrations, IA appliquée. Un domaine par réalisation ou plusieurs ?
-- Références clients (Lescuyer, Gémo, Brittany Ferries, Pileje…) : accord de citation à confirmer ; sinon libellé anonymisé (« distributeur de matériel professionnel »).
+- Références clients : accord de citation non confirmé ; par défaut, libellé anonymisé (« Référence confidentielle ») ; seuls les clients validés par le PO sont cités.
 - Filtrage sans JavaScript (liens avec paramètre) ou amélioration progressive ?
 - Récupération des 10 à 15 réalisations depuis la section Key Achievements du CV source, sans donnée personnelle.
+- Arbitrage sprint 2 (2026-10-14) : références clients anonymisées par défaut (« Référence confidentielle ») ; seuls les clients validés par le PO en T-006-01 sont cités (E12), cohérent avec `clientsCited: false` du sprint 1.
+- Arbitrage sprint 2 (2026-10-14) : URL `/competences/?domaine=ia-appliquee` avec barre finale (ADR-0008) ; valeur de l'énumération `ia-appliquee` (E11) ; paramètre inconnu = liste complète avec message.
 
 ### Validation INVEST
 - [x] Independent : réutilise la collection d'US-005 sans la modifier
@@ -36,7 +38,7 @@ GIVEN la page "Compétences" affichant toutes les réalisations
 WHEN P-002 sélectionne le domaine "E-commerce"
 THEN seules les réalisations marquées "e-commerce" sont affichées
 AND le compteur indique le nombre exact de résultats, par exemple "6 réalisations"
-AND chaque réalisation affiche au moins une référence client ou la mention "Référence confidentielle"
+AND chaque réalisation affiche la mention "Référence confidentielle" par défaut, ou le nom d'un client uniquement s'il figure dans la liste validée par le PO
 ```
 
 ### Scénarios alternatifs
@@ -47,7 +49,7 @@ WHEN P-002 active "Tous les domaines"
 THEN la liste complète s'affiche et le compteur reflète le total
 
 Scenario: Filtre partagé par lien
-GIVEN l'adresse "/competences?domaine=ia"
+GIVEN l'adresse "/competences/?domaine=ia-appliquee"
 WHEN P-002 ouvre ce lien
 THEN le filtre "IA appliquée" est déjà actif et sa case est marquée comme sélectionnée
 ```
@@ -55,7 +57,7 @@ THEN le filtre "IA appliquée" est déjà actif et sa case est marquée comme s�
 ### Scénarios d'erreur
 ```gherkin
 Scenario: Domaine inconnu dans l'adresse
-GIVEN l'adresse "/competences?domaine=inconnu"
+GIVEN l'adresse "/competences/?domaine=inconnu"
 WHEN P-002 ouvre ce lien
 THEN la liste complète s'affiche
 AND le message "Domaine inconnu, affichage de toutes les réalisations" est annoncé
@@ -68,7 +70,7 @@ THEN le message "Aucune réalisation pour ce domaine pour le moment" s'affiche a
 
 ### Critères techniques (site statique)
 - [ ] Schéma `achievements` (title, domains[] parmi 5 valeurs, clients[], year, proofUrl?) validé au build ; domaine hors liste = build en échec
-- [ ] Page `/competences` ; composants `DomainFilter` et `AchievementCard`
+- [ ] Page `/competences/` ; composants `DomainFilter` et `AchievementCard`
 - [ ] Responsive : filtres en liste défilante ou boutons repliables sous 768 px
 - [ ] WCAG 2.2 AA : groupe de boutons avec `aria-pressed`, compteur annoncé via `aria-live="polite"`
 - [ ] SEO : contenu rendu au build (indexable sans JavaScript)
