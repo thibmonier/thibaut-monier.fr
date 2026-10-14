@@ -1,0 +1,15 @@
+company: 'GINGERMINDS'
+role: 'Delivery Manager / CTO'
+start: '2021-01'
+end: '2025-12'
+location: 'Nantes'
+context: "Agence digitale à 3 millions d'euros de budget annuel : une vingtaine de projets simultanés, d'environ 100 000 euros en moyenne, et jusqu'à 26 personnes à manager."
+achievements:
+  - "Pilotage d'un portefeuille d'une vingtaine de projets simultanés et management de 24 à 26 personnes au plus fort : 14 développeurs, 3 à 5 freelances en renfort et 7 Product Owners."
+  - 'Membre du comité de direction : définition des axes stratégiques, suivi du staffing, de la capacité de production et de la sous-traitance.'
+  - "Avant-ventes : quasi-totalité des chiffrages de l'agence validés, taux de transformation de l'ordre de 50 % sur 2021-2024, risques technico-fonctionnels anticipés dès l'avant-vente."
+  - "Recrutement d'une quinzaine de collaborateurs (chefs de projet, Product Owners, développeurs) et accompagnement des équipes sur la gestion du budget de leur projet."
+  - "Pilotage de deux migrations du système de gestion de l'agence (vers Furious en 2021, puis vers l'ERP interne Wasabi en 2024) : données RH, projets, temps et finances."
+  - "Migration d'une plateforme e-commerce de Magento vers Sylius en 2024 (B2C à 10 millions d'euros de chiffre d'affaires annuel) et synchronisation produit sur six pays européens."
+  - "Conception, pilotage et réalisation à environ 95 % en solo de Hot Ones, SaaS B2B de gestion d'agence en 12 modules, par méthode agentique (BMAD, Claude Code) ; bêta en ligne, 83 % de couverture. Projet arrêté depuis par la nouvelle direction."
+featured: true

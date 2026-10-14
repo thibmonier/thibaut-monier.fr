@@ -1,0 +1,11 @@
+company: 'Digital Garden'
+role: 'Directeur de la Production'
+start: '2019-01'
+end: '2019-09'
+location: 'Nantes'
+context: 'Agence digitale (Symfony, Drupal, Prestashop) : direction de la production sur 4 à 5 projets simultanés.'
+achievements:
+  - "Direction d'une équipe de 15 développeurs et 4 Product Owners sur 4 à 5 projets simultanés."
+  - "Avant-vente et signature contractuelle de la refonte du site d'un groupe industriel mondial, projet réalisé après mon départ."
+  - "Ateliers d'amélioration continue et montée en compétence des équipes, staffing de l'agence, suivi de carrière des développeurs et recrutement."
+featured: true

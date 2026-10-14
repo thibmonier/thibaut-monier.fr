@@ -1,21 +1,20 @@
 ---
 import { getEntry } from 'astro:content';
+import CtaPair from '../components/ui/CtaPair.astro';
+import Hero from '../components/ui/Hero.astro';
+import ProofList from '../components/ui/ProofList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const entry = await getEntry('home', 'accueil');
 if (!entry) throw new Error("Entrée 'accueil' introuvable dans la collection home");
-const { name, title, contactLink } = entry.data;
+const { name, headline, valueProp, availability, metaTitle, metaDescription, ctas, proofs } =
+  entry.data;
 ---
 
-<BaseLayout
-  title={`${name} — direction technique et IA`}
-  description={`${name} : ${title}. Profil, parcours et contact.`}
->
-  <h1 class="text-3xl font-bold">{name}</h1>
-  <p class="mt-2 text-xl">{title}</p>
-  <p class="mt-8">
-    <a class="text-accent underline underline-offset-4" href={contactLink}>
-      Me contacter
-    </a>
-  </p>
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <div class="flex flex-col gap-6 sm:gap-8">
+    <Hero name={name} headline={headline} valueProp={valueProp} availability={availability} />
+    <CtaPair ctas={ctas} />
+    <ProofList proofs={proofs} />
+  </div>
 </BaseLayout>

@@ -1,0 +1,15 @@
+---
+// Frise verticale : une liste ordonnée, une colonne sous 768 px (période au-dessus du contenu).
+---
+
+<ol data-timeline class="ml-1.5 space-y-0 border-l-2 border-line pl-6 md:pl-8">
+  <slot />
+</ol>
+
+<style>
+  @media print {
+    ol {
+      border-left-width: 1px;
+    }
+  }
+</style>

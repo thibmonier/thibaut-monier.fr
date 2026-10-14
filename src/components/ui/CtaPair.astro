@@ -1,0 +1,23 @@
+---
+import type { Home } from '../../content/schemas/home.ts';
+
+interface Props {
+  ctas: Home['ctas'];
+}
+
+const { ctas } = Astro.props;
+const base =
+  'inline-flex min-h-12 items-center justify-center rounded-md border-2 border-accent px-6 text-base font-semibold';
+const styles = [
+  `${base} bg-accent text-accent-fg hover:opacity-90`,
+  `${base} bg-bg text-accent hover:bg-surface`,
+];
+---
+
+<p class="flex flex-col gap-3 sm:flex-row">
+  {ctas.map((cta, index) => (
+    <a href={`/contact/?motif=${cta.motif}`} class={styles[index]}>
+      {cta.label}
+    </a>
+  ))}
+</p>

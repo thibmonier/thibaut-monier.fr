@@ -1,5 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { file, glob } from 'astro/loaders';
+import { experienceSchema } from './content/schemas/experiences.ts';
 import { homeSchema } from './content/schemas/home.ts';
 import { legalFrontmatterSchema } from './content/schemas/legal.ts';
 
@@ -12,4 +13,10 @@ const legal = defineCollection({
   schema: legalFrontmatterSchema,
 });
 
-export const collections = { home, legal };
+// US-005
+const experiences = defineCollection({
+  loader: glob({ pattern: '*.yaml', base: './src/data/cv/experiences' }),
+  schema: experienceSchema,
+});
+
+export const collections = { home, legal, experiences };

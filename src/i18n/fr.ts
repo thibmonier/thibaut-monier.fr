@@ -45,6 +45,10 @@ export const fr = {
     backHome: "Retour à l'accueil",
     linkedin: 'Me joindre sur LinkedIn',
   },
+  // US-004
+  home: {
+    proofsHeading: 'Quelques preuves',
+  },
 } as const;
 
 type Widen<T> = { -readonly [K in keyof T]: T[K] extends string ? string : Widen<T[K]> };

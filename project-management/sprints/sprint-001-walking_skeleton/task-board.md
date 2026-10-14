@@ -4,6 +4,7 @@
 > Mis à jour par l'orchestrateur (écrivain unique). État initial : tout est à faire.
 > **Mise à jour W1 (2026-10-14)** : ✅ T-001-02 à T-001-12 et T-001-18 ; T-003-01 à T-003-07 (livrés, CI non encore exécutée sur GitHub). 🔄 T-001-13 (e2e et Lighthouse validés avec un Chromium Alpine faute de place disque pour l'image Playwright). Restent : T-001-01, 14 à 17, 19, 20 ; T-003-08 à 12.
 > **Mise à jour W2 (2026-10-14)** : ✅ T-002-01 à T-002-09 et T-002-12 (US-002 livrée, non commitée). 🔄 T-002-11 (e2e, axe, Lighthouse verts avec un Chromium Alpine). 🔲 T-002-10 (remplacée par les drapeaux `enabled` de `src/config/nav.ts`, arbitrage A4) et T-002-13 (revue).
+> **Mise à jour W3A (2026-10-14)** : ✅ T-004-02 à T-004-09 et T-005-02 à T-005-11 (US-004 et US-005 livrées, non commitées ; e2e, axe clair et sombre et Lighthouse verts avec un Chromium Alpine). 👀 T-004-01, T-005-01 (contenu rédigé depuis `cv.md`, décisions à faire valider par le PO) et T-004-10, T-005-12 (revues : contenu et confidentialité à valider par le PO).
 
 > **Mise à jour W3B (2026-10-14)** : ✅ T-029-02 à T-029-09, T-008-02 à T-008-09 et T-008-12 (US-029 et US-008 livrées, non commitées ; e2e, axe et Lighthouse verts avec un Chromium Alpine). 🔄 T-029-01 et T-008-01 (décisions PO : adresse Railway, adresse e-mail de repli, durée de conservation), T-029-10 et T-008-13 (revues), T-008-10 (variables Railway/GitHub, hors worktree), T-008-11 (attend US-004).
 

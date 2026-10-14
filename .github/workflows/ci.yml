@@ -12,6 +12,11 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# Valeurs factices : exercent le formulaire et le lien de RDV en e2e (Web3Forms simulé par page.route).
+env:
+  PUBLIC_WEB3FORMS_KEY: 00000000-0000-4000-8000-000000000000
+  PUBLIC_CALENDLY_URL: https://calendly.com/exemple/echange-decouverte
+
 # Docker uniquement sur le runner (ADR-0003) : aucun Node installé, cache BuildKit en mode GitHub Actions.
 jobs:
   quality:

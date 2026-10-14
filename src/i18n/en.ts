@@ -35,4 +35,6 @@ export const en: Dictionary = {
     backHome: '',
     linkedin: '',
   },
+  // US-004
+  home: { proofsHeading: '' },
 };

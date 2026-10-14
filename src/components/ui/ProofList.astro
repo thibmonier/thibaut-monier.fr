@@ -1,0 +1,36 @@
+---
+import type { Home } from '../../content/schemas/home.ts';
+import { getTranslations } from '../../i18n/utils.ts';
+
+interface Props {
+  proofs: Home['proofs'];
+}
+
+const { proofs } = Astro.props;
+const ui = getTranslations('fr');
+const isExternal = (link: string) => link.startsWith('https://');
+---
+
+<section aria-labelledby="preuves-titre">
+  <h2 id="preuves-titre" class="sr-only">
+    {ui.home.proofsHeading}
+  </h2>
+  <ul data-proofs class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    {proofs.map((proof) => (
+      <li>
+        <a
+          data-proof={proof.id}
+          href={proof.link}
+          rel={isExternal(proof.link) ? 'noopener noreferrer' : undefined}
+          class="flex h-full flex-col rounded-lg border border-border bg-surface p-4 hover:border-accent"
+        >
+          <span class="text-3xl font-bold text-fg">{proof.value}</span>
+          <span class="mt-1 text-base text-fg">{proof.label}</span>
+          <span class="mt-2 text-sm font-medium text-accent underline underline-offset-4">
+            {proof.source}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
