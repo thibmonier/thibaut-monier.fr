@@ -13,5 +13,7 @@ Un guide par sujet, rédigé par l'US qui l'introduit (un fichier par US pour é
 | [plugins-sylius.md](plugins-sylius.md) | Catalogue et fiches des plugins Sylius, captures | US-019, US-020 |
 | [donnees-open-source.md](donnees-open-source.md) | Métriques vivantes des fiches | US-021 |
 | [projets-open-source.md](projets-open-source.md) | Pages de projets (career-ops, tailsfadmin), collecte des métriques, liens externes | US-021, US-022, US-023 |
+| [cv-pdf.md](cv-pdf.md) | CV PDF généré par Typst, décisions, contrôles | US-007 |
+| [competences.md](competences.md) | Compétences et réalisations filtrables | US-006 |
 
 Le démarrage, les commandes `make` et le déploiement sont dans le [README](../../README.md).

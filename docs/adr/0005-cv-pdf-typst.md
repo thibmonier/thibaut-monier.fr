@@ -36,3 +36,10 @@ Le CV PDF doit venir de **la même source** que la page « Parcours » (CT-7, US
 - ✅ Gabarit réutilisable pour des CV ciblés (opportunité O-04, career-ops).
 - ⚠️ Deux rendus du même contenu (HTML et Typst) à garder visuellement cohérents : la charte (couleurs, fontes) est partagée via un fichier de tokens exporté en JSON et lu par Typst.
 - ⚠️ Accessibilité du PDF (balisage) limitée par les capacités de Typst 0.15 : à vérifier (PDF/UA), avec en repli un lien vers la page HTML accessible.
+
+## Précisions d'implémentation (sprint 2, US-007)
+- **Polices** : Typst 0.15 ne lit pas le WOFF2 du site. Le CV embarque Inter en TTF statique (`cv/fonts/`, licence OFL), sélectionnée avec `--font-path` et `--ignore-system-fonts` pour un rendu identique partout.
+- **Données** : `src/lib/cv-data.ts` assemble un JSON à liste blanche (profil, expériences triées et partitionnées par `lib/experiences.ts`, couleurs claires de `tokens.json`) passé par `--input data=...` ; le gabarit lit `json()` plutôt que `yaml()` et ne porte aucune donnée.
+- **Extraction de texte** : `pdftotext` et `pdfinfo` (poppler-utils, version épinglée) installés dans l'étape `deps` du Dockerfile, jamais dans `runtime`.
+- **Balisage** : le PDF est compilé avec `--pdf-standard ua-1` (Typst 0.15.1 balise le document, `pdfinfo` affiche `Tagged: yes`, langue `fr` dans les métadonnées XMP) : le repli vers la page HTML n'est pas nécessaire.
+- **Diffusion** : `X-Robots-Tag: noindex` (la page Parcours reste la version indexée) et `Cache-Control: no-cache` (ETag) sur `/thibaut-monier-cv.pdf`, à la place du cache de 30 jours des autres PDF.

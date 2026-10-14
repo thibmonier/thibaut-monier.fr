@@ -1,4 +1,5 @@
 ---
+import CvDownload from '../../components/cv/CvDownload.astro';
 import ContactForm from '../../components/contact/ContactForm.astro';
 import PrivacyNotice from '../../components/contact/PrivacyNotice.astro';
 import RdvLink from '../../components/contact/RdvLink.astro';
@@ -21,6 +22,9 @@ const ui = getTranslations('fr').contact;
         <RdvLink />
       </p>
     )}
+    <p class="mt-6">
+      <CvDownload />
+    </p>
     <ContactForm />
     <PrivacyNotice />
   </div>

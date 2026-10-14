@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import CvDownload from '../components/cv/CvDownload.astro';
 import EarlierCareer from '../components/cv/EarlierCareer.astro';
 import ExperienceCard from '../components/cv/ExperienceCard.astro';
 import Timeline from '../components/cv/Timeline.astro';
@@ -20,6 +21,9 @@ const { featured, earlier } = splitFeatured(
   <p class="mt-3 max-w-3xl text-lg text-muted">
     Du développement logiciel à la direction technique : les dix dernières années en détail, les
     précédentes en résumé.
+  </p>
+  <p class="mt-6 print:hidden">
+    <CvDownload />
   </p>
 
   <div class="mt-10">

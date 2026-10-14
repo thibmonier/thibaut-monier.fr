@@ -1,0 +1,24 @@
+---
+import { ALL_LABEL, DOMAIN_IDS, DOMAIN_LABELS } from '../../lib/filters.ts';
+
+// Groupe de boutons à bascule (US-006). Rendu masqué sans JavaScript (variante `js`, classe posée par
+// theme-init.js) : aucun contrôle inerte ; avec JavaScript, skill-filter.ts pilote `aria-pressed`.
+const button =
+  'inline-flex min-h-11 shrink-0 items-center rounded-md border-2 border-border bg-bg px-4 text-sm font-semibold text-fg hover:bg-surface aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-accent-fg';
+---
+
+<div
+  data-domain-filter
+  role="group"
+  aria-label="Filtrer par domaine"
+  class="hidden gap-2 overflow-x-auto p-1 js:flex md:flex-wrap md:overflow-visible"
+>
+  <button type="button" data-domain="" aria-pressed="true" class={button}>
+    {ALL_LABEL}
+  </button>
+  {DOMAIN_IDS.map((id) => (
+    <button type="button" data-domain={id} aria-pressed="false" class={button}>
+      {DOMAIN_LABELS[id]}
+    </button>
+  ))}
+</div>

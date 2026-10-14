@@ -19,46 +19,7 @@
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
 | T-900-00 | [OPS] | Phase 0 : prérequis hors backlog (publication Packagist et dépôts) | 1,5h | 0 |
-| T-007-01 | [CONTENT] | Cadrer le CV public et trancher les choix de forme | 1,5h | 1 |
-| T-006-01 | [CONTENT] | Arbitrages et sélection des réalisations | 2h | 1 |
 | T-019-01 | [CONTENT] | Trancher les décisions du catalogue (slugs, thèmes, hub, captures) | 2h | 2 |
-
-### US-007 : CV PDF téléchargeable généré au build
-
-| ID | Type | Tâche | Estimation | Lot |
-|----|------|-------|------------|-----|
-| T-007-02 | [TEST] | Écrire les tests unitaires RED : assemblage des données du CV, schéma profile, contrôle de confidentialité du PDF | 3,5h | 1 |
-| T-007-03 | [TEST] | Écrire les tests e2e RED : lien de téléchargement et en-têtes du PDF | 3,5h | 1 |
-| T-007-04 | [OPS] | Dockerfile : binaire Typst et extraction de texte dans l’image des dépendances | 3h | 1 |
-| T-007-05 | [FE-WEB] | Schéma `profile`, enregistrement de la collection et assemblage des données du CV (`cv-data`) | 4h | 1 |
-| T-007-06 | [CONTENT] | Rédiger `profile.yaml` (titre, accroche, résumé, liens) | 1h | 1 |
-| T-007-07 | [CONTENT] | Ajouter les polices Inter statiques (TTF) du CV et leur licence | 1h | 1 |
-| T-007-08 | [FE-WEB] | Gabarit Typst `cv/cv.typ` : structure et contenu sur 2 pages A4 | 5h | 1 |
-| T-007-09 | [FE-WEB] | Gabarit Typst : charte du site, métadonnées et balisage du PDF | 4h | 1 |
-| T-007-10 | [OPS] | Intégrer la génération au build : `build-cv.ts`, script npm, cible `make cv` | 3,5h | 1 |
-| T-007-11 | [OPS] | Contrôle de build `cv-pdf` sur `dist/` (texte, pages, taille, métadonnées) | 3,5h | 1 |
-| T-007-12 | [OPS] | nginx : revalidation et en-têtes dédiés du PDF | 1,5h | 1 |
-| T-007-13 | [FE-WEB] | Composant `CvDownload` et intégration à `/parcours/` et `/contact/` | 3h | 1 |
-| T-007-14 | [TEST] | Vérification GREEN : `make ci` et contrôle manuel du PDF | 3h | 1 |
-| T-007-15 | [DOC] | Guide du CV PDF, amendement d’ADR-0005, CHANGELOG | 2h | 1 |
-| T-007-16 | [REV] | Revue d’US-007 | 2h | 1 |
-
-### US-006 : Compétences et réalisations filtrables par domaine
-
-| ID | Type | Tâche | Estimation | Lot |
-|----|------|-------|------------|-----|
-| T-006-02 | [TEST] | Écrire les tests unitaires RED : schémas et `filters.ts` | 3h | 1 |
-| T-006-03 | [TEST] | Écrire les tests e2e RED de `/competences/` | 4h | 1 |
-| T-006-04 | [FE-WEB] | Schémas `skills` et `achievements`, `filters.ts`, enregistrement des collections | 3,5h | 1 |
-| T-006-05 | [OPS] | Contrôle de contenu `achievements` | 2,5h | 1 |
-| T-006-06 | [CONTENT] | Rédiger `skills.yaml` | 2,5h | 1 |
-| T-006-07 | [CONTENT] | Rédiger `achievements.yaml` (10 à 15 réalisations) | 4h | 1 |
-| T-006-08 | [FE-WEB] | Composants `AchievementCard` et `DomainFilter` | 4h | 1 |
-| T-006-09 | [FE-WEB] | Script de filtrage `skill-filter.ts` (< 3 Ko) | 3h | 1 |
-| T-006-10 | [FE-WEB] | Page `/competences/`, entrée de navigation et SEO | 3h | 1 |
-| T-006-11 | [TEST] | Vérification GREEN | 2h | 1 |
-| T-006-12 | [DOC] | Guide « ajouter une réalisation ou une compétence » | 1,5h | 1 |
-| T-006-13 | [REV] | Revue d’US-006 | 2h | 1 |
 
 ### US-019 : Catalogue des 20 plugins Sylius 2 filtrable par thème
 
@@ -185,6 +146,47 @@ _(aucune tâche)_
 | T-022-07 | [FE-WEB] | Page `/open-source/tailsfadmin/` | 3,5h | 3 |
 | T-022-08 | [TEST] | Vérification GREEN | 1,5h | 3 |
 | T-022-09 | [DOC] | Compléter le guide des projets et CHANGELOG | 1h | 3 |
+
+Lot 1 (W1) : décisions de contenu à valider par le PO (T-007-01, T-006-01) et revues finales (T-007-16, T-006-13).
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-007-01 | [CONTENT] | Cadrer le CV public et trancher les choix de forme | 1,5h | 1 |
+| T-006-01 | [CONTENT] | Arbitrages et sélection des réalisations | 2h | 1 |
+| T-007-16 | [REV] | Revue d’US-007 | 2h | 1 |
+| T-006-13 | [REV] | Revue d’US-006 | 2h | 1 |
+
+## ✅ Done
+
+Lot 1 (W1) : US-007 et US-006 implémentées et vérifiées (reste la revue et la validation du PO).
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-007-02 | [TEST] | Écrire les tests unitaires RED : assemblage des données du CV, schéma profile, contrôle de confidentialité du PDF | 3,5h | 1 |
+| T-007-03 | [TEST] | Écrire les tests e2e RED : lien de téléchargement et en-têtes du PDF | 3,5h | 1 |
+| T-007-04 | [OPS] | Dockerfile : binaire Typst et extraction de texte dans l’image des dépendances | 3h | 1 |
+| T-007-05 | [FE-WEB] | Schéma `profile`, enregistrement de la collection et assemblage des données du CV (`cv-data`) | 4h | 1 |
+| T-007-06 | [CONTENT] | Rédiger `profile.yaml` (titre, accroche, résumé, liens) | 1h | 1 |
+| T-007-07 | [CONTENT] | Ajouter les polices Inter statiques (TTF) du CV et leur licence | 1h | 1 |
+| T-007-08 | [FE-WEB] | Gabarit Typst `cv/cv.typ` : structure et contenu sur 2 pages A4 | 5h | 1 |
+| T-007-09 | [FE-WEB] | Gabarit Typst : charte du site, métadonnées et balisage du PDF | 4h | 1 |
+| T-007-10 | [OPS] | Intégrer la génération au build : `build-cv.ts`, script npm, cible `make cv` | 3,5h | 1 |
+| T-007-11 | [OPS] | Contrôle de build `cv-pdf` sur `dist/` (texte, pages, taille, métadonnées) | 3,5h | 1 |
+| T-007-12 | [OPS] | nginx : revalidation et en-têtes dédiés du PDF | 1,5h | 1 |
+| T-007-13 | [FE-WEB] | Composant `CvDownload` et intégration à `/parcours/` et `/contact/` | 3h | 1 |
+| T-007-14 | [TEST] | Vérification GREEN : `make ci` et contrôle manuel du PDF | 3h | 1 |
+| T-007-15 | [DOC] | Guide du CV PDF, amendement d’ADR-0005, CHANGELOG | 2h | 1 |
+| T-006-02 | [TEST] | Écrire les tests unitaires RED : schémas et `filters.ts` | 3h | 1 |
+| T-006-03 | [TEST] | Écrire les tests e2e RED de `/competences/` | 4h | 1 |
+| T-006-04 | [FE-WEB] | Schémas `skills` et `achievements`, `filters.ts`, enregistrement des collections | 3,5h | 1 |
+| T-006-05 | [OPS] | Contrôle de contenu `achievements` | 2,5h | 1 |
+| T-006-06 | [CONTENT] | Rédiger `skills.yaml` | 2,5h | 1 |
+| T-006-07 | [CONTENT] | Rédiger `achievements.yaml` (10 à 15 réalisations) | 4h | 1 |
+| T-006-08 | [FE-WEB] | Composants `AchievementCard` et `DomainFilter` | 4h | 1 |
+| T-006-09 | [FE-WEB] | Script de filtrage `skill-filter.ts` (< 3 Ko) | 3h | 1 |
+| T-006-10 | [FE-WEB] | Page `/competences/`, entrée de navigation et SEO | 3h | 1 |
+| T-006-11 | [TEST] | Vérification GREEN | 2h | 1 |
+| T-006-12 | [DOC] | Guide « ajouter une réalisation ou une compétence » | 1,5h | 1 |
 
 ## 🚫 Bloqué
 

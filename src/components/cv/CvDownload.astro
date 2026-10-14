@@ -1,0 +1,16 @@
+---
+import { getTranslations } from '../../i18n/utils.ts';
+
+// US-007 : lien de téléchargement du CV PDF. Libellé statique (le nombre de pages est vérifié au build par
+// scripts/checks/cv-pdf.dist.check.ts) ; `data-cv-download` sert à la mesure d'audience (US-026).
+const ui = getTranslations('fr').cv;
+---
+
+<a
+  data-cv-download
+  href="/thibaut-monier-cv.pdf"
+  download="thibaut-monier-cv.pdf"
+  class="inline-flex min-h-12 items-center justify-center rounded-md border-2 border-accent bg-bg px-6 text-base font-semibold text-accent hover:bg-surface print:hidden"
+>
+  {ui.download}
+</a>

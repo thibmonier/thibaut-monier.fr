@@ -17,19 +17,19 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-006-01 | [CONTENT] | Arbitrages et sélection des réalisations | 2h | - | 1 | 🔲 |
-| T-006-02 | [TEST] | Écrire les tests unitaires RED : schémas et `filters.ts` | 3h | - | 1 | 🔲 |
-| T-006-03 | [TEST] | Écrire les tests e2e RED de `/competences/` | 4h | - | 1 | 🔲 |
-| T-006-04 | [FE-WEB] | Schémas `skills` et `achievements`, `filters.ts`, enregistrement des collections | 3,5h | T-006-02 | 1 | 🔲 |
-| T-006-05 | [OPS] | Contrôle de contenu `achievements` | 2,5h | T-006-02, T-006-04 | 1 | 🔲 |
-| T-006-06 | [CONTENT] | Rédiger `skills.yaml` | 2,5h | T-006-01, T-006-04 | 1 | 🔲 |
-| T-006-07 | [CONTENT] | Rédiger `achievements.yaml` (10 à 15 réalisations) | 4h | T-006-01, T-006-04 | 1 | 🔲 |
-| T-006-08 | [FE-WEB] | Composants `AchievementCard` et `DomainFilter` | 4h | T-006-03, T-006-06, T-006-07 | 1 | 🔲 |
-| T-006-09 | [FE-WEB] | Script de filtrage `skill-filter.ts` (< 3 Ko) | 3h | T-006-03, T-006-08 | 1 | 🔲 |
-| T-006-10 | [FE-WEB] | Page `/competences/`, entrée de navigation et SEO | 3h | T-006-08, T-006-09 | 1 | 🔲 |
-| T-006-11 | [TEST] | Vérification GREEN | 2h | T-006-05, T-006-10 | 1 | 🔲 |
-| T-006-12 | [DOC] | Guide « ajouter une réalisation ou une compétence » | 1,5h | T-006-11 | 1 | 🔲 |
-| T-006-13 | [REV] | Revue d’US-006 | 2h | T-006-12 | 1 | 🔲 |
+| T-006-01 | [CONTENT] | Arbitrages et sélection des réalisations | 2h | - | 1 | 👀 |
+| T-006-02 | [TEST] | Écrire les tests unitaires RED : schémas et `filters.ts` | 3h | - | 1 | ✅ |
+| T-006-03 | [TEST] | Écrire les tests e2e RED de `/competences/` | 4h | - | 1 | ✅ |
+| T-006-04 | [FE-WEB] | Schémas `skills` et `achievements`, `filters.ts`, enregistrement des collections | 3,5h | T-006-02 | 1 | ✅ |
+| T-006-05 | [OPS] | Contrôle de contenu `achievements` | 2,5h | T-006-02, T-006-04 | 1 | ✅ |
+| T-006-06 | [CONTENT] | Rédiger `skills.yaml` | 2,5h | T-006-01, T-006-04 | 1 | ✅ |
+| T-006-07 | [CONTENT] | Rédiger `achievements.yaml` (10 à 15 réalisations) | 4h | T-006-01, T-006-04 | 1 | ✅ |
+| T-006-08 | [FE-WEB] | Composants `AchievementCard` et `DomainFilter` | 4h | T-006-03, T-006-06, T-006-07 | 1 | ✅ |
+| T-006-09 | [FE-WEB] | Script de filtrage `skill-filter.ts` (< 3 Ko) | 3h | T-006-03, T-006-08 | 1 | ✅ |
+| T-006-10 | [FE-WEB] | Page `/competences/`, entrée de navigation et SEO | 3h | T-006-08, T-006-09 | 1 | ✅ |
+| T-006-11 | [TEST] | Vérification GREEN | 2h | T-006-05, T-006-10 | 1 | ✅ |
+| T-006-12 | [DOC] | Guide « ajouter une réalisation ou une compétence » | 1,5h | T-006-11 | 1 | ✅ |
+| T-006-13 | [REV] | Revue d’US-006 | 2h | T-006-12 | 1 | 👀 |
 
 **Total estimé** : 37h (13 tâches)
 
