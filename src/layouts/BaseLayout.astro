@@ -23,6 +23,7 @@ const { title, description, noindex, canonical } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bloquant et externe (CSP sans script inline) : pose le thème avant le premier rendu. -->
     <script is:inline src="/theme-init.js"></script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <Seo title={title} description={description} noindex={noindex} canonical={canonical} />
     <link
       rel="preload"
