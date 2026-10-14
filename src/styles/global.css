@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+html {
+  overflow-x: hidden;
+}

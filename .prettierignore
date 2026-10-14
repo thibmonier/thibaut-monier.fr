@@ -1,0 +1,17 @@
+dist/
+node_modules/
+.astro/
+coverage/
+reports/
+playwright-report/
+test-results/
+package-lock.json
+tests/fixtures/
+# Documentation de pilotage et configuration d'agents : hors périmètre du formateur
+project-management/
+docs/
+.claude/
+.bmad/
+.github/PULL_REQUEST_TEMPLATE.md
+CLAUDE.md
+Tools/

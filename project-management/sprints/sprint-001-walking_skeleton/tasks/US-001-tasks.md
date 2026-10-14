@@ -18,23 +18,23 @@
 | ID | Type | Tâche | Estimation | Responsable | Dépend de | Statut |
 |----|------|-------|------------|-------------|-----------|--------|
 | T-001-01 | [OPS] | Prérequis manuels : dépôt GitHub, service Railway, DNS, comptes tiers | 1,5h | PO | - | 🔲 |
-| T-001-02 | [OPS] | Amorcer le projet Astro 7.3.8 en conteneur (package.json, lockfile, tsconfig, astro.config) | 3h | Dev | - | 🔲 |
-| T-001-03 | [OPS] | Dockerfile multi-étapes (base, deps, dev, build, test, runtime) | 4h | Dev | T-001-02 | 🔲 |
-| T-001-04 | [OPS] | compose.yaml (dev, preview, tools, e2e), Makefile de base et .env.example | 3h | Dev | T-001-03 | 🔲 |
-| T-001-05 | [TEST] | Configurer Vitest et Playwright ; écrire les tests RED de `privacy` et des schémas communs | 3,5h | Dev | T-001-04 | 🔲 |
-| T-001-06 | [FE-WEB] | Implémenter `privacy.ts` et les schémas communs Zod (GREEN) | 2,5h | Dev | T-001-05 | 🔲 |
-| T-001-07 | [TEST] | Écrire les tests e2e RED du squelette et des en-têtes de sécurité | 3h | Dev | T-001-05 | 🔲 |
-| T-001-08 | [TEST] | Écrire le test RED du schéma `home` minimal | 1h | Dev | T-001-05 | 🔲 |
-| T-001-09 | [FE-WEB] | Créer `content.config.ts` et le schéma `home` minimal (GREEN) | 1,5h | Dev | T-001-06, T-001-08 | 🔲 |
-| T-001-10 | [CONTENT] | Renseigner `home.yaml` minimal (nom, titre du profil, lien contact) | 0,5h | Dev | T-001-09 | 🔲 |
-| T-001-11 | [FE-WEB] | Layout racine minimal, page d'accueil, 404 et page 50x | 3h | Dev | T-001-07, T-001-09, T-001-10 | 🔲 |
-| T-001-12 | [OPS] | nginx.conf durci et snippet d'en-têtes de sécurité | 4h | Dev | T-001-03, T-001-07 | 🔲 |
-| T-001-13 | [OPS] | Valider le squelette en préproduction locale (jalon J1) | 2h | Dev | T-001-04, T-001-11, T-001-12 | 🔲 |
+| T-001-02 | [OPS] | Amorcer le projet Astro 7.3.8 en conteneur (package.json, lockfile, tsconfig, astro.config) | 3h | Dev | - | ✅ |
+| T-001-03 | [OPS] | Dockerfile multi-étapes (base, deps, dev, build, test, runtime) | 4h | Dev | T-001-02 | ✅ |
+| T-001-04 | [OPS] | compose.yaml (dev, preview, tools, e2e), Makefile de base et .env.example | 3h | Dev | T-001-03 | ✅ |
+| T-001-05 | [TEST] | Configurer Vitest et Playwright ; écrire les tests RED de `privacy` et des schémas communs | 3,5h | Dev | T-001-04 | ✅ |
+| T-001-06 | [FE-WEB] | Implémenter `privacy.ts` et les schémas communs Zod (GREEN) | 2,5h | Dev | T-001-05 | ✅ |
+| T-001-07 | [TEST] | Écrire les tests e2e RED du squelette et des en-têtes de sécurité | 3h | Dev | T-001-05 | ✅ |
+| T-001-08 | [TEST] | Écrire le test RED du schéma `home` minimal | 1h | Dev | T-001-05 | ✅ |
+| T-001-09 | [FE-WEB] | Créer `content.config.ts` et le schéma `home` minimal (GREEN) | 1,5h | Dev | T-001-06, T-001-08 | ✅ |
+| T-001-10 | [CONTENT] | Renseigner `home.yaml` minimal (nom, titre du profil, lien contact) | 0,5h | Dev | T-001-09 | ✅ |
+| T-001-11 | [FE-WEB] | Layout racine minimal, page d'accueil, 404 et page 50x | 3h | Dev | T-001-07, T-001-09, T-001-10 | ✅ |
+| T-001-12 | [OPS] | nginx.conf durci et snippet d'en-têtes de sécurité | 4h | Dev | T-001-03, T-001-07 | ✅ |
+| T-001-13 | [OPS] | Valider le squelette en préproduction locale (jalon J1) | 2h | Dev | T-001-04, T-001-11, T-001-12 | 🔄 |
 | T-001-14 | [OPS] | Configurer Railway : build du Dockerfile, variables, domaine, « Wait for CI » | 3h | Dev | T-001-01, T-001-13, T-003-07 | 🔲 |
 | T-001-15 | [OPS] | Script de contrôle de fumée post-déploiement | 2h | Dev | T-001-12 | 🔲 |
 | T-001-16 | [OPS] | Premier déploiement en production et vérification des scénarios | 2,5h | Dev | T-001-14, T-001-15 | 🔲 |
 | T-001-17 | [OPS] | Workflow de déploiement de repli `deploy.yml` (conditionnel) | 2h | Dev | T-001-14 | 🔲 |
-| T-001-18 | [OPS] | Renovate : configuration et épinglage des digests | 1h | Dev | T-001-02 | 🔲 |
+| T-001-18 | [OPS] | Renovate : configuration et épinglage des digests | 1h | Dev | T-001-02 | ✅ |
 | T-001-19 | [DOC] | README, CHANGELOG et guide de développement | 2h | Dev | T-001-16 | 🔲 |
 | T-001-20 | [REV] | Revue d'US-001 (DoD §1, §6, §9, §10) | 2h | Dev | T-001-18, T-001-19 | 🔲 |
 
@@ -140,7 +140,7 @@ Lever les prérequis hors backlog (sprint-dependencies.md) : créer le dépôt p
 - **Responsable** : Dev
 - **Dépend de** : -
 - **Débloque** : T-001-03, T-001-18
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer le squelette Node/Astro sans installer Node sur le poste : un `docker run` jetable sur `node:26-alpine` (digest épinglé) génère `package.json` et `package-lock.json`. Installer avec `save-exact=true` : astro 7.3.8, typescript 6.0.3, tailwindcss 4.3.3 + `@tailwindcss/vite`, `@astrojs/check`, vitest 5.0.4 (+ `@vitest/coverage-v8`), `@playwright/test` 1.64.1, `@axe-core/playwright` 4.13. Configurer `astro.config.mjs` : `site`, `output: 'static'`, `trailingSlash: 'always'`, `build.inlineStylesheets: 'never'`, `vite.build.assetsInlineLimit: 0`, plugin Tailwind. TypeScript strict. Le bloc `i18n` est laissé à US-002 (T-002-09).
@@ -167,7 +167,7 @@ Créer le squelette Node/Astro sans installer Node sur le poste : un `docker run
 - **Responsable** : Dev
 - **Dépend de** : T-001-02
 - **Débloque** : T-001-04, T-001-12
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Écrire le `Dockerfile` selon ADR-0003 : `base` (node:26-alpine@sha256, utilisateur `node`), `deps` (`npm ci --ignore-scripts`, cache BuildKit), `dev` (`astro dev --host 0.0.0.0 --port 4321`), `build`, `test` (lint + check + Vitest + build), `runtime` (`nginxinc/nginx-unprivileged:1.30.5-alpine@sha256`, `nginx.conf`, `dist/`). L'étape `typst` est reportée à US-007 (YAGNI). IMPORTANT : `runtime` doit être la **dernière étape** du fichier, car Railway construit l'étape finale par défaut. Déclarer `ARG PUBLIC_WEB3FORMS_KEY`, `ARG PUBLIC_UMAMI_WEBSITE_ID` dans l'étape `build` (aucune valeur par défaut secrète).
@@ -189,7 +189,7 @@ Créer le squelette Node/Astro sans installer Node sur le poste : un `docker run
 - **Responsable** : Dev
 - **Dépend de** : T-001-03
 - **Débloque** : T-001-05, T-001-13, T-003-02
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer `compose.yaml` : `dev` (port 4321, sources montées, `node_modules` en volume nommé, polling Vite activable par variable), `preview` (image `runtime` construite localement, port 8080, build args `PUBLIC_*`), `tools` (profil, `npm` ponctuel), `e2e` (profil, image `mcr.microsoft.com/playwright:v1.64.1-noble`, cible `preview`). `Makefile` : `dev`, `preview`, `build`, `shell`, `down`, `clean`. `.env.example` documente les variables de build (aucune valeur secrète). Les cibles `lint`, `test`, `e2e`, `ci` sont ajoutées par US-003 (T-003-06).
@@ -213,7 +213,7 @@ Créer `compose.yaml` : `dev` (port 4321, sources montées, `node_modules` en vo
 - **Responsable** : Dev
 - **Dépend de** : T-001-04
 - **Débloque** : T-001-06, T-001-07, T-001-08, T-003-01
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 TDD : configurer `vitest.config.ts` (couverture v8, seuils 80 % lignes / 75 % branches sur `src/lib/`) et `playwright.config.ts` (baseURL `http://preview:8080`, projets desktop et mobile 375 px). Écrire les tests RED : `tests/unit/lib/privacy.test.ts` — `detectPii(texte)` renvoie des types `telephone | age | naissance | adresse` ; REJETTE « +33 6 12 34 56 78 », « 06 12 34 56 78 », « Âge : 47 ans », « âgé de 47 ans », « née le 12/03/1978 », « 12 rue de la Paix » ; ACCEPTE « 25 ans d'expérience », « pendant 3 ans » (voir point d'attention 1 du README) ; `tests/unit/content/common-schemas.test.ts` (`slug`, `yearMonth`, `httpsUrl`, `safeText`).
@@ -236,7 +236,7 @@ TDD : configurer `vitest.config.ts` (couverture v8, seuils 80 % lignes / 75 % br
 - **Responsable** : Dev
 - **Dépend de** : T-001-05
 - **Débloque** : T-001-09, T-005-06
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Implémenter `src/lib/privacy.ts` (`detectPii`, `formatPiiError(fichier, type)` → « Donnée personnelle interdite détectée dans <fichier> : <type> ») et `src/content/schemas/common.ts` (`slug`, `yearMonth`, `httpsUrl`, `repoRef`, `safeText` adossé à `detectPii`), conformément à content-model.md §2, avec le correctif sur les « N ans ». Briques réutilisées par US-004, US-005 et US-029.
@@ -257,7 +257,7 @@ Implémenter `src/lib/privacy.ts` (`detectPii`, `formatPiiError(fichier, type)` 
 - **Responsable** : Dev
 - **Dépend de** : T-001-05
 - **Débloque** : T-001-11, T-001-12
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Traduire les scénarios Gherkin d'US-001 en Playwright (contre `preview`) : `tests/e2e/skeleton.spec.ts` (accueil 200, un seul `h1`, `lang="fr"`, `title`/`meta description`/`canonical` présents, texte « Thibaut Monier » + titre du profil + lien vers `/contact/`, 404 réel avec « Cette page n'existe pas » et « Retour à l'accueil », aucune pile ni version serveur) et `tests/e2e/headers.spec.ts` (CSP, HSTS max-age ≥ 31536000, `nosniff`, Referrer-Policy `strict-origin-when-cross-origin`, Permissions-Policy, COOP, CORP, `X-Frame-Options`, absence de COEP et de version dans `Server`, `POST` → 405, `/.git/config` et `/.env` → 404, requête avec `X-Forwarded-Proto: http` → 301 vers https, `Cache-Control` immutable sur `/_astro/*`, aucun cookie).
@@ -278,7 +278,7 @@ Traduire les scénarios Gherkin d'US-001 en Playwright (contre `preview`) : `tes
 - **Responsable** : Dev
 - **Dépend de** : T-001-05
 - **Débloque** : T-001-09
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 `tests/unit/content/home-schema.test.ts` : le schéma minimal (`name`, `title`, `contactLink`) accepte une entrée valide et rejette l'absence de chaque champ avec un message citant le fichier et le champ (« Champ 'title' requis dans la collection home »).
@@ -297,7 +297,7 @@ Traduire les scénarios Gherkin d'US-001 en Playwright (contre `preview`) : `tes
 - **Responsable** : Dev
 - **Dépend de** : T-001-06, T-001-08
 - **Débloque** : T-001-10, T-001-11
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer `src/content.config.ts` (point d'enregistrement unique des collections : une ligne d'import et une clé par collection, zone append-only) et `src/content/schemas/home.ts` (schéma minimal, étendu par US-004). Loader `file('./src/data/home.yaml')`. Messages d'erreur en français via `errorMap`.
@@ -317,7 +317,7 @@ Créer `src/content.config.ts` (point d'enregistrement unique des collections : 
 - **Responsable** : Dev
 - **Dépend de** : T-001-09
 - **Débloque** : T-001-11
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer `src/data/home.yaml` : name « Thibaut Monier », title du profil (version courte validée par le PO), `contactLink: /contact/`. Le contenu riche arrive avec US-004.
@@ -336,7 +336,7 @@ Créer `src/data/home.yaml` : name « Thibaut Monier », title du profil (versio
 - **Responsable** : Dev
 - **Dépend de** : T-001-07, T-001-09, T-001-10
 - **Débloque** : T-001-13
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer `BaseLayout.astro` minimal (`lang="fr"`, `title`, `meta description`, `canonical` absolue avec barre finale, viewport, landmarks `main`), `index.astro` (un `h1`, nom, titre, lien vers `/contact/`), `404.astro` (« Cette page n'existe pas », lien « Retour à l'accueil »), `public/50x.html` statique sans détail technique, `src/styles/global.css` (`@import "tailwindcss"`, focus visible, pas de défilement horizontal 320–1920 px). BaseLayout est réécrit par US-002.
@@ -360,7 +360,7 @@ Créer `BaseLayout.astro` minimal (`lang="fr"`, `title`, `meta description`, `ca
 - **Responsable** : Dev
 - **Dépend de** : T-001-03, T-001-07
 - **Débloque** : T-001-13, T-001-15
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Implémenter la configuration de security.md §3 : `nginx.conf` (utilisateur non root, port 8080, `server_tokens off`, GET/HEAD seuls, dotfiles et fichiers source en 404, `error_page 404 /404.html` et `5xx /50x.html`, cache : `/_astro/` immutable 1 an, HTML `no-cache`, médias 30 j, `gzip_static`, journal sans IP) et `nginx/snippets/security-headers.conf` (CSP complète avec Umami et Web3Forms déjà déclarés, HSTS preload, nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, COOP, CORP, pas de COEP). Ajouter la redirection 301 http→https pilotée par `X-Forwarded-Proto` (Railway termine le TLS). Copier ces fichiers dans l'étape `runtime`.
@@ -383,7 +383,7 @@ Implémenter la configuration de security.md §3 : `nginx.conf` (utilisateur non
 - **Responsable** : Dev
 - **Dépend de** : T-001-04, T-001-11, T-001-12
 - **Débloque** : T-001-14, T-003-04, T-003-05, T-002-02, T-002-03, T-004-02, T-004-03, T-005-04, T-005-05, T-008-02, T-008-03, T-029-02, T-029-03
-- **Statut** : 🔲 À faire
+- **Statut** : 🔄 En cours
 
 **Description** :  
 Construire l'image de production, lancer `make preview` puis `make e2e` : toute la suite doit être verte. Mesurer à la main Lighthouse (mobile) sur `/` pour vérifier LCP < 1,5 s et ≥ 95 sur 4 axes. Corriger les écarts. **Jalon J1 : le squelette buildable et testé est fusionnable ; US-002 et US-003 peuvent démarrer.**
@@ -488,7 +488,7 @@ Fusionner sur `main`, mesurer le délai fusion → HTTP 200 en HTTPS (< 10 min),
 - **Responsable** : Dev
 - **Dépend de** : T-001-02
 - **Débloque** : T-001-20
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer `renovate.json` : preset de base, `pinDigests` pour Docker, `helpers:pinGitHubActionDigests`, regroupement des mises à jour mineures, ouverture de PR validées par `ci.yml`. Installer l'application Renovate sur le dépôt (action du PO).

@@ -17,13 +17,13 @@
 
 | ID | Type | Tâche | Estimation | Responsable | Dépend de | Statut |
 |----|------|-------|------------|-------------|-----------|--------|
-| T-003-01 | [TEST] | Écrire les tests RED des scripts de contrôle (liens, ancres, Lighthouse, découverte des pages) | 3,5h | Dev | T-001-05 | 🔲 |
-| T-003-02 | [OPS] | ESLint, Prettier et `astro check` en mode vérification | 3h | Dev | T-001-04 | 🔲 |
-| T-003-03 | [OPS] | Exécuteur de contrôles et vérification des liens internes et des ancres (GREEN) | 4h | Dev | T-003-01 | 🔲 |
-| T-003-04 | [OPS] | Script Lighthouse 13.5 : 3 exécutions, médiane, seuil 0,95 sur 4 axes | 5h | Dev | T-003-01, T-001-13 | 🔲 |
-| T-003-05 | [TEST] | Test axe sur toutes les pages découvertes et assistant de découverte des routes | 2,5h | Dev | T-001-13 | 🔲 |
-| T-003-06 | [OPS] | Makefile et scripts npm : cibles lint, test, build-check, lighthouse, e2e, ci | 2,5h | Dev | T-003-02, T-003-03, T-003-04, T-003-05 | 🔲 |
-| T-003-07 | [OPS] | Workflow GitHub Actions `ci.yml` | 5h | Dev | T-003-06 | 🔲 |
+| T-003-01 | [TEST] | Écrire les tests RED des scripts de contrôle (liens, ancres, Lighthouse, découverte des pages) | 3,5h | Dev | T-001-05 | ✅ |
+| T-003-02 | [OPS] | ESLint, Prettier et `astro check` en mode vérification | 3h | Dev | T-001-04 | ✅ |
+| T-003-03 | [OPS] | Exécuteur de contrôles et vérification des liens internes et des ancres (GREEN) | 4h | Dev | T-003-01 | ✅ |
+| T-003-04 | [OPS] | Script Lighthouse 13.5 : 3 exécutions, médiane, seuil 0,95 sur 4 axes | 5h | Dev | T-003-01, T-001-13 | ✅ |
+| T-003-05 | [TEST] | Test axe sur toutes les pages découvertes et assistant de découverte des routes | 2,5h | Dev | T-001-13 | ✅ |
+| T-003-06 | [OPS] | Makefile et scripts npm : cibles lint, test, build-check, lighthouse, e2e, ci | 2,5h | Dev | T-003-02, T-003-03, T-003-04, T-003-05 | ✅ |
+| T-003-07 | [OPS] | Workflow GitHub Actions `ci.yml` | 5h | Dev | T-003-06 | ✅ |
 | T-003-08 | [OPS] | Hadolint, Trivy et SBOM CycloneDX dans la CI | 2,5h | Dev | T-003-07 | 🔲 |
 | T-003-09 | [OPS] | Protection de `main` et PR de test à échec volontaire | 3h | Dev | T-003-07 | 🔲 |
 | T-003-10 | [OPS] | Mesurer la durée de la CI et le gain du cache | 1,5h | Dev | T-003-07 | 🔲 |
@@ -94,7 +94,7 @@ graph TD
 - **Responsable** : Dev
 - **Dépend de** : T-001-05
 - **Débloque** : T-003-03, T-003-04
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 TDD des fonctions pures des scripts : `tests/unit/checks/links.test.ts` (extraction des liens/ancres d'un dossier `dist` factice ; lien interne cassé et ancre manquante détectés ; lien externe ignoré en bloquant, 503 externe → avertissement sans échec), `tests/unit/checks/lighthouse-assert.test.ts` (médiane de 3 runs ; message exact « Accessibility score 0.92 < 0.95 » ; 4 axes), `tests/unit/checks/dist-routes.test.ts` (découverte des routes depuis `dist/**/index.html`, exclusion de `404` et `/contact/merci/`), `tests/unit/checks/runner.test.ts` (découverte de `*.content.check.ts` et `*.dist.check.ts`, code de sortie).
@@ -117,7 +117,7 @@ TDD des fonctions pures des scripts : `tests/unit/checks/links.test.ts` (extract
 - **Responsable** : Dev
 - **Dépend de** : T-001-04
 - **Débloque** : T-003-06
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Configurer ESLint 10.12 (flat config, `eslint-plugin-astro` 3.2, `typescript-eslint` 8.71), Prettier 3.9 (+ plugin Astro, version relevée avec `npm view` dans `tools`), `.prettierignore`. Scripts npm : `lint`, `format:check`, `check` (`astro check`). Couvre JS/TS, Astro, CSS et Markdown (Prettier). Corriger les écarts du code existant. Installer les dépendances via `tools` (package.json en écriture exclusive de ce lot).
@@ -142,7 +142,7 @@ Configurer ESLint 10.12 (flat config, `eslint-plugin-astro` 3.2, `typescript-esl
 - **Responsable** : Dev
 - **Dépend de** : T-003-01
 - **Débloque** : T-003-06, T-004-05, T-005-07, T-029-07
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Implémenter `scripts/checks/run.ts` (option `--phase=content|dist` ; découvre `scripts/checks/*.content.check.ts` — avant `astro build`, sur les sources — et `*.dist.check.ts` — après build, sur `dist/`), `scripts/checks/lib/dist-routes.ts` et `scripts/checks/internal-links.dist.check.ts` (liens `href` internes + ancres sur `dist/`, liens externes en avertissement avec délai d'attente, jamais bloquants). Les US suivantes ajoutent leurs contrôles en déposant un fichier, sans toucher au runner.
@@ -164,7 +164,7 @@ Implémenter `scripts/checks/run.ts` (option `--phase=content|dist` ; découvre 
 - **Responsable** : Dev
 - **Dépend de** : T-003-01, T-001-13
 - **Débloque** : T-003-06
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Écrire `scripts/checks/lighthouse.ts` : pilote la CLI `lighthouse` 13.5 dans l'image Playwright (Chromium inclus) contre `preview`, profil mobile, 3 exécutions par page et médiane, pages **découvertes dans `dist/`** (aucune liste à maintenir, donc aucune édition partagée), assertions ≥ 0,95 sur Performance, Accessibilité, Bonnes pratiques, SEO, message « <Axe> score 0.92 < 0.95 », rapports HTML/JSON en artefact. ADR-0007 retient la CLI maison plutôt que `@lhci/cli` (la formulation d'US-003 est dépassée).
@@ -185,7 +185,7 @@ Implémenter `scripts/checks/run.ts` (option `--phase=content|dist` ; découvre 
 - **Responsable** : Dev
 - **Dépend de** : T-001-13
 - **Débloque** : T-003-06, T-029-03
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer `tests/e2e/helpers/routes.ts` (parcours en largeur des liens internes à partir de `/`, sans liste à maintenir ; réutilisé par US-029) et `tests/e2e/a11y.spec.ts` (@axe-core/playwright 4.13, WCAG 2.2 AA, thèmes clair et sombre, échec sur toute violation `serious` ou `critical`).
@@ -206,7 +206,7 @@ Créer `tests/e2e/helpers/routes.ts` (parcours en largeur des liens internes à 
 - **Responsable** : Dev
 - **Dépend de** : T-003-02, T-003-03, T-003-04, T-003-05
 - **Débloque** : T-003-07, T-002-11
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Ajouter au `Makefile` : `lint`, `format`, `check`, `test`, `checks`, `lighthouse`, `e2e`, `ci` (enchaîne exactement les étapes de la CI). Scripts npm : `checks:content`, `checks:dist`, `build` = `checks:content && astro build && checks:dist`. Service `e2e` de compose exécute Playwright puis Lighthouse. Fichiers `Makefile`, `package.json` et `compose.yaml` réservés à ce lot.
@@ -228,7 +228,7 @@ Ajouter au `Makefile` : `lint`, `format`, `check`, `test`, `checks`, `lighthouse
 - **Responsable** : Dev
 - **Dépend de** : T-003-06
 - **Débloque** : T-001-14, T-003-08, T-003-09, T-003-10
-- **Statut** : 🔲 À faire
+- **Statut** : ✅ Fait
 
 **Description** :  
 Créer `.github/workflows/ci.yml` (PR et `main`) : `permissions: contents: read`, `persist-credentials: false`, actions épinglées par SHA complet avec commentaire de version, `concurrency`, pas de `pull_request_target`, cache BuildKit en mode GitHub Actions (clé liée au `package-lock.json`). Jobs : `quality` (cible Docker `test` : lint, check, Vitest + couverture, build + contrôles), puis `e2e` (preview + Playwright + axe + Lighthouse). Rapports Lighthouse publiés en artefact. L'utilisation de Node sur le runner est interdite : tout passe par Docker.

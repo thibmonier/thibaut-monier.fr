@@ -1,0 +1,21 @@
+---
+import { getEntry } from 'astro:content';
+import MinimalLayout from '../layouts/MinimalLayout.astro';
+
+const entry = await getEntry('home', 'accueil');
+if (!entry) throw new Error("Entrée 'accueil' introuvable dans la collection home");
+const { name, title, contactLink } = entry.data;
+---
+
+<MinimalLayout
+  title={`${name} — ${title.charAt(0).toLowerCase()}${title.slice(1)}`}
+  description={`${name} : ${title}. Profil, parcours et contact.`}
+>
+  <h1 class="text-3xl font-bold">{name}</h1>
+  <p class="mt-2 text-xl">{title}</p>
+  <p class="mt-8">
+    <a class="underline" href={contactLink}>
+      Me contacter
+    </a>
+  </p>
+</MinimalLayout>

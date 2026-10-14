@@ -1,0 +1,31 @@
+name: scheduled
+
+# Publication programmée (ADR-0002) : redéploiement quotidien pour publier les contenus datés.
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      RAILWAY_SERVICE_ID: ${{ vars.RAILWAY_SERVICE_ID }}
+      RAILWAY_ENVIRONMENT_ID: ${{ vars.RAILWAY_ENVIRONMENT_ID }}
+    steps:
+      - name: Jeton Railway absent, redéploiement ignoré
+        if: ${{ env.RAILWAY_TOKEN == '' }}
+        run: echo "RAILWAY_TOKEN non défini, rien à faire."
+      # Mutation GraphQL à confirmer à la configuration de Railway (T-001-14)
+      - name: Redéploiement du service
+        if: ${{ env.RAILWAY_TOKEN != '' }}
+        run: |
+          jq -n --arg e "$RAILWAY_ENVIRONMENT_ID" --arg s "$RAILWAY_SERVICE_ID" \
+            '{query: "mutation($e: String!, $s: String!) { serviceInstanceRedeploy(environmentId: $e, serviceId: $s) }", variables: {e: $e, s: $s}}' \
+          | curl --fail-with-body -sS -X POST https://backboard.railway.com/graphql/v2 \
+              -H "Project-Access-Token: $RAILWAY_TOKEN" -H "Content-Type: application/json" --data @-

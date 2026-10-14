@@ -5,6 +5,7 @@ dist/
 coverage/
 playwright-report/
 test-results/
+reports/
 *.tsbuildinfo
 
 # Environnement et secrets
