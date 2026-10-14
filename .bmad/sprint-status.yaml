@@ -1,0 +1,261 @@
+# Statut des stories (single writer : orchestrateur). Généré depuis project-management/backlog le 2026-10-14
+project: thibaut-monier.fr
+current_sprint: 1
+sprints:
+  - number: 1
+    name: sprint-001-walking_skeleton
+    status: ready
+    points: 24
+    stories:
+      - id: US-001
+        title: "Squelette du site publié en production"
+        epic: EPIC-001
+        points: 5
+        status: ready-for-dev
+        blocked_by: []
+        depends_on: []
+        file: project-management/backlog/user-stories/US-001-squelette-site-production.md
+      - id: US-002
+        title: "Design system et layout"
+        epic: EPIC-001
+        points: 3
+        status: ready-for-dev
+        blocked_by: [US-001]
+        depends_on: [US-001]
+        file: project-management/backlog/user-stories/US-002-design-system-layout.md
+      - id: US-003
+        title: "Pipeline CI qualité"
+        epic: EPIC-001
+        points: 3
+        status: ready-for-dev
+        blocked_by: [US-001]
+        depends_on: [US-001]
+        file: project-management/backlog/user-stories/US-003-pipeline-ci-qualite.md
+      - id: US-004
+        title: "Page d'accueil : proposition de valeur et double parcours"
+        epic: EPIC-002
+        points: 3
+        status: ready-for-dev
+        blocked_by: [US-002]
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-004-page-accueil-double-parcours.md
+      - id: US-005
+        title: "Parcours professionnel en frise"
+        epic: EPIC-002
+        points: 5
+        status: ready-for-dev
+        blocked_by: [US-002]
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-005-parcours-professionnel-frise.md
+      - id: US-008
+        title: "Page contact avec motif, anti-spam et prise de RDV"
+        epic: EPIC-002
+        points: 3
+        status: ready-for-dev
+        blocked_by: [US-002]
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-008-page-contact-formulaire.md
+      - id: US-029
+        title: "Mentions légales et politique de vie privée"
+        epic: EPIC-001
+        points: 2
+        status: ready-for-dev
+        blocked_by: [US-002]
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-029-mentions-legales-vie-privee.md
+  - number: 2
+    name: sprint-002-preuves_profil_open_source
+    status: planned
+    points: 25
+    stories:
+      - id: US-006
+        title: "Compétences et réalisations filtrables par domaine"
+        epic: EPIC-002
+        points: 3
+        status: backlog
+        blocked_by: []
+        depends_on: [US-005]
+        file: project-management/backlog/user-stories/US-006-competences-realisations-filtrables.md
+      - id: US-007
+        title: "CV PDF téléchargeable généré au build"
+        epic: EPIC-002
+        points: 5
+        status: backlog
+        blocked_by: []
+        depends_on: [US-005]
+        file: project-management/backlog/user-stories/US-007-cv-pdf-genere-au-build.md
+      - id: US-019
+        title: "Catalogue des 20 plugins Sylius 2 filtrable par thème"
+        epic: EPIC-005
+        points: 5
+        status: backlog
+        blocked_by: []
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-019-catalogue-plugins-sylius-filtrable.md
+      - id: US-020
+        title: "Fiche détaillée d'un plugin"
+        epic: EPIC-005
+        points: 5
+        status: backlog
+        blocked_by: [US-019]
+        depends_on: [US-019]
+        file: project-management/backlog/user-stories/US-020-fiche-detaillee-plugin.md
+      - id: US-021
+        title: "Données vivantes au build avec cache et repli"
+        epic: EPIC-005
+        points: 3
+        status: backlog
+        blocked_by: [US-020]
+        depends_on: [US-020]
+        file: project-management/backlog/user-stories/US-021-donnees-vivantes-au-build.md
+      - id: US-022
+        title: "Page du bundle Symfony tailsfadmin"
+        epic: EPIC-005
+        points: 2
+        status: backlog
+        blocked_by: []
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-022-page-bundle-tailsfadmin.md
+      - id: US-023
+        title: "Étude de cas des contributions career-ops"
+        epic: EPIC-005
+        points: 2
+        status: backlog
+        blocked_by: []
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-023-etude-cas-contributions-career-ops.md
+  - number: 3
+    name: sprint-003-blog_migre_seo
+    status: planned
+    points: 25
+    stories:
+      - id: US-009
+        title: "Migration des 28 articles d'Agentic Agency"
+        epic: EPIC-003
+        points: 5
+        status: backlog
+        blocked_by: []
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-009-migration-28-articles.md
+      - id: US-010
+        title: "Canonical sur le nouveau domaine et table de correspondance prête pour les redirections"
+        epic: EPIC-003
+        points: 2
+        status: backlog
+        blocked_by: [US-009]
+        depends_on: [US-003, US-009]
+        file: project-management/backlog/user-stories/US-010-redirections-301-canonical.md
+      - id: US-011
+        title: "Navigation du blog : catégories, tags, séries, pagination"
+        epic: EPIC-003
+        points: 3
+        status: backlog
+        blocked_by: [US-009]
+        depends_on: [US-009]
+        file: project-management/backlog/user-stories/US-011-navigation-blog.md
+      - id: US-012
+        title: "Recherche plein texte côté client (Pagefind)"
+        epic: EPIC-003
+        points: 2
+        status: backlog
+        blocked_by: [US-009]
+        depends_on: [US-009]
+        file: project-management/backlog/user-stories/US-012-recherche-pagefind.md
+      - id: US-013
+        title: "Flux RSS"
+        epic: EPIC-003
+        points: 2
+        status: backlog
+        blocked_by: [US-009]
+        depends_on: [US-009]
+        file: project-management/backlog/user-stories/US-013-flux-rss.md
+      - id: US-024
+        title: "SEO technique et données structurées"
+        epic: EPIC-006
+        points: 5
+        status: backlog
+        blocked_by: [US-009]
+        depends_on: [US-005, US-009, US-020]
+        file: project-management/backlog/user-stories/US-024-seo-technique-donnees-structurees.md
+      - id: US-025
+        title: "Images Open Graph générées par page"
+        epic: EPIC-006
+        points: 3
+        status: backlog
+        blocked_by: []
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-025-images-open-graph.md
+      - id: US-026
+        title: "Mesure d'audience sans cookie et suivi des conversions"
+        epic: EPIC-006
+        points: 3
+        status: backlog
+        blocked_by: []
+        depends_on: [US-007, US-008]
+        file: project-management/backlog/user-stories/US-026-mesure-audience-conversions.md
+  - number: 4
+    name: sprint-004-labo_outils
+    status: planned
+    points: 19
+    stories:
+      - id: US-014
+        title: "Modèle de test d'outil structuré"
+        epic: EPIC-004
+        points: 5
+        status: backlog
+        blocked_by: []
+        depends_on: [US-002]
+        file: project-management/backlog/user-stories/US-014-modele-test-outil-structure.md
+      - id: US-015
+        title: "Publier les 3 premiers tests complets selon le protocole"
+        epic: EPIC-004
+        points: 5
+        status: backlog
+        blocked_by: [US-014]
+        depends_on: [US-014]
+        file: project-management/backlog/user-stories/US-015-trois-premiers-tests-complets.md
+      - id: US-016
+        title: "Annuaire des 57 outils migré avec badge « testé »"
+        epic: EPIC-004
+        points: 3
+        status: backlog
+        blocked_by: [US-014]
+        depends_on: [US-014]
+        file: project-management/backlog/user-stories/US-016-annuaire-57-outils-badge-teste.md
+      - id: US-017
+        title: "Médias de démonstration dans les tests"
+        epic: EPIC-004
+        points: 3
+        status: backlog
+        blocked_by: [US-014]
+        depends_on: [US-014]
+        file: project-management/backlog/user-stories/US-017-medias-demonstration-tests.md
+      - id: US-018
+        title: "Comparatifs entre outils d'une même catégorie"
+        epic: EPIC-004
+        points: 3
+        status: backlog
+        blocked_by: [US-015]
+        depends_on: [US-015]
+        file: project-management/backlog/user-stories/US-018-comparatifs-outils-categorie.md
+  - number: 5
+    name: sprint-005-version_anglaise
+    status: planned
+    points: 10
+    stories:
+      - id: US-027
+        title: "Infrastructure i18n FR/EN activée"
+        epic: EPIC-007
+        points: 5
+        status: backlog
+        blocked_by: []
+        depends_on: [US-004]
+        file: project-management/backlog/user-stories/US-027-infrastructure-i18n-fr-en.md
+      - id: US-028
+        title: "Traduction EN des pages profil et vitrine open source"
+        epic: EPIC-007
+        points: 5
+        status: backlog
+        blocked_by: [US-027]
+        depends_on: [US-005, US-020, US-027]
+        file: project-management/backlog/user-stories/US-028-traduction-en-profil-vitrine.md

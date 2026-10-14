@@ -1,0 +1,19 @@
+# Dépendances et builds
+node_modules/
+dist/
+.astro/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Environnement et secrets
+.env
+.env.*
+!.env.example
+
+# Réglages locaux Claude Code (permissions propres au poste)
+.claude/settings.local.json
+
+# Système
+.DS_Store

@@ -1,0 +1,68 @@
+# Suivi du workflow — généré par /workflow:init
+project: thibmonier-site
+description: >
+  Site personnel CV/portfolio : profil et expériences, blog (modèle Agentic Agency),
+  tests d'outils approfondis (protocole, captures, verdict), vitrine des projets
+  open source (20 plugins Sylius 2, career-ops).
+track: enterprise
+track_history:
+  - { track: standard, from: 2026-10-14, reason: "score de complexité 11" }
+  - { track: enterprise, from: 2026-10-14, reason: "forcé par le PO (/workflow:init --enterprise)" }
+initialized_at: 2026-10-14T14:10:00+02:00
+current_phase: implementation
+
+complexity:
+  files_impacted: { estimate: "~50-80 (nouveau site)", level: standard }
+  new_entities: { estimate: "4 content collections (profil/expériences, blog, tests d'outils, projets)", level: standard }
+  integrations: { estimate: "GitHub API (stars/releases), formulaire contact, analytics", level: enterprise }
+  stories: { estimate: "12-18", level: standard }
+  teams: { estimate: 1, level: quick }
+  security: { estimate: "faible (site statique, aucune donnée utilisateur)", level: quick }
+  score: 11
+
+context:
+  reference_project: /Users/tmonier/Projects/blog  # Agentic Agency — Astro 7, MDX, Tailwind v4, Pagefind, Docker/nginx, Railway
+  content_sources:
+    cv: /Users/tmonier/Projects/career-ops/cv.md
+    plugins_catalogue: /Users/tmonier/Projects/sylius_plugins/docs/2026-10-14-catalogue-plugins.md
+    plugins_screenshots: /Users/tmonier/Projects/sylius_plugins/captures-2026-10-12/
+    talks_material: "/Users/tmonier/Projects/Agentic Devs Orga/"
+  stack_hypothesis: "Astro (réutilisation de l'existant Agentic Agency) — à confirmer en phase Conception"
+  open_questions:
+    - "Arbitrages tech spec : hébergement (Railway vs Cloudflare gratuit), .fr vs .com, mesure des conversions (Cloudflare WA vs Umami Cloud gratuit)"
+    - "Le dossier n'est pas encore un dépôt git"
+
+phases:
+  analysis:
+    status: completed
+    completed_at: 2026-10-14
+    note: "Ajoutée par le passage en Enterprise ; exécutée après la planification, ses conclusions peuvent amender le PRD et le backlog"
+    artifacts:
+      research_summary: done     # analysis/research-summary.md (delta D-1..D-7, 3 questions PO)
+      constraints: done          # analysis/constraints.md
+      risks_opportunities: done  # analysis/risks-opportunities.md (12 risques, 8 opportunités)
+      technical_options: done    # analysis/technical-options.md (versions du 2026-10-14)
+  planning:
+    status: completed
+    revised_at: 2026-10-14  # delta D-1..D-7 issu de l'analyse
+    completed_at: 2026-10-14
+    artifacts:
+      prd: done            # prd.md
+      personas: done       # personas.md (4)
+      definition_of_done: done
+      dependencies_matrix: done
+      backlog: done        # 7 EPICs, 29 US, 103 points (delta d'analyse D-1..D-7 appliqué)
+      sprints: done        # 5 sprints planifiés
+      backlog_validation: done  # /gate:validate-backlog 29/29 PASS après delta (2026-10-14)
+  design:
+    status: completed
+    completed_at: 2026-10-14
+    artifacts:
+      tech_spec: done        # tech-spec.md (10/10 critères du gate techspec présents)
+      architecture: done     # architecture/c4.md, content-model.md, integrations.md, security.md
+      adr: done              # docs/adr/0001..0009 (statut Proposé, validation PO attendue)
+  implementation:
+    status: pending
+
+next_action: "Valider les ADR (Proposé → Accepté), lever les prérequis du sprint 1 (domaine, dépôt GitHub, Railway, Umami, Calendly, Web3Forms), puis démarrer le sprint 1"
+next_command: "/workflow:implement"
