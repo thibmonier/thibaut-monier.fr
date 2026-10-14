@@ -1,0 +1,56 @@
+---
+name: 'Quote Request'
+tagline: 'Demande de devis B2B pour Sylius 2 : négociation en back-office, proposition par e-mail, acceptation vers un panier à prix verrouillés.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-quote-request-plugin
+packagist: tmonier/sylius-quote-request-plugin
+license: MIT
+features:
+  - 'Demande depuis le panier ou une fiche produit, formulaire prérempli, visiteurs sans compte acceptés.'
+  - 'Espace « Mes devis » : statut, lignes, prix proposés, validité, fil de messages, actions du client.'
+  - 'Invités : suivi par un lien secret à jeton aléatoire de 256 bits.'
+  - 'Négociation en back-office : prix unitaires, remises par ligne et globale, validité, note interne.'
+  - 'Acceptation vers un panier aux prix verrouillés puis tunnel de commande classique.'
+  - 'Deux façons de convertir le devis en commande pour le client.'
+  - 'PDF du devis en option, joint à l’e-mail de proposition, moteur remplaçable.'
+  - 'Workflow Symfony complet, expiration par tâche planifiée, événements et limitation de débit.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusQuoteRequestPlugin\\TmonierSyliusQuoteRequestPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusQuoteRequestPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_quote_request.yaml`.'
+  - 'Importer les routes d’administration et de boutique avec `@TmonierSyliusQuoteRequestPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_quote_request.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (trois tables).'
+  - 'Planifier l’expiration des propositions, chaque nuit : `bin/console tmonier:quote-request:expire`.'
+configExcerpt: |
+  tmonier_sylius_quote_request:
+      allow_guests: true
+      default_validity_days: 30
+      from_product_page: true
+      from_cart: true
+      allow_promotions: false
+      max_lines: 100
+      rate_limit:
+          enabled: true
+          per_ip: 10
+          interval: '1 hour'
+---
+
+Dans le négoce, le prix catalogue n’est qu’un point de départ et la négociation se fait par e-mail et tableur. Ce plugin transforme un panier ou une fiche produit en demande de devis, que le marchand chiffre dans le back-office avant de l’envoyer. Le client accepte, et retrouve un panier aux prix négociés qui suit le paiement habituel.

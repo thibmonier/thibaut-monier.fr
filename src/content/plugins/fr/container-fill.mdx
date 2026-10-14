@@ -1,0 +1,55 @@
+---
+name: 'Container Fill'
+tagline: 'Constructeur de palettes et de camions pour Sylius 2 : plan de chargement, jauge de remplissage au panier et règles B2B au paiement.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-container-fill-plugin
+packagist: tmonier/sylius-container-fill-plugin
+license: MIT
+features:
+  - 'Types de contenants : palettes, camions, conteneurs maritimes et cartons, avec charge utile et nombre de places.'
+  - 'Onglet « Logistique » sur les produits : unités par colis, poids, hauteur de couche, gerbable, vendu par colis entiers.'
+  - 'Plan de chargement : contrainte limitante affichée, volume indicatif, répartition en plusieurs contenants.'
+  - 'Règles par canal, périmètre et groupe de clients : contenants pleins, taux minimum, multiple, nombre maximum.'
+  - 'Mode par couches : piles de couches limitées par la hauteur, avec vue de côté de chaque palette.'
+  - 'Jauge accessible dans le panier et boutons « ajoutez 30 colis pour compléter la palette ».'
+  - 'Règles appliquées en boutique et par la Shop API, avec exception journalisée pour un rôle dédié.'
+  - 'Frais de livraison par contenant et import CSV des capacités.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+complements:
+  - quick-order
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusContainerFillPlugin\\TmonierSyliusContainerFillPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusContainerFillPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_container_fill.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusContainerFillPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_container_fill.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin seulement).'
+  - 'Facultatif : charger les types de contenants prédéfinis avec `bin/console sylius:fixtures:load container_types`, puis les relire dans l’administration.'
+screenshots:
+  - src: ../../../assets/plugins/container-fill/panier-camion.webp
+    alt: 'Panier avec un plan de chargement : jauge de remplissage d’un camion et règles de remplissage respectées.'
+  - src: ../../../assets/plugins/container-fill/panier-couches.webp
+    alt: 'Panier avec un plan de chargement par couches : palette incomplète et bouton pour la compléter.'
+  - src: ../../../assets/plugins/container-fill/regle-remplissage.webp
+    alt: 'Formulaire d’une règle de remplissage : périmètre, types de contenants autorisés et exigence.'
+  - src: ../../../assets/plugins/container-fill/logistique-produit.webp
+    alt: 'Onglet « Logistique » d’un produit : unités par colis, poids, hauteur de couche et capacité par contenant.'
+---
+
+Vendre à la palette ou au camion complet suppose de savoir combien de produits tiennent dans un contenant, et de refuser une commande à moitié vide. Ce plugin décrit les contenants, calcule un plan de chargement indicatif et applique des règles de remplissage jusqu’à la finalisation. L’acheteur voit dans son panier ce qu’il lui manque pour compléter la palette.

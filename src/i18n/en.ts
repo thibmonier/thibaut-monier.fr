@@ -37,4 +37,6 @@ export const en: Dictionary = {
   },
   // US-004
   home: { proofsHeading: '' },
+  // US-007
+  cv: { download: '' },
 };

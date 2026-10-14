@@ -49,6 +49,10 @@ export const fr = {
   home: {
     proofsHeading: 'Quelques preuves',
   },
+  // US-007
+  cv: {
+    download: 'Télécharger mon CV (PDF, 2 pages)',
+  },
 } as const;
 
 type Widen<T> = { -readonly [K in keyof T]: T[K] extends string ? string : Widen<T[K]> };

@@ -1,0 +1,50 @@
+---
+name: 'Bulk Actions'
+tagline: 'Actions en masse dans les listes du back-office Sylius 2 : produits, commandes, paiements, expéditions et clients.'
+theme: back-office
+repo:
+  owner: thibmonier
+  name: sylius-bulk-actions-plugin
+packagist: tmonier/sylius-bulk-actions-plugin
+license: MIT
+features:
+  - 'Produits : activer ou désactiver, ajouter à un taxon ou en retirer, gérer les canaux.'
+  - 'Commandes : annuler ou marquer comme payées ; paiements et expéditions via les transitions du cœur.'
+  - 'Expédition avec numéros de suivi collés au format `numéro de commande;numéro de suivi`.'
+  - 'Clients : affecter à un groupe ou le retirer, activer ou désactiver le compte boutique.'
+  - 'Mêmes événements que l’action unitaire : e-mails, contrôle de stock, promotions, annulation en cascade.'
+  - 'Éléments ignorés ou en échec rapportés avec leur raison, sans bloquer les autres.'
+  - 'Page de confirmation protégée contre la falsification de requête, plafond de 500 éléments par requête.'
+  - 'Extensible par une interface pour ajouter ses propres actions.'
+compatibility:
+  matrix:
+    - sylius: '2.2'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusBulkActionsPlugin\\TmonierSyliusBulkActionsPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusBulkActionsPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_bulk_actions.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusBulkActionsPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_bulk_actions.yaml`.'
+  - 'Aucune migration : le plugin n’a pas de table.'
+configExcerpt: |
+  tmonier_sylius_bulk_actions:
+      max_items: 500
+      batch_size: 50
+      actions:
+          order_cancel: { enabled: false }
+          customer_disable_account: false
+---
+
+Activer cinquante produits ou expédier trente commandes une par une est long et source d’erreurs. Ce plugin ajoute des actions groupées aux listes d’administration, avec le même comportement que les boutons unitaires. Chaque élément est traité séparément et un rapport clair indique ce qui a été modifié, ignoré ou refusé.

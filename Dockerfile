@@ -11,8 +11,17 @@ ENV NODE_ENV=development \
 RUN chown node:node /app
 USER 1000
 
+# ---- typst : binaire seul pour le CV (US-007) --------------------------------
+FROM ghcr.io/typst/typst:0.15.1@sha256:032e292249bcd378480cc7c142cfa324b63ef8aadeb88d7e7230320c4c9c422f AS typst
+
 # ---- deps : dépendances (lockfile strict, sans scripts d'installation) -------
 FROM base AS deps
+# CV PDF (US-007, ADR-0005) : Typst compile le gabarit, pdftotext (poppler) alimente le contrôle de
+# confidentialité du PDF. Visibles de dev, tools et build ; jamais copiés dans `runtime`.
+USER 0
+RUN apk add --no-cache poppler-utils=25.12.0-r1
+USER 1000
+COPY --from=typst /bin/typst /usr/local/bin/typst
 COPY --chown=node:node package.json package-lock.json .npmrc ./
 # Pas de montage de cache BuildKit : Railway exige un id lié au service (ADR-0002) ;
 # la CI s'appuie sur le cache de couches.
@@ -22,9 +31,6 @@ RUN npm ci --ignore-scripts && npm cache clean --force
 FROM deps AS dev
 EXPOSE 4321
 CMD ["npx", "astro", "dev", "--host", "0.0.0.0", "--port", "4321"]
-
-# ---- typst : binaire seul pour le CV (gabarit ajouté par US-007) -------------
-FROM ghcr.io/typst/typst:0.15.1@sha256:032e292249bcd378480cc7c142cfa324b63ef8aadeb88d7e7230320c4c9c422f AS typst
 
 # ---- build : site statique ---------------------------------------------------
 FROM deps AS build

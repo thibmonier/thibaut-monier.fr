@@ -1,0 +1,154 @@
+---
+import type { ImageMetadata } from 'astro';
+import CompatMatrix from '../components/oss/CompatMatrix.astro';
+import Gallery from '../components/oss/Gallery.astro';
+import InstallSnippet from '../components/oss/InstallSnippet.astro';
+import LiveStats from '../components/oss/LiveStats.astro';
+import PluginDeps from '../components/oss/PluginDeps.astro';
+import type { Dependencies } from '../lib/plugin-deps.ts';
+import { composerRequire, installPackage } from '../lib/install.ts';
+import type { LiveStats as LiveStatsData } from '../lib/oss-metrics.ts';
+import { THEME_LABELS, splitInlineCode, type PluginTheme } from '../lib/plugins.ts';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  slug: string;
+  plugin: {
+    name: string;
+    tagline: string;
+    theme: PluginTheme;
+    repo: { owner: string; name: string };
+    packagist?: string | undefined;
+    license: string;
+    features: string[];
+    compatibility: {
+      matrix: { sylius: string; php: string; symfony: string[] }[];
+      databases: string[];
+    };
+    installSteps: string[];
+    screenshots: { src: ImageMetadata; alt: string }[];
+    configExcerpt?: string | undefined;
+  };
+  deps: Dependencies;
+  names: Record<string, string>;
+  stats: LiveStatsData | null;
+}
+
+const { plugin, deps, names, stats } = Astro.props;
+const pkg = installPackage(plugin);
+const github = `https://github.com/${plugin.repo.owner}/${plugin.repo.name}`;
+const suffix = ' Compatibilité, dépendances et installation.';
+const description =
+  plugin.tagline.length + suffix.length <= 160 ? plugin.tagline + suffix : plugin.tagline;
+const link =
+  'inline-flex min-h-11 items-center rounded-md text-accent underline underline-offset-4';
+---
+
+<BaseLayout title={`${plugin.name}, plugin Sylius 2`} description={description}>
+  <nav aria-label="Fil d’Ariane" data-breadcrumb class="text-sm text-muted">
+    <ol class="flex flex-wrap gap-x-2">
+      <li>
+        <a class="underline underline-offset-4" href="/">
+          Accueil
+        </a>
+        <span aria-hidden="true"> /</span>
+      </li>
+      <li>
+        <a class="underline underline-offset-4" href="/open-source/">
+          Open source
+        </a>
+        <span aria-hidden="true"> /</span>
+      </li>
+      <li aria-current="page">{plugin.name}</li>
+    </ol>
+  </nav>
+
+  <header class="mt-4">
+    <h1 class="text-3xl font-bold tracking-tight">{plugin.name}</h1>
+    <p class="mt-1 text-sm font-medium text-muted" data-theme-label>
+      {THEME_LABELS[plugin.theme]}
+    </p>
+    <p class="mt-2 max-w-3xl text-lg">{plugin.tagline}</p>
+    <ul class="mt-3 flex flex-wrap gap-x-6" data-links>
+      <li>
+        <a class={link} href={github} target="_blank" rel="noopener noreferrer" data-link="github">
+          Code source sur GitHub<span class="sr-only"> (nouvel onglet)</span>
+        </a>
+      </li>
+      {pkg.published && (
+        <li>
+          <a
+            class={link}
+            href={`https://packagist.org/packages/${pkg.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-link="packagist"
+          >
+            Paquet sur Packagist<span class="sr-only"> (nouvel onglet)</span>
+          </a>
+        </li>
+      )}
+      <li class="inline-flex min-h-11 items-center">Licence {plugin.license}</li>
+    </ul>
+  </header>
+
+  <div class="mt-8 gap-10 lg:grid lg:grid-cols-[minmax(0,1fr)_20rem]">
+    <div class="space-y-10">
+      <section aria-labelledby="probleme-titre" data-problem>
+        <h2 id="probleme-titre" class="text-xl font-semibold tracking-tight">
+          Le problème résolu
+        </h2>
+        <div class="mt-2 max-w-prose space-y-3">
+          <slot />
+        </div>
+      </section>
+
+      <section aria-labelledby="features-titre" data-features>
+        <h2 id="features-titre" class="text-xl font-semibold tracking-tight">
+          Fonctionnalités
+        </h2>
+        <ul class="mt-2 list-disc space-y-1 pl-5">
+          {plugin.features.map((feature) => (
+            <li>{feature}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="install-titre" data-install>
+        <h2 id="install-titre" class="text-xl font-semibold tracking-tight">
+          Installation
+        </h2>
+        <div class="mt-3">
+          <InstallSnippet
+            command={composerRequire(pkg.name)}
+            note={pkg.published ? undefined : 'Paquet bientôt publié sur Packagist'}
+          />
+        </div>
+        <ol class="mt-3 list-decimal space-y-2 pl-5" data-install-steps>
+          {plugin.installSteps.map((step) => (
+            <li>
+              {splitInlineCode(step).map((part) =>
+                part.code ? (
+                  <code class="font-mono text-sm break-words">{part.text}</code>
+                ) : (
+                  part.text
+                ),
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <Gallery screenshots={plugin.screenshots} configExcerpt={plugin.configExcerpt} />
+    </div>
+
+    <aside class="mt-10 space-y-8 lg:mt-0" aria-label="Compatibilité et dépendances">
+      <CompatMatrix
+        matrix={plugin.compatibility.matrix}
+        databases={plugin.compatibility.databases}
+      />
+      <PluginDeps deps={deps} names={names} />
+      <LiveStats stats={stats} />
+    </aside>
+  </div>
+</BaseLayout>

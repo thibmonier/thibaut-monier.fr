@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import PluginLayout from '../../../../layouts/PluginLayout.astro';
+import metrics from '../../../../data/oss-metrics.json';
+import { getLiveStats } from '../../../../lib/oss-metrics.ts';
+import { computeDependencies } from '../../../../lib/plugin-deps.ts';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('plugins', ({ data }) => !data.draft);
+  const slugOf = (id: string) => id.replace(/^fr\//, '');
+  const nodes = entries.map((e) => ({ slug: slugOf(e.id), ...e.data }));
+  const names = Object.fromEntries(nodes.map((n) => [n.slug, n.name]));
+  return entries.map((entry) => ({
+    params: { slug: slugOf(entry.id) },
+    props: { entry, nodes, names },
+  }));
+}
+
+const { entry, nodes, names } = Astro.props;
+const slug = Astro.params.slug as string;
+const { Content } = await render(entry);
+const deps = computeDependencies(nodes, slug);
+const stats = getLiveStats(metrics, `${entry.data.repo.owner}/${entry.data.repo.name}`);
+---
+
+<PluginLayout slug={slug} plugin={entry.data} deps={deps} names={names} stats={stats}>
+  <Content />
+</PluginLayout>

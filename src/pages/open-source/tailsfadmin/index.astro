@@ -1,0 +1,84 @@
+---
+import { getEntry, render } from 'astro:content';
+import InstallSnippet from '../../../components/oss/InstallSnippet.astro';
+import LiveStats from '../../../components/oss/LiveStats.astro';
+import metrics from '../../../data/oss-metrics.json';
+import ProjectLayout from '../../../layouts/ProjectLayout.astro';
+import { getLiveStats } from '../../../lib/oss-metrics.ts';
+import { formatLongDate, projectEntryId } from '../../../lib/projects.ts';
+
+const entry = await getEntry('projects', projectEntryId('tailsfadmin'));
+if (!entry) throw new Error('Page « tailsfadmin » introuvable dans la collection projects');
+const { Content } = await render(entry);
+const project = entry.data;
+const stats = getLiveStats(metrics, `${project.repo.owner}/${project.repo.name}`);
+const steps = project.installSteps ?? [];
+---
+
+<ProjectLayout project={project}>
+  {project.inBrief && (
+    <aside
+      data-in-brief
+      aria-labelledby="en-bref"
+      class="mt-8 max-w-3xl rounded-lg border border-border bg-surface p-5"
+    >
+      <h2 id="en-bref" class="text-xl font-semibold tracking-tight">
+        En bref
+      </h2>
+      <p class="mt-2">{project.inBrief}</p>
+    </aside>
+  )}
+
+  <section aria-labelledby="installation" class="mt-10 max-w-3xl">
+    <h2 id="installation" class="text-2xl font-semibold tracking-tight">
+      Installation en 4 étapes
+    </h2>
+    <ol data-install-steps class="mt-4 space-y-5">
+      {steps.map((step, index) => (
+        <li data-step={index + 1}>
+          <h3 class="font-semibold">
+            Étape {index + 1} : {step.title}
+          </h3>
+          <p class="mt-1">{step.text}</p>
+          {index === 0 && project.packagist && (
+            <div class="mt-2" data-install-command>
+              <InstallSnippet command={`composer require ${project.packagist}`} />
+            </div>
+          )}
+        </li>
+      ))}
+    </ol>
+    <p class="mt-4">
+      Le détail de chaque étape reste dans le{' '}
+      <a
+        href={project.readmeUrl}
+        rel="noopener noreferrer"
+        class="rounded-md font-medium text-accent underline underline-offset-4"
+      >
+        README du dépôt
+      </a>
+      , qui fait foi.
+    </p>
+  </section>
+
+  <div class="mt-10 max-w-3xl">
+    <LiveStats stats={stats} />
+  </div>
+
+  <div
+    data-body
+    class="mt-10 max-w-3xl [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_li]:mt-2 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-5"
+  >
+    <Content />
+  </div>
+
+  {project.verifiedAt && (
+    <p class="mt-10 text-sm text-muted">
+      Version et licence relevées dans le dépôt le{' '}
+      <time datetime={project.verifiedAt.toISOString().slice(0, 10)}>
+        {formatLongDate(project.verifiedAt)}
+      </time>
+      .
+    </p>
+  )}
+</ProjectLayout>

@@ -1,5 +1,18 @@
 # Sprint 002 : Preuves : profil complet et open source
 
+## Informations
+
+| Attribut | Valeur |
+|----------|--------|
+| Numéro | 2 |
+| Début | 2026-10-29 |
+| Fin | 2026-11-11 |
+| Durée | 10 jours ouvrés |
+| Capacité | 25 points (référence sprint 1 : 24 points livrés, 7 US ; plage 24 pts ± 20 %, action 4 de la rétro) |
+| Branche | `feature/sprint-002-preuves_profil_open_source` |
+| Dépôt | https://github.com/thibmonier/thibaut-monier.fr |
+| Prérequis | `pre-sprint-checklist.md` |
+
 ## Objectif du sprint (Sprint Goal)
 > Rendre les preuves d'expertise consultables (CV PDF, compétences, 20 plugins Sylius, tailsfadmin, contributions career-ops) pour transformer une visite en prise de contact.
 
@@ -43,3 +56,28 @@ Un recruteur télécharge un CV PDF à jour ; un intégrateur filtre les 20 plug
 - 🟡 Commencer
 - ⬆️ Plus de
 - ⬇️ Moins de
+
+## Definition of Done (rappel)
+- [ ] Revue de code (auto-revue + CI verte, contributeur unique) et revue DoD indépendante à mi-sprint
+- [ ] Tests passants, couverture ≥ 80 % sur le code testable
+- [ ] **0 test e2e ignoré non justifié** (liste d'exceptions versionnée avec raison et date ; nombre exécuté / ignoré affiché dans la CI)
+- [ ] Qualité : lint, formatage, vérification de types Astro, build sans erreur
+- [ ] Aucun marqueur de brouillon (« à vérifier », TODO, « lorem ») dans les pages construites
+- [ ] Contenus rédigés depuis les sources validés par le PO (`contenu-a-valider.md`)
+- [ ] Accessibilité et performance contrôlées (Lighthouse ≥ 95, axe sans violation)
+- [ ] Vérification sur l'image Docker réellement construite (variables de build `PUBLIC_*` transmises)
+- [ ] Documentation et ADR mis à jour si décision d'architecture
+- [ ] Déployable en production (conteneur Docker, Railway) ; build à blanc Railway et runner avant le premier merge
+
+## Risques identifiés
+| Risque | Probabilité | Impact | Mitigation |
+|--------|-------------|--------|------------|
+| Espace disque insuffisant (5,0 Go libres le 2026-10-14, 98 % utilisé) : images Docker, Playwright, Typst | Élevée | Élevé | Vérification ≥ 5 Go avant implémentation (cible 10 Go, action 2 rétro), `docker system prune` proposé, CI comme référence |
+| Faux vert CI (tests e2e ignorés) | Moyenne | Élevé | Garde-fou « zéro test ignoré » (action 1), mode strict `E2E_EXPECT_FULL_CONFIG=1` |
+| Génération du PDF Typst 0.15.1 lourde ou non reproductible en CI/Docker (US-007) | Moyenne | Moyen | ADR-0005 ; binaire épinglé dans l'image ; test de présence et de contenu du PDF |
+| Limites de l'API GitHub/Packagist au build, `GITHUB_TOKEN` absent (US-021) | Moyenne | Moyen | ADR-0006 ; repli sur données figées versionnées ; échec de build évité |
+| Sources de contenu modifiées ou confidentielles (CV, captures, catalogue, README tailsfadmin) | Moyenne | Moyen | Contenu validé par le PO avant publication ; copie des sources dans le dépôt, pas de lien vers des chemins locaux |
+| Contenu publié non validé (leçon sprint 1) | Moyenne | Élevé | `contenu-a-valider.md`, test anti-marqueur bloquant |
+| Compatibilité Railway / runner découverte tard | Moyenne | Moyen | Build à blanc dès le premier jour (action 6) |
+| Actions PO du sprint 1 toujours en attente (clés, domaine) | Élevée | Faible | Variables optionnelles avec repli ; ne bloquent pas ce sprint |
+| Worktrees parallèles mal initialisés | Moyenne | Faible | Guide `docs/guides/worktrees-agents.md` (action 3), base = branche du sprint |

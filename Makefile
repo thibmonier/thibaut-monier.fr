@@ -4,7 +4,7 @@ COMPOSE ?= docker compose
 TOOLS   := $(COMPOSE) run --rm tools
 E2E     := $(COMPOSE) --profile e2e run --rm e2e
 
-.PHONY: help dev preview build shell down clean install lint format check test checks e2e lighthouse smoke ci
+.PHONY: help dev preview build shell down clean install cv lint format check test checks e2e lighthouse smoke metrics external-links ci
 
 help: ## Affiche les cibles
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -31,6 +31,9 @@ clean: ## Arrête tout et supprime volumes et sorties de build
 	$(COMPOSE) --profile tools --profile e2e down -v --remove-orphans
 	rm -rf dist .astro coverage reports test-results playwright-report
 
+cv: ## Génère dist/thibaut-monier-cv.pdf (Typst, US-007)
+	$(TOOLS) npm run build:cv
+
 lint: ## ESLint + Prettier (vérification)
 	$(TOOLS) npm run lint
 	$(TOOLS) npm run format:check
@@ -56,6 +59,12 @@ lighthouse: preview ## Lighthouse (3 exécutions, médiane, seuil 0,95)
 smoke: ## Contrôle de fumée post-déploiement : make smoke URL=https://thibaut-monier.fr
 	@test -n "$(URL)" || { echo 'Usage : make smoke URL=<url>'; exit 2; }
 	$(COMPOSE) run --rm --no-deps -e SMOKE_URL="$(URL)" tools node scripts/checks/smoke.ts
+
+metrics: ## Relève GitHub et Packagist dans src/data/oss-metrics.json : GITHUB_TOKEN=$(gh auth token) make metrics
+	$(TOOLS) npm run metrics
+
+external-links: ## Liens externes de /open-source/ (404 et 410 bloquants) : exige dist/ (make build)
+	$(TOOLS) npm run checks:external
 
 ci: ## Enchaîne exactement les étapes de la CI
 	$(MAKE) lint

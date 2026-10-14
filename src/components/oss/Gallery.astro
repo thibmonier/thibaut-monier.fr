@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  screenshots: { src: ImageMetadata; alt: string }[];
+  configExcerpt?: string | undefined;
+}
+
+const { screenshots, configExcerpt } = Astro.props;
+---
+
+{screenshots.length > 0 ? (
+  <section aria-labelledby="captures-titre" data-gallery>
+    <h2 id="captures-titre" class="text-xl font-semibold tracking-tight">
+      Captures
+    </h2>
+    <div class="mt-3 grid gap-6">
+      {screenshots.map((shot) => (
+        <figure>
+          <Image
+            src={shot.src}
+            alt={shot.alt}
+            widths={[640, 1200]}
+            sizes="(min-width: 1024px) 44rem, 100vw"
+            loading="lazy"
+            decoding="async"
+            class="h-auto w-full rounded-md border border-border"
+          />
+          <figcaption class="mt-1 text-sm text-muted">{shot.alt}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+) : (
+  configExcerpt && (
+    <section aria-labelledby="config-titre" data-config-excerpt>
+      <h2 id="config-titre" class="text-xl font-semibold tracking-tight">
+        Extrait de configuration
+      </h2>
+      <pre
+        class="mt-3 overflow-x-auto rounded-md border border-border bg-surface p-3 text-sm"
+        tabindex="0"
+      ><code class="font-mono">{configExcerpt}</code></pre>
+    </section>
+  )
+)}

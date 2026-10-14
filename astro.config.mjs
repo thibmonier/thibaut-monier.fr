@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
 
 // URL publique provisoire tant que le domaine n'est pas branché (PUBLIC_SITE_URL, voir .env.example).
@@ -8,6 +9,8 @@ export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
+  // US-019 : collection `plugins` en MDX (ADR-0001) ; les projets (`projects`) sont en Markdown simple, sans composant.
+  integrations: [mdx()],
   // Locales fr/en, le français sans préfixe (ADR-0008). Les pages en anglais arrivent au sprint 5.
   i18n: {
     defaultLocale: 'fr',

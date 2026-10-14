@@ -16,13 +16,13 @@ accueil:
     - id: plugins-sylius
       value: '20'
       label: plugins open source pour Sylius 2
-      link: https://github.com/thibmonier
-      source: Dépôts GitHub
+      link: /open-source/
+      source: Catalogue open source
     - id: pr-career-ops
       value: '3'
       label: correctifs mergés sur career-ops
-      link: https://github.com/career-ops-hq/career-ops/pulls?q=is%3Apr+is%3Amerged+author%3Athibmonier
-      source: Pull requests GitHub
+      link: /open-source/career-ops/
+      source: Étude de cas
     - id: erp-agentique
       value: '12'
       label: modules d'ERP livrés en développement agentique

@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import AchievementCard from '../../components/cv/AchievementCard.astro';
+import DomainFilter from '../../components/cv/DomainFilter.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { DOMAIN_IDS, DOMAIN_LABELS, countLabel } from '../../lib/filters.ts';
+
+// Contenu rendu en entier au build (indexable sans JavaScript) ; le filtre est une amélioration progressive.
+const skills = (await getCollection('skills')).map((entry) => entry.data);
+const skillLabels = new Map(skills.map((skill) => [skill.id, skill.label]));
+const achievements = (await getCollection('achievements'))
+  .map((entry) => entry.data)
+  .sort((a, b) => b.year - a.year);
+const groups = DOMAIN_IDS.map((id) => ({
+  id,
+  label: DOMAIN_LABELS[id],
+  skills: skills.filter((skill) => skill.domain === id),
+})).filter((group) => group.skills.length > 0);
+---
+
+<BaseLayout
+  title="Compétences et réalisations"
+  description="Compétences et réalisations de Thibaut Monier par domaine : delivery, architecture, e-commerce, données et migrations, IA appliquée."
+>
+  <h1 class="text-3xl font-bold tracking-tight">Compétences et réalisations</h1>
+  <p class="mt-3 max-w-3xl text-lg text-muted">
+    Des réalisations concrètes, classées par domaine, pour vérifier rapidement qu’un besoin proche
+    du vôtre a déjà été résolu. Le détail des postes est dans le
+    <a href="/parcours/" class="font-medium text-accent underline underline-offset-4">
+      parcours
+    </a>
+    .
+  </p>
+
+  <div class="mt-8">
+    <DomainFilter />
+  </div>
+
+  <section class="mt-8" aria-labelledby="realisations">
+    <h2 id="realisations" class="text-2xl font-semibold tracking-tight">
+      Réalisations
+    </h2>
+    <div data-status aria-live="polite" class="mt-2">
+      <p data-count class="font-medium text-muted">
+        {countLabel(achievements.length)}
+      </p>
+      <p data-message class="font-medium [&:not(:empty)]:mt-1"></p>
+    </div>
+    <p class="mt-1">
+      <a
+        data-reset
+        hidden
+        href="/competences/"
+        class="inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4"
+      >
+        Voir toutes les réalisations
+      </a>
+    </p>
+    <ul class="mt-4 grid gap-4 md:grid-cols-2">
+      {achievements.map((item) => (
+        <AchievementCard
+          id={item.id}
+          title={item.title}
+          year={item.year}
+          domains={item.domains}
+          clients={item.clients}
+          skills={item.skills.flatMap((id) => skillLabels.get(id) ?? [])}
+          proofUrl={item.proofUrl}
+        />
+      ))}
+    </ul>
+  </section>
+
+  <section class="mt-12" aria-labelledby="competences">
+    <h2 id="competences" class="text-2xl font-semibold tracking-tight">
+      Compétences
+    </h2>
+    <div class="mt-4 grid gap-6 md:grid-cols-2">
+      {groups.map((group) => (
+        <section data-skill-group data-domains={group.id}>
+          <h3 class="text-lg font-semibold">{group.label}</h3>
+          <ul class="mt-2 flex flex-wrap gap-2">
+            {group.skills.map((skill) => (
+              <li class="rounded-md border border-border bg-surface px-3 py-1 text-sm">
+                {skill.label}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import '../../scripts/skill-filter.ts';
+</script>

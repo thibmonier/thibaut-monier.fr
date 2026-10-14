@@ -1,0 +1,52 @@
+---
+name: 'Timeline'
+tagline: 'Chronologie des commandes et des clients pour le back-office Sylius 2, avec notes internes de l’équipe.'
+theme: back-office
+repo:
+  owner: thibmonier
+  name: sylius-timeline-plugin
+packagist: tmonier/sylius-timeline-plugin
+license: MIT
+features:
+  - 'Carte « Timeline » sur la commande, du plus récent au plus ancien : changements d’état, paiements, expéditions, e-mails.'
+  - 'Note du client au passage de commande devenue une entrée de la chronologie.'
+  - 'Notes internes sur commandes et clients, en texte brut avec échappement du HTML, jamais visibles en boutique.'
+  - 'Notes épinglées affichées en tête de la page.'
+  - 'Chronologie du client avec ses événements clés et une page paginée complète.'
+  - 'Badge du nombre de notes dans la liste des commandes.'
+  - 'Commande pour reconstruire la chronologie des commandes existantes.'
+compatibility:
+  matrix:
+    - sylius: '2.2'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusTimelinePlugin\\TmonierSyliusTimelinePlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusTimelinePlugin/config/config.yaml` dans `config/packages/tmonier_sylius_timeline.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusTimelinePlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_timeline.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Facultatif : reconstruire la chronologie des commandes passées avec `bin/console tmonier:timeline:backfill --dry-run`, puis sans l’option.'
+configExcerpt: |
+  tmonier_sylius_timeline:
+      record_emails: true
+      enabled_workflows:
+          - sylius_order
+          - sylius_order_payment
+          - sylius_order_shipping
+          - sylius_payment
+          - sylius_shipment
+---
+
+L’historique d’une commande est éparpillé entre états, paiements, expéditions et e-mails, et les remarques de l’équipe se perdent dans des messages. Ce plugin rassemble tout dans une carte chronologique de la page commande et de la fiche client. Les notes internes restent visibles de l’équipe seulement.

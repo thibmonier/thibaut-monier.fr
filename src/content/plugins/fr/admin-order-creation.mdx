@@ -1,0 +1,52 @@
+---
+name: 'Admin Order Creation'
+tagline: 'Création de commandes depuis le back-office Sylius 2 : commandes téléphoniques, prix personnalisés, remise manuelle, lien de paiement.'
+theme: back-office
+repo:
+  owner: thibmonier
+  name: sylius-admin-order-creation-plugin
+packagist: tmonier/sylius-admin-order-creation-plugin
+license: MIT
+features:
+  - 'Bouton « Créer une commande » sur la liste des commandes et la fiche client, avec choix du canal et de la langue.'
+  - 'Client existant ou nouvel invité, recherche de produits par nom ou code, totaux recalculés en direct.'
+  - 'Prix unitaire personnalisé et remise manuelle avec motif, réservés à un rôle et désactivables.'
+  - 'Adresses préremplies, livraison et paiement limités aux méthodes proposées par le cœur.'
+  - 'Validation par les contrôles de la boutique, e-mail de confirmation et lien de paiement facultatifs.'
+  - 'Action « Recommander » sur une commande existante.'
+  - 'Traçabilité : auteur, commande source et motif de la remise sur la page commande.'
+  - 'Liste des brouillons à reprendre et purge des brouillons abandonnés.'
+compatibility:
+  matrix:
+    - sylius: '2.2'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusAdminOrderCreationPlugin\\TmonierSyliusAdminOrderCreationPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusAdminOrderCreationPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_admin_order_creation.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusAdminOrderCreationPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_admin_order_creation.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Planifier la purge des brouillons abandonnés, par exemple chaque jour : `bin/console tmonier:admin-order:purge-drafts`.'
+configExcerpt: |
+  tmonier_sylius_admin_order_creation:
+      allow_price_override: true
+      allow_manual_discount: true
+      adjustments_role: ROLE_ADMINISTRATION_ACCESS
+      send_confirmation_email_default: true
+      draft_lifetime_days: 7
+      restrict_drafts_to_owner: false
+---
+
+Les commandes prises par téléphone ou négociées en rendez-vous obligent souvent à passer par un compte client de substitution. Ce plugin permet au personnel de construire une commande complète depuis l’administration, avec les mêmes règles que la boutique. La traçabilité indique qui l’a créée, et le client peut la régler depuis un lien.

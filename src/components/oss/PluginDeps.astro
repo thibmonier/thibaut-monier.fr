@@ -1,0 +1,61 @@
+---
+import type { Dependencies } from '../../lib/plugin-deps.ts';
+
+interface Props {
+  deps: Dependencies;
+  names: Record<string, string>;
+}
+
+const { deps, names } = Astro.props;
+const groups = [
+  { id: 'requires', label: 'Nécessite', slugs: deps.requires },
+  { id: 'complements', label: 'Complété par', slugs: deps.complements },
+  { id: 'used-by', label: 'Utilisé par', slugs: deps.usedBy },
+].filter((group) => group.slugs.length > 0);
+---
+
+<section aria-labelledby="deps-titre" data-deps>
+  <h2 id="deps-titre" class="text-xl font-semibold tracking-tight">
+    Dépendances
+  </h2>
+  {deps.isEmpty && (
+    <p class="mt-2" data-no-deps>
+      Aucune dépendance sur un autre plugin de la collection
+    </p>
+  )}
+  <dl class="mt-2 space-y-2">
+    {groups.map((group) => (
+      <div data-dep-group={group.id}>
+        <dt class="font-medium">{group.label} :</dt>
+        <dd>
+          <ul class="flex flex-wrap gap-x-3">
+            {group.slugs.map((slug) => (
+              <li>
+                <a
+                  class="inline-flex min-h-6 items-center text-accent underline underline-offset-4"
+                  href={`/open-source/sylius/${slug}/`}
+                >
+                  {names[slug] ?? slug}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+    ))}
+    {deps.externalRequires.length > 0 && (
+      <div data-dep-group="external">
+        <dt class="font-medium">Paquets externes requis :</dt>
+        <dd>
+          <ul class="flex flex-wrap gap-x-3">
+            {deps.externalRequires.map((pkg) => (
+              <li>
+                <code class="font-mono text-sm">{pkg}</code>
+              </li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+    )}
+  </dl>
+</section>
