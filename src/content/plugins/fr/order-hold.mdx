@@ -1,0 +1,45 @@
+---
+name: 'Order Hold'
+tagline: 'Noyau commun de mise en attente des commandes pour Sylius 2 : exclusion de l’annulation, moyens de paiement filtrés, paiement bloqué.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-order-hold-plugin
+packagist: tmonier/sylius-order-hold-plugin
+license: MIT
+features:
+  - 'Exclusion des commandes à crédit ou en attente de l’annulation automatique des impayés, indéfinie ou depuis une date.'
+  - 'Exclusion exécutée en SQL, sans charger toutes les commandes, avec une annulation flushée une par une.'
+  - 'Moyens de paiement proposés à certains clients seulement, avec un refus motivé et un message traduisible.'
+  - 'Filtre appliqué partout : boutique, API, moyen par défaut, changement après commande et finalisation.'
+  - 'Blocage de l’entrée en paiement avant approbation, avec redirection et message dans la bonne langue.'
+  - 'Résolution du propriétaire du compte, décorable par un plugin société.'
+  - 'Échec dès la compilation du conteneur si les graphes tournent sur winzou.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusOrderHoldPlugin\\TmonierSyliusOrderHoldPlugin` dans `config/bundles.php`."
+  - 'Aucune route, aucune migration, aucun asset : le plugin s’installe le plus souvent comme dépendance d’un autre plugin.'
+configExcerpt: |
+  tmonier_sylius_order_hold:
+      unpaid_orders:
+          batch_size: 100
+      check_state_machine_adapters: true
+---
+
+Plusieurs règles B2B doivent empêcher qu’une commande soit annulée ou payée trop tôt, par exemple en attente d’approbation ou réglée à crédit. Ce plugin fournit un noyau unique, fondé sur des décorateurs et des vérificateurs étiquetés, que les autres plugins complètent. Il évite que chaque extension recopie la même logique et se heurte aux autres.

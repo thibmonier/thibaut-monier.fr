@@ -17,27 +17,27 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-020-01 | [TEST] | Écrire les tests unitaires RED : schéma étendu, dépendances, installation | 4h | T-019-05 | 2 | 🔲 |
-| T-020-02 | [TEST] | Écrire les tests e2e RED des fiches | 4,5h | T-019-05 | 2 | 🔲 |
-| T-020-03 | [FE-WEB] | Étendre le schéma `plugins` (champs optionnels) et les libs `plugin-deps`, `install` | 4h | T-020-01 | 2 | 🔲 |
-| T-020-04 | [OPS] | Étendre le contrôle de contenu : références, dépendances, messages de l’US | 2,5h | T-020-01, T-020-03 | 2 | 🔲 |
+| T-020-01 | [TEST] | Écrire les tests unitaires RED : schéma étendu, dépendances, installation | 4h | T-019-05 | 2 | ✅ |
+| T-020-02 | [TEST] | Écrire les tests e2e RED des fiches | 4,5h | T-019-05 | 2 | ✅ |
+| T-020-03 | [FE-WEB] | Étendre le schéma `plugins` (champs optionnels) et les libs `plugin-deps`, `install` | 4h | T-020-01 | 2 | ✅ |
+| T-020-04 | [OPS] | Étendre le contrôle de contenu : références, dépendances, messages de l’US | 2,5h | T-020-01, T-020-03 | 2 | ✅ |
 | T-020-05 | [TEST] | Écrire les tests RED du contrôle dist des images de plugins | 2h | - | 3 | 🔲 |
 | T-020-06 | [OPS] | Contrôle dist des images et script d’optimisation des captures (`sharp`) | 4,5h | T-019-02, T-020-05 | 3 | 🔲 |
-| T-020-07 | [CONTENT] | Revoir et sélectionner les captures (49 fichiers, 5,1 Mo), rédiger les textes alternatifs | 3h | T-019-01 | 2 | 🔲 |
-| T-020-08 | [OPS] | Optimiser et enregistrer les captures retenues | 1,5h | T-020-06, T-020-07 | 2 | 🔲 |
-| T-020-09 | [FE-WEB] | Composants `CompatMatrix` et `PluginDeps` | 3,5h | T-020-02, T-020-03 | 2 | 🔲 |
-| T-020-10 | [FE-WEB] | Composant `InstallSnippet` et script de copie (< 1 Ko) | 3h | T-020-02, T-020-03 | 2 | 🔲 |
-| T-020-11 | [FE-WEB] | Composant `Gallery` (captures optimisées) | 2,5h | T-020-02, T-020-08 | 2 | 🔲 |
-| T-020-12 | [FE-WEB] | `PluginLayout` et page `/open-source/sylius/[slug]/` | 4h | T-020-09, T-020-10, T-020-11 | 2 | 🔲 |
-| T-020-13 | [CONTENT] | Fiches B2B (1/2) : Company Accounts, Order Hold, Purchase Approval, Trade Credit, Quote Request | 5,5h | T-020-03, T-020-08 | 2 | 🔲 |
-| T-020-14 | [CONTENT] | Fiches B2B (2/2) : Quick Order, Tier Pricing, Container Fill, B2B MCP | 5h | T-020-03, T-020-08 | 2 | 🔲 |
-| T-020-15 | [CONTENT] | Fiches conformité UE : Factur-X, GPSR, Withdrawal | 3h | T-020-03 | 2 | 🔲 |
-| T-020-16 | [CONTENT] | Fiches back-office : Admin Order Creation, Audit Log, Bulk Actions, Command Palette, Timeline | 5h | T-020-03 | 2 | 🔲 |
-| T-020-17 | [CONTENT] | Fiches IA et intégrations : Agentic Feeds, AI Catalog Copilot, Webhook Outbox | 3h | T-020-03, T-020-08 | 2 | 🔲 |
-| T-020-18 | [FE-WEB] | Resserrer le schéma : champs de fiche obligatoires | 1h | T-020-13, T-020-14, T-020-15, T-020-16, T-020-17 | 2 | 🔲 |
-| T-020-19 | [TEST] | Vérification GREEN : `make ci`, axe sur 20 fiches, Lighthouse | 3,5h | T-020-04, T-020-12, T-020-18 | 2 | 🔲 |
-| T-020-20 | [DOC] | Compléter le guide des plugins (fiche, captures, dépendances) | 1,5h | T-020-19 | 2 | 🔲 |
-| T-020-21 | [REV] | Revue d’US-020 : code et relecture éditoriale des 20 fiches | 4h | T-020-20 | 2 | 🔲 |
+| T-020-07 | [CONTENT] | Revoir et sélectionner les captures (49 fichiers, 5,1 Mo), rédiger les textes alternatifs | 3h | T-019-01 | 2 | ✅ |
+| T-020-08 | [OPS] | Optimiser et enregistrer les captures retenues | 1,5h | T-020-06, T-020-07 | 2 | ✅ |
+| T-020-09 | [FE-WEB] | Composants `CompatMatrix` et `PluginDeps` | 3,5h | T-020-02, T-020-03 | 2 | ✅ |
+| T-020-10 | [FE-WEB] | Composant `InstallSnippet` et script de copie (< 1 Ko) | 3h | T-020-02, T-020-03 | 2 | ✅ |
+| T-020-11 | [FE-WEB] | Composant `Gallery` (captures optimisées) | 2,5h | T-020-02, T-020-08 | 2 | ✅ |
+| T-020-12 | [FE-WEB] | `PluginLayout` et page `/open-source/sylius/[slug]/` | 4h | T-020-09, T-020-10, T-020-11 | 2 | ✅ |
+| T-020-13 | [CONTENT] | Fiches B2B (1/2) : Company Accounts, Order Hold, Purchase Approval, Trade Credit, Quote Request | 5,5h | T-020-03, T-020-08 | 2 | ✅ |
+| T-020-14 | [CONTENT] | Fiches B2B (2/2) : Quick Order, Tier Pricing, Container Fill, B2B MCP | 5h | T-020-03, T-020-08 | 2 | ✅ |
+| T-020-15 | [CONTENT] | Fiches conformité UE : Factur-X, GPSR, Withdrawal | 3h | T-020-03 | 2 | ✅ |
+| T-020-16 | [CONTENT] | Fiches back-office : Admin Order Creation, Audit Log, Bulk Actions, Command Palette, Timeline | 5h | T-020-03 | 2 | ✅ |
+| T-020-17 | [CONTENT] | Fiches IA et intégrations : Agentic Feeds, AI Catalog Copilot, Webhook Outbox | 3h | T-020-03, T-020-08 | 2 | ✅ |
+| T-020-18 | [FE-WEB] | Resserrer le schéma : champs de fiche obligatoires | 1h | T-020-13, T-020-14, T-020-15, T-020-16, T-020-17 | 2 | ✅ |
+| T-020-19 | [TEST] | Vérification GREEN : `make ci`, axe sur 20 fiches, Lighthouse | 3,5h | T-020-04, T-020-12, T-020-18 | 2 | ✅ |
+| T-020-20 | [DOC] | Compléter le guide des plugins (fiche, captures, dépendances) | 1,5h | T-020-19 | 2 | ✅ |
+| T-020-21 | [REV] | Revue d’US-020 : code et relecture éditoriale des 20 fiches | 4h | T-020-20 | 2 | 👀 |
 
 **Total estimé** : 70,5h (21 tâches)
 

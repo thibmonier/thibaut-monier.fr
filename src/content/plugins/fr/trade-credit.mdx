@@ -1,0 +1,53 @@
+---
+name: 'Trade Credit'
+tagline: 'Paiement en compte pour Sylius 2 : plafond de crédit, échéances nettes ou fin de mois, réservation atomique, relevé et relances.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-trade-credit-plugin
+packagist: tmonier/sylius-trade-credit-plugin
+license: MIT
+features:
+  - 'Compte de crédit par client : plafond, devise, blocage manuel, dépassement et blocage en cas de retard.'
+  - 'Conditions de paiement en jours nets ou fin de mois sur un moyen de paiement hors ligne.'
+  - 'Réservation atomique à la finalisation de la commande : jamais de dépassement, même en concurrence.'
+  - 'Relevé dans le compte client, avec plafond, engagé, disponible et échéances, et lecture par la Shop API.'
+  - 'Back-office : échéances ouvertes, filtre des retards, « Marquer comme payé », grand livre des mouvements.'
+  - 'Import de virements en lot (tout ou rien, idempotent), relances avant et après échéance, balance par ancienneté.'
+  - 'Avertissements sur les délais de paiement maximaux en France (L441-10, L441-11).'
+  - 'Connecteur facultatif pour lire plafond et encours dans un ERP, avec refus par défaut en cas de panne.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+requires:
+  - order-hold
+complements:
+  - facturx
+installSteps:
+  - "Enregistrer les bundles dans `config/bundles.php`, dépendances d’abord : `Tmonier\\SyliusOrderHoldPlugin\\TmonierSyliusOrderHoldPlugin`, `Tmonier\\SyliusTradeCreditPlugin\\TmonierSyliusTradeCreditPlugin`."
+  - 'Importer la configuration `@TmonierSyliusTradeCreditPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_trade_credit.yaml`.'
+  - 'Importer les routes avec `@TmonierSyliusTradeCreditPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_trade_credit.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin seulement).'
+  - 'Dans l’administration : créer un moyen de paiement hors ligne, ses conditions de paiement, puis un compte de crédit sur la fiche de chaque client approuvé.'
+screenshots:
+  - src: ../../../assets/plugins/trade-credit/releve.webp
+    alt: 'Relevé de crédit dans le compte client : plafond, montant engagé, disponible, échéances ouvertes et retard.'
+  - src: ../../../assets/plugins/trade-credit/compte-edition.webp
+    alt: 'Formulaire d’un compte de crédit dans le back-office : plafond, devise, blocages et conditions de paiement.'
+---
+
+Un client professionnel veut commander maintenant et payer à échéance, sans que le marchand perde le contrôle de son encours. Ce plugin ouvre un compte de crédit par client, réserve le montant au moment de la commande sans jamais dépasser le plafond, et suit les échéances. Le marchand encaisse, relance et rapproche les virements depuis le back-office.

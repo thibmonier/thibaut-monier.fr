@@ -1,0 +1,48 @@
+---
+name: 'Webhook Outbox'
+tagline: 'Webhooks sortants fiables pour Sylius 2 : capture atomique des événements, signatures Standard Webhooks, reprises et rejeu.'
+theme: ia-integrations
+repo:
+  owner: thibmonier
+  name: sylius-webhook-outbox-plugin
+packagist: tmonier/sylius-webhook-outbox-plugin
+license: MIT
+features:
+  - 'Événements écrits dans la transaction métier, quel que soit le point d’entrée : boutique, API, administration ou console.'
+  - 'Événements de commande, de client, de stock des variantes et événement de test, avec des schémas JSON fournis.'
+  - 'Enveloppe versionnée et charges utiles stables, sans mots de passe ni jetons.'
+  - 'Signatures Standard Webhooks v1, vérifiées contre les vecteurs de la spécification.'
+  - 'Reprises espacées sur environ trois jours, respect de `Retry-After`, lettres mortes après la dernière tentative.'
+  - 'Administration : points de terminaison, livraisons filtrables, nouvel essai et rejeu en masse.'
+  - 'Client HTTP qui bloque les réseaux privés, sans redirection, HTTPS seulement.'
+  - 'Purge, anonymisation d’un client et registre d’événements personnalisés.'
+compatibility:
+  matrix:
+    - sylius: '2.2 et 2.3'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusWebhookOutboxPlugin\\TmonierSyliusWebhookOutboxPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusWebhookOutboxPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_webhook_outbox.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusWebhookOutboxPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_webhook_outbox.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Lancer le worker `bin/console tmonier:webhook:dispatch` (cron ou boucle) et planifier la purge `bin/console tmonier:webhook:purge`.'
+  - 'Renseigner `framework.router.default_uri` pour que les URLs des charges utiles émises depuis la console pointent vers la boutique.'
+configExcerpt: |
+  tmonier_sylius_webhook_outbox:
+      enabled: true
+      retry_schedule: [0, 5, 300, 1800, 7200, 18000, 36000, 50400, 72000, 86400]
+      timeout: 15
+      max_duration: 30
+      retention_days: 30
+      allow_http_endpoints: false
+---
+
+Notifier un ERP ou un outil externe quand une commande change ne doit ni perdre d’événement ni en envoyer un pour une transaction annulée. Ce plugin applique le patron « outbox » : l’événement est écrit dans la transaction du changement, puis livré avec signature et reprises. Le back-office permet de suivre les livraisons et de les rejouer.

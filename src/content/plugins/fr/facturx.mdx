@@ -1,0 +1,48 @@
+---
+name: 'Factur-X'
+tagline: 'Factures électroniques Factur-X (EN 16931) pour Sylius 2 : PDF/A-3 avec XML intégré, produit à partir de l’Invoicing Plugin.'
+theme: conformite-ue
+repo:
+  owner: thibmonier
+  name: sylius-facturx-plugin
+packagist: tmonier/sylius-facturx-plugin
+license: MIT
+features:
+  - 'PDF/A-3 avec `factur-x.xml` et métadonnées XMP Factur-X, produit avant le stockage de la facture.'
+  - 'XML au profil EN 16931 (COMFORT) : lignes, remises, livraison, TVA multitaux, totaux réconciliés au centime.'
+  - 'Téléchargement du XML depuis la page facture, la liste des factures et la commande.'
+  - 'Réglages par canal : raison sociale, SIREN, SIRET, TVA, forme juridique, coordonnées bancaires, conditions de paiement.'
+  - 'Mentions françaises 2026 : catégorie d’opération, état de paiement, SIREN de l’acheteur, option TVA sur les débits.'
+  - 'Exonérations de TVA avec motif et code VATEX.'
+  - 'Commande pour régénérer en Factur-X les PDF déjà émis.'
+  - 'Événement fournissant le XML et le PDF à un connecteur de plateforme agréée.'
+compatibility:
+  matrix:
+    - sylius: '2.2 et 2.3'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+externalRequires:
+  - sylius/invoicing-plugin
+installSteps:
+  - 'Installer et configurer d’abord le plugin officiel de facturation (Invoicing Plugin) avec la génération de PDF.'
+  - "Enregistrer les bundles dans `config/bundles.php`, dépendances d’abord : `Sylius\\InvoicingPlugin\\SyliusInvoicingPlugin`, `Tmonier\\SyliusFacturXPlugin\\TmonierSyliusFacturXPlugin`."
+  - 'Importer la configuration `@TmonierSyliusFacturXPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_facturx.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusFacturXPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_facturx.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Dans l’administration, ouvrir chaque canal, activer Factur-X et renseigner les données du vendeur ainsi que les données de facturation du canal.'
+  - 'Facultatif : régénérer les anciens PDF avec `bin/console tmonier:facturx:regenerate-pdfs --dry-run`.'
+configExcerpt: |
+  tmonier_sylius_facturx:
+      enabled: true
+      profile: en16931
+      attachment_relationship: Alternative
+---
+
+La facturation électronique impose en France un format structuré, et un PDF simple ne suffit plus. Ce plugin transforme les factures du plugin officiel de facturation de Sylius en PDF/A-3 qui embarque un XML au profil EN 16931. Les liens de téléchargement existants servent directement le nouveau fichier.

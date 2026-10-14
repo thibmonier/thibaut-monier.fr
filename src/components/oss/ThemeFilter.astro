@@ -1,0 +1,40 @@
+---
+import { THEMES, THEME_LABELS, countLabel } from '../../lib/plugins.ts';
+
+interface Props {
+  total: number;
+}
+
+const { total } = Astro.props;
+const button =
+  'inline-flex min-h-11 items-center rounded-md border border-border px-4 font-medium hover:border-accent aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-accent-fg';
+---
+
+<!-- Révélé par plugin-filter.ts : sans JavaScript, le catalogue reste groupé par thème avec des ancres. -->
+<div data-filter hidden class="mb-8 space-y-4">
+  <div>
+    <label for="plugin-search" class="block font-medium">
+      Rechercher un plugin
+    </label>
+    <input
+      id="plugin-search"
+      type="search"
+      autocomplete="off"
+      class="mt-1 min-h-11 w-full max-w-md rounded-md border border-border bg-bg px-3"
+    />
+  </div>
+  <div role="group" aria-label="Filtrer par thème" class="flex flex-wrap gap-2">
+    <button type="button" data-theme-button="all" aria-pressed="true" class={button}>
+      Tous
+    </button>
+    {THEMES.map((theme) => (
+      <button type="button" data-theme-button={theme} aria-pressed="false" class={button}>
+        {THEME_LABELS[theme]}
+      </button>
+    ))}
+  </div>
+  <p data-count role="status" aria-live="polite" aria-atomic="true" class="font-medium">
+    {countLabel(total)}
+  </p>
+  <p data-empty hidden class="rounded-md border border-border bg-surface p-4"></p>
+</div>

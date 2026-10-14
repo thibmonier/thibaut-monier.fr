@@ -3,6 +3,7 @@ import { file, glob } from 'astro/loaders';
 import { experienceSchema } from './content/schemas/experiences.ts';
 import { homeSchema } from './content/schemas/home.ts';
 import { legalFrontmatterSchema } from './content/schemas/legal.ts';
+import { createPluginSchema } from './content/schemas/plugins.ts';
 
 // Point d'enregistrement unique des collections (zone append-only : un import et une clé par collection).
 const home = defineCollection({ loader: file('./src/data/home.yaml'), schema: homeSchema });
@@ -19,4 +20,10 @@ const experiences = defineCollection({
   schema: experienceSchema,
 });
 
-export const collections = { home, legal, experiences };
+// US-019, US-020 : catalogue des plugins Sylius (corps MDX = problème résolu).
+const plugins = defineCollection({
+  loader: glob({ pattern: 'fr/*.mdx', base: './src/content/plugins' }),
+  schema: ({ image }) => createPluginSchema(image),
+});
+
+export const collections = { home, legal, experiences, plugins };

@@ -1,0 +1,50 @@
+---
+name: 'Agentic Feeds'
+tagline: 'Flux produits pour assistants d’achat IA et comparateurs (Google Merchant Center, OpenAI, Stripe) pour Sylius 2.'
+theme: ia-integrations
+repo:
+  owner: thibmonier
+  name: sylius-agentic-feeds-plugin
+license: MIT
+features:
+  - 'Google Merchant Center en RSS 2.0 ou fichier tabulé, flux produit OpenAI compressé et catalogue CSV Stripe.'
+  - 'Un flux par marché : canal, langue, devise convertie et pays cible.'
+  - 'Prix cohérents avec la boutique, hors taxes pour les États-Unis et le Canada, prix soldé conforme à la règle Omnibus.'
+  - 'Un article par variante active, groupé par produit, avec GTIN, MPN et marque.'
+  - 'Validation de chaque article, rapport par flux et code de sortie utilisable en intégration continue.'
+  - 'Génération sélective : seuls les flux périmés sont régénérés par la tâche planifiée.'
+  - 'URLs stables avec jeton d’accès facultatif, `Last-Modified` et stockage Flysystem.'
+  - 'Données structurées schema.org `Product` avec une offre par variante.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+complements:
+  - webhook-outbox
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusAgenticFeedsPlugin\\TmonierSyliusAgenticFeedsPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusAgenticFeedsPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_agentic_feeds.yaml`.'
+  - 'Importer les routes (pages d’administration et URLs publiques `/feeds/...`) avec `@TmonierSyliusAgenticFeedsPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_agentic_feeds.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (tables du plugin).'
+  - 'Créer les flux dans « Marketing > Flux produits », puis planifier `bin/console tmonier:feeds:generate --stale` toutes les 15 minutes.'
+screenshots:
+  - src: ../../../assets/plugins/agentic-feeds/flux-produits.webp
+    alt: 'Liste des flux produits du back-office : format, cible, dernière génération, fichiers et actions.'
+  - src: ../../../assets/plugins/agentic-feeds/anomalies.webp
+    alt: 'Anomalies d’un flux : gravité, article, produit et description du problème, avec filtre par flux.'
+---
+
+Les assistants d’achat et les comparateurs lisent des flux produits, chacun dans son propre format. Ce plugin génère ces flux depuis le catalogue Sylius, par canal, langue et devise, en vérifiant chaque article avant diffusion. Les articles en erreur sont exclus et listés dans un rapport, plutôt que publiés avec des données fausses.

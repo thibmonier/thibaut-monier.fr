@@ -193,3 +193,10 @@ _(aucune tâche)_
 | Lot 2 : Catalogue et fiches Sylius (W2) | 37 | 114,5h |
 | Lot 3 : Projets et collecte des métriques (W3) | 32 | 85,5h |
 | Phase 4 : intégration | 10 | 19,5h |
+
+## Lot 2 (W2) : état en fin de session
+
+- ✅ US-019 : T-019-01 à T-019-12 ; 👀 T-019-13 (revue) ; T-019-14 reste en phase 4.
+- ✅ US-020 : toutes les tâches du lot 2 sauf T-020-21 (👀 revue) ; T-020-05 et T-020-06 (contrôle dist des images, `optimize-captures.ts`) restent au lot 3 : les captures ont été optimisées avec `sharp` par un script jetable hors dépôt.
+- ✅ US-021 (affichage) : T-021-03, T-021-07, T-021-10, T-021-11 ; 👀 T-021-12. La collecte (T-021-01, 02, 04, 05, 06, 08, 09) reste au lot 3.
+

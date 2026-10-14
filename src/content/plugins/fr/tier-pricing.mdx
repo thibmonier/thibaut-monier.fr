@@ -1,0 +1,50 @@
+---
+name: 'Tier Pricing'
+tagline: 'Prix dégressifs par quantité pour Sylius 2 : paliers par canal et groupe de clients, affichés sur la fiche produit et dans le panier.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-tier-pricing-plugin
+packagist: tmonier/sylius-tier-pricing-plugin
+license: MIT
+features:
+  - 'Règles à partir de N pièces : prix unitaire fixe ou pourcentage de remise, par canal et groupe de clients, avec dates.'
+  - 'Ciblage d’une variante, de toutes les variantes d’un produit ou d’un taxon et de ses enfants.'
+  - 'Priorité claire : variante ou produit d’abord, puis taxon le plus profond, puis prix normal.'
+  - 'Prix qui ne monte jamais avec la quantité ; le plus bas des prix applicables l’emporte.'
+  - 'Cumul avec les promotions du catalogue au choix par règle ; promotions du panier toujours appliquées.'
+  - 'Tableau des paliers sur la fiche produit et incitations « ajoutez 3 de plus » dans le panier.'
+  - 'Import et export CSV en masse avec simulation, CRUD Admin API et lecture Shop API.'
+  - 'Cache étiqueté par produit, canal et groupe de clients.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusTierPricingPlugin\\TmonierSyliusTierPricingPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusTierPricingPlugin/config/config.yaml` dans `config/packages/tmonier_sylius_tier_pricing.yaml`.'
+  - 'Importer les routes d’administration avec `@TmonierSyliusTierPricingPlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_tier_pricing.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (une table et une contrainte CHECK).'
+screenshots:
+  - src: ../../../assets/plugins/tier-pricing/regle-edition.webp
+    alt: 'Formulaire d’édition d’une règle de prix dégressif dans le back-office : portée, quantité, remise et période.'
+  - src: ../../../assets/plugins/tier-pricing/regles-liste.webp
+    alt: 'Liste des règles « Volume pricing » du back-office, avec produit, canal, quantité et remise.'
+  - src: ../../../assets/plugins/tier-pricing/panier-paliers.webp
+    alt: 'Panier avec les mentions de prix dégressif par ligne et l’incitation à ajouter des pièces.'
+---
+
+Les acheteurs professionnels attendent un prix qui baisse avec la quantité, sans négocier chaque commande. Ce plugin applique des paliers par variante, produit ou taxon, et laisse le processeur de commande recalculer le panier. Les paliers restent présentés comme des prix conditionnels, conformes aux règles d’affichage des prix.

@@ -1,0 +1,51 @@
+---
+name: 'Command Palette'
+tagline: 'Palette de commandes (Ctrl+K) pour le back-office Sylius 2 : recherche globale des commandes, clients, produits et pages.'
+theme: back-office
+repo:
+  owner: thibmonier
+  name: sylius-command-palette-plugin
+packagist: tmonier/sylius-command-palette-plugin
+license: MIT
+features:
+  - 'Commandes par numéro exact puis par client, clients par e-mail, nom ou téléphone, avec sous-titres utiles.'
+  - 'Produits par nom ou code, variantes par code, promotions et coupons.'
+  - 'Toutes les pages du menu d’administration, y compris celles d’autres plugins, et les actions de création.'
+  - 'Sources personnalisées par un service étiqueté.'
+  - 'Navigation au clavier et dialogue accessible : combobox, piège de focus, focus restauré.'
+  - 'Thèmes clair et sombre, traductions dans sept langues.'
+  - 'Limitation de débit configurable par administrateur.'
+compatibility:
+  matrix:
+    - sylius: '2.2 et 2.3'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusCommandPalettePlugin\\TmonierSyliusCommandPalettePlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusCommandPalettePlugin/config/config.yaml` dans `config/packages/tmonier_sylius_command_palette.yaml`.'
+  - 'Importer la route d’administration avec `@TmonierSyliusCommandPalettePlugin/config/routes.yaml` dans `config/routes/tmonier_sylius_command_palette.yaml`.'
+  - 'Aucune migration : le plugin n’a pas de table.'
+  - 'Installer les assets (un fichier JavaScript et un fichier CSS, sans compilation) : `bin/console assets:install`.'
+configExcerpt: |
+  tmonier_sylius_command_palette:
+      limit_per_group: 5
+      providers:
+          orders: true
+          customers: true
+          products: true
+          promotions: true
+          pages: true
+      rate_limit:
+          enabled: true
+          per_admin: 120
+          interval: '1 minute'
+---
+
+Dans un back-office chargé, retrouver une commande ou une page passe par plusieurs menus. Ce plugin ajoute une palette ouverte au clavier qui cherche en même temps dans les commandes, clients, produits, promotions et pages d’administration. Elle ne demande aucune étape de compilation ni dépendance JavaScript.
