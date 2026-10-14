@@ -146,6 +146,15 @@ test.describe('Scénario : lecture non technique', () => {
 });
 
 test.describe('Scénario : accès depuis la page profil', () => {
+  test('la mention « Contributeur career-ops » de /parcours/ ouvre l’étude de cas', async ({
+    page,
+  }) => {
+    await page.goto('/parcours/');
+    await page.getByRole('link', { name: 'Contributeur career-ops' }).click();
+    await expect(page).toHaveURL(/\/open-source\/career-ops\/$/);
+    await expect(page.locator('main a[data-back]')).toHaveText(/Retour au profil/);
+  });
+
   test('« Retour au profil » est visible en tête de page, avant le titre, et ramène au parcours', async ({
     page,
   }) => {

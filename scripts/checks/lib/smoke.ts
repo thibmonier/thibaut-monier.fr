@@ -1,7 +1,16 @@
 // Logique du contrôle de fumée post-déploiement (T-001-15). `fetch` est injectable pour les tests.
 export type FetchLike = (url: string, init?: RequestInit) => Promise<Response>;
 
-export const OK_PATHS = ['/', '/parcours/', '/contact/', '/mentions-legales/'] as const;
+export const OK_PATHS = [
+  '/',
+  '/parcours/',
+  '/contact/',
+  '/mentions-legales/',
+  '/competences/',
+  '/open-source/',
+  '/open-source/career-ops/',
+  '/open-source/tailsfadmin/',
+] as const;
 export const UNKNOWN_PATH = '/__smoke-introuvable__/';
 
 // En-têtes dont la simple présence est exigée (valeurs détaillées : tests e2e `headers.spec.ts`).

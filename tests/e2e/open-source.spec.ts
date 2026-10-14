@@ -203,3 +203,20 @@ test.describe('Scénario : SEO et réseau', () => {
     );
   });
 });
+
+test.describe('Scénario : autres projets depuis le hub', () => {
+  test('tailsfadmin et career-ops sont accessibles, le catalogue reste à 20 plugins', async ({
+    page,
+  }) => {
+    await page.goto('/open-source/');
+    await expect(visibleCards(page)).toHaveCount(20);
+    const section = page.locator('[data-other-projects]');
+    await expect(section.getByRole('heading', { name: 'Autres projets', level: 2 })).toBeVisible();
+    await expect(section.locator('[data-project]')).toHaveCount(2);
+    await section.getByRole('link', { name: 'tailsfadmin' }).click();
+    await expect(page).toHaveURL(/\/open-source\/tailsfadmin\/$/);
+    await page.goto('/open-source/');
+    await page.locator('[data-other-projects]').getByRole('link', { name: 'career-ops' }).click();
+    await expect(page).toHaveURL(/\/open-source\/career-ops\/$/);
+  });
+});

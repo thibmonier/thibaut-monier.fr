@@ -3,6 +3,7 @@ import type { AddressInfo } from 'node:net';
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   checkSecurityHeaders,
+  OK_PATHS,
   normalizeBaseUrl,
   runSmoke,
   type FetchLike,
@@ -17,7 +18,7 @@ const SECURE = {
 // Site factice : 200 sur les pages connues, 404 ailleurs, 405 hors GET/HEAD ; options pour dégrader.
 function fakeSite(options: { headers?: Record<string, string>; softNotFound?: boolean } = {}) {
   const headers = options.headers ?? SECURE;
-  const known = new Set(['/', '/parcours/', '/contact/', '/mentions-legales/']);
+  const known = new Set<string>(OK_PATHS);
   const fetchFn: FetchLike = async (url, init) => {
     const { pathname } = new URL(url);
     const method = init?.method ?? 'GET';
@@ -58,6 +59,25 @@ describe('runSmoke', () => {
   it('passe sur un site conforme', async () => {
     expect(await runSmoke('http://localhost:8080', fakeSite())).toEqual([]);
   });
+  it('couvre le hub open source, les deux projets et les compétences', () => {
+    expect(OK_PATHS).toEqual(
+      expect.arrayContaining([
+        '/competences/',
+        '/open-source/',
+        '/open-source/career-ops/',
+        '/open-source/tailsfadmin/',
+      ]),
+    );
+  });
+  it('échoue si une page de la vitrine répond 404', async () => {
+    const fetchFn: FetchLike = async (url, init) => {
+      const { pathname } = new URL(url);
+      const status = pathname === '/open-source/career-ops/' ? 404 : 200;
+      return new Response('x', { status: init?.method === 'POST' ? 405 : status, headers: SECURE });
+    };
+    const errors = await runSmoke('http://localhost:8080', fetchFn);
+    expect(errors).toContain('GET /open-source/career-ops/ : statut 404, attendu 200');
+  });
   it('échoue si la CSP est absente', async () => {
     const { 'content-security-policy': _csp, ...sansCsp } = SECURE;
     const errors = await runSmoke('http://localhost:8080', fakeSite({ headers: sansCsp }));
@@ -78,7 +98,7 @@ describe('runSmoke', () => {
       throw new Error('ECONNREFUSED');
     };
     const errors = await runSmoke('http://localhost:1', down);
-    expect(errors).toHaveLength(6);
+    expect(errors).toHaveLength(OK_PATHS.length + 2);
     expect(errors[0]).toContain('ECONNREFUSED');
   });
 });
