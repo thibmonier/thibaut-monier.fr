@@ -14,10 +14,10 @@ EPIC-006 : SEO, GEO et mesure
 **Afin de** arriver directement sur la page qui répond à mon besoin (par exemple « Factur-X Sylius ») et contacter l'expert en moins de 2 minutes
 
 ### Conversation
-- Types JSON-LD (PRD) : Person, ProfilePage (profil), BlogPosting (articles), SoftwareSourceCode (fiches plugins), BreadcrumbList (toutes pages), FAQPage (articles avec FAQ).
+- Types JSON-LD (PRD) : Person, ProfilePage (profil), BlogPosting (articles), SoftwareSourceCode (fiches plugins), ItemList (`/open-source/`), BreadcrumbList (toutes pages), FAQPage (articles avec FAQ, 3 articles à la livraison).
 - Les fiches plugins sont livrées par US-020 (EPIC-005) : la story ne peut pas être terminée avant. Que faire si EPIC-005 glisse : livrer d'abord Person, ProfilePage, BlogPosting et FAQPage ?
 - `llms.txt` : contenu minimal (présentation, liens clés vers profil, plugins, articles) ; mise à jour manuelle ou générée au build ?
-- Le nom de domaine définitif est requis pour les URL absolues (question ouverte n°1).
+- Arbitrage sprint 3 (2026-10-14) : URL absolues relatives à `PUBLIC_SITE_URL` (domaine provisoire accepté), avec contrôle interdisant tout domaine en dur ; `lastmod` = date du contenu, sinon date du build (E18) ; `<title>` : le suffixe de marque n'est ajouté que s'il tient dans 60 caractères (`seoTitle` sinon).
 
 ### Validation INVEST
 - [x] Independent : bloquée seulement par des contenus existants (US-005, US-009, US-020)
@@ -34,7 +34,7 @@ EPIC-006 : SEO, GEO et mesure
 Scenario: JSON-LD valide sur chaque type de page
 GIVEN le site construit
 WHEN le validateur de données structurées analyse une page profil, un article avec FAQ et une fiche plugin
-THEN la page profil expose Person et ProfilePage, l'article expose BlogPosting et FAQPage, la fiche plugin expose SoftwareSourceCode
+THEN la page profil expose Person et ProfilePage, l'article expose BlogPosting (et FAQPage pour les 3 articles à FAQ), la fiche plugin expose SoftwareSourceCode, la page "/open-source/" expose ItemList
 AND toutes les pages exposent un BreadcrumbList
 AND aucune erreur de validation n'est signalée
 ```
@@ -44,7 +44,7 @@ AND aucune erreur de validation n'est signalée
 Scenario: Sitemap complet
 GIVEN le site construit avec N pages indexables
 WHEN P-002 (ou un robot) ouvre "/sitemap-index.xml"
-THEN toutes les pages indexables y figurent avec URL absolue et date de modification
+THEN toutes les pages indexables y figurent avec URL absolue et `lastmod` (date du contenu, sinon date du build)
 AND les pages en "noindex" en sont exclues
 
 Scenario: Fichiers pour robots et moteurs IA
@@ -70,7 +70,8 @@ THEN la CI échoue avec le message "JSON-LD Person : propriété interdite 'tele
 - [ ] Schéma de contenu : champs nécessaires au JSON-LD (dates, auteur, résumé, version, dépôt) obligatoires et validés au build
 - [ ] Composant `JsonLd` générique et générateurs par type ; `BreadcrumbList` dans le layout
 - [ ] Sitemap, `robots.txt`, `llms.txt` générés au build ; canonical absolu partout
-- [ ] Meta : `title` ≤ 60 caractères, `description` ≤ 160 caractères, unicité vérifiée en CI
+- [ ] Contrôle interdisant tout domaine en dur ; toutes les URL absolues dérivent de `PUBLIC_SITE_URL` (C4)
+- [ ] Meta : `title` ≤ 60 caractères (suffixe de marque ajouté seulement s'il tient), `description` ≤ 160 caractères, unicité vérifiée en CI
 - [ ] Liste blanche des propriétés de Person (nom, intitulé, URL, réseaux, localisation générale)
 - [ ] Performance : JSON-LD inline < 5 Ko par page ; Lighthouse SEO = 100
 

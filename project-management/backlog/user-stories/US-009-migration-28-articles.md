@@ -10,14 +10,15 @@ EPIC-003 : Blog migré
 
 ### Carte
 **En tant que** P-004 : Sophie, tech lead qui pratique l'agentic engineering
-**Je veux** retrouver les 28 articles du blog avec leur contenu, leurs images et leur FAQ à une adresse stable
+**Je veux** retrouver les 28 articles du blog avec leur contenu, leurs images et leurs FAQ (3 articles) à une adresse stable
 **Afin de** relire, citer et partager les retours d'expérience sans perte de contenu ni lien cassé
 
 ### Conversation
-- Source : `blog/src/content/blog` (Astro). Le frontmatter (title, description, pubDate, updatedDate, author, image, imageAlt, excerpt, tags, category, series, draft, faq) est-il conservé tel quel ? Le champ `author` doit pointer vers Thibaut Monier.
-- Structure d'URL cible : `/blog/<slug>` en conservant les slugs existants ; cette décision conditionne US-010.
+- Source : `blog/src/content/blog` (Astro). Le frontmatter source est normalisé vers le schéma C1 (description de 50 à 160 caractères réécrite à la main, `seoTitle` obligatoire au-delà de 60 caractères de titre, champ `validated`) ; le champ `author` pointe vers Thibaut Monier.
+- Structure d'URL cible : `/blog/<slug>/` (barre finale, C10) en conservant les slugs existants ; cette décision conditionne US-010.
 - Les articles `draft: true` éventuels restent-ils non publiés ? Les contenus datés dans le futur sont-ils programmés (exigence PRD) ?
-- Mentions de la marque Agentic Agency dans le corps : à conserver, adapter ou signaler ? Liens internes à réécrire.
+- Mentions de la marque Agentic Agency dans le corps : aucun corps d'article ne la cite (E12) ; le bloc auteur, les CTA de marque et les boutons de partage ne sont pas migrés. Pieds biographiques « Operations Director » retirés et remplacés par une note d'auteur sobre alignée sur le profil du site (E10, E11). Liens vers les pages non migrées : URL absolue de l'ancien site.
+- Arbitrage sprint 3 (2026-10-14) : l'agent rédige 3 FAQ de 3 questions pour 3 articles qu'il choisit, à partir du contenu de l'article uniquement, marquées `validated: false` (à valider par le PO) ; bio alignée sur le profil du site (E11), aucune mention d'« Operations Director » ; l'index livré par US-009 est une liste unique, remplacée par la pagination de 12 par page d'US-011 (E14).
 
 ### Validation INVEST
 - [x] Independent : ne dépend que du layout
@@ -34,17 +35,24 @@ EPIC-003 : Blog migré
 Scenario: Les 28 articles sont publiés
 GIVEN le dépôt contenant 28 fichiers d'articles au frontmatter valide
 WHEN le site est construit
-THEN 28 pages d'article sont générées sous "/blog/<slug>"
-AND la page d'index du blog liste 28 articles par date décroissante
+THEN 28 pages d'article sont générées sous "/blog/<slug>/"
+AND l'index du blog donne accès aux 28 articles par date décroissante (liste unique à la livraison d'US-009, paginée par US-011)
 AND chaque article affiche titre, date, catégorie, image avec texte alternatif et temps de lecture
 ```
 
 ### Scénarios alternatifs
 ```gherkin
 Scenario: Article avec FAQ
-GIVEN un article dont le frontmatter contient un champ "faq" de N questions
+GIVEN un des 3 articles à FAQ (3 questions rédigées, "validated: false")
 WHEN P-004 ouvre l'article
-THEN les N questions s'affichent en section repliable avec réponses visibles au clavier
+THEN les 3 questions s'affichent en section repliable, réponses accessibles au clavier
+
+Scenario: Pied biographique aligné
+GIVEN les 28 articles migrés
+WHEN P-004 parcourt leurs pieds d'article et leurs liens
+THEN aucun article ne contient "Operations Director"
+AND une note d'auteur renvoie vers "/parcours/"
+AND les liens vers les pages non migrées pointent vers l'URL absolue de l'ancien site
 
 Scenario: Publication programmée
 GIVEN un article dont "pubDate" est dans le futur
@@ -67,8 +75,8 @@ THEN le build échoue avec le message "Image introuvable : <chemin> (article <sl
 ```
 
 ### Critères techniques (site statique)
-- [ ] Collection `blog` avec schéma strict (champs du frontmatter existant ; `image` + `imageAlt` obligatoires ensemble ; `faq` optionnel)
-- [ ] Routes `/blog` et `/blog/[slug]` ; composants `ArticleCard`, `ArticleLayout`, `Faq`
+- [ ] Collection `blog` avec schéma strict (schéma C1 : `description` de 50 à 160 caractères, `seoTitle` obligatoire au-delà de 60 caractères de titre, `validated` ; `image` + `imageAlt` obligatoires ensemble ; `faq` optionnel)
+- [ ] Routes `/blog/` et `/blog/[slug]/` (barre finale, `trailingSlash: 'always'`) ; composants `ArticleCard`, `ArticleLayout`, `Faq`
 - [ ] Responsive : largeur de lecture ≤ 75 caractères, images adaptatives
 - [ ] WCAG 2.2 AA : hiérarchie de titres, textes alternatifs non vides, blocs de code défilables au clavier
 - [ ] SEO : `title`, `description`, `canonical`, dates `datePublished`/`dateModified` ; données structurées traitées en US-024

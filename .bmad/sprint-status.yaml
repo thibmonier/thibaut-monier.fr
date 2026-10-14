@@ -1,6 +1,6 @@
 # Statut des stories (single writer : orchestrateur). Généré depuis project-management/backlog le 2026-10-14
 project: thibaut-monier.fr
-current_sprint: 2
+current_sprint: 3
 sprints:
   - number: 1
     name: sprint-001-walking_skeleton
@@ -71,7 +71,7 @@ sprints:
         file: project-management/backlog/user-stories/US-029-mentions-legales-vie-privee.md
   - number: 2
     name: sprint-002-preuves_profil_open_source
-    status: review
+    status: done
     points: 25
     metadata:
       sprint_id: sprint-002
@@ -138,14 +138,20 @@ sprints:
         file: project-management/backlog/user-stories/US-023-etude-cas-contributions-career-ops.md
   - number: 3
     name: sprint-003-blog_migre_seo
-    status: planned
+    status: ready
     points: 25
+    metadata:
+      sprint_id: sprint-003
+      start_date: 2026-11-12
+      end_date: 2026-11-25
+      capacity_points: 25
+      goal: "Rapatrier les articles d'Agentic Agency sur le nom propre, avec le nouveau domaine comme référence, et rendre tout le site lisible par les moteurs classiques et IA."
     stories:
       - id: US-009
         title: "Migration des 28 articles d'Agentic Agency"
         epic: EPIC-003
         points: 5
-        status: backlog
+        status: ready-for-dev
         blocked_by: []
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-009-migration-28-articles.md
@@ -153,7 +159,7 @@ sprints:
         title: "Canonical sur le nouveau domaine et table de correspondance prête pour les redirections"
         epic: EPIC-003
         points: 2
-        status: backlog
+        status: ready-for-dev
         blocked_by: [US-009]
         depends_on: [US-003, US-009]
         file: project-management/backlog/user-stories/US-010-redirections-301-canonical.md
@@ -161,7 +167,7 @@ sprints:
         title: "Navigation du blog : catégories, tags, séries, pagination"
         epic: EPIC-003
         points: 3
-        status: backlog
+        status: ready-for-dev
         blocked_by: [US-009]
         depends_on: [US-009]
         file: project-management/backlog/user-stories/US-011-navigation-blog.md
@@ -169,7 +175,7 @@ sprints:
         title: "Recherche plein texte côté client (Pagefind)"
         epic: EPIC-003
         points: 2
-        status: backlog
+        status: ready-for-dev
         blocked_by: [US-009]
         depends_on: [US-009]
         file: project-management/backlog/user-stories/US-012-recherche-pagefind.md
@@ -177,7 +183,7 @@ sprints:
         title: "Flux RSS"
         epic: EPIC-003
         points: 2
-        status: backlog
+        status: ready-for-dev
         blocked_by: [US-009]
         depends_on: [US-009]
         file: project-management/backlog/user-stories/US-013-flux-rss.md
@@ -185,7 +191,7 @@ sprints:
         title: "SEO technique et données structurées"
         epic: EPIC-006
         points: 5
-        status: backlog
+        status: ready-for-dev
         blocked_by: [US-009]
         depends_on: [US-005, US-009, US-020]
         file: project-management/backlog/user-stories/US-024-seo-technique-donnees-structurees.md
@@ -193,7 +199,7 @@ sprints:
         title: "Images Open Graph générées par page"
         epic: EPIC-006
         points: 3
-        status: backlog
+        status: ready-for-dev
         blocked_by: []
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-025-images-open-graph.md
@@ -201,7 +207,7 @@ sprints:
         title: "Mesure d'audience sans cookie et suivi des conversions"
         epic: EPIC-006
         points: 3
-        status: backlog
+        status: ready-for-dev
         blocked_by: []
         depends_on: [US-007, US-008]
         file: project-management/backlog/user-stories/US-026-mesure-audience-conversions.md

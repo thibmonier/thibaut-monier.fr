@@ -16,7 +16,8 @@ EPIC-003 : Blog migré
 ### Conversation
 - Flux unique (tous les articles) ou aussi un flux par catégorie ? Un flux unique suffit au départ (YAGNI).
 - Contenu du flux : extrait (`excerpt`) ou article complet ? Impact sur la fréquentation du site.
-- Adresse du flux de l'ancien site : à rediriger en 301 (lien avec US-010).
+- Adresse du flux de l'ancien site : entrée `flux` dans la table de correspondance d'US-010, sans redirection appliquée (l'ancien site est intact et non public).
+- Arbitrage sprint 3 (2026-10-14) : aucun 301 de l'ancien flux (ancien site intact et non public, agentic-agency.fr répond 401) ; `Content-Type: application/rss+xml` et `charset` servis par une `location` nginx dédiée (E20).
 - Les contenus programmés dans le futur ne doivent jamais apparaître.
 
 ### Validation INVEST
@@ -58,10 +59,10 @@ GIVEN un titre contenant "&", "<" et des guillemets
 WHEN le flux est généré
 THEN le XML reste valide, caractères échappés, validé par le contrôle de la CI
 
-Scenario: Article sans description
-GIVEN un article sans "excerpt" ni "description"
-WHEN le build s'exécute
-THEN le build échoue avec le message "Flux RSS : description manquante pour <slug>"
+Scenario: Entrée sans description au niveau de la bibliothèque
+GIVEN une entrée fournie à "lib/rss.ts" sans "excerpt" ni "description" (cas inatteignable par le schéma, car "description" de 50 à 160 caractères est obligatoire en C1)
+WHEN le test unitaire de "lib/rss.ts" s'exécute
+THEN la fonction échoue avec le message "Flux RSS : description manquante pour <slug>"
 ```
 
 ### Critères techniques (site statique)
@@ -69,12 +70,12 @@ THEN le build échoue avec le message "Flux RSS : description manquante pour <sl
 - [ ] Balise `<link rel="alternate" type="application/rss+xml">` dans le layout, lien visible « S'abonner (RSS) » dans le pied de page
 - [ ] Responsive et WCAG 2.2 AA pour le lien d'abonnement (libellé explicite, cible ≥ 24 px)
 - [ ] SEO : URL absolues, `lastBuildDate`, `language` `fr`
-- [ ] Performance : flux < 100 Ko, `Content-Type: application/rss+xml` servi par nginx
+- [ ] Performance : flux < 100 Ko, `Content-Type: application/rss+xml` et `charset` servis par nginx (`location` dédiée)
 - [ ] Validation du flux dans la CI (US-003)
 
 ## Notes techniques (à confirmer en tech spec)
 - Paquet `@astrojs/rss` ; tri par `pubDate` décroissant ; filtrage identique à celui de la liste du blog.
-- Ancienne adresse du flux ajoutée à la table de redirections d'US-010 si elle existait.
+- Ancienne adresse du flux ajoutée à la table de correspondance d'US-010 (entrée `flux`), sans redirection appliquée ni 301.
 
 ## Estimation
 - **Story Points** : 2

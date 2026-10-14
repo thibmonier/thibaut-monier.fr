@@ -15,7 +15,8 @@ EPIC-006 : SEO, GEO et mesure
 
 ### Conversation
 - Gabarit : nom, titre de la page, catégorie ou type, logo discret. Une seule mise en page ou une par type de contenu ?
-- Génération au build (Satori + resvg ou équivalent) : durée de build acceptable pour une centaine de pages ?
+- Génération au build avec `astro-og-canvas` 0.13.2 (`canvaskit-wasm`, ADR-0012) : durée de build acceptable pour une centaine de pages ?
+- Arbitrage sprint 3 (2026-10-14) : `astro-og-canvas` 0.13.2 (et non Satori + resvg, E17) ; police Inter déjà présente dans `cv/fonts/` ; URL des images obtenue uniquement via `getOgImageUrl` (C9).
 - Les articles ayant déjà une image de couverture : l'utiliser telle quelle ou la composer avec le titre ?
 - Polices : les mêmes que le site (auto-hébergées).
 
@@ -68,14 +69,14 @@ AND le caractère non supporté est omis sans faire échouer le build
 
 ### Critères techniques (site statique)
 - [ ] Champs `title` et `description` obligatoires dans tous les schémas de page (déjà validés au build)
-- [ ] Endpoint statique `/og/[slug].png` ou génération en post-build
-- [ ] Composant `SeoHead` : balises og:* et twitter:* dérivées de la page
+- [ ] Endpoint statique `/og/<clé>.png` généré par `astro-og-canvas`, URL obtenue via `getOgImageUrl` (C9) ; les pages n'écrivent jamais `/og/` elles-mêmes
+- [ ] Composant `Seo.astro` existant : balises og:* et twitter:* dérivées de la page (pas de nouveau composant `SeoHead`)
 - [ ] Contraste du gabarit ≥ 4,5:1 ; texte alternatif `og:image:alt` renseigné
 - [ ] SEO : URL absolues ; image de repli pour la page d'accueil et les pages sans gabarit
 - [ ] Performance : génération < 3 min pour l'ensemble du site ; aucune image OG chargée par les visiteurs
 
 ## Notes techniques (à confirmer en tech spec)
-- Satori (HTML vers SVG) + resvg-js (SVG vers PNG), exécutés au build ; cache entre builds.
+- `astro-og-canvas` 0.13.2 (ADR-0012), exécuté au build ; cache entre builds.
 - Compatible avec l'image de l'article si `image` existe (à arbitrer).
 
 ## Estimation
