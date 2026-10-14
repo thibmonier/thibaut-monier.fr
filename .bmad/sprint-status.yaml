@@ -71,7 +71,7 @@ sprints:
         file: project-management/backlog/user-stories/US-029-mentions-legales-vie-privee.md
   - number: 2
     name: sprint-002-preuves_profil_open_source
-    status: ready
+    status: review
     points: 25
     metadata:
       sprint_id: sprint-002
@@ -84,7 +84,7 @@ sprints:
         title: "Compétences et réalisations filtrables par domaine"
         epic: EPIC-002
         points: 3
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-005]
         file: project-management/backlog/user-stories/US-006-competences-realisations-filtrables.md
@@ -92,7 +92,7 @@ sprints:
         title: "CV PDF téléchargeable généré au build"
         epic: EPIC-002
         points: 5
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-005]
         file: project-management/backlog/user-stories/US-007-cv-pdf-genere-au-build.md
@@ -100,7 +100,7 @@ sprints:
         title: "Catalogue des 20 plugins Sylius 2 filtrable par thème"
         epic: EPIC-005
         points: 5
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-019-catalogue-plugins-sylius-filtrable.md
@@ -108,7 +108,7 @@ sprints:
         title: "Fiche détaillée d'un plugin"
         epic: EPIC-005
         points: 5
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-019]
         depends_on: [US-019]
         file: project-management/backlog/user-stories/US-020-fiche-detaillee-plugin.md
@@ -116,7 +116,7 @@ sprints:
         title: "Données vivantes au build avec cache et repli"
         epic: EPIC-005
         points: 3
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-020]
         depends_on: [US-020]
         file: project-management/backlog/user-stories/US-021-donnees-vivantes-au-build.md
@@ -124,7 +124,7 @@ sprints:
         title: "Page du bundle Symfony tailsfadmin"
         epic: EPIC-005
         points: 2
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-022-page-bundle-tailsfadmin.md
@@ -132,7 +132,7 @@ sprints:
         title: "Étude de cas des contributions career-ops"
         epic: EPIC-005
         points: 2
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-023-etude-cas-contributions-career-ops.md

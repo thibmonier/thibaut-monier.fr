@@ -4,7 +4,23 @@
 >
 > Remarque : l'arbre était propre au début de la revue (builds Docker lancés sur HEAD). Pendant la revue, `tests/e2e/a11y.spec.ts` a été modifié localement sans commit (correctif probable du délai d'axe, voir B1). Ce correctif n'est ni commité ni vérifié en CI : il n'est pas pris en compte ici.
 
-## Verdict
+## Verdict révisé (seconde passe, HEAD `0053c07`)
+
+Les quatre bloquants B1 à B4 sont corrigés et vérifiés : voir « Seconde passe » en fin de document. Aucune régression constatée. La CI du run 38616206639 est verte : e2e **427 passed, 0 failed, 3 skipped** (les skips attendus), aucun test flaky, Lighthouse ≥ 0,95 sur les 4 axes pour 29 pages.
+
+| US | Verdict | Réserves |
+|----|---------|----------|
+| US-007 | **Done sous réserve PO** | T-007-01 et T-007-16 (validation PO) ; scénario « Échec de génération » sans test (N5) |
+| US-006 | **Done sous réserve PO** | T-006-01, années des réalisations à valider (`src/data/cv/achievements.yaml:2`) |
+| US-019 | **Done sous réserve PO** | Title du catalogue différent de la story (N8) |
+| US-020 | **Done sous réserve PO** | Pas de contrôle de build du poids et des EXIF des captures (N6) |
+| US-021 | **Done sous réserve PO** | Liste des dépôts dupliquée (N2) |
+| US-022 | **Done sous réserve PO** | Le scénario « Métriques disponibles » n'affiche plus la date de release de tailsfadmin (le tag v1.6.2 n'a pas de release GitHub) : c'est exact, mais incomplet par rapport au Gherkin. Arbitrage PO, ou publication d'une release GitHub v1.6.2 |
+| US-023 | **Done sous réserve PO** | Aucune |
+
+**Score révisé : 85/100.** Les 7 stories sont « Done sous réserve PO ». Les réserves communes à toutes restent ouvertes : phase 4 en cours (T-900-01 partiel, T-900-02 à T-900-06), déploiement, contrôle de fumée et validation PO sur la production (DoD §10), squash merge (DoD §1).
+
+## Verdict initial (première passe, HEAD `8bf7d6b`)
 
 | US | Titre | Verdict | Motif principal | Après correctifs bloquants |
 |----|-------|---------|-----------------|----------------------------|
@@ -183,3 +199,32 @@ Remédiation du 2026-10-14 (worker DoD). Rien n'est commité par le worker.
 | N2, N5, N6, N7, N10, N11, N12, N13 | Laissés : refactorings ou décisions hors périmètre « rapide et sûr » (N2, N11), tests de build absents (N5, N6), tableau des tâches (N7), décision PO (N10, N8), process Git (N12), sitemap (N13). |
 
 Reste de la phase 4 : T-900-02 à T-900-06 (scénarios inter-US dédiés, porte du sprint, déploiement, README et CHANGELOG, validation PO).
+
+## Seconde passe : vérification de la remédiation (HEAD `0053c07`)
+
+Constats d'origine rejoués sur HEAD. Le tableau « Suite donnée » ci-dessus est la déclaration du worker ; ce qui suit est vérifié indépendamment.
+
+| Point | Vérification | Statut |
+|-------|--------------|--------|
+| B1 | `tests/e2e/a11y.spec.ts:16` : délai de `30 s + routes × 2 × 5 s` ; les violations de toutes les pages sont agrégées (`:18-34`), aucune n'est masquée. CI 38616206639 : `a11y.spec.ts:8` vert sur desktop (47,9 s) et sur mobile (44,2 s) ; e2e à 427 passed, 0 failed, 3 skipped (`contact.spec.ts:295` × 2, `parcours.spec.ts:132` mobile), sans retry ; Lighthouse : 29 pages ≥ 0,95 sur les 4 axes | **Levé** |
+| B2 | `src/lib/oss-metrics.ts:28-41` : la date n'est affichée que si `bare(release.tag) === bare(version)`. Dans `dist/` reconstruit, tailsfadmin affiche « v1.6.2 » sans date ; les 20 fiches affichent une date égale au `publishedAt` du JSON pour le même tag (vérifié). Tests : `tests/unit/lib/oss-metrics.test.ts:79-100`, `tests/e2e/tailsfadmin.spec.ts` (scénario « version et date de release cohérentes ») | **Levé** (réserve US-022 ci-dessus) |
+| B3 | Comparaison des 20 frontmatters avec les `composer.json` des dépôts : plus aucune ligne mêlant 2.2 et 2.3. Chaque fiche porte « 2.2 (ou 2.2.9+) → PHP ≥ 8.2, Symfony 6.4/7.4 » (7.4 seul pour ai-catalog-copilot et b2b-mcp, conforme à leurs contraintes `^7.4`) et « 2.3 → PHP ≥ 8.3, Symfony …/8.x (PHP 8.4 requis) ». Garde de build : `src/lib/compatibility.ts`, branchée dans `scripts/checks/lib/plugins.ts:66-67`, avec un test sur les 20 fiches (`tests/unit/lib/compatibility.test.ts:58`). Limite déjà signalée par le worker : la règle Sylius 2.2 repose sur les README et les `composer.json` des plugins (pas de Sylius 2.2 installé) | **Levé** |
+| B4 | `dist/` : `/open-source/career-ops/` est lié depuis `/`, `/open-source/` et `/parcours/` ; `/open-source/tailsfadmin/` est lié depuis `/open-source/`. « Contributeur career-ops » est présent sur `/parcours/`. Preuves de l'accueil : `src/data/home.yaml:19` et `:24`. Tests : `tests/e2e/career-ops.spec.ts` (parcours vers l'étude de cas), `tests/e2e/open-source.spec.ts` (« Autres projets », catalogue toujours à 20) | **Levé** |
+| N1 | `src/lib/live-stats.ts` est supprimé ; un seul lecteur valide chaque entrée avec le schéma partagé `ossMetricSchema` (`src/lib/oss-metrics.ts:55-61`). Les 21 blocs `LiveStats` de `dist/` sont complets (agentic-feeds sans téléchargements, tailsfadmin sans date, comme attendu) | **Levé** |
+| N3, N4, N9 | Version préfixée « v » partout (`oss-metrics.ts:32`) ; PDF non balisé refusé (`pdf-privacy.ts:90`) ; `astro.config.mjs:12` et US-022 alignés sur `.md` | **Levés** |
+| Non-régression | `docker build --target test` sur HEAD : `EXIT=0`, contrôles `content` et `dist` OK, 31 pages, CV PDF généré, ESLint, Prettier et `astro check` à 0, **512 tests** verts, couverture : lignes 96,62 %, branches 88,77 % | OK |
+
+### Points non bloquants restants
+
+| # | Point | Classement |
+|---|-------|------------|
+| N2 | `scripts/lib/oss-targets.ts` duplique `repo` et `packagist` du frontmatter (DRY) | Dette technique, sprint suivant |
+| N5 | « Échec de génération » du CV sans test ni preuve manuelle | Réserve US-007 : ajouter un test ou une preuve dans la PR |
+| N6 | T-020-05 et T-020-06 : pas de contrôle de build du poids et des EXIF des captures (aujourd'hui conforme) | Réserve US-020 : à planifier |
+| N7 | `task-board.md` : le résumé affiche toujours 79 tâches « À faire » et 28 « Done », incohérent avec les tâches | Transparence : à corriger avant la Sprint Review |
+| N8 | Title du catalogue différent de la story US-019 | Décision PO (mettre la story à jour) |
+| N10 | audit-log → timeline en `complements` sans `suggest` Composer | Décision PO |
+| N11 | Analyse du frontmatter dupliquée entre les contrôles `plugins` et `projects` | Dette technique mineure |
+| N12 | Commits `merge: lot N` | Réglé par le squash merge |
+| N13 | Sitemap absent | Hors sprint (US-024) |
+| Nouveau | La date de release de tailsfadmin n'est plus affichée (conséquence exacte de B2) | Réserve US-022, décision PO |
