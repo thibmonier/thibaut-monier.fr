@@ -15,5 +15,6 @@ Un guide par sujet, rédigé par l'US qui l'introduit (un fichier par US pour é
 | [projets-open-source.md](projets-open-source.md) | Pages de projets (career-ops, tailsfadmin), collecte des métriques, liens externes | US-021, US-022, US-023 |
 | [cv-pdf.md](cv-pdf.md) | CV PDF généré par Typst, décisions, contrôles | US-007 |
 | [competences.md](competences.md) | Compétences et réalisations filtrables | US-006 |
+| [worktrees-agents.md](worktrees-agents.md) | Worktrees d'agents : projet Compose, ports, propriété des fichiers, aucun prune global | rétro sprint 2 (T-900-05) |
 
 Le démarrage, les commandes `make` et le déploiement sont dans le [README](../../README.md).

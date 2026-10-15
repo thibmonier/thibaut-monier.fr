@@ -6,10 +6,10 @@
 
 | Statut | Tâches | Heures |
 |--------|--------|--------|
-| 🔲 À faire | 142 | 409h |
+| 🔲 À faire | 118 | 347h |
 | 🔄 En cours | 0 | 0h |
-| 👀 Review | 0 | 0h |
-| ✅ Done | 0 | 0h |
+| 👀 Review | 2 | 5,5h |
+| ✅ Done | 22 | 56,5h |
 | 🚫 Bloqué | 0 | 0h |
 
 | Lot | Worker | Tâches | Heures |
@@ -25,29 +25,7 @@ Limite de travail en cours : 1 tâche par worker, 2 workers au plus (disque), `m
 
 ### Phase 0 : retour de rétro, socle et contrats (orchestrateur)
 
-| ID | Type | Tâche | Estimation | Lot |
-|----|------|-------|------------|-----|
-| T-900-01 | [OPS] | Contrôle no-global-prune (prompts, scripts, Makefile, workflows) | 3h | Phase 0 |
-| T-900-02 | [OPS] | Cible make preflight (disque, sans prune global) | 2h | Phase 0 |
-| T-900-03 | [DOC] | Créer contenu-a-valider.md (28 articles par lots de 5, sprints 1 et 2) | 2h | Phase 0 |
-| T-900-04 | [OPS] | Liste d'exceptions e2e versionnée et compte exécutés/ignorés dans la CI | 4h | Phase 0 |
-| T-900-05 | [DOC] | Guide worktrees-agents et section « Pièges d'environnement » | 3h | Phase 0 |
-| T-900-06 | [OPS] | Zones anti-conflit : mk/, changelog.d/, propriété des fichiers | 1,5h | Phase 0 |
-| T-900-07 | [OPS] | Dépendances du sprint en une passe et vérifications natives (Pagefind, MIME nginx) | 4h | Phase 0 |
-| T-900-08 | [OPS] | Chaîne de build : étape Pagefind après le build, avant les contrôles dist | 1,5h | Phase 0 |
-| T-900-09 | [TEST] | Écrire les tests RED du module d'URL absolue (site-url) | 1,5h | Phase 0 |
-| T-900-10 | [FE-WEB] | Module unique d'URL absolue : src/lib/site-url.ts | 1,5h | Phase 0 |
-| T-900-11 | [OPS] | CI : variables factices PUBLIC_SITE_URL et PUBLIC_UMAMI_WEBSITE_ID | 1,5h | Phase 0 |
-| T-900-12 | [TEST] | Écrire les tests RED de l'échantillonnage des gabarits répétés | 2,5h | Phase 0 |
-| T-900-13 | [FE-WEB] | Échantillonnage dans axe, matrice responsive et Lighthouse (délai proportionnel) | 3,5h | Phase 0 |
-| T-009-01 | [CONTENT] | Inventaire de la source et décisions de migration | 3h | Phase 0 |
-| T-009-02 | [TEST] | Écrire les tests unitaires RED : schéma blog (contrat C1) | 3h | Phase 0 |
-| T-009-03 | [FE-WEB] | Schéma blog et collection enregistrée (contrat C1, C2) | 3h | Phase 0 |
-| T-009-04 | [TEST] | Écrire les tests unitaires RED : lib/blog.ts (contrat C3) | 3h | Phase 0 |
-| T-009-05 | [FE-WEB] | lib/blog.ts et blog-source.ts : un seul lecteur de la collection (contrat C3) | 4h | Phase 0 |
-| T-009-06 | [TEST] | Écrire les tests RED du plugin rehype des blocs défilants | 1,5h | Phase 0 |
-| T-009-07 | [FE-WEB] | Plugin rehype des blocs défilants et configuration Markdown d'Astro | 2,5h | Phase 0 |
-| T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | Phase 0 |
+Terminée (voir « Done » et « Review »).
 
 ### US-009 : Migration des 28 articles d'Agentic Agency (lot A)
 
@@ -81,9 +59,6 @@ Limite de travail en cours : 1 tâche par worker, 2 workers au plus (disque), `m
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-010-01 | [CONTENT] | Relever les URL d'origine sur agentic-agency.fr (lecture seule) | 2h | Phase 0 |
-| T-010-02 | [TEST] | Écrire les tests unitaires RED : lib/redirects.ts (contrat C6) | 3,5h | Phase 0 |
-| T-010-03 | [FE-WEB] | src/lib/redirects.ts : schéma, couverture et génération nginx | 3h | Phase 0 |
 | T-010-04 | [CONTENT] | Table de correspondance versionnée (articles et index) | 3h | A |
 | T-010-05 | [TEST] | Écrire les tests RED : contrôles canonical, redirections et pages orphelines | 4h | A |
 | T-010-06 | [OPS] | Contrôles canonical, redirects (content et dist) et pages orphelines | 5,5h | A |
@@ -221,11 +196,41 @@ Aucune tâche.
 
 ## 👀 Review
 
-Aucune tâche.
+En attente de la preuve CI (résumé « exécutés / ignorés » et variables factices), à constater au premier push.
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-900-04 | [OPS] | Liste d'exceptions e2e versionnée et compte exécutés/ignorés dans la CI | 4h | Phase 0 |
+| T-900-11 | [OPS] | CI : variables factices PUBLIC_SITE_URL et PUBLIC_UMAMI_WEBSITE_ID | 1,5h | Phase 0 |
 
 ## ✅ Done
 
-Aucune tâche.
+Phase 0 (2026-10-14, worker W0) : preuves E25 consignées dans le rapport de phase 0.
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-900-01 | [OPS] | Contrôle no-global-prune (prompts, scripts, Makefile, workflows) | 3h | Phase 0 |
+| T-900-02 | [OPS] | Cible make preflight (disque, sans prune global) | 2h | Phase 0 |
+| T-900-03 | [DOC] | Créer contenu-a-valider.md (28 articles par lots de 5, sprints 1 et 2) | 2h | Phase 0 |
+| T-900-05 | [DOC] | Guide worktrees-agents et section « Pièges d'environnement » | 3h | Phase 0 |
+| T-900-06 | [OPS] | Zones anti-conflit : mk/, changelog.d/, propriété des fichiers | 1,5h | Phase 0 |
+| T-900-07 | [OPS] | Dépendances du sprint en une passe et vérifications natives (Pagefind, MIME nginx) | 4h | Phase 0 |
+| T-900-08 | [OPS] | Chaîne de build : étape Pagefind après le build, avant les contrôles dist | 1,5h | Phase 0 |
+| T-900-09 | [TEST] | Écrire les tests RED du module d'URL absolue (site-url) | 1,5h | Phase 0 |
+| T-900-10 | [FE-WEB] | Module unique d'URL absolue : src/lib/site-url.ts | 1,5h | Phase 0 |
+| T-900-12 | [TEST] | Écrire les tests RED de l'échantillonnage des gabarits répétés | 2,5h | Phase 0 |
+| T-900-13 | [FE-WEB] | Échantillonnage dans axe, matrice responsive et Lighthouse (délai proportionnel) | 3,5h | Phase 0 |
+| T-009-01 | [CONTENT] | Inventaire de la source et décisions de migration | 3h | Phase 0 |
+| T-009-02 | [TEST] | Écrire les tests unitaires RED : schéma blog (contrat C1) | 3h | Phase 0 |
+| T-009-03 | [FE-WEB] | Schéma blog et collection enregistrée (contrat C1, C2) | 3h | Phase 0 |
+| T-009-04 | [TEST] | Écrire les tests unitaires RED : lib/blog.ts (contrat C3) | 3h | Phase 0 |
+| T-009-05 | [FE-WEB] | lib/blog.ts et blog-source.ts : un seul lecteur de la collection (contrat C3) | 4h | Phase 0 |
+| T-009-06 | [TEST] | Écrire les tests RED du plugin rehype des blocs défilants | 1,5h | Phase 0 |
+| T-009-07 | [FE-WEB] | Plugin rehype des blocs défilants et configuration Markdown d'Astro | 2,5h | Phase 0 |
+| T-010-01 | [CONTENT] | Relever les URL d'origine sur agentic-agency.fr (lecture seule) | 2h | Phase 0 |
+| T-010-02 | [TEST] | Écrire les tests unitaires RED : lib/redirects.ts (contrat C6) | 3,5h | Phase 0 |
+| T-010-03 | [FE-WEB] | src/lib/redirects.ts : schéma, couverture et génération nginx | 3h | Phase 0 |
+| T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | Phase 0 |
 
 ## 🚫 Bloqué
 

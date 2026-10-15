@@ -17,9 +17,9 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-010-01 | [CONTENT] | Relever les URL d'origine sur agentic-agency.fr (lecture seule) | 2h | - | Phase 0 | 🔲 |
-| T-010-02 | [TEST] | Écrire les tests unitaires RED : lib/redirects.ts (contrat C6) | 3,5h | T-010-01, T-009-05 | Phase 0 | 🔲 |
-| T-010-03 | [FE-WEB] | src/lib/redirects.ts : schéma, couverture et génération nginx | 3h | T-010-02 | Phase 0 | 🔲 |
+| T-010-01 | [CONTENT] | Relever les URL d'origine sur agentic-agency.fr (lecture seule) | 2h | - | Phase 0 | ✅ |
+| T-010-02 | [TEST] | Écrire les tests unitaires RED : lib/redirects.ts (contrat C6) | 3,5h | T-010-01, T-009-05 | Phase 0 | ✅ |
+| T-010-03 | [FE-WEB] | src/lib/redirects.ts : schéma, couverture et génération nginx | 3h | T-010-02 | Phase 0 | ✅ |
 | T-010-04 | [CONTENT] | Table de correspondance versionnée (articles et index) | 3h | T-010-03, T-011-01 | A | 🔲 |
 | T-010-05 | [TEST] | Écrire les tests RED : contrôles canonical, redirections et pages orphelines | 4h | T-010-03 | A | 🔲 |
 | T-010-06 | [OPS] | Contrôles canonical, redirects (content et dist) et pages orphelines | 5,5h | T-010-05, T-010-04, T-009-23 | A | 🔲 |

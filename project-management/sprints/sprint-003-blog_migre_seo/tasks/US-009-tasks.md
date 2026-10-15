@@ -17,13 +17,13 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-009-01 | [CONTENT] | Inventaire de la source et décisions de migration | 3h | - | Phase 0 | 🔲 |
-| T-009-02 | [TEST] | Écrire les tests unitaires RED : schéma blog (contrat C1) | 3h | T-009-01 | Phase 0 | 🔲 |
-| T-009-03 | [FE-WEB] | Schéma blog et collection enregistrée (contrat C1, C2) | 3h | T-009-02 | Phase 0 | 🔲 |
-| T-009-04 | [TEST] | Écrire les tests unitaires RED : lib/blog.ts (contrat C3) | 3h | T-009-03 | Phase 0 | 🔲 |
-| T-009-05 | [FE-WEB] | lib/blog.ts et blog-source.ts : un seul lecteur de la collection (contrat C3) | 4h | T-009-04 | Phase 0 | 🔲 |
-| T-009-06 | [TEST] | Écrire les tests RED du plugin rehype des blocs défilants | 1,5h | T-009-03 | Phase 0 | 🔲 |
-| T-009-07 | [FE-WEB] | Plugin rehype des blocs défilants et configuration Markdown d'Astro | 2,5h | T-009-06, T-900-07 | Phase 0 | 🔲 |
+| T-009-01 | [CONTENT] | Inventaire de la source et décisions de migration | 3h | - | Phase 0 | ✅ |
+| T-009-02 | [TEST] | Écrire les tests unitaires RED : schéma blog (contrat C1) | 3h | T-009-01 | Phase 0 | ✅ |
+| T-009-03 | [FE-WEB] | Schéma blog et collection enregistrée (contrat C1, C2) | 3h | T-009-02 | Phase 0 | ✅ |
+| T-009-04 | [TEST] | Écrire les tests unitaires RED : lib/blog.ts (contrat C3) | 3h | T-009-03 | Phase 0 | ✅ |
+| T-009-05 | [FE-WEB] | lib/blog.ts et blog-source.ts : un seul lecteur de la collection (contrat C3) | 4h | T-009-04 | Phase 0 | ✅ |
+| T-009-06 | [TEST] | Écrire les tests RED du plugin rehype des blocs défilants | 1,5h | T-009-03 | Phase 0 | ✅ |
+| T-009-07 | [FE-WEB] | Plugin rehype des blocs défilants et configuration Markdown d'Astro | 2,5h | T-009-06, T-900-07 | Phase 0 | ✅ |
 | T-009-08 | [TEST] | Écrire les tests RED : bibliothèque de migration des articles | 4h | T-009-01, T-009-03, T-900-05 | A | 🔲 |
 | T-009-09 | [FE-WEB] | Bibliothèque et script de migration idempotent | 5h | T-009-08 | A | 🔲 |
 | T-009-10 | [TEST] | Écrire les tests RED : contrôles de contenu du blog | 4h | T-009-03, T-009-05 | A | 🔲 |

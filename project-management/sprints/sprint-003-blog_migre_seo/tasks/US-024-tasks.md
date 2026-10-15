@@ -18,7 +18,7 @@
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
 | T-024-01 | [CONTENT] | Décisions SEO technique : types JSON-LD, sitemap, llms.txt | 2,5h | T-900-05 | B | 🔲 |
-| T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | T-900-10 | Phase 0 | 🔲 |
+| T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | T-900-10 | Phase 0 | ✅ |
 | T-024-03 | [TEST] | Écrire les tests unitaires RED : générateurs JSON-LD et fil d'Ariane | 5h | T-024-01, T-024-02 | B | 🔲 |
 | T-024-04 | [FE-WEB] | Générateurs JSON-LD typés : src/lib/jsonld/ | 6h | T-024-03 | B | 🔲 |
 | T-024-05 | [FE-WEB] | Composant JsonLd, intégration à Seo et fil d'Ariane automatique | 4h | T-024-04, T-024-15 | B | 🔲 |

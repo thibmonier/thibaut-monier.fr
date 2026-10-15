@@ -786,3 +786,15 @@ Les résolutions proposées pour E1 à E26 sont **retenues**, avec les décision
 | E24 | Capacité maintenue à 25 points ; si le temps manque, US-012, US-025 et US-026 (8 points) passent au sprint suivant, dans cet ordre inverse de priorité |
 | E25 | Phase 0 : `no-global-prune` (contrôle et règle dans les prompts), `make preflight` (contrôle disque ≥ 5 Go), `skip-allowlist` e2e et `docs/guides/worktrees-agents.md` sont **livrés et prouvés avant le lancement des workers** |
 | Workers | **2 workers au maximum** (disque à environ 6 Go), surveillance continue, séquencement sous 1,5 Go |
+
+## Écarts constatés en phase 0 (2026-10-14, worker W0)
+
+| # | Constat | Décision appliquée |
+|---|---------|--------------------|
+| E27 | Astro 7.3.8 rend le Markdown avec Sätteri : `markdown.rehypePlugins` exige `@astrojs/markdown-remark`, absent (le build échoue sinon). | Plugin des blocs défilants écrit comme plugin HAST de `satteri({ hastPlugins })` (`src/lib/rehype-article-blocks.ts`, `astro.config.mjs`) ; `@astrojs/markdown-satteri` 0.4.3 et `satteri` 0.10.5 déclarés en dépendances directes (déjà présents en transitif, même lockfile). Aucune dépendance nouvelle côté résolution. |
+| E28 | `make preflight` : seuil de 8 Go dans T-900-02, 5 Go demandés par l'orchestrateur. | Défaut 5 Go (`PREFLIGHT_MIN_GB`) ; plafond de workers 2 / 1 / 0 aux seuils 3 Go et 1,5 Go. |
+| E29 | Quatre prompts d'agents de `.claude/` (`devops-engineer`, `docker-debug`, `docker-architecture`) recommandaient un nettoyage Docker global ; une mention dans `sprint-goal.md` du sprint 2. | Remplacés par `docker compose down --remove-orphans` et `docker builder prune -f` ; entrée de la liste `disallowedTools` marquée `# interdit`. Le contrôle `no-global-prune` parcourt tout le dépôt. |
+| E30 | Les 3 ignorés du sprint 2 se regroupent en 2 entrées de `skip-allowlist.json` (`[sans-clé]` sur desktop et mobile ; impression sur mobile). | Entrées par fichier, fragment de titre et projets. |
+| E31 | Une collection `blog` vide fait émettre un avertissement du chargeur (`No files found matching`) ; le build reste vert. | Aucune action ; l'avertissement disparaît avec le premier article. |
+| E32 | Précisions de contrat C3 : `tagsWithPages` renvoie des libellés (le slug se calcule avec `slugify`), `seriesNeighbors().index` commence à 0, `paginate` d'une liste vide renvoie une page 1 vide. | Documentées dans `docs/guides/blog.md` ; les workers ne les modifient pas. |
+| E33 | Types MIME de l'image nginx 1.30.5 : `wasm` déjà `application/wasm` ; `xml` en `text/xml` sans charset ; `txt` sans charset. | Aucune correction nginx en phase 0 ; `location` dédiées pour le lot B (T-013-07, T-024-14). |
