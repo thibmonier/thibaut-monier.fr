@@ -1,0 +1,9 @@
+{
+  "families": [
+    { "prefix": "/blog/tag/", "max": 2 },
+    { "prefix": "/blog/serie/", "max": 2 },
+    { "prefix": "/blog/page/", "max": 2 }
+  ],
+  "articles": [],
+  "include": []
+}
