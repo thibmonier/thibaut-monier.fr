@@ -1,0 +1,33 @@
+---
+import SearchBox from '../../components/blog/SearchBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Page de recherche en noindex (US-012, ADR-0013) : l'index Pagefind n'existe qu'après le build.
+const link =
+  'inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4';
+---
+
+<BaseLayout
+  title="Recherche"
+  description="Recherche plein texte dans les articles du blog de Thibaut Monier : un mot, un sujet, une méthode."
+  noindex
+  breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Recherche' }]}
+>
+  <h1 class="text-3xl font-bold tracking-tight">Recherche</h1>
+  <p class="mt-3 max-w-3xl text-lg text-muted">
+    Cherchez un mot dans l'ensemble des articles du blog.
+  </p>
+  <SearchBox />
+  <!-- Repli sans JavaScript : masqué dès que theme-init.js a posé la classe `js` sur <html>. -->
+  <div data-search-fallback class="js:hidden">
+    <p class="mt-6">
+      La recherche nécessite JavaScript. Parcourez les articles par catégorie ou depuis la liste du
+      blog.
+    </p>
+    <p>
+      <a href="/blog/" class={link}>
+        Parcourir le blog
+      </a>
+    </p>
+  </div>
+</BaseLayout>

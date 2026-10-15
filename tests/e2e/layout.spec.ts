@@ -75,12 +75,12 @@ test.describe('Scénario : layout commun affiché sur chaque page', () => {
     await expect(footer.locator('a[href^="/"]')).toHaveCount(footerItems.length);
   });
 
-  test('aucun lien désactivé (Blog, Labo) ne figure dans la page', async ({ page }) => {
+  test('aucun lien désactivé (Labo) ne figure dans la page', async ({ page }) => {
     await page.goto('/');
     for (const item of [...site.nav.main, ...site.nav.footer].filter((i) => !i.enabled)) {
       await expect(page.locator(`a[href="${item.href}"]`)).toHaveCount(0);
     }
-    await expect(page.locator('a[href="/blog/"], a[href="/labo/"]')).toHaveCount(0);
+    await expect(page.locator('a[href="/labo/"]')).toHaveCount(0);
   });
 
   test("le lien d'évitement est le premier élément focalisable et mène au contenu", async ({

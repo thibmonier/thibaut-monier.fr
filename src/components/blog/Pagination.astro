@@ -1,0 +1,49 @@
+---
+import { paginationItems } from '../../lib/blog-taxonomy.ts';
+
+interface Props {
+  page: number;
+  pages: number;
+}
+
+const { page, pages } = Astro.props;
+const items = paginationItems(page, pages);
+const link =
+  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-border px-3 font-medium text-accent hover:bg-surface';
+---
+
+<nav aria-label="Pagination" class="mt-10 flex flex-col items-center gap-3">
+  <p class="font-semibold">{items.label}</p>
+  <ul class="flex flex-wrap items-center justify-center gap-2">
+    {items.previous && (
+      <li>
+        <a href={items.previous} class={link}>
+          ← Précédent
+        </a>
+      </li>
+    )}
+    {items.pages.map((entry) => (
+      <li>
+        {entry.current ? (
+          <span
+            aria-current="page"
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-accent px-3 font-semibold text-accent-fg"
+          >
+            {entry.number}
+          </span>
+        ) : (
+          <a href={entry.href} class={link} aria-label={`Page ${entry.number}`}>
+            {entry.number}
+          </a>
+        )}
+      </li>
+    ))}
+    {items.next && (
+      <li>
+        <a href={items.next} class={link}>
+          Suivant →
+        </a>
+      </li>
+    )}
+  </ul>
+</nav>

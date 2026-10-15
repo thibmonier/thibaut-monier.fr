@@ -1,0 +1,49 @@
+---
+import { categoryPath, pagePath, type BlogEntry } from '../../lib/blog.ts';
+import type { Facet } from '../../lib/blog-taxonomy.ts';
+import type { Crumb } from '../../lib/page-meta.ts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from './ArticleCard.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import Pagination from './Pagination.astro';
+import TaxonomyList from './TaxonomyList.astro';
+
+interface Props {
+  posts: BlogEntry[];
+  page: number;
+  pages: number;
+  total: number;
+  categories: Facet[];
+}
+
+// Page de la liste du blog : la page 1 est `/blog/`, les suivantes `/blog/page/<n>/` (12 articles par page).
+const { posts, page, pages, total, categories } = Astro.props;
+const crumbs: Crumb[] =
+  page === 1
+    ? [{ label: 'Accueil', href: '/' }, { label: 'Blog' }]
+    : [
+        { label: 'Accueil', href: '/' },
+        { label: 'Blog', href: pagePath(1) },
+        { label: `Page ${page}` },
+      ];
+const intro = `Retours d'expérience sur l'agentic engineering, le delivery et la gestion de projet à l'ère de l'IA : ${total} articles.`;
+---
+
+<BaseLayout
+  title={page === 1 ? 'Blog' : `Blog, page ${page} sur ${pages}`}
+  description={page === 1 ? intro : `${intro} Page ${page} sur ${pages}.`}
+  breadcrumb={crumbs}
+>
+  <Breadcrumb crumbs={crumbs} />
+  <h1 class="mt-4 text-3xl font-bold tracking-tight">Blog</h1>
+  <p class="mt-3 max-w-3xl text-lg text-muted">{intro}</p>
+  <div class="mt-6">
+    <TaxonomyList label="Catégories" items={categories} href={(slug) => categoryPath(slug)} />
+  </div>
+  <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {posts.map((post) => (
+      <ArticleCard post={post} />
+    ))}
+  </ul>
+  <Pagination page={page} pages={pages} />
+</BaseLayout>

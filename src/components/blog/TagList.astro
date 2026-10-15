@@ -1,0 +1,28 @@
+---
+import { slugify, tagPath } from '../../lib/blog.ts';
+
+interface Props {
+  tags: string[];
+  /** Slugs des tags qui ont une page (2 articles ou plus) : les autres restent du texte non lié (E7). */
+  linked: string[];
+}
+
+const { tags, linked } = Astro.props;
+const chip = 'inline-flex items-center rounded-md border border-border bg-surface px-3 text-sm';
+---
+
+{tags.length > 0 && (
+  <ul data-tag-list data-pagefind-ignore aria-label="Tags" class="mt-8 flex flex-wrap gap-2">
+    {tags.map((tag) => (
+      <li>
+        {linked.includes(slugify(tag)) ? (
+          <a href={tagPath(slugify(tag))} class={`${chip} min-h-11 underline underline-offset-4`}>
+            {tag}
+          </a>
+        ) : (
+          <span class={`${chip} min-h-8`}>{tag}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+)}

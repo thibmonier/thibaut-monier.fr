@@ -39,13 +39,35 @@ afterEach(async () => {
 });
 
 describe('collectShowcaseLinks', () => {
-  it('ne lit que les pages de /open-source/ et ignore les liens internes et les ancres', async () => {
+  it('ne lit que les pages de /open-source/ et /blog/ et ignore les liens internes et les ancres', async () => {
     const dist = await distWith({
       'open-source/career-ops': [PR + '#section', '/parcours/', 'mailto:a@b.fr'],
       parcours: ['https://example.org/hors-vitrine'],
     });
     const links = await collectShowcaseLinks(dist);
     expect(links).toEqual([{ url: PR, pages: ['/open-source/career-ops/'] }]);
+  });
+
+  it('lit aussi les pages du blog : articles et listes, jamais le reste du site', async () => {
+    const dist = await distWith({
+      'blog/mon-article': [PKG, '/blog/autre/'],
+      'blog/page/2': [PKG],
+      parcours: ['https://example.org/hors-blog'],
+    });
+    expect(await collectShowcaseLinks(dist)).toEqual([
+      { url: PKG, pages: ['/blog/mon-article/', '/blog/page/2/'] },
+    ]);
+  });
+
+  it('signale un lien mort d’une page du blog, mais 429 reste un avertissement', async () => {
+    const dist = await distWith({ 'blog/mon-article': [PR, PKG] });
+    const result = await checkShowcaseLinks(
+      await collectShowcaseLinks(dist),
+      fetcherReturning({ [PR]: 404, [PKG]: 429 }),
+      { sleep },
+    );
+    expect(result.errors).toEqual([`Lien cassé sur /blog/mon-article/ : ${PR} (404)`]);
+    expect(result.warnings).toEqual([`Lien indisponible sur /blog/mon-article/ : ${PKG} (429)`]);
   });
 
   it('regroupe les pages qui partagent un même lien', async () => {

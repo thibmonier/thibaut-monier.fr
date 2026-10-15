@@ -1,0 +1,102 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import AuthorNote from '../components/blog/AuthorNote.astro';
+import Breadcrumb from '../components/blog/Breadcrumb.astro';
+import Faq from '../components/blog/Faq.astro';
+import OriginalNotice from '../components/blog/OriginalNotice.astro';
+import PostDate from '../components/blog/PostDate.astro';
+import SeriesNav from '../components/blog/SeriesNav.astro';
+import TagList from '../components/blog/TagList.astro';
+import { categoryPath, readingMinutes, slugOf, slugify, type BlogEntry } from '../lib/blog.ts';
+import type { SeriesPosition } from '../lib/blog-taxonomy.ts';
+import type { ArticleMeta, Crumb } from '../lib/page-meta.ts';
+import { countWords } from '../lib/text.ts';
+import BaseLayout from './BaseLayout.astro';
+import '../styles/article.css';
+
+interface Props {
+  post: BlogEntry;
+  /** Position dans la série ; `null` hors série (aucun encart). */
+  position: SeriesPosition | null;
+  /** Slugs des tags qui ont une page (les autres sont affichés en texte). */
+  linkedTags: string[];
+}
+
+const { post, position, linkedTags } = Astro.props;
+const { data } = post;
+const slug = slugOf(post.id);
+const body = post.body ?? '';
+const cover = data.image as ImageMetadata | undefined;
+const crumbs: Crumb[] = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: data.category, href: categoryPath(slugify(data.category)) },
+  { label: data.title },
+];
+const article: ArticleMeta = {
+  slug,
+  publishedAt: data.pubDate,
+  category: data.category,
+  tags: data.tags,
+  wordCount: countWords(body),
+  ...(data.updatedDate ? { updatedAt: data.updatedDate } : {}),
+  ...(cover ? { image: { src: cover.src, alt: data.imageAlt ?? '' } } : {}),
+  ...(data.faq ? { faq: data.faq } : {}),
+};
+---
+
+<BaseLayout
+  title={data.seoTitle ?? data.title}
+  description={data.description}
+  ogType="article"
+  article={article}
+  breadcrumb={crumbs}
+>
+  <div class="mx-auto max-w-[75ch]">
+    <Breadcrumb crumbs={crumbs} />
+    <article data-pagefind-body class="mt-4">
+      <header>
+        <p class="text-sm font-semibold tracking-wide uppercase">
+          <a
+            href={categoryPath(slugify(data.category))}
+            data-pagefind-meta="category"
+            data-pagefind-filter="category"
+            class="inline-flex min-h-11 items-center rounded-md text-accent underline underline-offset-4"
+          >
+            {data.category}
+          </a>
+        </p>
+        <h1 id="article-titre" tabindex="-1" class="text-3xl font-bold tracking-tight sm:text-4xl">
+          {data.title}
+        </h1>
+        <p class="mt-3 text-sm text-muted">
+          <PostDate date={data.pubDate} />
+          <span aria-hidden="true"> · </span>
+          <span>{readingMinutes(body)} min de lecture</span>
+        </p>
+      </header>
+      {cover && (
+        <Image
+          src={cover}
+          alt={data.imageAlt ?? ''}
+          widths={[640, 960, 1200]}
+          sizes="(min-width: 80ch) 75ch, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="article-cover mt-6"
+        />
+      )}
+      <div data-article-body class="article-body mt-8">
+        <slot />
+      </div>
+      {data.faq && <Faq items={data.faq} />}
+    </article>
+    <TagList tags={data.tags} linked={linkedTags} />
+    {position && <SeriesNav position={position} />}
+    {data.originalUrl && data.originalPublishedAt && (
+      <OriginalNotice url={data.originalUrl} date={data.originalPublishedAt} />
+    )}
+    <AuthorNote />
+  </div>
+</BaseLayout>

@@ -4,6 +4,12 @@
     { "prefix": "/blog/serie/", "max": 2 },
     { "prefix": "/blog/page/", "max": 2 }
   ],
-  "articles": [],
+  "articles": [
+    "/blog/certifications-ia-signal-ou-bruit-au-recrutement/",
+    "/blog/cycle-en-v-agile-sdd-comparaison-timelines/",
+    "/blog/reduire-la-facture-token-caveman-codegraph/",
+    "/blog/la-spec-est-le-nouveau-code/",
+    "/blog/la-boite-a-outils-du-poweruser/"
+  ],
   "include": []
 }
