@@ -58,11 +58,6 @@ describe('absoluteUrl', () => {
 });
 
 describe('siteFromEnv', () => {
-  it('retient la valeur par défaut quand PUBLIC_SITE_URL est absente ou vide', () => {
-    expect(siteFromEnv(undefined)).toBe('https://thibaut-monier.fr');
-    expect(siteFromEnv('')).toBe('https://thibaut-monier.fr');
-  });
-
   it('normalise une URL absolue en origine, sans barre finale', () => {
     expect(siteFromEnv('https://web-production-70714.up.railway.app/')).toBe(
       'https://web-production-70714.up.railway.app',
@@ -70,12 +65,12 @@ describe('siteFromEnv', () => {
   });
 
   it('refuse un domaine sans schéma avec un message qui nomme la variable', () => {
-    expect(() => siteFromEnv('thibaut-monier.fr')).toThrow(
-      'PUBLIC_SITE_URL invalide : "thibaut-monier.fr" (URL absolue attendue, par exemple https://thibaut-monier.fr)',
+    expect(() => siteFromEnv('exemple.test')).toThrow(
+      'PUBLIC_SITE_URL invalide : "exemple.test" (URL absolue attendue, par exemple https://<domaine>)',
     );
   });
 
-  it('refuse un schéma autre que http(s)', () => {
-    expect(() => siteFromEnv('ftp://thibaut-monier.fr')).toThrow('PUBLIC_SITE_URL invalide');
+  it.each(['', 'ftp://exemple.test'])('refuse %j', (value) => {
+    expect(() => siteFromEnv(value)).toThrow('PUBLIC_SITE_URL invalide');
   });
 });

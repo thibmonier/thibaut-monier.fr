@@ -9,7 +9,7 @@ import { siteFromEnv } from './src/lib/site-url.ts';
 
 // URL publique provisoire tant que le domaine n'est pas branché (PUBLIC_SITE_URL, voir .env.example).
 // Une valeur sans schéma (`thibaut-monier.fr`) échoue avec un message explicite, pas « Invalid URL ».
-const site = siteFromEnv(process.env.PUBLIC_SITE_URL);
+const site = siteFromEnv(process.env.PUBLIC_SITE_URL || 'https://thibaut-monier.fr');
 
 // `lastmod` du sitemap : date du contenu quand elle existe (articles, pages légales), sinon date du build (E18).
 const buildDate = new Date();
