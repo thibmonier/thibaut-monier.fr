@@ -165,9 +165,9 @@ test.describe('Scénario : série', () => {
     await expect(cards(page)).toHaveCount(4);
     expect(await titles(page)).toEqual([
       "Les outils de l'agentic engineering qui méritent vraiment un essai",
-      'Réduire la facture token : ce que Caveman et CodeGraph font vraiment',
-      'Donner à lire à un agent : MarkItDown et mq',
-      'Sortir du rendu générique : Hallmark, DESIGN.md et Modern Web Guidance',
+      'Réduire la facture token : ce que Caveman et CodeGraph font vraiment',
+      'Donner à lire à un agent : MarkItDown et mq',
+      'Sortir du rendu générique : Hallmark, DESIGN.md et Modern Web Guidance',
     ]);
   });
 });
