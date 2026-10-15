@@ -17,18 +17,18 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-026-01 | [CONTENT] | ADR-0011 : chargement d'Umami et contrat des événements (avant le code) | 3h | - | B | 🔲 |
-| T-026-02 | [TEST] | Écrire les tests unitaires RED : lib/analytics-events.ts | 4h | T-026-01 | B | 🔲 |
-| T-026-03 | [FE-WEB] | src/lib/analytics-events.ts : seul lecteur de la configuration et du contrat | 4h | T-026-02 | B | 🔲 |
-| T-026-04 | [TEST] | Écrire les tests RED du contrôle de contrat des événements | 2,5h | T-026-03 | B | 🔲 |
-| T-026-05 | [OPS] | Contrôle de contrat analytics-events.content.check.ts | 3h | T-026-04 | B | 🔲 |
-| T-026-06 | [FE-WEB] | Analytics.astro, chargeur différé et délégation des clics | 5h | T-026-03, T-024-05, T-013-06, T-026-08 | B | 🔲 |
-| T-026-07 | [FE-WEB] | Marquage des liens et de l'envoi du formulaire | 3h | T-026-06, T-026-08 | B | 🔲 |
-| T-026-08 | [TEST] | Écrire les tests e2e RED : audience sans cookie et événements | 4,5h | T-026-01 | B | 🔲 |
-| T-026-09 | [OPS] | CSP et domaines d'Umami : confirmation et test d'en-têtes | 1,5h | T-026-06 | B | 🔲 |
-| T-026-10 | [CONTENT] | Vérifier et compléter la section mesure d'audience de /vie-privee/ | 2h | T-026-01 | B | 🔲 |
-| T-026-11 | [DOC] | Guide d'analytics, variable et fragment de CHANGELOG | 1,5h | T-026-07 | B | 🔲 |
-| T-026-12 | [TEST] | Vérification GREEN d'US-026 | 2h | T-026-05, T-026-07, T-026-08, T-026-09, T-026-10 | B | 🔲 |
+| T-026-01 | [CONTENT] | ADR-0011 : chargement d'Umami et contrat des événements (avant le code) | 3h | - | B | 👀 |
+| T-026-02 | [TEST] | Écrire les tests unitaires RED : lib/analytics-events.ts | 4h | T-026-01 | B | ✅ |
+| T-026-03 | [FE-WEB] | src/lib/analytics-events.ts : seul lecteur de la configuration et du contrat | 4h | T-026-02 | B | ✅ |
+| T-026-04 | [TEST] | Écrire les tests RED du contrôle de contrat des événements | 2,5h | T-026-03 | B | ✅ |
+| T-026-05 | [OPS] | Contrôle de contrat analytics-events.content.check.ts | 3h | T-026-04 | B | ✅ |
+| T-026-06 | [FE-WEB] | Analytics.astro, chargeur différé et délégation des clics | 5h | T-026-03, T-024-05, T-013-06, T-026-08 | B | ✅ |
+| T-026-07 | [FE-WEB] | Marquage des liens et de l'envoi du formulaire | 3h | T-026-06, T-026-08 | B | ✅ |
+| T-026-08 | [TEST] | Écrire les tests e2e RED : audience sans cookie et événements | 4,5h | T-026-01 | B | ✅ |
+| T-026-09 | [OPS] | CSP et domaines d'Umami : confirmation et test d'en-têtes | 1,5h | T-026-06 | B | ✅ |
+| T-026-10 | [CONTENT] | Vérifier et compléter la section mesure d'audience de /vie-privee/ | 2h | T-026-01 | B | 👀 |
+| T-026-11 | [DOC] | Guide d'analytics, variable et fragment de CHANGELOG | 1,5h | T-026-07 | B | 🔄 |
+| T-026-12 | [TEST] | Vérification GREEN d'US-026 | 2h | T-026-05, T-026-07, T-026-08, T-026-09, T-026-10 | B | 🔄 |
 | T-026-13 | [REV] | Revue d'US-026 | 2h | T-026-11, T-026-12 | B | 🔲 |
 
 **Total estimé** : 38h (13 tâches)

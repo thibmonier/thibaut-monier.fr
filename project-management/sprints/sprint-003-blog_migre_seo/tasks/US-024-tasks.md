@@ -17,23 +17,23 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-024-01 | [CONTENT] | Décisions SEO technique : types JSON-LD, sitemap, llms.txt | 2,5h | T-900-05 | B | 🔲 |
+| T-024-01 | [CONTENT] | Décisions SEO technique : types JSON-LD, sitemap, llms.txt | 2,5h | T-900-05 | B | 👀 |
 | T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | T-900-10 | Phase 0 | ✅ |
-| T-024-03 | [TEST] | Écrire les tests unitaires RED : générateurs JSON-LD et fil d'Ariane | 5h | T-024-01, T-024-02 | B | 🔲 |
-| T-024-04 | [FE-WEB] | Générateurs JSON-LD typés : src/lib/jsonld/ | 6h | T-024-03 | B | 🔲 |
-| T-024-05 | [FE-WEB] | Composant JsonLd, intégration à Seo et fil d'Ariane automatique | 4h | T-024-04, T-024-15 | B | 🔲 |
-| T-024-06 | [FE-WEB] | Brancher JSON-LD sur les pages existantes (accueil, parcours, fiches, catalogue) | 4h | T-024-05, T-024-15 | B | 🔲 |
-| T-024-07 | [TEST] | Écrire les tests RED du contrôle dist JSON-LD | 3h | T-024-01 | B | 🔲 |
-| T-024-08 | [OPS] | Contrôle dist jsonld.dist.check.ts | 4h | T-024-07, T-024-06 | B | 🔲 |
-| T-024-09 | [TEST] | Écrire les tests RED du contrôle des métadonnées | 2h | T-024-01 | B | 🔲 |
-| T-024-10 | [OPS] | Contrôle dist des métadonnées | 2,5h | T-024-09 | B | 🔲 |
-| T-024-11 | [CONTENT] | Corriger les titres et descriptions hors limites des pages existantes | 3h | T-024-10, T-025-05 | B | 🔲 |
-| T-024-12 | [TEST] | Écrire les tests RED : sitemap, robots.txt, llms.txt et garde-fous | 5h | T-024-01 | B | 🔲 |
-| T-024-13 | [FE-WEB] | Sitemap, robots.txt, llms.txt et leurs contrôles | 7h | T-024-12, T-900-07 | B | 🔲 |
-| T-024-14 | [OPS] | nginx : robots.txt, llms.txt et sitemaps (type, charset, cache) | 2h | T-013-07, T-900-07, T-024-12 | B | 🔲 |
-| T-024-15 | [TEST] | Écrire les tests e2e RED : SEO technique | 4h | T-024-01 | B | 🔲 |
+| T-024-03 | [TEST] | Écrire les tests unitaires RED : générateurs JSON-LD et fil d'Ariane | 5h | T-024-01, T-024-02 | B | ✅ |
+| T-024-04 | [FE-WEB] | Générateurs JSON-LD typés : src/lib/jsonld/ | 6h | T-024-03 | B | ✅ |
+| T-024-05 | [FE-WEB] | Composant JsonLd, intégration à Seo et fil d'Ariane automatique | 4h | T-024-04, T-024-15 | B | ✅ |
+| T-024-06 | [FE-WEB] | Brancher JSON-LD sur les pages existantes (accueil, parcours, fiches, catalogue) | 4h | T-024-05, T-024-15 | B | ✅ |
+| T-024-07 | [TEST] | Écrire les tests RED du contrôle dist JSON-LD | 3h | T-024-01 | B | ✅ |
+| T-024-08 | [OPS] | Contrôle dist jsonld.dist.check.ts | 4h | T-024-07, T-024-06 | B | ✅ |
+| T-024-09 | [TEST] | Écrire les tests RED du contrôle des métadonnées | 2h | T-024-01 | B | ✅ |
+| T-024-10 | [OPS] | Contrôle dist des métadonnées | 2,5h | T-024-09 | B | ✅ |
+| T-024-11 | [CONTENT] | Corriger les titres et descriptions hors limites des pages existantes | 3h | T-024-10, T-025-05 | B | ✅ |
+| T-024-12 | [TEST] | Écrire les tests RED : sitemap, robots.txt, llms.txt et garde-fous | 5h | T-024-01 | B | ✅ |
+| T-024-13 | [FE-WEB] | Sitemap, robots.txt, llms.txt et leurs contrôles | 7h | T-024-12, T-900-07 | B | ✅ |
+| T-024-14 | [OPS] | nginx : robots.txt, llms.txt et sitemaps (type, charset, cache) | 2h | T-013-07, T-900-07, T-024-12 | B | ✅ |
+| T-024-15 | [TEST] | Écrire les tests e2e RED : SEO technique | 4h | T-024-01 | B | ✅ |
 | T-024-16 | [TEST] | Vérification GREEN d'US-024 | 3h | T-024-08, T-024-10, T-024-11, T-024-13, T-024-14, T-024-15, T-009-23 | B | 🔲 |
-| T-024-17 | [DOC] | Guide du SEO technique, variables et fragment de CHANGELOG | 1,5h | T-024-16 | B | 🔲 |
+| T-024-17 | [DOC] | Guide du SEO technique, variables et fragment de CHANGELOG | 1,5h | T-024-16 | B | 🔄 |
 | T-024-18 | [REV] | Revue d'US-024 | 2,5h | T-024-17 | B | 🔲 |
 
 **Total estimé** : 63h (18 tâches)

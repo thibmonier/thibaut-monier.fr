@@ -17,16 +17,16 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-013-01 | [CONTENT] | Décisions du flux RSS | 1,5h | - | B | 🔲 |
-| T-013-02 | [TEST] | Écrire les tests unitaires RED : lib/rss.ts | 3h | T-013-01 | B | 🔲 |
-| T-013-03 | [FE-WEB] | lib/rss.ts et endpoint /rss.xml | 3,5h | T-013-02, T-009-05, T-900-07 | B | 🔲 |
-| T-013-04 | [TEST] | Écrire les tests RED du contrôle dist du flux | 2h | T-013-01 | B | 🔲 |
-| T-013-05 | [OPS] | Contrôle dist rss.dist.check.ts | 3h | T-013-04, T-013-03 | B | 🔲 |
-| T-013-06 | [FE-WEB] | Découverte automatique et lien « S'abonner (RSS) » du pied de page | 2h | T-013-03, T-024-02, T-013-08 | B | 🔲 |
-| T-013-07 | [OPS] | nginx : type de contenu et cache de /rss.xml | 2h | T-900-07, T-013-03, T-013-08 | B | 🔲 |
-| T-013-08 | [TEST] | Écrire les tests e2e RED : flux RSS | 3h | T-013-01 | B | 🔲 |
+| T-013-01 | [CONTENT] | Décisions du flux RSS | 1,5h | - | B | 👀 |
+| T-013-02 | [TEST] | Écrire les tests unitaires RED : lib/rss.ts | 3h | T-013-01 | B | ✅ |
+| T-013-03 | [FE-WEB] | lib/rss.ts et endpoint /rss.xml | 3,5h | T-013-02, T-009-05, T-900-07 | B | ✅ |
+| T-013-04 | [TEST] | Écrire les tests RED du contrôle dist du flux | 2h | T-013-01 | B | ✅ |
+| T-013-05 | [OPS] | Contrôle dist rss.dist.check.ts | 3h | T-013-04, T-013-03 | B | ✅ |
+| T-013-06 | [FE-WEB] | Découverte automatique et lien « S'abonner (RSS) » du pied de page | 2h | T-013-03, T-024-02, T-013-08 | B | ✅ |
+| T-013-07 | [OPS] | nginx : type de contenu et cache de /rss.xml | 2h | T-900-07, T-013-03, T-013-08 | B | ✅ |
+| T-013-08 | [TEST] | Écrire les tests e2e RED : flux RSS | 3h | T-013-01 | B | ✅ |
 | T-013-09 | [TEST] | Vérification GREEN d'US-013 | 2h | T-013-05, T-013-06, T-013-07, T-013-08, T-009-23 | B | 🔲 |
-| T-013-10 | [DOC] | Guide du flux RSS et fragment de CHANGELOG | 1h | T-013-09 | B | 🔲 |
+| T-013-10 | [DOC] | Guide du flux RSS et fragment de CHANGELOG | 1h | T-013-09 | B | 🔄 |
 | T-013-11 | [REV] | Revue d'US-013 | 1,5h | T-013-10 | B | 🔲 |
 
 **Total estimé** : 24,5h (11 tâches)

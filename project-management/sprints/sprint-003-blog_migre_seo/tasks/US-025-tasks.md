@@ -17,18 +17,18 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-025-01 | [CONTENT] | Décisions Open Graph : bibliothèque, gabarit, couverture | 2h | - | B | 🔲 |
-| T-025-02 | [TEST] | Écrire les tests unitaires RED : lib/og.ts | 4h | T-025-01, T-900-10 | B | 🔲 |
-| T-025-03 | [FE-WEB] | lib/og.ts : registre des pages et URL des images | 4h | T-025-02, T-009-05 | B | 🔲 |
-| T-025-04 | [FE-WEB] | Endpoint d'images /og/[...route].png et gabarit | 5h | T-025-03, T-900-07, T-025-08 | B | 🔲 |
-| T-025-05 | [FE-WEB] | Seo.astro : balises og:image, twitter:* et texte alternatif | 2h | T-025-03, T-024-05, T-025-08 | B | 🔲 |
-| T-025-06 | [TEST] | Écrire les tests RED du contrôle dist des images Open Graph | 3h | T-025-01 | B | 🔲 |
-| T-025-07 | [OPS] | Contrôle dist og.dist.check.ts | 3h | T-025-06, T-025-04, T-025-05 | B | 🔲 |
-| T-025-08 | [TEST] | Écrire les tests e2e RED : partage et images Open Graph | 2,5h | T-025-01 | B | 🔲 |
-| T-025-09 | [CONTENT] | Revue visuelle des images générées | 1,5h | T-025-04 | B | 🔲 |
-| T-025-10 | [OPS] | Durée de génération, cache et nginx pour /og/ | 2h | T-025-04, T-024-14 | B | 🔲 |
+| T-025-01 | [CONTENT] | Décisions Open Graph : bibliothèque, gabarit, couverture | 2h | - | B | 👀 |
+| T-025-02 | [TEST] | Écrire les tests unitaires RED : lib/og.ts | 4h | T-025-01, T-900-10 | B | ✅ |
+| T-025-03 | [FE-WEB] | lib/og.ts : registre des pages et URL des images | 4h | T-025-02, T-009-05 | B | ✅ |
+| T-025-04 | [FE-WEB] | Endpoint d'images /og/[...route].png et gabarit | 5h | T-025-03, T-900-07, T-025-08 | B | ✅ |
+| T-025-05 | [FE-WEB] | Seo.astro : balises og:image, twitter:* et texte alternatif | 2h | T-025-03, T-024-05, T-025-08 | B | ✅ |
+| T-025-06 | [TEST] | Écrire les tests RED du contrôle dist des images Open Graph | 3h | T-025-01 | B | ✅ |
+| T-025-07 | [OPS] | Contrôle dist og.dist.check.ts | 3h | T-025-06, T-025-04, T-025-05 | B | ✅ |
+| T-025-08 | [TEST] | Écrire les tests e2e RED : partage et images Open Graph | 2,5h | T-025-01 | B | ✅ |
+| T-025-09 | [CONTENT] | Revue visuelle des images générées | 1,5h | T-025-04 | B | 🔄 |
+| T-025-10 | [OPS] | Durée de génération, cache et nginx pour /og/ | 2h | T-025-04, T-024-14 | B | ✅ |
 | T-025-11 | [TEST] | Vérification GREEN d'US-025 | 2h | T-025-07, T-025-08, T-025-09, T-025-10, T-009-23 | B | 🔲 |
-| T-025-12 | [DOC] | Guide des images Open Graph, ADR-0012 et fragment de CHANGELOG | 2h | T-025-11 | B | 🔲 |
+| T-025-12 | [DOC] | Guide des images Open Graph, ADR-0012 et fragment de CHANGELOG | 2h | T-025-11 | B | 🔄 |
 | T-025-13 | [REV] | Revue d'US-025 | 1,5h | T-025-12 | B | 🔲 |
 
 **Total estimé** : 34,5h (13 tâches)
