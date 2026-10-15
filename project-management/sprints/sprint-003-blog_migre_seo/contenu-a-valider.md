@@ -144,7 +144,7 @@ Statut « proposées par le lot B » dans chaque guide.
 |---|---------|---------|--------|
 | 1 | Le chargeur Umami ne charge pas le script quand `navigator.webdriver` est vrai (navigateurs automatisés : tests, Lighthouse), en plus de Do Not Track et Global Privacy Control. Conséquence : l'absence de cookie du vrai script ne se contrôle qu'en production, avec un navigateur réel (T-900-28) | `src/scripts/analytics.ts`, `docs/adr/0011-umami-chargement-et-evenements.md` | à valider |
 | 2 | ADR-0009 à amender (par un nouvel ADR, un ADR accepté n'étant pas modifié) : `connect-src` autorise `https://gateway.umami.is` au lieu de `cloud.umami.is` et `api-gateway.umami.dev` | `docs/adr/0009-securite-en-tetes-supply-chain.md`, `nginx/snippets/security-headers.conf` | à valider |
-| 3 | `.env.example` à compléter : `PUBLIC_SITE_URL` (défaut `https://thibaut-monier.fr`) et `PUBLIC_UMAMI_WEBSITE_ID` (vide : aucune mesure) ; non modifié par l'intégration | `.env.example` | à valider |
+| 3 | `.env.example` : variables `PUBLIC_SITE_URL`, `PUBLIC_UMAMI_WEBSITE_ID`, `PUBLIC_WEB3FORMS_KEY` et `PUBLIC_CALENDLY_URL` déjà référencées (confirmé par le PO le 2026-10-15) ; vraies valeurs dans `.env.local` (ignoré par git et par Docker). Reste : déclarer les mêmes variables dans le service Railway `web` puis redéployer (variables de build) | `.env.example`, `.env.local`, Railway | validé (Railway à faire) |
 
 ## Sprint 2 : éléments restants (statuts inchangés, `done-pending-po`)
 
