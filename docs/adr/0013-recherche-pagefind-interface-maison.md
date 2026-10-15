@@ -4,7 +4,7 @@
 Accepté (2026-10-15, sprint 3, US-012)
 
 ## Contexte
-Le blog compte 28 articles et doit offrir une recherche plein texte en moins de 10 secondes, sans serveur ni service tiers (ADR-0004 : outils gratuits, site statique sur nginx). La CSP (ADR-0009) interdit `unsafe-inline` pour les scripts et les styles et autorise déjà `'wasm-unsafe-eval'` (WebAssembly de Pagefind). Pagefind 1.5.2 est une dépendance déclarée en phase 0 (`pagefind`, script `build:search` après `astro build`).
+Le blog compte 28 articles et doit offrir une recherche plein texte en moins de 10 secondes, sans serveur ni service tiers (ADR-0004 : outils gratuits, site statique sur nginx). La CSP (ADR-0009) interdit `unsafe-inline` pour les scripts et les styles et autorise `'wasm-unsafe-eval'` (WebAssembly de Pagefind) sur `/recherche/` et `/pagefind/` seulement. Pagefind 1.5.2 est une dépendance déclarée en phase 0 (`pagefind`, script `build:search` après `astro build`).
 
 ## Décision
 1. **Moteur** : Pagefind indexe `dist/` après le build ; seules les pages portant `data-pagefind-body` (les articles, 28 pages) entrent dans l'index.

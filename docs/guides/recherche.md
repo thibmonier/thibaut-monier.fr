@@ -61,5 +61,5 @@ Pagefind renvoie un résultat pour une requête absurde : « zzzzqq » surligne 
 ## Dépannage
 
 - `/recherche/` répond mais la recherche est « indisponible » : l'index est absent (`astro dev`, ou build sans `npm run build:search`), ou `/pagefind/` est bloqué. `make build` régénère l'index et le contrôle `pagefind.dist` échoue s'il manque.
-- `Refused to compile or instantiate WebAssembly module` dans la console : la CSP doit contenir `'wasm-unsafe-eval'` (déjà le cas, ADR-0009 ; `nginx/snippets/security-headers.conf` appartient au lot B).
+- `Refused to compile or instantiate WebAssembly module` dans la console : la CSP de `/recherche/` et de `/pagefind/` doit contenir `'wasm-unsafe-eval'` (variable `$csp_wasm`, `map` de `nginx.conf`, ADR-0009) ; les autres pages ne l'ont volontairement pas.
 - Les fichiers `/pagefind/` sont servis avec `Cache-Control: no-cache` (non hachés, donc revalidés) : `nginx.conf` (lot B) a déjà la `location ^~ /pagefind/`.

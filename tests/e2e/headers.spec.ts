@@ -1,4 +1,21 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type APIRequestContext } from '@playwright/test';
+
+test.describe("Scénario : 'wasm-unsafe-eval' limité à la recherche", () => {
+  const cspOf = async (request: APIRequestContext, path: string) =>
+    (await request.get(path)).headers()['content-security-policy'] ?? '';
+
+  test('absent des pages courantes, de l’index et du flux', async ({ request }) => {
+    for (const path of ['/', '/blog/', '/rss.xml', '/inconnu-pour-la-csp/']) {
+      expect(await cspOf(request, path), path).not.toContain('wasm-unsafe-eval');
+    }
+  });
+
+  test('présent sur /recherche/ et sur les fichiers Pagefind', async ({ request }) => {
+    for (const path of ['/recherche/', '/pagefind/pagefind.js', '/pagefind/pagefind-worker.js']) {
+      expect(await cspOf(request, path), path).toMatch(/script-src[^;]*'wasm-unsafe-eval'/);
+    }
+  });
+});
 
 test.describe('Scénario : En-têtes de sécurité présents', () => {
   test("l'accueil porte tous les en-têtes de sécurité", async ({ request }) => {
