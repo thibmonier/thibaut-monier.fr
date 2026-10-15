@@ -1,5 +1,5 @@
 ---
-title: "Chiffrer et rassurer : la nouvelle posture commerciale face à l'agentic coding"
+title: "Chiffrer et rassurer : la nouvelle posture commerciale face à l'agentic coding"
 seoTitle: "Chiffrer et rassurer face à l'agentic coding"
 description: "Quand l'agent écrit l'essentiel du code, le jour-homme ne tient plus. Le commercial doit vendre une garantie de résultat et adopter de nouveaux modèles de prix."
 pubDate: 2026-05-20

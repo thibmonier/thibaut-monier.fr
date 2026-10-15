@@ -1,5 +1,5 @@
 ---
-title: 'Le coût caché de la supervision : ce que le modèle des équipes réduites ne dit pas'
+title: 'Le coût caché de la supervision : ce que le modèle des équipes réduites ne dit pas'
 seoTitle: 'Le coût caché de la supervision agentique'
 description: "La production se découple de l'effectif, pas la validation : la capacité de relecture humaine devient le goulot et doit dimensionner l'équipe."
 pubDate: 2026-09-22

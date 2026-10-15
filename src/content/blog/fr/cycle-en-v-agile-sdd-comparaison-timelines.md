@@ -1,5 +1,5 @@
 ---
-title: 'Cycle en V, Agile, SDD × IA : trois façons de livrer un projet, trois rapport au temps'
+title: 'Cycle en V, Agile, SDD × IA : trois façons de livrer un projet, trois rapport au temps'
 seoTitle: 'Cycle en V, Agile, SDD × IA : comparaison des timelines'
 description: 'Cycle en V, Agile et SDD assisté par IA comparés sur un même projet : durées, hypothèses et conditions pour que les calendriers tiennent.'
 pubDate: 2026-02-09

@@ -1,5 +1,5 @@
 ---
-title: 'La dette de contexte : le nouveau risque caché des projets IA'
+title: 'La dette de contexte : le nouveau risque caché des projets IA'
 seoTitle: 'La dette de contexte : le risque caché des projets IA'
 description: "La dette de contexte s'accumule dans ce que l'agent lit, non dans le code : quatre mécanismes, des symptômes discrets et des pratiques pour la prévenir."
 pubDate: 2026-02-18

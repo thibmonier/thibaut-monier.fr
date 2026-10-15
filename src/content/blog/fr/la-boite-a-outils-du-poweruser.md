@@ -1,5 +1,5 @@
 ---
-title: 'La boîte à outils du poweruser : 57 accélérateurs du quotidien'
+title: 'La boîte à outils du poweruser : 57 accélérateurs du quotidien'
 seoTitle: 'La boîte à outils du poweruser : 57 accélérateurs'
 description: 'Une liste d’outils ne vaut rien en soi : seuls comptent ceux qui survivent à six mois d’usage réel, et les raisons pour lesquelles les autres sont désinstallés.'
 pubDate: 2026-09-22

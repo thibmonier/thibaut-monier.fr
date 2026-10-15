@@ -1,5 +1,5 @@
 ---
-title: "Shadow IT agentique : quand l'entreprise perd la trace de ses propres agents"
+title: "Shadow IT agentique : quand l'entreprise perd la trace de ses propres agents"
 seoTitle: 'Shadow IT agentique : perdre la trace de ses agents'
 description: "Des agents IA tournent sans être inventoriés. L'interdiction les cache davantage ; un registre simple, fondé sur les droits et la validation, fonctionne mieux."
 pubDate: 2026-09-21

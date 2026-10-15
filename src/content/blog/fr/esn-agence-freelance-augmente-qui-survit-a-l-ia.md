@@ -1,5 +1,5 @@
 ---
-title: "ESN, agence, freelance augmenté : qui survit à l'ère des agents ?"
+title: "ESN, agence, freelance augmenté : qui survit à l'ère des agents ?"
 seoTitle: "ESN, agence, freelance augmenté : qui survit à l'IA ?"
 description: "ESN, agence ou freelance augmenté : l'IA redistribue les avantages compétitifs, et seules la connaissance métier et la confiance résistent."
 pubDate: 2026-02-21

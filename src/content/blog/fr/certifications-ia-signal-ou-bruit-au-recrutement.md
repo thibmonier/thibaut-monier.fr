@@ -1,5 +1,5 @@
 ---
-title: 'Certifications IA : signal ou bruit au recrutement ?'
+title: 'Certifications IA : signal ou bruit au recrutement ?'
 description: 'Six certifications IA sur un CV disent peu de ce que la personne sait faire, mais beaucoup sur sa manière d’apprendre, à condition de savoir les lire.'
 pubDate: 2026-09-22
 tags: ['Recrutement', 'Compétences', 'IA générative', 'Évaluation']

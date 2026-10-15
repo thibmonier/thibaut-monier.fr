@@ -1,5 +1,5 @@
 ---
-title: "L'IA vous accélère-t-elle ou vous précipite-t-elle ?"
+title: "L'IA vous accélère-t-elle ou vous précipite-t-elle ?"
 description: 'Accélérer réduit le temps entre décision et réalisation ; précipiter supprime le temps de décider. Comment les distinguer, et où ralentir volontairement.'
 pubDate: 2026-09-22
 tags: ['Pilotage', 'Décision', 'IA générative', 'Qualité', 'Méthode']

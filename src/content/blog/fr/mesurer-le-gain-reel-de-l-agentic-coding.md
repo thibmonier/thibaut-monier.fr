@@ -1,5 +1,5 @@
 ---
-title: "Le gain de rentabilité agentic : comment vérifier qu'il existe vraiment"
+title: "Le gain de rentabilité agentic : comment vérifier qu'il existe vraiment"
 seoTitle: "Gain de rentabilité agentic : vérifier qu'il existe"
 description: "Le gain de l'agentic coding est réel à la génération, mais il se déplace vers cadrage, validation et rework. Comment le mesurer honnêtement, poste par poste."
 pubDate: 2026-05-22

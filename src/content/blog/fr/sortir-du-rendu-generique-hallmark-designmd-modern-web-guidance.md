@@ -1,5 +1,5 @@
 ---
-title: 'Sortir du rendu générique : Hallmark, DESIGN.md et Modern Web Guidance'
+title: 'Sortir du rendu générique : Hallmark, DESIGN.md et Modern Web Guidance'
 seoTitle: 'Rendu générique : Hallmark, DESIGN.md, Modern Web Guidance'
 description: 'Trois outils contre la signature visuelle et technique du code généré : Hallmark, DESIGN.md et Modern Web Guidance, avec une réserve sur le registre public.'
 pubDate: 2026-09-22

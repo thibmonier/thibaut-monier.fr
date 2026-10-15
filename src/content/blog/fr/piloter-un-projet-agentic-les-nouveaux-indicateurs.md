@@ -1,5 +1,5 @@
 ---
-title: 'Piloter un projet agentic : ce que les indicateurs classiques ne mesurent plus'
+title: 'Piloter un projet agentic : ce que les indicateurs classiques ne mesurent plus'
 seoTitle: 'Piloter un projet agentic : les nouveaux indicateurs'
 description: "Vélocité et burndown mesurent l'effort humain. Sur un projet agentic, mieux vaut suivre la qualité du contexte, du flux et du risque avec cinq indicateurs clés."
 pubDate: 2026-05-21

@@ -1,5 +1,5 @@
 ---
-title: "Du vibe coding à l'agentic engineering : l'industrialisation passe par le SDD"
+title: "Du vibe coding à l'agentic engineering : l'industrialisation passe par le SDD"
 seoTitle: "Du vibe coding à l'agentic engineering : le rôle du SDD"
 description: "Le vibe coding ne passe pas à l'échelle. L'agentic engineering, fondé sur la spécification (SDD), permet d'industrialiser la génération de code par agents."
 pubDate: 2026-05-18

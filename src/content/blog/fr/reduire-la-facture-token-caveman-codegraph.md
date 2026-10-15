@@ -1,5 +1,5 @@
 ---
-title: 'Réduire la facture token : ce que Caveman et CodeGraph font vraiment'
+title: 'Réduire la facture token : ce que Caveman et CodeGraph font vraiment'
 seoTitle: 'Réduire la facture token : Caveman et CodeGraph'
 description: 'Deux outils réduisent le coût des agents par des chemins opposés ; la recherche citée par l’un d’eux contredit en partie son argumentaire.'
 pubDate: 2026-09-22

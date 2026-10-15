@@ -1,5 +1,5 @@
 ---
-title: "Sécurité agentic : comment rassurer un client et prouver la qualité de l'outil"
+title: "Sécurité agentic : comment rassurer un client et prouver la qualité de l'outil"
 seoTitle: 'Sécurité agentic : rassurer le client et prouver la qualité'
 description: 'Le client demande si le code généré est sécurisé : répondre par une chaîne de contrôles en cinq maillons et des preuves continues, pas des promesses.'
 pubDate: 2026-05-23

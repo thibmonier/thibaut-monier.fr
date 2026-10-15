@@ -1,5 +1,5 @@
 ---
-title: "Agence digitale : le binôme augmenté remplace-t-il l'équipe ?"
+title: "Agence digitale : le binôme augmenté remplace-t-il l'équipe ?"
 seoTitle: "Le binôme augmenté remplace-t-il l'équipe d'une agence ?"
 description: "Un binôme augmenté peut livrer en 48 heures ce qu'une agence met des semaines à produire, mais la bonne réponse est de réallouer, pas de réduire l'équipe."
 pubDate: 2026-03-11

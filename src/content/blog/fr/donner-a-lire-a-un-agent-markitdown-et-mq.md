@@ -1,5 +1,5 @@
 ---
-title: 'Donner à lire à un agent : MarkItDown et mq'
+title: 'Donner à lire à un agent : MarkItDown et mq'
 description: 'MarkItDown convertit les documents du client en Markdown versionné, mq en extrait la section utile : une chaîne reproductible pour alimenter un agent.'
 pubDate: 2026-09-22
 tags: ['Outils', 'Cadrage', 'AMOA', 'Markdown', 'Agentic engineering']

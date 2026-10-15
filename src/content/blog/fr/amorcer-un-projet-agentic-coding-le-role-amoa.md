@@ -1,5 +1,5 @@
 ---
-title: "Amorcer un projet agentic coding : le rôle nouveau de l'AMOA"
+title: "Amorcer un projet agentic coding : le rôle nouveau de l'AMOA"
 description: "Avec un agent, le cadrage de l'AMOA devient le programme exécuté : elle n'amorce plus le projet, elle écrit la première version du logiciel."
 pubDate: 2026-05-19
 tags: ['AMOA', 'SDD', 'Agentic engineering', 'Cadrage']

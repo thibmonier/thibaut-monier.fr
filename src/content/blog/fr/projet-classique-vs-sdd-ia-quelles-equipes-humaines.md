@@ -1,5 +1,5 @@
 ---
-title: 'Cycle en V, Agile, SDD × IA : de quelles équipes humaines a-t-on vraiment besoin ?'
+title: 'Cycle en V, Agile, SDD × IA : de quelles équipes humaines a-t-on vraiment besoin ?'
 seoTitle: 'Cycle en V, Agile, SDD × IA : quelles équipes humaines ?'
 description: 'Comparaison phase par phase des équipes nécessaires en cycle en V, en Agile et en SDD × IA : effectifs, profils mobilisés et rôles qui se redistribuent.'
 pubDate: 2026-02-08
