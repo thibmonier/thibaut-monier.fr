@@ -15,6 +15,11 @@ const SECURE = {
   'x-content-type-options': 'nosniff',
 };
 
+const CONTENT_TYPES: Record<string, string> = {
+  '/rss.xml': 'application/rss+xml; charset=utf-8',
+  '/og/blog-la-spec-est-le-nouveau-code.png': 'image/png',
+};
+
 // Site factice : 200 sur les pages connues, 404 ailleurs, 405 hors GET/HEAD ; options pour dégrader.
 function fakeSite(options: { headers?: Record<string, string>; softNotFound?: boolean } = {}) {
   const headers = options.headers ?? SECURE;
@@ -25,7 +30,11 @@ function fakeSite(options: { headers?: Record<string, string>; softNotFound?: bo
     let status = 404;
     if (method !== 'GET' && method !== 'HEAD') status = 405;
     else if (known.has(pathname) || options.softNotFound) status = 200;
-    return new Response('x', { status, headers });
+    const type = CONTENT_TYPES[pathname];
+    return new Response('x', {
+      status,
+      headers: type ? { ...headers, 'content-type': type } : headers,
+    });
   };
   return fetchFn;
 }
@@ -67,6 +76,49 @@ describe('runSmoke', () => {
         '/open-source/career-ops/',
         '/open-source/tailsfadmin/',
       ]),
+    );
+  });
+  it('couvre le blog, la recherche, le flux, les sitemaps, robots, llms et une image Open Graph (T-900-22)', () => {
+    expect(OK_PATHS).toEqual(
+      expect.arrayContaining([
+        '/blog/',
+        '/blog/page/2/',
+        '/blog/la-spec-est-le-nouveau-code/',
+        '/blog/categorie/methode/',
+        '/recherche/',
+        '/rss.xml',
+        '/sitemap-index.xml',
+        '/robots.txt',
+        '/llms.txt',
+        '/og/blog-la-spec-est-le-nouveau-code.png',
+      ]),
+    );
+  });
+  it('échoue si /rss.xml n’est pas servi en application/rss+xml', async () => {
+    const base = fakeSite();
+    const wrong: FetchLike = async (url, init) => {
+      const response = await base(url, init);
+      if (new URL(url).pathname !== '/rss.xml') return response;
+      return new Response('x', { status: 200, headers: { ...SECURE, 'content-type': 'text/xml' } });
+    };
+    const errors = await runSmoke('http://localhost:8080', wrong);
+    expect(errors).toContain(
+      'GET /rss.xml : type de contenu text/xml, attendu application/rss+xml',
+    );
+  });
+  it('échoue si l’image Open Graph n’est pas un PNG', async () => {
+    const base = fakeSite();
+    const wrong: FetchLike = async (url, init) => {
+      const response = await base(url, init);
+      if (!new URL(url).pathname.startsWith('/og/')) return response;
+      return new Response('x', {
+        status: 200,
+        headers: { ...SECURE, 'content-type': 'text/html' },
+      });
+    };
+    const errors = await runSmoke('http://localhost:8080', wrong);
+    expect(errors).toContain(
+      'GET /og/blog-la-spec-est-le-nouveau-code.png : type de contenu text/html, attendu image/png',
     );
   });
   it('échoue si une page de la vitrine répond 404', async () => {
