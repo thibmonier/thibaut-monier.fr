@@ -66,3 +66,140 @@ Précisions de contrat :
 - `paginate(items, page, size = 12)` renvoie `null` hors bornes ; une liste vide reste une page 1 vide. `pagePath(1)` vaut `/blog/` (la page 1 n'a pas d'URL `/blog/page/1/`).
 - `isPublished` compare `pubDate` à l'instant du build : un `pubDate` sans heure vaut minuit UTC, donc publié au redéploiement de 06:00 UTC du jour même.
 - **Astro 7 et Markdown** : le rendu par défaut est Sätteri. `markdown.rehypePlugins` exige `@astrojs/markdown-remark` (non installé) : le plugin des blocs défilants est donc un plugin HAST de `satteri({ hastPlugins })`, déclaré dans `astro.config.mjs` avec `syntaxHighlight: false`. Les plugins `unified` (remark/rehype) ne sont pas utilisables sans cette dépendance.
+
+## Navigation (décisions T-011-01, 2026-10-15)
+
+Décidées par l'agent selon les arbitrages du 2026-10-14 (aucune attente du PO) ; la table de séries et les tags normalisés sont inscrits dans `contenu-a-valider.md` pour validation (à la charge de l'orchestrateur).
+
+| Sujet | Décision |
+|-------|----------|
+| Taille de page | 12 articles par page : 28 articles = 3 pages (`/blog/`, `/blog/page/2/`, `/blog/page/3/`). `/blog/page/1/` n'existe pas. |
+| Catégories | 5 pages, une par catégorie du schéma ayant au moins un article publié : Business (4), Méthode (5), Métiers (7), Outils (5), Pilotage (7). Slugs sans accent (`methode`, `metiers`…). |
+| Tags | Pages seulement pour les tags portés par 2 articles ou plus (`tagPages`) : 19 pages. Les autres tags (34 après normalisation) sont affichés en texte non lié : aucune page mince, aucun `noindex` à gérer (E7). |
+| Normalisation des tags avant migration | « Méthodologie » devient « Méthode », « Management de projet » devient « Gestion de projet », « Rentabilité » devient « ROI » (doublons supprimés dans un même article) : 56 tags d'origine, 53 après normalisation. « Outils », « Méthode » et « Pilotage » restent des tags malgré leur homonymie avec des catégories. La table est dans `TAG_ALIASES` de `src/lib/blog-migration.ts`. |
+| Taille maximale d'une taxonomie | Une page de catégorie, de tag ou de série n'est pas paginée : elle liste tous ses articles. Au-delà de `MAX_TAXONOMY_ARTICLES` (24, soit deux pages de liste), le build échoue (« pagination de taxonomie non prévue ») plutôt que de tronquer. Le tag « IA générative » compte 17 articles : la limite de 12 supposée par la décomposition (qui ne comptait que les catégories, 7 au plus) aurait fait échouer le build. |
+| Catégories : libellé et description | Le libellé est la valeur de l'énumération du schéma ; titre de page « <nom> (N articles) » ; description « Les N articles de la catégorie <nom> du blog de Thibaut Monier, du plus récent au plus ancien. » |
+
+### Ordre de lecture des séries (`seriesOrder`, E6)
+
+Déduit des pieds d'article (« Prochain article : … », « Dernier article de la série… »), à valider par le PO. Les `pubDate` ne donnent pas l'ordre (dates identiques ou inversées). La source de vérité du contenu est le champ `seriesOrder` de chaque article ; `SERIES_ORDER` (`src/lib/blog-migration.ts`) ne sert qu'à la migration et un test vérifie 26 articles, 6 séries, sans trou.
+
+| Série | Ordre |
+|-------|-------|
+| L'agence digitale augmentée (5) | 1 `le-vrai-developpeur-augmente-c-est-le-chef`, 2 `la-spec-est-le-nouveau-code`, 3 `le-junior-n-est-pas-le-probleme-le`, 4 `agence-digitale-le-binome-augmente-remplace-t-il`, 5 `ce-que-l-ia-ne-fera-jamais-a-votre-place` |
+| Les métiers à l'ère agentic (5) | 1 `amorcer-un-projet-agentic-coding-le-role-amoa`, 2 `chiffrer-et-rassurer-autour-de-l-agentic-coding`, 3 `piloter-un-projet-agentic-les-nouveaux-indicateurs`, 4 `mesurer-le-gain-reel-de-l-agentic-coding`, 5 `securite-agentic-rassurer-le-client-et-prouver-la-qualite` |
+| Transformer l'agence (5) | 1 `comment-mesurer-le-roi-reel-d-un-workflow`, 2 `recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia`, 3 `la-gestion-de-projet-ia-est-une-discipline`, 4 `ce-que-le-client-doit-savoir-sur-l`, 5 `esn-agence-freelance-augmente-qui-survit-a-l-ia` |
+| La boîte à outils agentic (4) | 1 `outils-agentic-engineering-qui-meritent-un-essai`, 2 `reduire-la-facture-token-caveman-codegraph`, 3 `donner-a-lire-a-un-agent-markitdown-et-mq`, 4 `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance` |
+| Les nouveaux risques projet (4) | 1 `la-dette-de-contexte-le-nouveau-risque-cache`, 2 `shadow-it-agentique-perdre-la-trace-de-ses-agents`, 3 `le-cout-cache-de-la-supervision-agentique`, 4 `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle` |
+| Software-Driven Development (3) | 1 `cycle-en-v-agile-sdd-comparaison-timelines`, 2 `projet-classique-vs-sdd-ia-quelles-equipes-humaines`, 3 `du-vibe-coding-a-l-agentic-engineering` |
+
+Hors série : `certifications-ia-signal-ou-bruit-au-recrutement` et `la-boite-a-outils-du-poweruser`. Les phrases « Prochain article » du corps, conservées telles quelles, restent cohérentes avec cet ordre ; trois pieds annoncent un article ou une série qui n'existe pas (« Les agents spécialisés… » après `du-vibe-coding-a-l-agentic-engineering`, « Composer son pipeline agentic » après `securite-agentic-…`, « Mesurer l'effet réel d'un outil » après `sortir-du-rendu-generique-…`) et `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle`, dernier de sa série, annonce « Certifications IA… » qui est hors série. Ces promesses viennent de l'ancien site ; les numéros de série des anciens pieds (« série 2 », « série 3 ») sont aussi périmés : à décider par le PO (le contrôle ne les bloque pas).
+
+### Routes
+
+| Page | URL | Générateur |
+|------|-----|------------|
+| Liste | `/blog/`, `/blog/page/<n>/` (n ≥ 2) | `src/pages/blog/index.astro`, `page/[page]/index.astro` |
+| Article | `/blog/<slug>/` | `[slug]/index.astro` (`getPublishedPosts()`) |
+| Catégorie | `/blog/categorie/<slug>/` | `categorie/[categorie]/index.astro` |
+| Tag | `/blog/tag/<slug>/` | `tag/[tag]/index.astro` (tags à 2 articles ou plus) |
+| Série | `/blog/serie/<slug>/` | `serie/[serie]/index.astro` |
+
+Ajouter une catégorie : l'ajouter à l'énumération `BLOG_CATEGORIES` de `src/content/schemas/blog.ts` (contrat C1 : demande à l'orchestrateur), puis publier un article de cette catégorie ; la page apparaît seule. Le filtre des catégories est un `details` replié sous 768 px et déplié au-dessus (`::details-content`), sans JavaScript ; les pages de liste n'utilisent ni `rel="prev"` ni `rel="next"`.
+
+## Images et licences (T-009-12)
+
+22 fichiers WebP copiés sans modification depuis `public/blog/` de la source vers `src/assets/blog/` (1,8 Mo, 227 664 octets au plus par fichier, aucun bloc EXIF ; sommes de contrôle vérifiées identiques à la source le 2026-10-15). Non migrés : `blog_post_12_1768850610966.webp`, `markdown.webp`, `welcome.webp` (inutilisés) et `og-image.png` (visuel de marque d'Agentic Agency). 20 images font 1200 × 630 ; `kanban-timelines-methodes.webp` (1200 × 943) et `team-equipes-humaines.webp` (1200 × 900) sont cadrées par CSS (`aspect-ratio`, `object-fit: cover`), jamais recadrées. Aucune image d'article ne vient d'Unsplash d'après la source (les références Unsplash sont dans `src/pages/services.astro`, non migré).
+
+**À faire par le PO (CR-6)** : l'origine et le droit d'usage des 22 couvertures ne sont documentés nulle part dans la source ; plusieurs ressemblent à des photographies de banque d'images (par exemple `blog_post_1_1768848683359.webp`, `kanban-timelines-methodes.webp`). Déclarer création, génération ou achat, avec la licence, puis compléter le tableau.
+
+| Fichier | Articles | SHA-256 (12 premiers caractères) | Origine | Droit d'usage | Date |
+|---------|----------|----------------------------------|---------|---------------|------|
+| `blog_post_10_1768850582328.webp` | `esn-agence-freelance-augmente-qui-survit-a-l-ia` | `47a0a83a2969` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_11_1768850597259.webp` | `la-dette-de-contexte-le-nouveau-risque-cache` | `ab4097b5466c` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_1_1768848683359.webp` | `le-vrai-developpeur-augmente-c-est-le-chef` | `14813e22577c` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_2_1768848698871.webp` | `la-spec-est-le-nouveau-code` | `b1acb933378d` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_3_1768848720552.webp` | `du-vibe-coding-a-l-agentic-engineering`, `le-junior-n-est-pas-le-probleme-le` | `ae03838dfc96` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_4_1768848735398.webp` | `agence-digitale-le-binome-augmente-remplace-t-il`, `amorcer-un-projet-agentic-coding-le-role-amoa` | `0f658e21c3e9` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_5_1768848750922.webp` | `ce-que-l-ia-ne-fera-jamais-a-votre-place`, `chiffrer-et-rassurer-autour-de-l-agentic-coding` | `c80835f41085` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_6_1768848765056.webp` | `comment-mesurer-le-roi-reel-d-un-workflow`, `piloter-un-projet-agentic-les-nouveaux-indicateurs` | `eafe83ec7a90` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_7_1768850538178.webp` | `mesurer-le-gain-reel-de-l-agentic-coding`, `recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia` | `8eb85a67ac23` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_8_1768850554501.webp` | `la-gestion-de-projet-ia-est-une-discipline` | `226c68edb677` | à déclarer par le PO | à déclarer par le PO | - |
+| `blog_post_9_1768850568154.webp` | `ce-que-le-client-doit-savoir-sur-l`, `securite-agentic-rassurer-le-client-et-prouver-la-qualite` | `582ab29b7856` | à déclarer par le PO | à déclarer par le PO | - |
+| `boite-a-outils-poweruser.webp` | `la-boite-a-outils-du-poweruser` | `8fe985298e9d` | à déclarer par le PO | à déclarer par le PO | - |
+| `certifications-ia.webp` | `certifications-ia-signal-ou-bruit-au-recrutement` | `a49091e2116f` | à déclarer par le PO | à déclarer par le PO | - |
+| `cout-token-reseau.webp` | `reduire-la-facture-token-caveman-codegraph` | `a7c613e9e52e` | à déclarer par le PO | à déclarer par le PO | - |
+| `design-nuancier.webp` | `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance` | `dec1034fce9c` | à déclarer par le PO | à déclarer par le PO | - |
+| `documents-ingestion.webp` | `donner-a-lire-a-un-agent-markitdown-et-mq` | `ac29c5c9fc98` | à déclarer par le PO | à déclarer par le PO | - |
+| `kanban-timelines-methodes.webp` | `cycle-en-v-agile-sdd-comparaison-timelines` | `6cfb02c7cd1d` | à déclarer par le PO | à déclarer par le PO | - |
+| `outils-etabli.webp` | `outils-agentic-engineering-qui-meritent-un-essai` | `0707f210beb5` | à déclarer par le PO | à déclarer par le PO | - |
+| `shadow-it-agents.webp` | `shadow-it-agentique-perdre-la-trace-de-ses-agents` | `84a054a059b0` | à déclarer par le PO | à déclarer par le PO | - |
+| `supervision-relecture.webp` | `le-cout-cache-de-la-supervision-agentique` | `d1da768982a7` | à déclarer par le PO | à déclarer par le PO | - |
+| `team-equipes-humaines.webp` | `projet-classique-vs-sdd-ia-quelles-equipes-humaines` | `1f8d8f6106c7` | à déclarer par le PO | à déclarer par le PO | - |
+| `vitesse-precipitation.webp` | `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle` | `1183ce4e702e` | à déclarer par le PO | à déclarer par le PO | - |
+
+## Structure de la collection et schéma
+
+Fichiers : `src/content/blog/fr/<slug>.md` (identifiant d'entrée `fr/<slug>`) ; images : `src/assets/blog/<fichier>.webp`, référencées par `image: "../../../assets/blog/<fichier>.webp"`. Les 28 fichiers sont en `.md` (le glob accepte aussi `.mdx`, mais MDX interprète les `<` et `{` du texte).
+
+| Champ | Règle |
+|-------|-------|
+| `title` | 1 à 100 caractères ; c'est le h1 |
+| `seoTitle` | 20 à 60 caractères ; obligatoire quand `title` dépasse 60 ; c'est le `<title>` |
+| `description` | 50 à 160 caractères, jamais tronquée ; méta description et extrait |
+| `pubDate` | date ; sans heure = minuit UTC ; l'article n'est publié qu'à partir de cette date |
+| `updatedDate` | optionnelle, jamais avant `pubDate` |
+| `image`, `imageAlt` | ensemble ou aucun des deux ; l'alt décrit ce que l'on voit |
+| `excerpt` | optionnel ; sinon `description` |
+| `tags` | libellés ; un tag n'a une page qu'à partir de 2 articles |
+| `category` | énumération du schéma (Business, Méthode, Métiers, Outils, Pilotage) |
+| `series`, `seriesOrder` | ensemble ; ordre unique dans la série (contrôlé) |
+| `draft` | `true` : aucun rendu |
+| `validated` | validation du PO du lot ; **jamais passé à `true` par un agent** ; `REQUIRE_VALIDATED_CONTENT=1` fait échouer le build tant qu'un article publié n'est pas validé |
+| `faq` | 1 question ou plus : section repliable et, côté lot B, données structurées |
+| `originalUrl`, `originalPublishedAt` | adresse et date de l'article chez Agentic Agency (mention « Initialement publié sur… ») |
+
+Contrôle de contenu (`scripts/checks/blog.content.check.ts`, avant le build) : 28 articles publiés (constante `EXPECTED_ARTICLES`, message « Blog : 27 articles trouvés, 28 attendus »), schéma, slugs uniques, aucun attribut `style` ni balise `script` dans le corps, aucun titre de niveau 1 ni saut de niveau, liens internes au format cible, images présentes de 250 Ko au plus sans bloc EXIF, données personnelles, mention interdite « Operations Director » (E11), ordres de série uniques et un seul lecteur de la collection (`getCollection('blog')` n'est appelé que par `src/lib/blog-source.ts`).
+
+## Ajouter un article
+
+1. Créer `src/content/blog/fr/<slug>.md` (slug en kebab-case, jamais renommé ensuite : ADR-0008) avec `title`, `description` (50 à 160 caractères), `pubDate`, `category`, `tags`.
+2. Si le titre dépasse 60 caractères, ajouter `seoTitle` (20 à 60).
+3. Copier l'image WebP (1200 × 630 de préférence, 250 Ko au plus, sans EXIF) dans `src/assets/blog/`, renseigner `image` et `imageAlt`, déclarer l'origine et la licence dans le tableau ci-dessus.
+4. Série : `series` et `seriesOrder` (ordre unique) ; sinon rien.
+5. Corps en Markdown : titres à partir de `##` sans saut de niveau, liens internes avec barre finale, aucun HTML avec `style`, schémas SVG avec `<title>`, `role="img"` et classes (`w-full h-auto`), jamais d'attribut `style`.
+6. `make checks` puis `make build` ; l'article est `validated: false` tant que le PO ne l'a pas relu.
+7. Ajouter l'entrée de la table de correspondance seulement si l'article existait sur l'ancien site (`src/data/redirects.yaml`, voir [redirections-blog.md](redirections-blog.md)).
+
+## Publication programmée
+
+`isPublished` compare `pubDate` à l'instant du build : un article daté de demain n'a ni page, ni entrée de sitemap, ni entrée de flux aujourd'hui. Il est publié au premier redéploiement après sa date : le workflow `scheduled.yml` relance le déploiement chaque jour à **06:00 UTC** ; une `pubDate` sans heure vaut minuit UTC, donc un article daté du jour J paraît au redéploiement de 06:00 UTC du jour J. Le contrôle `blog-schedule.dist.check.ts` fait échouer le build si `dist/` contient la page, le sitemap ou le flux d'un article non publié (message avec le slug).
+
+## Migration depuis Agentic Agency
+
+`scripts/migrate-blog.ts` (hors `make ci`, conservé comme trace reproductible) lit le dépôt source en lecture seule et écrit dans `src/content/blog/fr/` et `src/assets/blog/` :
+
+```bash
+docker compose -p tm-w1 run --rm -v /Users/tmonier/Projects/blog:/blog-source:ro tools \
+  node scripts/migrate-blog.ts /blog-source --slugs la-spec-est-le-nouveau-code
+```
+
+Ce qu'il fait : titre et description sur une ligne, image déplacée, `originalUrl` (forme sans barre finale) et `originalPublishedAt`, tags normalisés, `seriesOrder`, liens réécrits (`/blog/<slug>` avec barre finale, `/blog/category/x` vers `/blog/categorie/x/`, pages non migrées vers l'ancien site), SVG sans `style` (classes `w-full h-auto`, `font-family` en attribut, `role="img"`, `<title>` tiré du premier texte), conteneur de l'ancien thème remplacé par `diagram-frame`, pied biographique retiré. Une déclaration CSS inconnue dans un SVG est une erreur. Il n'écrase pas un article déjà migré (les relectures sont protégées) sans `--force`, et accepte `--root <dossier>` pour écrire hors de la collection. Ce qu'il ne fait pas, à la main : `description` (50 à 160), `seoTitle`, `imageAlt`, relecture des liens et de la phrase narrative d'un article (E11).
+
+## Composants, styles et recherche
+
+Composants dans `src/components/blog/` (`ArticleCard`, `Faq`, `AuthorNote`, `OriginalNotice`, `Pagination`, `TaxonomyList`, `SeriesNav`, `TagList`, `Breadcrumb`, `PostDate`, `SearchBox`), gabarit `src/layouts/ArticleLayout.astro`, styles de lecture `src/styles/article.css` (largeur de lecture 75 caractères ; les SVG reprennent les jetons du site par des alias `--color-*` ; `diagram-frame` garde un fond clair pour les schémas aux couleurs figées).
+
+Rappel CSP (ADR-0009) : aucun attribut `style` ni script inline, pas de coloration syntaxique (`markdown.syntaxHighlight: false`), blocs de code en monospace défilant et focalisables. Les textes d'espaces insécables avant « : ; ? ! » concernent les valeurs écrites à la main (description, titre SEO, texte alternatif, FAQ).
+
+## Écarts constatés au sprint 3 (lot A)
+
+| # | Constat | Décision appliquée |
+|---|---------|--------------------|
+| A1 | Le tag « IA générative » compte 17 articles et « Agentic engineering » 10 : plus que la page de 12 articles prévue pour les taxonomies. | Pages de taxonomie non paginées, limite 24 articles avec erreur de build explicite. |
+| A2 | Pagefind renvoie un résultat pour une requête absurde (« zzzzqq » surligne le « Z » de « colonnes X, Y, Z » de `la-spec-est-le-nouveau-code`). | `isRelevant` (`src/lib/search.ts`) garde un résultat seulement si un mot surligné partage 3 lettres de début avec la requête. |
+| A3 | `agentic-agency.fr` répond 401 : les 6 liens vers des pages non migrées (E10) mènent à une page protégée. | Conformes à E10 (URL absolue de l'ancien site, avertissement du job `external-links`) ; variante « retirer le lien, garder le texte » à décider par le PO. |
+| A4 | Une mention d'« Operations Director » subsistait dans le récit de `le-vrai-developpeur-augmente-c-est-le-chef`. | Phrase adaptée (ancien rôle de delivery manager et directeur technique d'une agence digitale) ; contrôle bloquant sur la mention. |
+| A5 | Les nombres d'étoiles GitHub des articles d'outils dataient du 22 septembre 2026. | Relevés par l'API GitHub le 2026-10-15 et mis à jour avec leur date dans les 4 articles concernés (`reduire-la-facture-token-caveman-codegraph`, `donner-a-lire-a-un-agent-markitdown-et-mq`, `outils-agentic-engineering-qui-meritent-un-essai`, `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance`). Les licences affichées par GitHub concordent, sauf Caveman (dépôt marqué Apache-2.0, alors que l'article décrit une licence double MIT et BSL 1.1) : à relire par le PO. |
+| A6 | Le compilateur d'Astro retire l'espace avant un lien inline en fin de ligne (« sur<a> »). | Espaces explicites (`{' '}`) dans `OriginalNotice`. |
+| A7 | La citation d'OCTO de `le-cout-cache-de-la-supervision-agentique` (« lorsqu'une équipe de deux à quatre experts orchestre plusieurs dizaines d'agents spécialisés… ») n'a pas été retrouvée au 2026-10-15 (recherches web et requête sur le blog d'OCTO) ; l'article ne donne aucun lien source. | Texte conservé tel quel ; à vérifier ou à sourcer par le PO avant validation du lot 6. |

@@ -17,18 +17,18 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-012-01 | [CONTENT] | Décisions de la recherche : page dédiée, périmètre, interface | 1,5h | T-009-01 | A | 🔲 |
-| T-012-02 | [TEST] | Écrire les tests unitaires RED : lib/search.ts | 3h | T-012-01 | A | 🔲 |
-| T-012-03 | [FE-WEB] | lib/search.ts et script de recherche chargé à la demande | 5h | T-012-02 | A | 🔲 |
-| T-012-04 | [TEST] | Écrire les tests e2e RED : recherche | 4h | T-012-01 | A | 🔲 |
-| T-012-05 | [FE-WEB] | Marquage Pagefind dans ArticleLayout et titre focalisable | 1,5h | T-009-22, T-012-04, T-011-07 | A | 🔲 |
-| T-012-06 | [FE-WEB] | Page /recherche/, composant SearchBox et entrée de navigation | 4h | T-012-03, T-012-05, T-009-24 | A | 🔲 |
-| T-012-07 | [TEST] | Écrire les tests RED du contrôle dist de l'index Pagefind | 2h | T-012-01 | A | 🔲 |
-| T-012-08 | [OPS] | Contrôle dist de l'index Pagefind | 2,5h | T-012-07, T-012-05, T-009-26 | A | 🔲 |
-| T-012-09 | [TEST] | Vérification GREEN d'US-012 | 2,5h | T-012-06, T-012-08 | A | 🔲 |
-| T-012-10 | [DOC] | ADR-0013 : recherche Pagefind avec interface maison | 1,5h | T-012-09 | A | 🔲 |
-| T-012-11 | [DOC] | Guide de la recherche et fragment de CHANGELOG | 1h | T-012-09 | A | 🔲 |
-| T-012-12 | [REV] | Revue d'US-012 | 2h | T-012-10, T-012-11 | A | 🔲 |
+| T-012-01 | [CONTENT] | Décisions de la recherche : page dédiée, périmètre, interface | 1,5h | T-009-01 | A | ✅ |
+| T-012-02 | [TEST] | Écrire les tests unitaires RED : lib/search.ts | 3h | T-012-01 | A | ✅ |
+| T-012-03 | [FE-WEB] | lib/search.ts et script de recherche chargé à la demande | 5h | T-012-02 | A | ✅ |
+| T-012-04 | [TEST] | Écrire les tests e2e RED : recherche | 4h | T-012-01 | A | ✅ |
+| T-012-05 | [FE-WEB] | Marquage Pagefind dans ArticleLayout et titre focalisable | 1,5h | T-009-22, T-012-04, T-011-07 | A | ✅ |
+| T-012-06 | [FE-WEB] | Page /recherche/, composant SearchBox et entrée de navigation | 4h | T-012-03, T-012-05, T-009-24 | A | ✅ |
+| T-012-07 | [TEST] | Écrire les tests RED du contrôle dist de l'index Pagefind | 2h | T-012-01 | A | ✅ |
+| T-012-08 | [OPS] | Contrôle dist de l'index Pagefind | 2,5h | T-012-07, T-012-05, T-009-26 | A | ✅ |
+| T-012-09 | [TEST] | Vérification GREEN d'US-012 | 2,5h | T-012-06, T-012-08 | A | 🔄 |
+| T-012-10 | [DOC] | ADR-0013 : recherche Pagefind avec interface maison | 1,5h | T-012-09 | A | ✅ |
+| T-012-11 | [DOC] | Guide de la recherche et fragment de CHANGELOG | 1h | T-012-09 | A | ✅ |
+| T-012-12 | [REV] | Revue d'US-012 | 2h | T-012-10, T-012-11 | A | 👀 |
 
 **Total estimé** : 30,5h (12 tâches)
 

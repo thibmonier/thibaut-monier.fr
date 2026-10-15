@@ -17,17 +17,17 @@
 
 | ID | Type | Tâche | Estimation | Dépend de | Lot | Statut |
 |----|------|-------|------------|-----------|-----|--------|
-| T-011-01 | [CONTENT] | Décisions de navigation : tags, taille de page, séries | 2,5h | T-009-01 | A | 🔲 |
-| T-011-02 | [TEST] | Écrire les tests unitaires RED : taxonomies du blog | 3h | T-009-05 | A | 🔲 |
-| T-011-03 | [FE-WEB] | src/lib/blog-taxonomy.ts | 3h | T-011-02, T-011-01 | A | 🔲 |
-| T-011-04 | [TEST] | Écrire les tests e2e RED : navigation du blog | 3,5h | T-009-03, T-011-01, T-009-20 | A | 🔲 |
-| T-011-05 | [FE-WEB] | Composants Pagination, TaxonomyList, SeriesNav et TagList | 5h | T-011-03, T-009-21, T-011-04 | A | 🔲 |
-| T-011-06 | [FE-WEB] | Routes : index paginé, catégories, tags, séries | 5h | T-011-05, T-009-23, T-011-04 | A | 🔲 |
-| T-011-07 | [FE-WEB] | ArticleLayout : encart de série, catégorie et tags liés | 2,5h | T-011-05, T-009-22, T-010-09, T-011-04 | A | 🔲 |
-| T-011-08 | [FE-WEB] | Page 404 : lien « Retour au blog » et tests de la 404 | 1h | T-009-24, T-011-04 | A | 🔲 |
-| T-011-09 | [TEST] | Vérification GREEN d'US-011 | 2,5h | T-011-06, T-011-07, T-011-08, T-009-26 | A | 🔲 |
-| T-011-10 | [DOC] | Guide de navigation du blog | 1h | T-011-09 | A | 🔲 |
-| T-011-11 | [REV] | Revue d'US-011 | 2h | T-011-10 | A | 🔲 |
+| T-011-01 | [CONTENT] | Décisions de navigation : tags, taille de page, séries | 2,5h | T-009-01 | A | ✅ |
+| T-011-02 | [TEST] | Écrire les tests unitaires RED : taxonomies du blog | 3h | T-009-05 | A | ✅ |
+| T-011-03 | [FE-WEB] | src/lib/blog-taxonomy.ts | 3h | T-011-02, T-011-01 | A | ✅ |
+| T-011-04 | [TEST] | Écrire les tests e2e RED : navigation du blog | 3,5h | T-009-03, T-011-01, T-009-20 | A | ✅ |
+| T-011-05 | [FE-WEB] | Composants Pagination, TaxonomyList, SeriesNav et TagList | 5h | T-011-03, T-009-21, T-011-04 | A | ✅ |
+| T-011-06 | [FE-WEB] | Routes : index paginé, catégories, tags, séries | 5h | T-011-05, T-009-23, T-011-04 | A | ✅ |
+| T-011-07 | [FE-WEB] | ArticleLayout : encart de série, catégorie et tags liés | 2,5h | T-011-05, T-009-22, T-010-09, T-011-04 | A | ✅ |
+| T-011-08 | [FE-WEB] | Page 404 : lien « Retour au blog » et tests de la 404 | 1h | T-009-24, T-011-04 | A | ✅ |
+| T-011-09 | [TEST] | Vérification GREEN d'US-011 | 2,5h | T-011-06, T-011-07, T-011-08, T-009-26 | A | ✅ |
+| T-011-10 | [DOC] | Guide de navigation du blog | 1h | T-011-09 | A | ✅ |
+| T-011-11 | [REV] | Revue d'US-011 | 2h | T-011-10 | A | 👀 |
 
 **Total estimé** : 31h (11 tâches)
 

@@ -24,29 +24,29 @@
 | T-009-05 | [FE-WEB] | lib/blog.ts et blog-source.ts : un seul lecteur de la collection (contrat C3) | 4h | T-009-04 | Phase 0 | ✅ |
 | T-009-06 | [TEST] | Écrire les tests RED du plugin rehype des blocs défilants | 1,5h | T-009-03 | Phase 0 | ✅ |
 | T-009-07 | [FE-WEB] | Plugin rehype des blocs défilants et configuration Markdown d'Astro | 2,5h | T-009-06, T-900-07 | Phase 0 | ✅ |
-| T-009-08 | [TEST] | Écrire les tests RED : bibliothèque de migration des articles | 4h | T-009-01, T-009-03, T-900-05 | A | 🔲 |
-| T-009-09 | [FE-WEB] | Bibliothèque et script de migration idempotent | 5h | T-009-08 | A | 🔲 |
-| T-009-10 | [TEST] | Écrire les tests RED : contrôles de contenu du blog | 4h | T-009-03, T-009-05 | A | 🔲 |
-| T-009-11 | [OPS] | Contrôle de contenu blog.content.check.ts | 5h | T-009-10 | A | 🔲 |
-| T-009-12 | [CONTENT] | Images : copie, provenance et licences (CR-6) | 3h | T-009-01 | A | 🔲 |
-| T-009-13 | [CONTENT] | Lot 1 de 5 articles (pilotes) : normalisation et relecture | 4h | T-009-09, T-009-11, T-009-12, T-011-01 | A | 🔲 |
-| T-009-14 | [CONTENT] | Lot 2 de 5 articles : série « L'agence digitale augmentée » et outils | 3h | T-009-13 | A | 🔲 |
-| T-009-15 | [CONTENT] | Lot 3 de 5 articles : série « Les métiers à l'ère agentic » | 3h | T-009-13 | A | 🔲 |
-| T-009-16 | [CONTENT] | Lot 4 de 5 articles : série « Transformer l'agence » | 3h | T-009-13 | A | 🔲 |
-| T-009-17 | [CONTENT] | Lot 5 de 5 articles : méthode SDD, outils et risques | 3h | T-009-13 | A | 🔲 |
-| T-009-18 | [CONTENT] | Lot 6 de 3 articles : série « Les nouveaux risques projet » | 2h | T-009-13 | A | 🔲 |
-| T-009-19 | [CONTENT] | Rédiger la FAQ de 3 articles | 3h | T-009-13, T-009-14, T-009-15 | A | 🔲 |
-| T-009-20 | [TEST] | Écrire les tests e2e RED du blog (article, index, FAQ, 404) | 4h | T-009-03, T-900-04 | A | 🔲 |
-| T-009-21 | [FE-WEB] | Composants ArticleCard, Faq et AuthorNote | 3,5h | T-009-20, T-009-05 | A | 🔲 |
-| T-009-22 | [FE-WEB] | ArticleLayout et styles de lecture | 5h | T-009-21, T-009-07, T-024-02 | A | 🔲 |
-| T-009-23 | [FE-WEB] | Routes /blog/ et /blog/[slug]/ | 4h | T-009-22, T-009-13, T-009-11 | A | 🔲 |
-| T-009-24 | [FE-WEB] | Navigation : ajouter Blog et adapter les tests qui supposaient le blog absent | 1h | T-009-23 | A | 🔲 |
-| T-009-25 | [OPS] | Contrôle dist de la publication programmée | 2,5h | T-009-23, T-009-10, T-009-11 | A | 🔲 |
-| T-009-26 | [TEST] | Vérification GREEN d'US-009 et liste d'échantillonnage | 3h | T-009-24, T-009-25, T-009-14, T-009-15, T-009-16, T-009-17, T-009-18, T-009-19 | A | 🔲 |
-| T-009-27 | [DOC] | Guide du blog et fragment de CHANGELOG | 2h | T-009-26 | A | 🔲 |
-| T-009-28 | [REV] | Revue de code d'US-009 | 3h | T-009-27 | A | 🔲 |
+| T-009-08 | [TEST] | Écrire les tests RED : bibliothèque de migration des articles | 4h | T-009-01, T-009-03, T-900-05 | A | ✅ |
+| T-009-09 | [FE-WEB] | Bibliothèque et script de migration idempotent | 5h | T-009-08 | A | ✅ |
+| T-009-10 | [TEST] | Écrire les tests RED : contrôles de contenu du blog | 4h | T-009-03, T-009-05 | A | ✅ |
+| T-009-11 | [OPS] | Contrôle de contenu blog.content.check.ts | 5h | T-009-10 | A | ✅ |
+| T-009-12 | [CONTENT] | Images : copie, provenance et licences (CR-6) | 3h | T-009-01 | A | 🔄 |
+| T-009-13 | [CONTENT] | Lot 1 de 5 articles (pilotes) : normalisation et relecture | 4h | T-009-09, T-009-11, T-009-12, T-011-01 | A | ✅ |
+| T-009-14 | [CONTENT] | Lot 2 de 5 articles : série « L'agence digitale augmentée » et outils | 3h | T-009-13 | A | ✅ |
+| T-009-15 | [CONTENT] | Lot 3 de 5 articles : série « Les métiers à l'ère agentic » | 3h | T-009-13 | A | ✅ |
+| T-009-16 | [CONTENT] | Lot 4 de 5 articles : série « Transformer l'agence » | 3h | T-009-13 | A | ✅ |
+| T-009-17 | [CONTENT] | Lot 5 de 5 articles : méthode SDD, outils et risques | 3h | T-009-13 | A | ✅ |
+| T-009-18 | [CONTENT] | Lot 6 de 3 articles : série « Les nouveaux risques projet » | 2h | T-009-13 | A | ✅ |
+| T-009-19 | [CONTENT] | Rédiger la FAQ de 3 articles | 3h | T-009-13, T-009-14, T-009-15 | A | ✅ |
+| T-009-20 | [TEST] | Écrire les tests e2e RED du blog (article, index, FAQ, 404) | 4h | T-009-03, T-900-04 | A | ✅ |
+| T-009-21 | [FE-WEB] | Composants ArticleCard, Faq et AuthorNote | 3,5h | T-009-20, T-009-05 | A | ✅ |
+| T-009-22 | [FE-WEB] | ArticleLayout et styles de lecture | 5h | T-009-21, T-009-07, T-024-02 | A | ✅ |
+| T-009-23 | [FE-WEB] | Routes /blog/ et /blog/[slug]/ | 4h | T-009-22, T-009-13, T-009-11 | A | ✅ |
+| T-009-24 | [FE-WEB] | Navigation : ajouter Blog et adapter les tests qui supposaient le blog absent | 1h | T-009-23 | A | ✅ |
+| T-009-25 | [OPS] | Contrôle dist de la publication programmée | 2,5h | T-009-23, T-009-10, T-009-11 | A | ✅ |
+| T-009-26 | [TEST] | Vérification GREEN d'US-009 et liste d'échantillonnage | 3h | T-009-24, T-009-25, T-009-14, T-009-15, T-009-16, T-009-17, T-009-18, T-009-19 | A | ✅ |
+| T-009-27 | [DOC] | Guide du blog et fragment de CHANGELOG | 2h | T-009-26 | A | ✅ |
+| T-009-28 | [REV] | Revue de code d'US-009 | 3h | T-009-27 | A | 👀 |
 | T-009-29 | [REV] | Relecture éditoriale des 28 articles par lots et validation PO | 3h | T-009-18, T-009-28 | A | 🔲 |
-| T-009-30 | [OPS] | Étendre le contrôle des liens externes de la CI aux articles | 2h | T-009-23 | A | 🔲 |
+| T-009-30 | [OPS] | Étendre le contrôle des liens externes de la CI aux articles | 2h | T-009-23 | A | ✅ |
 
 **Total estimé** : 95h (30 tâches)
 
