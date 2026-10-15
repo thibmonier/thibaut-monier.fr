@@ -1,8 +1,25 @@
 {
   "families": [
-    { "prefix": "/blog/tag/", "max": 2 },
-    { "prefix": "/blog/serie/", "max": 2 },
-    { "prefix": "/blog/page/", "max": 2 }
+    {
+      "prefix": "/blog/tag/",
+      "max": 2
+    },
+    {
+      "prefix": "/blog/serie/",
+      "max": 2
+    },
+    {
+      "prefix": "/blog/page/",
+      "max": 2
+    },
+    {
+      "prefix": "/blog/categorie/",
+      "max": 2
+    },
+    {
+      "prefix": "/open-source/sylius/",
+      "max": 3
+    }
   ],
   "articles": [
     "/blog/certifications-ia-signal-ou-bruit-au-recrutement/",
