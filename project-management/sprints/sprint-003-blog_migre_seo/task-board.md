@@ -6,10 +6,10 @@
 
 | Statut | Tâches | Heures |
 |--------|--------|--------|
-| 🔲 À faire | 118 | 347h |
+| 🔲 À faire | 117 | 344h |
 | 🔄 En cours | 0 | 0h |
 | 👀 Review | 2 | 5,5h |
-| ✅ Done | 22 | 56,5h |
+| ✅ Done | 23 | 59,5h |
 | 🚫 Bloqué | 0 | 0h |
 
 | Lot | Worker | Tâches | Heures |
@@ -180,7 +180,6 @@ Terminée (voir « Done » et « Review »).
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-900-20 | [DOC] | Phase 4 : fusion des lots, CHANGELOG, index des guides et des ADR | 3h | Phase 4 |
 | T-900-21 | [OPS] | Phase 4 : ci.yml final (artefact de redirections, garde du dépôt, Lighthouse séparé, durées) | 3,5h | Phase 4 |
 | T-900-22 | [TEST] | Phase 4 : tests RED du contrôle de fumée étendu | 1,5h | Phase 4 |
 | T-900-23 | [OPS] | Phase 4 : contrôle de fumée étendu (OK_PATHS) | 1h | Phase 4 |
@@ -231,6 +230,7 @@ Phase 0 (2026-10-14, worker W0) : preuves E25 consignées dans le rapport de pha
 | T-010-02 | [TEST] | Écrire les tests unitaires RED : lib/redirects.ts (contrat C6) | 3,5h | Phase 0 |
 | T-010-03 | [FE-WEB] | src/lib/redirects.ts : schéma, couverture et génération nginx | 3h | Phase 0 |
 | T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | Phase 0 |
+| T-900-20 | [DOC] | Phase 4 : fusion des lots, CHANGELOG, index des guides et des ADR | 3h | Phase 4 |
 
 ## 🚫 Bloqué
 

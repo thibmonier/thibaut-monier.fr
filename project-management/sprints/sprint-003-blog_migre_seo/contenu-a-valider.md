@@ -88,6 +88,64 @@ Arbitrages du 2026-10-14 appliqués par l'agent, à confirmer. Consignés dans `
 | 3 | Liens vers les pages non migrées : URL absolue de l'ancien site, à reprendre vers `/labo/` au sprint 4 (E10) | `src/content/blog/fr/*.md` | à valider |
 | 4 | Origine et droit d'usage des 22 couvertures (E4) | `docs/guides/blog.md` (tableau des images) | à valider |
 
+### 3 FAQ rédigées par l'agent (`validated: false`, 3 éléments)
+
+Rédigées à partir du contenu de l'article seul (écart E5), 3 questions chacune. Aucun des 28 articles n'est `validated: true` : le build ne bloque pas tant que `REQUIRE_VALIDATED_CONTENT` n'est pas activée (T-900-21), mais l'activer exige ces validations.
+
+| # | Élément | Fichier | Statut |
+|---|---------|---------|--------|
+| 1 | FAQ de `chiffrer-et-rassurer-autour-de-l-agentic-coding` | `src/content/blog/fr/chiffrer-et-rassurer-autour-de-l-agentic-coding.md` (champ `faq`) | à valider |
+| 2 | FAQ de `la-spec-est-le-nouveau-code` | `src/content/blog/fr/la-spec-est-le-nouveau-code.md` (champ `faq`) | à valider |
+| 3 | FAQ de `reduire-la-facture-token-caveman-codegraph` | `src/content/blog/fr/reduire-la-facture-token-caveman-codegraph.md` (champ `faq`) | à valider |
+
+### Origine et licence des 22 images de couverture (1 élément, T-009-12)
+
+| # | Élément | Fichier | Statut |
+|---|---------|---------|--------|
+| 1 | Déclarer, pour chacune des 22 couvertures, création, génération ou achat, avec la licence et la date : aucune information dans la source. Plusieurs ressemblent à des photographies de banque d'images (`blog_post_1_1768848683359.webp`, `kanban-timelines-methodes.webp`) | `docs/guides/blog.md` (tableau « Images et licences », colonnes Origine, Droit d'usage, Date) | à valider |
+
+### Anomalies de contenu à arbitrer, 1re série (5 éléments)
+
+Venues de l'ancien site ou relevées à la migration ; textes conservés tels quels, rien n'a été corrigé sans le PO. Détail : `docs/guides/blog.md`.
+
+| # | Élément | Fichier | Statut |
+|---|---------|---------|--------|
+| 1 | Pieds « Prochain article » vers des contenus inexistants : « Les agents spécialisés… » après `du-vibe-coding-a-l-agentic-engineering`, « Composer son pipeline agentic » après `securite-agentic-rassurer-le-client-et-prouver-la-qualite`, « Mesurer l'effet réel d'un outil » après `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance`, et « Certifications IA… » annoncé par `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle` (hors série) | `src/content/blog/fr/*.md` (corps des 4 articles) | à valider |
+| 2 | Numéros de série périmés : « série 2 » dans `comment-mesurer-le-roi-reel-d-un-workflow` (ambigu), « La série 3 s'ouvre sur les nouveaux risques projet » dans `esn-agence-freelance-augmente-qui-survit-a-l-ia` (cette série est la 5e), « série 3 » dans `la-dette-de-contexte-le-nouveau-risque-cache` | `src/content/blog/fr/*.md` | à valider |
+| 3 | Lien `/methode` vers `agentic-agency.fr` dans `cycle-en-v-agile-sdd-comparaison-timelines` (page non migrée) | `src/content/blog/fr/cycle-en-v-agile-sdd-comparaison-timelines.md` | à valider |
+| 4 | « Huit » outils : l'ancienne description de `outils-agentic-engineering-qui-meritent-un-essai` en annonçait huit, l'article en liste sept (description réécrite à « sept », corps à relire) | `src/content/blog/fr/outils-agentic-engineering-qui-meritent-un-essai.md` | à valider |
+| 5 | Fautes relevées à la migration : « genere », « products » (`esn-agence-freelance-augmente-qui-survit-a-l-ia`, ligne 41) et « survive » ; à corriger ou conserver | `src/content/blog/fr/esn-agence-freelance-augmente-qui-survit-a-l-ia.md` et lot 4 | à valider |
+
+### Anomalies de contenu à arbitrer, 2e série (5 éléments)
+
+| # | Élément | Fichier | Statut |
+|---|---------|---------|--------|
+| 1 | Chiffre « 30 % à 60 % du coût classique » non sourcé (« sur les projets que j'ai pu observer… ») | `src/content/blog/fr/mesurer-le-gain-reel-de-l-agentic-coding.md` (ligne 55) | à valider |
+| 2 | Citations d'OCTO introuvables au 2026-10-15 (titre « quand l'IA accélère, ralentir devient essentiel » et « lorsqu'une équipe de deux à quatre experts… »), aucun lien source : sourcer ou retirer | `src/content/blog/fr/le-cout-cache-de-la-supervision-agentique.md` | à valider |
+| 3 | Licence de Caveman : GitHub affiche Apache-2.0, l'article décrit une double licence MIT et BSL 1.1 | `src/content/blog/fr/reduire-la-facture-token-caveman-codegraph.md` | à valider |
+| 4 | 6 liens vers des pages non migrées d'`agentic-agency.fr` (`/methode`, `/boite-a-outils`, `/boite-a-outils/zsh`, `/services/sites-ia`...) : le site répond 401. Garder l'URL absolue (E10) ou retirer le lien en gardant le texte ; reprise vers `/labo/` au sprint 4 | `src/content/blog/fr/*.md` | à valider |
+| 5 | Limite de 24 articles par page de taxonomie (non paginée, erreur de build au-delà) : « IA générative » en compte 17 et « Agentic engineering » 10 ; à rouvrir si un tag dépasse 24 | `docs/guides/blog.md` (écart A1), `src/lib/blog-taxonomy.ts` | à valider |
+
+### Décisions du lot B : SEO, flux, partage, audience (5 éléments)
+
+Statut « proposées par le lot B » dans chaque guide.
+
+| # | Élément | Fichier | Statut |
+|---|---------|---------|--------|
+| 1 | T-024-01 : types JSON-LD par page (`BlogPosting` plutôt que `TechArticle`), liste blanche de `Person`, `lastmod`, `llms.txt`, pages exclues du sitemap | `docs/guides/seo-technique.md` | à valider |
+| 2 | T-026-01 : ADR-0011 (chargeur d'Umami différé, contrat fermé des 6 événements, CSP) | `docs/adr/0011-umami-chargement-et-evenements.md` | à valider |
+| 3 | T-026-10 : section « Mesure d'audience » de `/vie-privee/` (événements, base légale, hébergement, conservation, refus) | `src/content/legal/vie-privee.md` | à valider |
+| 4 | T-025-01 : images Open Graph (`astro-og-canvas`, PNG 1200 × 630 de moins de 300 Ko, image `default`) et ADR-0012 | `docs/guides/images-og.md`, `docs/adr/0012-images-og-astro-og-canvas.md` | à valider |
+| 5 | T-013-01 : flux RSS unique de 20 articles, extrait plutôt que texte complet, adresse `/rss.xml` conservée | `docs/guides/flux-rss.md` | à valider |
+
+### Décisions techniques à confirmer (3 éléments)
+
+| # | Élément | Fichier | Statut |
+|---|---------|---------|--------|
+| 1 | Le chargeur Umami ne charge pas le script quand `navigator.webdriver` est vrai (navigateurs automatisés : tests, Lighthouse), en plus de Do Not Track et Global Privacy Control. Conséquence : l'absence de cookie du vrai script ne se contrôle qu'en production, avec un navigateur réel (T-900-28) | `src/scripts/analytics.ts`, `docs/adr/0011-umami-chargement-et-evenements.md` | à valider |
+| 2 | ADR-0009 à amender (par un nouvel ADR, un ADR accepté n'étant pas modifié) : `connect-src` autorise `https://gateway.umami.is` au lieu de `cloud.umami.is` et `api-gateway.umami.dev` | `docs/adr/0009-securite-en-tetes-supply-chain.md`, `nginx/snippets/security-headers.conf` | à valider |
+| 3 | `.env.example` à compléter : `PUBLIC_SITE_URL` (défaut `https://thibaut-monier.fr`) et `PUBLIC_UMAMI_WEBSITE_ID` (vide : aucune mesure) ; non modifié par l'intégration | `.env.example` | à valider |
+
 ## Sprint 2 : éléments restants (statuts inchangés, `done-pending-po`)
 
 Reportés tels quels depuis `sprint-002-preuves_profil_open_source/sprint-review.md` (section 6) : le statut n'est pas modifié ici.

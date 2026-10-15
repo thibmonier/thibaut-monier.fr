@@ -40,12 +40,12 @@ Ajouter une dépendance : `docker compose run --rm tools npm install <paquet>` (
 
 Variables de build publiques, toutes optionnelles (voir `.env.example`) :
 
-| Variable                  | Rôle                                                          |
-| ------------------------- | ------------------------------------------------------------- |
-| `PUBLIC_SITE_URL`         | URL canonique (provisoire tant que le DNS n'est pas en place) |
-| `PUBLIC_UMAMI_WEBSITE_ID` | Mesure d'audience Umami Cloud                                 |
-| `PUBLIC_WEB3FORMS_KEY`    | Clé publique du formulaire de contact                         |
-| `PUBLIC_CALENDLY_URL`     | Prise de rendez-vous                                          |
+| Variable                  | Rôle                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `PUBLIC_SITE_URL`         | URL canonique ; défaut `https://thibaut-monier.fr` (à surcharger tant que le DNS n'est pas en place)    |
+| `PUBLIC_UMAMI_WEBSITE_ID` | Mesure d'audience Umami Cloud ; vide, aucun script ni aucune requête (guide `docs/guides/analytics.md`) |
+| `PUBLIC_WEB3FORMS_KEY`    | Clé publique du formulaire de contact                                                                   |
+| `PUBLIC_CALENDLY_URL`     | Prise de rendez-vous                                                                                    |
 
 ## Déploiement (Railway)
 
@@ -64,6 +64,7 @@ Railway construit la dernière étape (`runtime`) du `Dockerfile` à chaque push
 - `nginx.conf` et `nginx/snippets/security-headers.conf` : CSP stricte sans `unsafe-inline`, HSTS, COOP, CORP, pas de COEP (ADR-0009).
 - `scripts/checks/` : exécuteur de contrôles. Déposer `<nom>.content.check.ts` (avant le build) ou `<nom>.dist.check.ts` (sur `dist/`) suffit, sans modifier `run.ts`.
 - `.github/workflows/` : `ci.yml` (PR et `main` : qualité, e2e, Hadolint, Trivy et SBOM), `scheduled.yml` (redéploiement quotidien à 06:00 UTC si `RAILWAY_TOKEN` est défini, puis contrôle de fumée si `SMOKE_URL` l'est), `deploy.yml` (déploiement manuel de repli).
+- Blog (28 articles, flux `/rss.xml`, recherche Pagefind), SEO technique (JSON-LD, sitemap, `llms.txt`), images Open Graph et mesure d'audience : voir l'index des guides, [`docs/guides/README.md`](docs/guides/README.md). La table de redirections de l'ancien site (`make redirects`) est décrite dans `docs/guides/redirections-blog.md`.
 - Guides : `docs/guides/`. Décisions : `docs/adr/`. Spécification : `project-management/tech-spec.md`.
 
 ## Versions (relevé du 2026-10-14)

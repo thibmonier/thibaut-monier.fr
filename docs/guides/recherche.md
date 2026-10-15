@@ -52,7 +52,7 @@ Relevé du 2026-10-15 sur le build local (28 articles) :
 | Module WebAssembly (`wasm.fr.pagefind`) | 70,6 Ko | mesuré à part |
 | Script de la page (`SearchBox…js`) | 5,4 Ko servis dont 3,8 Ko de code du projet (2,4 Ko gzip) ; le reste est l'aide de préchargement ajoutée par Vite à tout `import()` | moins de 5 Ko de code du projet |
 
-`pagefind-ui*.js/css`, `pagefind-modular-ui*`, `pagefind-component-ui*` et `pagefind-highlight.js` (environ 400 Ko) sont produits par Pagefind mais jamais chargés par le site ; ils pourraient être supprimés après `build:search` (hors périmètre du lot A : `package.json`).
+Pagefind produit trois interfaces prêtes à l'emploi que le site ne charge jamais (`pagefind-ui*`, `pagefind-modular-ui*`, `pagefind-component-ui*`, environ 400 Ko). `npm run build:search` les supprime après l'indexation (`scripts/prune-pagefind.ts`, `scripts/lib/pagefind-prune.ts`) ; le contrôle `pagefind.dist` échoue si l'une d'elles reste dans `dist/pagefind/` ou si `pagefind.js` manque. `pagefind-highlight.js` (43 Ko, non chargé non plus) est conservé : il ne fait pas partie des interfaces.
 
 ## Pertinence (écart A2)
 

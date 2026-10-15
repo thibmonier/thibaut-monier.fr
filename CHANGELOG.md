@@ -1,6 +1,6 @@
 # Changelog
 
-Format [Keep a Changelog](https://keepachangelog.com/). Zone `[Unreleased]` en ajout seul.
+- Format [Keep a Changelog](https://keepachangelog.com/). Zone `[Unreleased]` en ajout seul.
 
 ## [Unreleased]
 
@@ -21,7 +21,34 @@ Format [Keep a Changelog](https://keepachangelog.com/). Zone `[Unreleased]` en a
 - US-022 : page `/open-source/tailsfadmin/` (bundle : « En bref », installation en 4 étapes renvoyant au README, métriques, liens GitHub, Packagist et README), schéma `projects` étendu aux bundles.
 - US-007 : CV PDF `thibaut-monier-cv.pdf` généré au build par Typst 0.15.1 (2 pages A4, PDF/UA balisé, polices Inter TTF), collection `profile` et son schéma, `cv-data.ts` (liste blanche), `build-cv.ts` (échec franc, aucun PDF obsolète), contrôle de build `cv-pdf` (texte sans donnée personnelle, taille, pages, métadonnées, fidélité à la source), poppler-utils et Typst dans l'étape `deps` du Dockerfile, revalidation et `noindex` du PDF dans nginx, lien « Télécharger mon CV (PDF, 2 pages) » sur `/parcours/` et `/contact/`, guide `docs/guides/cv-pdf.md`.
 - US-006 : page `/competences/` (réalisations et compétences filtrables par domaine, références clients anonymisées par défaut, filtre en amélioration progressive de moins de 3 Ko, lien partageable `?domaine=`), collections `skills` et `achievements`, `filters.ts`, contrôle de contenu des références croisées et des clients citables, entrée « Compétences » de la navigation, guide `docs/guides/competences.md`.
+- Blog migré (US-009) : 28 articles d'Agentic Agency sous `/blog/<slug>/`, 22 images, index, composants d'article (FAQ de 3 articles, note d'auteur, temps de lecture), publication programmée, outil de migration idempotent `scripts/migrate-blog.ts`, contrôles `blog.content`, `blog-schedule.dist` et lecteur unique de la collection.
+- Canonical autoréférente, mention d'origine et table de redirections (US-010) : `src/data/redirects.yaml` (95 entrées), `make redirects` (fichier nginx hors `dist/`), contrôles `canonical.dist`, `redirects.content`, `redirects.dist` et `orphans.dist`.
+- Navigation du blog (US-011) : liste paginée (12 articles par page), 5 catégories, 19 tags, 6 séries avec encart « article N sur M », lien « Retour au blog » sur la 404.
+- Recherche plein texte (US-012) : page `/recherche/` en `noindex`, interface maison sur l'API JavaScript de Pagefind chargée à la première interaction, contrôle `pagefind.dist` (budget de 500 Ko).
+- Données structurées JSON-LD (`Person`, `ProfilePage`, `SoftwareSourceCode`, `ItemList`, `BlogPosting`, `FAQPage`, `BreadcrumbList`) produites par un module unique, avec contrôle de build (liste blanche de `Person`, poids, types attendus).
+- Sitemap (`/sitemap-index.xml`), `robots.txt` et `llms.txt` générés au build ; contrôles de cohérence du sitemap, de longueur et d'unicité des titres et descriptions, et d'absence de domaine en dur.
+- Flux RSS `/rss.xml` (20 articles les plus récents), lien de découverte et lien « S'abonner (RSS) » dans le pied de page, contrôle de build.
+- Images Open Graph (1200 × 630) générées au build par `astro-og-canvas`, balises `og:image` et `twitter:*`, contrôle de build.
+- Mesure d'audience Umami sans cookie : chargeur différé, contrat fermé des événements (ADR-0011), contrôle de build, respect de Do Not Track et de Global Privacy Control.
+- Intégration du sprint 3 : suppression après `build:search` des interfaces Pagefind jamais chargées (`pagefind-ui*`, `pagefind-modular-ui*`, `pagefind-component-ui*`, `scripts/prune-pagefind.ts`) et contrôle `pagefind.dist` étendu (`pagefind.js` obligatoire, aucune interface résiduelle).
+
+### Changed
+
+- Navigation principale : entrées « Blog » et « Recherche ».
+- Le job `external-links` vérifie aussi les liens externes des pages du blog.
+- `buildTitle` n'ajoute le suffixe « — Thibaut Monier » que s'il tient dans 60 caractères.
+- CSP : `connect-src` autorise `https://gateway.umami.is` (hôte réel de collecte relevé le 2026-10-15) au lieu de `cloud.umami.is` et `api-gateway.umami.dev`.
+- nginx : `location` dédiées pour `/rss.xml`, les sitemaps, `robots.txt`, `llms.txt` (type et charset) et `/og/` (cache d'un jour).
+- `/vie-privee/` : section « Mesure d'audience » complétée (événements, base légale, hébergement, conservation, refus).
+- Lighthouse et axe ignorent aussi `/recherche/` (`noindex` voulu), comme `/contact/merci/`.
+- Redirections : l'apostrophe est refusée dans `from` et `to` (elle ouvrirait une chaîne dans le `return 301` de nginx).
 
 ### Fixed
 
 - Favicon SVG ajouté (`/favicon.ico` répondait 404 sur chaque page et polluait la console).
+- Contrôle `jsonld` : une question de FAQ contenant une espace insécable avant « ? » n'est plus signalée à tort comme invisible (3 articles).
+- Extraits de la recherche : les entités `&#x27;`, `&#39;` et `&nbsp;` de Pagefind sont décodées.
+
+### Security
+
+- Le script d'audience n'est chargé ni avec Do Not Track, ni avec Global Privacy Control, ni par un navigateur automatisé ; aucune donnée saisie n'entre dans un événement.
