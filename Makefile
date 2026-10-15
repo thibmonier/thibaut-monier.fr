@@ -4,10 +4,13 @@ COMPOSE ?= docker compose
 TOOLS   := $(COMPOSE) run --rm tools
 E2E     := $(COMPOSE) --profile e2e run --rm e2e
 
+# Cibles de lot : un fichier par lot dans mk/ (chaque fichier déclare son .PHONY), voir changelog.d/ et docs/guides/worktrees-agents.md.
+-include mk/*.mk
+
 .PHONY: help dev preview build shell down clean install cv lint format check test checks e2e lighthouse smoke metrics external-links ci
 
 help: ## Affiche les cibles
-	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
+	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
 
 dev: ## Serveur de développement : http://localhost:4321
 	$(COMPOSE) up --build dev
