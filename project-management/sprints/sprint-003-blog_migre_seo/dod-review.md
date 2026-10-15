@@ -90,3 +90,63 @@ Aucun.
 ## Ordre de correction recommandé
 
 M1, puis M3 (extension de `OK_PATHS`), puis M2 et M4 (administratif), m6 en même temps. Les mineurs m1 à m3 peuvent rejoindre le sprint 4 sans empêcher la fusion.
+
+---
+
+## Seconde passe (2026-10-15)
+
+> Seconde passe de la tâche T-900-27, après la remédiation (commits `e41bea1` à `095eb39`). Relecture du code, de la configuration nginx, des fichiers de tâches et du journal de la CI du run 38713520394 (HEAD `095eb39`) ; aucun build, aucun e2e local, aucune commande Git. Seul ce fichier est modifié.
+
+### Preuves de la seconde passe
+
+| Vérification | Résultat |
+|--------------|----------|
+| CI, run 38713520394 | `dockerfile`, `supply-chain`, `quality`, `external-links`, `e2e`, `ci` : `success` |
+| Playwright | « Tests e2e : 615 exécutés / 3 ignorés (0 hors liste d'exceptions) » (603 + 12 : les 4 scénarios de `tests/e2e/sprint-003.spec.ts` en desktop et mobile) |
+| Artefact de redirections | étape « Génération des redirections nginx » (`ci.yml:80-87`) ; artefact `redirections-nginx` « successfully uploaded » (2190 octets) dans le job `quality` |
+| Contrôles de build | `Contrôles content : OK` et `Contrôles dist : OK` dans les builds de `quality` et de `supply-chain` |
+| Tests unitaires | `tests/unit/checks/smoke.test.ts` : 16 tests verts dans le journal ; suite non relancée par ce relecteur |
+
+### Écarts de la première passe
+
+| Écart | Nouveau statut | Preuve et reste à faire |
+|-------|----------------|-------------------------|
+| **M1** Artefact de redirections | **Corrigé** | `ci.yml:70-92` : génération dans Docker, `test -s`, `grep -c '^location = ' ≥ 56` (28 articles × 2 formes), `upload-artifact` `redirections-nginx`, `if-no-files-found: error`. Publication constatée dans le journal |
+| **M2** Board contradictoire | **Corrigé** | `task-board.md:5-11` : 5 à faire, 10 en cours, 6 en revue, 121 terminées (142 tâches). Recomptage des lignes `tasks/*.md` par statut : 5 / 10 / 6 / 121 / 0, identique. Détail ci-dessous (nouvel écart m9) |
+| **M3** Phase 4 | **Partiellement corrigé** | T-900-22/23 faites : `OK_PATHS` (`scripts/checks/lib/smoke.ts:4-22`) couvre `/blog/`, `/blog/page/2/`, un article, une catégorie, `/recherche/`, `/rss.xml`, `/sitemap-index.xml`, `/robots.txt`, `/llms.txt`, une image Open Graph, avec type de contenu exigé pour le RSS et le PNG. T-900-24 faite (`sprint-003.spec.ts` : navigation, recherche vers article, RSS, absence de cookie ; exécuté en CI). **Reste ouvert** : T-900-21 en partie (garde du dépôt, job Lighthouse séparé : Lighthouse reste dans `e2e`, `ci.yml:99,142`, `REQUIRE_VALIDATED_CONTENT`), T-900-25 (mesure de durée), T-900-26 (porte du sprint, build à blanc Railway, déploiement), T-900-28 |
+| **M4** Revues et GREEN non tracés | **Corrigé (réserve de forme)** | T-009-28, T-010-12, T-011-11, T-012-12, T-013-09, T-013-11, T-024-16, T-024-18, T-025-11, T-025-13, T-026-13 sont passées à ✅. Réserve : T-013-11 et T-026-13 sont closes alors que leurs prédécesseurs T-013-10 et T-026-11/12 sont encore en cours (voir m9) ; la preuve Gherkin cite le présent rapport |
+| **m1** Typographie | **Partiellement corrigé** | Les 19 titres concernés ont une espace insécable avant `: ; ? !` (28 titres, 19 avec insécable, 0 espace ordinaire restante) ; slugs et noms de fichiers de `src/content/blog/fr/` inchangés ; `CHANGELOG.md:46`. **Reste** : environ 420 lignes de corps avec espace ordinaire (contre environ 507), laissées au PO (`contenu-a-valider.md`). Relève du PO |
+| **m2** `/recherche/` hors Lighthouse | **Toujours ouvert** | `scripts/checks/lib/dist-routes.ts:5` exclut encore `/recherche/` ; dérogation commentée, mais l'inexactitude du CHANGELOG sur axe n'est pas revérifiée ici. Mineur, sprint 4 |
+| **m3** CSP `wasm-unsafe-eval` globale | **Corrigé** | `nginx.conf:35-38` : `map $uri $csp_wasm` ne renvoie `'wasm-unsafe-eval'` que pour `^/(recherche\|pagefind)/` ; `security-headers.conf:7` interpole `$csp_wasm`. Compromis consigné dans ADR-0009 §1 |
+| **m4** Lien vers l'ancien site (401) | **Toujours ouvert, relève du PO** | `OriginalNotice.astro` inchangé |
+| **m5** ADR-0011 et ADR-0012 « Proposé » | **Toujours ouvert, relève du PO** | `docs/adr/README.md:15-16` |
+| **m6** T-900-04 et T-900-11 en « Review » | **Corrigé** | Les deux sont ✅ (`technical-tasks.md:12`) ; le décompte exécutés/ignorés est dans le journal |
+| **m7** Intitulés de profil hétérogènes | **Toujours ouvert** | `AuthorNote.astro:13` (« COO/CTO ») contre `jobTitle` JSON-LD. Mineur |
+| **m8** `PUBLIC_SITE_URL` en clair dans `ci.yml` | **Partiellement corrigé** | Documenté dans `docs/guides/seo-technique.md:74` (repli et effet), valeur CI inchangée et acceptée |
+
+### Régressions
+
+Aucune régression constatée.
+
+- **En-têtes de sécurité** : `security-headers.conf` est inclus au niveau `server` (`nginx.conf:59`) et dans chacune des 13 `location` qui déclarent un `add_header` (`/`, `_astro`, `pagefind`, `rss.xml`, sitemaps, `robots`/`llms`, `og`, CV, médias, `404.html`, `50x.html`). Le `map` porte sur `$uri` (évalué après réécriture vers `index.html`), son motif exige la barre oblique finale : `/recherche/` et `/pagefind/` seulement, `default ""` ailleurs.
+- **Typographie** : seul le champ `title:` change ; les slugs viennent des noms de fichiers, inchangés ; `redirects.yaml` non touché ; contrôles de build verts.
+- **Fumée étendue** : élargie sans régression, tests unitaires verts. La fumée réelle contre l'image n'a pas été rejouée par ce relecteur (déclarée verte dans `technical-tasks.md:308`).
+
+### Avis sur l'ADR-0009 précisé
+
+Mineur, pas une réserve PO. L'ADR est déjà « Accepté », la précision restreint une dérogation sans en créer de nouvelle, et la décision reste dans son périmètre (CSP, écarts assumés). Un nouvel ADR aurait fragmenté la source de vérité (règle DRY de la documentation). Condition : mentionner la précision dans le CHANGELOG ou la date de mise à jour de l'ADR.
+
+### Nouvel écart
+
+- **m9. Statuts hétérogènes dans `tasks/*.md`** : 10 tâches encore « En cours » (dont T-009-12, T-012-09, T-013-10, T-024-17, T-025-09, T-025-12, T-026-11, T-026-12 ; les deux autres sont dans `technical-tasks.md`) et 6 « Review » (dont T-013-01, T-024-01, T-025-01, T-026-01, T-026-10), alors que les stories correspondantes sont closes par leurs revues et que la CI est verte. T-025-09 (revue visuelle) et T-026-12 (GREEN d'US-026) étaient comptées faites en première passe. Les revues T-013-11 et T-026-13 devancent leurs prédécesseurs. À solder par l'orchestrateur avant la porte du sprint. Mineur.
+
+### Score et verdict
+
+| Critère | Première passe | Seconde passe |
+|---------|----------------|---------------|
+| Bloquants | 0 | 0 |
+| Majeurs | 4 | 1 partiel (M3, phase 4 : déploiement, mesure de durée, Lighthouse séparé) |
+| Mineurs | 8 | 5 ouverts ou partiels (m1, m2, m4, m5, m7, m8) et m9 nouveau |
+| Score | 88/100 | **95/100** |
+
+**Verdict final : Done sous réserve PO.** Le code, la CI et la sécurité sont conformes ; M1, M2 et M4 sont corrigés, m3 et m6 aussi. Restent hors de portée de l'équipe de développement : validation des 28 articles, des 3 FAQ et des licences d'images, décision sur m4 et sur les ADR-0011/0012, typographie des corps (m1), Umami, Search Console, DNS, déploiement et contrôle de fumée en production (T-900-26 et T-900-28, DoD §10). M3 (partie déploiement et mesure) doit être soldé avant la fusion.
