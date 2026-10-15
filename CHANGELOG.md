@@ -31,6 +31,7 @@
 - Images Open Graph (1200 × 630) générées au build par `astro-og-canvas`, balises `og:image` et `twitter:*`, contrôle de build.
 - Mesure d'audience Umami sans cookie : chargeur différé, contrat fermé des événements (ADR-0011), contrôle de build, respect de Do Not Track et de Global Privacy Control.
 - Intégration du sprint 3 : suppression après `build:search` des interfaces Pagefind jamais chargées (`pagefind-ui*`, `pagefind-modular-ui*`, `pagefind-component-ui*`, `scripts/prune-pagefind.ts`) et contrôle `pagefind.dist` étendu (`pagefind.js` obligatoire, aucune interface résiduelle).
+- Remédiation de la revue DoD du sprint 3 : job CI `quality` qui génère `agentic-agency.nginx.conf` dans Docker et le publie en artefact `redirections-nginx` (non déployé, au moins 56 règles pour les 28 articles), contrôle de fumée étendu au blog, à un article, à une catégorie, à `/recherche/`, au flux RSS (type `application/rss+xml`), aux sitemaps, `robots.txt`, `llms.txt` et à une image Open Graph (PNG), scénarios e2e inter-US `tests/e2e/sprint-003.spec.ts`.
 
 ### Changed
 
@@ -42,6 +43,7 @@
 - `/vie-privee/` : section « Mesure d'audience » complétée (événements, base légale, hébergement, conservation, refus).
 - Lighthouse et axe ignorent aussi `/recherche/` (`noindex` voulu), comme `/contact/merci/`.
 - Redirections : l'apostrophe est refusée dans `from` et `to` (elle ouvrirait une chaîne dans le `return 301` de nginx).
+- Typographie : espace insécable (U+00A0) avant « : ; ? ! » dans les 19 titres d'articles concernés (titres uniquement ; les corps restent à décider par le PO, voir `contenu-a-valider.md`).
 
 ### Fixed
 
@@ -52,3 +54,4 @@
 ### Security
 
 - Le script d'audience n'est chargé ni avec Do Not Track, ni avec Global Privacy Control, ni par un navigateur automatisé ; aucune donnée saisie n'entre dans un événement.
+- CSP : `'wasm-unsafe-eval'` n'est plus servi qu'à `/recherche/` et `/pagefind/` (variable nginx `$csp_wasm`) ; Pagefind en a besoin pour son WebAssembly, aucune autre page n'en a besoin.

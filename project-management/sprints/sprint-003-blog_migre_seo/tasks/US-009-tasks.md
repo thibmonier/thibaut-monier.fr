@@ -44,7 +44,7 @@
 | T-009-25 | [OPS] | Contrôle dist de la publication programmée | 2,5h | T-009-23, T-009-10, T-009-11 | A | ✅ |
 | T-009-26 | [TEST] | Vérification GREEN d'US-009 et liste d'échantillonnage | 3h | T-009-24, T-009-25, T-009-14, T-009-15, T-009-16, T-009-17, T-009-18, T-009-19 | A | ✅ |
 | T-009-27 | [DOC] | Guide du blog et fragment de CHANGELOG | 2h | T-009-26 | A | ✅ |
-| T-009-28 | [REV] | Revue de code d'US-009 | 3h | T-009-27 | A | 👀 |
+| T-009-28 | [REV] | Revue de code d'US-009 | 3h | T-009-27 | A | ✅ |
 | T-009-29 | [REV] | Relecture éditoriale des 28 articles par lots et validation PO | 3h | T-009-18, T-009-28 | A | 🔲 |
 | T-009-30 | [OPS] | Étendre le contrôle des liens externes de la CI aux articles | 2h | T-009-23 | A | ✅ |
 

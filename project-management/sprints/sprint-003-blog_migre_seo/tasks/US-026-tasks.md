@@ -29,7 +29,7 @@
 | T-026-10 | [CONTENT] | Vérifier et compléter la section mesure d'audience de /vie-privee/ | 2h | T-026-01 | B | 👀 |
 | T-026-11 | [DOC] | Guide d'analytics, variable et fragment de CHANGELOG | 1,5h | T-026-07 | B | 🔄 |
 | T-026-12 | [TEST] | Vérification GREEN d'US-026 | 2h | T-026-05, T-026-07, T-026-08, T-026-09, T-026-10 | B | 🔄 |
-| T-026-13 | [REV] | Revue d'US-026 | 2h | T-026-11, T-026-12 | B | 🔲 |
+| T-026-13 | [REV] | Revue d'US-026 | 2h | T-026-11, T-026-12 | B | ✅ |
 
 **Total estimé** : 38h (13 tâches)
 

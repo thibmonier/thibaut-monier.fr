@@ -28,7 +28,7 @@
 | T-012-09 | [TEST] | Vérification GREEN d'US-012 | 2,5h | T-012-06, T-012-08 | A | 🔄 |
 | T-012-10 | [DOC] | ADR-0013 : recherche Pagefind avec interface maison | 1,5h | T-012-09 | A | ✅ |
 | T-012-11 | [DOC] | Guide de la recherche et fragment de CHANGELOG | 1h | T-012-09 | A | ✅ |
-| T-012-12 | [REV] | Revue d'US-012 | 2h | T-012-10, T-012-11 | A | 👀 |
+| T-012-12 | [REV] | Revue d'US-012 | 2h | T-012-10, T-012-11 | A | ✅ |
 
 **Total estimé** : 30,5h (12 tâches)
 

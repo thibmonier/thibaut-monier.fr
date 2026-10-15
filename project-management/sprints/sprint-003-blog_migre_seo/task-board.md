@@ -6,10 +6,10 @@
 
 | Statut | Tâches | Heures |
 |--------|--------|--------|
-| 🔲 À faire | 117 | 344h |
-| 🔄 En cours | 0 | 0h |
-| 👀 Review | 2 | 5,5h |
-| ✅ Done | 23 | 59,5h |
+| 🔲 À faire | 5 | 15,5h |
+| 🔄 En cours | 10 | 23,5h |
+| 👀 Review | 6 | 15h |
+| ✅ Done | 121 | 355h |
 | 🚫 Bloqué | 0 | 0h |
 
 | Lot | Worker | Tâches | Heures |
@@ -23,9 +23,133 @@ Limite de travail en cours : 1 tâche par worker, 2 workers au plus (disque), `m
 
 ## 🔲 À faire
 
+### US-009 : Migration des 28 articles d'Agentic Agency (lot A)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-009-29 | [REV] | Relecture éditoriale des 28 articles par lots et validation PO | 3h | A |
+
+### Phase 4 : intégration (orchestrateur)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-900-20 | [DOC] | Phase 4 : fusion des lots, CHANGELOG, index des guides et des ADR | 3h | Phase 4 |
+| T-900-25 | [OPS] | Phase 4 : mesure de la durée de la CI et ajustements | 3h | Phase 4 |
+| T-900-26 | [OPS] | Phase 4 : porte du sprint, build à blanc Railway et runner, déploiement | 4h | Phase 4 |
+| T-900-28 | [OPS] | Phase 4 : actions en production avec le PO (Search Console, Rich Results, Umami) | 2,5h | Phase 4 |
+
+## 🔄 En cours
+
+### US-009 : Migration des 28 articles d'Agentic Agency (lot A)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-009-12 | [CONTENT] | Images : copie, provenance et licences (CR-6) | 3h | A |
+
+### US-012 : Recherche plein texte côté client (Pagefind) (lot A)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-012-09 | [TEST] | Vérification GREEN d'US-012 | 2,5h | A |
+
+### US-013 : Flux RSS (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-013-10 | [DOC] | Guide du flux RSS et fragment de CHANGELOG | 1h | B |
+
+### US-024 : SEO technique et données structurées (JSON-LD, sitemap, llms.txt) (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-024-17 | [DOC] | Guide du SEO technique, variables et fragment de CHANGELOG | 1,5h | B |
+
+### US-025 : Images Open Graph générées au build (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-025-09 | [CONTENT] | Revue visuelle des images générées | 1,5h | B |
+| T-025-12 | [DOC] | Guide des images Open Graph, ADR-0012 et fragment de CHANGELOG | 2h | B |
+
+### US-026 : Analytics sans cookie et mesure des conversions (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-026-11 | [DOC] | Guide d'analytics, variable et fragment de CHANGELOG | 1,5h | B |
+| T-026-12 | [TEST] | Vérification GREEN d'US-026 | 2h | B |
+
+### Phase 4 : intégration (orchestrateur)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-900-21 | [OPS] | Phase 4 : ci.yml final (artefact de redirections, garde du dépôt, Lighthouse séparé, durées) | 3,5h | Phase 4 |
+| T-900-27 | [REV] | Phase 4 : revue DoD indépendante transverse | 5h | Phase 4 |
+
+## 👀 Review
+
+### US-013 : Flux RSS (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-013-01 | [CONTENT] | Décisions du flux RSS | 1,5h | B |
+
+### US-024 : SEO technique et données structurées (JSON-LD, sitemap, llms.txt) (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-024-01 | [CONTENT] | Décisions SEO technique : types JSON-LD, sitemap, llms.txt | 2,5h | B |
+
+### US-025 : Images Open Graph générées au build (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-025-01 | [CONTENT] | Décisions Open Graph : bibliothèque, gabarit, couverture | 2h | B |
+
+### US-026 : Analytics sans cookie et mesure des conversions (lot B)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-026-01 | [CONTENT] | ADR-0011 : chargement d'Umami et contrat des événements (avant le code) | 3h | B |
+| T-026-10 | [CONTENT] | Vérifier et compléter la section mesure d'audience de /vie-privee/ | 2h | B |
+
+### Phase 4 : intégration (orchestrateur)
+
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-900-24 | [TEST] | Phase 4 : scénarios e2e inter-US du sprint 3 | 4h | Phase 4 |
+
+## ✅ Done
+
+Phase 0 (2026-10-14, worker W0) : preuves E25 consignées dans le rapport de phase 0. Lots A et B : CI verte du run 38698008560 (603 e2e exécutés / 3 ignorés, Lighthouse ≥ 0,95), revue `dod-review.md` du 2026-10-15.
+
 ### Phase 0 : retour de rétro, socle et contrats (orchestrateur)
 
-Terminée (voir « Done » et « Review »).
+| ID | Type | Tâche | Estimation | Lot |
+|----|------|-------|------------|-----|
+| T-009-01 | [CONTENT] | Inventaire de la source et décisions de migration | 3h | Phase 0 |
+| T-009-02 | [TEST] | Écrire les tests unitaires RED : schéma blog (contrat C1) | 3h | Phase 0 |
+| T-009-03 | [FE-WEB] | Schéma blog et collection enregistrée (contrat C1, C2) | 3h | Phase 0 |
+| T-009-04 | [TEST] | Écrire les tests unitaires RED : lib/blog.ts (contrat C3) | 3h | Phase 0 |
+| T-009-05 | [FE-WEB] | lib/blog.ts et blog-source.ts : un seul lecteur de la collection (contrat C3) | 4h | Phase 0 |
+| T-009-06 | [TEST] | Écrire les tests RED du plugin rehype des blocs défilants | 1,5h | Phase 0 |
+| T-009-07 | [FE-WEB] | Plugin rehype des blocs défilants et configuration Markdown d'Astro | 2,5h | Phase 0 |
+| T-010-01 | [CONTENT] | Relever les URL d'origine sur agentic-agency.fr (lecture seule) | 2h | Phase 0 |
+| T-010-02 | [TEST] | Écrire les tests unitaires RED : lib/redirects.ts (contrat C6) | 3,5h | Phase 0 |
+| T-010-03 | [FE-WEB] | src/lib/redirects.ts : schéma, couverture et génération nginx | 3h | Phase 0 |
+| T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | Phase 0 |
+| T-900-01 | [OPS] | Contrôle no-global-prune (prompts, scripts, Makefile, workflows) | 3h | Phase 0 |
+| T-900-02 | [OPS] | Cible make preflight (disque, sans prune global) | 2h | Phase 0 |
+| T-900-03 | [DOC] | Créer contenu-a-valider.md (28 articles par lots de 5, sprints 1 et 2) | 2h | Phase 0 |
+| T-900-04 | [OPS] | Liste d'exceptions e2e versionnée et compte exécutés/ignorés dans la CI | 4h | Phase 0 |
+| T-900-05 | [DOC] | Guide worktrees-agents et section « Pièges d'environnement » | 3h | Phase 0 |
+| T-900-06 | [OPS] | Zones anti-conflit : mk/, changelog.d/, propriété des fichiers | 1,5h | Phase 0 |
+| T-900-07 | [OPS] | Dépendances du sprint en une passe et vérifications natives (Pagefind, MIME nginx) | 4h | Phase 0 |
+| T-900-08 | [OPS] | Chaîne de build : étape Pagefind après le build, avant les contrôles dist | 1,5h | Phase 0 |
+| T-900-09 | [TEST] | Écrire les tests RED du module d'URL absolue (site-url) | 1,5h | Phase 0 |
+| T-900-10 | [FE-WEB] | Module unique d'URL absolue : src/lib/site-url.ts | 1,5h | Phase 0 |
+| T-900-11 | [OPS] | CI : variables factices PUBLIC_SITE_URL et PUBLIC_UMAMI_WEBSITE_ID | 1,5h | Phase 0 |
+| T-900-12 | [TEST] | Écrire les tests RED de l'échantillonnage des gabarits répétés | 2,5h | Phase 0 |
+| T-900-13 | [FE-WEB] | Échantillonnage dans axe, matrice responsive et Lighthouse (délai proportionnel) | 3,5h | Phase 0 |
 
 ### US-009 : Migration des 28 articles d'Agentic Agency (lot A)
 
@@ -35,7 +159,6 @@ Terminée (voir « Done » et « Review »).
 | T-009-09 | [FE-WEB] | Bibliothèque et script de migration idempotent | 5h | A |
 | T-009-10 | [TEST] | Écrire les tests RED : contrôles de contenu du blog | 4h | A |
 | T-009-11 | [OPS] | Contrôle de contenu blog.content.check.ts | 5h | A |
-| T-009-12 | [CONTENT] | Images : copie, provenance et licences (CR-6) | 3h | A |
 | T-009-13 | [CONTENT] | Lot 1 de 5 articles (pilotes) : normalisation et relecture | 4h | A |
 | T-009-14 | [CONTENT] | Lot 2 de 5 articles : série « L'agence digitale augmentée » et outils | 3h | A |
 | T-009-15 | [CONTENT] | Lot 3 de 5 articles : série « Les métiers à l'ère agentic » | 3h | A |
@@ -52,7 +175,6 @@ Terminée (voir « Done » et « Review »).
 | T-009-26 | [TEST] | Vérification GREEN d'US-009 et liste d'échantillonnage | 3h | A |
 | T-009-27 | [DOC] | Guide du blog et fragment de CHANGELOG | 2h | A |
 | T-009-28 | [REV] | Revue de code d'US-009 | 3h | A |
-| T-009-29 | [REV] | Relecture éditoriale des 28 articles par lots et validation PO | 3h | A |
 | T-009-30 | [OPS] | Étendre le contrôle des liens externes de la CI aux articles | 2h | A |
 
 ### US-010 : Canonical sur le nouveau domaine et table de correspondance prête pour les redirections (lot A)
@@ -97,7 +219,6 @@ Terminée (voir « Done » et « Review »).
 | T-012-06 | [FE-WEB] | Page /recherche/, composant SearchBox et entrée de navigation | 4h | A |
 | T-012-07 | [TEST] | Écrire les tests RED du contrôle dist de l'index Pagefind | 2h | A |
 | T-012-08 | [OPS] | Contrôle dist de l'index Pagefind | 2,5h | A |
-| T-012-09 | [TEST] | Vérification GREEN d'US-012 | 2,5h | A |
 | T-012-10 | [DOC] | ADR-0013 : recherche Pagefind avec interface maison | 1,5h | A |
 | T-012-11 | [DOC] | Guide de la recherche et fragment de CHANGELOG | 1h | A |
 | T-012-12 | [REV] | Revue d'US-012 | 2h | A |
@@ -106,7 +227,6 @@ Terminée (voir « Done » et « Review »).
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-013-01 | [CONTENT] | Décisions du flux RSS | 1,5h | B |
 | T-013-02 | [TEST] | Écrire les tests unitaires RED : lib/rss.ts | 3h | B |
 | T-013-03 | [FE-WEB] | lib/rss.ts et endpoint /rss.xml | 3,5h | B |
 | T-013-04 | [TEST] | Écrire les tests RED du contrôle dist du flux | 2h | B |
@@ -115,14 +235,12 @@ Terminée (voir « Done » et « Review »).
 | T-013-07 | [OPS] | nginx : type de contenu et cache de /rss.xml | 2h | B |
 | T-013-08 | [TEST] | Écrire les tests e2e RED : flux RSS | 3h | B |
 | T-013-09 | [TEST] | Vérification GREEN d'US-013 | 2h | B |
-| T-013-10 | [DOC] | Guide du flux RSS et fragment de CHANGELOG | 1h | B |
 | T-013-11 | [REV] | Revue d'US-013 | 1,5h | B |
 
 ### US-024 : SEO technique et données structurées (JSON-LD, sitemap, llms.txt) (lot B)
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-024-01 | [CONTENT] | Décisions SEO technique : types JSON-LD, sitemap, llms.txt | 2,5h | B |
 | T-024-03 | [TEST] | Écrire les tests unitaires RED : générateurs JSON-LD et fil d'Ariane | 5h | B |
 | T-024-04 | [FE-WEB] | Générateurs JSON-LD typés : src/lib/jsonld/ | 6h | B |
 | T-024-05 | [FE-WEB] | Composant JsonLd, intégration à Seo et fil d'Ariane automatique | 4h | B |
@@ -137,14 +255,12 @@ Terminée (voir « Done » et « Review »).
 | T-024-14 | [OPS] | nginx : robots.txt, llms.txt et sitemaps (type, charset, cache) | 2h | B |
 | T-024-15 | [TEST] | Écrire les tests e2e RED : SEO technique | 4h | B |
 | T-024-16 | [TEST] | Vérification GREEN d'US-024 | 3h | B |
-| T-024-17 | [DOC] | Guide du SEO technique, variables et fragment de CHANGELOG | 1,5h | B |
 | T-024-18 | [REV] | Revue d'US-024 | 2,5h | B |
 
 ### US-025 : Images Open Graph générées au build (lot B)
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-025-01 | [CONTENT] | Décisions Open Graph : bibliothèque, gabarit, couverture | 2h | B |
 | T-025-02 | [TEST] | Écrire les tests unitaires RED : lib/og.ts | 4h | B |
 | T-025-03 | [FE-WEB] | lib/og.ts : registre des pages et URL des images | 4h | B |
 | T-025-04 | [FE-WEB] | Endpoint d'images /og/[...route].png et gabarit | 5h | B |
@@ -152,17 +268,14 @@ Terminée (voir « Done » et « Review »).
 | T-025-06 | [TEST] | Écrire les tests RED du contrôle dist des images Open Graph | 3h | B |
 | T-025-07 | [OPS] | Contrôle dist og.dist.check.ts | 3h | B |
 | T-025-08 | [TEST] | Écrire les tests e2e RED : partage et images Open Graph | 2,5h | B |
-| T-025-09 | [CONTENT] | Revue visuelle des images générées | 1,5h | B |
 | T-025-10 | [OPS] | Durée de génération, cache et nginx pour /og/ | 2h | B |
 | T-025-11 | [TEST] | Vérification GREEN d'US-025 | 2h | B |
-| T-025-12 | [DOC] | Guide des images Open Graph, ADR-0012 et fragment de CHANGELOG | 2h | B |
 | T-025-13 | [REV] | Revue d'US-025 | 1,5h | B |
 
 ### US-026 : Analytics sans cookie et mesure des conversions (lot B)
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-026-01 | [CONTENT] | ADR-0011 : chargement d'Umami et contrat des événements (avant le code) | 3h | B |
 | T-026-02 | [TEST] | Écrire les tests unitaires RED : lib/analytics-events.ts | 4h | B |
 | T-026-03 | [FE-WEB] | src/lib/analytics-events.ts : seul lecteur de la configuration et du contrat | 4h | B |
 | T-026-04 | [TEST] | Écrire les tests RED du contrôle de contrat des événements | 2,5h | B |
@@ -171,70 +284,30 @@ Terminée (voir « Done » et « Review »).
 | T-026-07 | [FE-WEB] | Marquage des liens et de l'envoi du formulaire | 3h | B |
 | T-026-08 | [TEST] | Écrire les tests e2e RED : audience sans cookie et événements | 4,5h | B |
 | T-026-09 | [OPS] | CSP et domaines d'Umami : confirmation et test d'en-têtes | 1,5h | B |
-| T-026-10 | [CONTENT] | Vérifier et compléter la section mesure d'audience de /vie-privee/ | 2h | B |
-| T-026-11 | [DOC] | Guide d'analytics, variable et fragment de CHANGELOG | 1,5h | B |
-| T-026-12 | [TEST] | Vérification GREEN d'US-026 | 2h | B |
 | T-026-13 | [REV] | Revue d'US-026 | 2h | B |
 
 ### Phase 4 : intégration (orchestrateur)
 
 | ID | Type | Tâche | Estimation | Lot |
 |----|------|-------|------------|-----|
-| T-900-21 | [OPS] | Phase 4 : ci.yml final (artefact de redirections, garde du dépôt, Lighthouse séparé, durées) | 3,5h | Phase 4 |
 | T-900-22 | [TEST] | Phase 4 : tests RED du contrôle de fumée étendu | 1,5h | Phase 4 |
 | T-900-23 | [OPS] | Phase 4 : contrôle de fumée étendu (OK_PATHS) | 1h | Phase 4 |
-| T-900-24 | [TEST] | Phase 4 : scénarios e2e inter-US du sprint 3 | 4h | Phase 4 |
-| T-900-25 | [OPS] | Phase 4 : mesure de la durée de la CI et ajustements | 3h | Phase 4 |
-| T-900-26 | [OPS] | Phase 4 : porte du sprint, build à blanc Railway et runner, déploiement | 4h | Phase 4 |
-| T-900-27 | [REV] | Phase 4 : revue DoD indépendante transverse | 5h | Phase 4 |
-| T-900-28 | [OPS] | Phase 4 : actions en production avec le PO (Search Console, Rich Results, Umami) | 2,5h | Phase 4 |
-
-## 🔄 En cours
-
-Aucune tâche.
-
-## 👀 Review
-
-En attente de la preuve CI (résumé « exécutés / ignorés » et variables factices), à constater au premier push.
-
-| ID | Type | Tâche | Estimation | Lot |
-|----|------|-------|------------|-----|
-| T-900-04 | [OPS] | Liste d'exceptions e2e versionnée et compte exécutés/ignorés dans la CI | 4h | Phase 0 |
-| T-900-11 | [OPS] | CI : variables factices PUBLIC_SITE_URL et PUBLIC_UMAMI_WEBSITE_ID | 1,5h | Phase 0 |
-
-## ✅ Done
-
-Phase 0 (2026-10-14, worker W0) : preuves E25 consignées dans le rapport de phase 0.
-
-| ID | Type | Tâche | Estimation | Lot |
-|----|------|-------|------------|-----|
-| T-900-01 | [OPS] | Contrôle no-global-prune (prompts, scripts, Makefile, workflows) | 3h | Phase 0 |
-| T-900-02 | [OPS] | Cible make preflight (disque, sans prune global) | 2h | Phase 0 |
-| T-900-03 | [DOC] | Créer contenu-a-valider.md (28 articles par lots de 5, sprints 1 et 2) | 2h | Phase 0 |
-| T-900-05 | [DOC] | Guide worktrees-agents et section « Pièges d'environnement » | 3h | Phase 0 |
-| T-900-06 | [OPS] | Zones anti-conflit : mk/, changelog.d/, propriété des fichiers | 1,5h | Phase 0 |
-| T-900-07 | [OPS] | Dépendances du sprint en une passe et vérifications natives (Pagefind, MIME nginx) | 4h | Phase 0 |
-| T-900-08 | [OPS] | Chaîne de build : étape Pagefind après le build, avant les contrôles dist | 1,5h | Phase 0 |
-| T-900-09 | [TEST] | Écrire les tests RED du module d'URL absolue (site-url) | 1,5h | Phase 0 |
-| T-900-10 | [FE-WEB] | Module unique d'URL absolue : src/lib/site-url.ts | 1,5h | Phase 0 |
-| T-900-12 | [TEST] | Écrire les tests RED de l'échantillonnage des gabarits répétés | 2,5h | Phase 0 |
-| T-900-13 | [FE-WEB] | Échantillonnage dans axe, matrice responsive et Lighthouse (délai proportionnel) | 3,5h | Phase 0 |
-| T-009-01 | [CONTENT] | Inventaire de la source et décisions de migration | 3h | Phase 0 |
-| T-009-02 | [TEST] | Écrire les tests unitaires RED : schéma blog (contrat C1) | 3h | Phase 0 |
-| T-009-03 | [FE-WEB] | Schéma blog et collection enregistrée (contrat C1, C2) | 3h | Phase 0 |
-| T-009-04 | [TEST] | Écrire les tests unitaires RED : lib/blog.ts (contrat C3) | 3h | Phase 0 |
-| T-009-05 | [FE-WEB] | lib/blog.ts et blog-source.ts : un seul lecteur de la collection (contrat C3) | 4h | Phase 0 |
-| T-009-06 | [TEST] | Écrire les tests RED du plugin rehype des blocs défilants | 1,5h | Phase 0 |
-| T-009-07 | [FE-WEB] | Plugin rehype des blocs défilants et configuration Markdown d'Astro | 2,5h | Phase 0 |
-| T-010-01 | [CONTENT] | Relever les URL d'origine sur agentic-agency.fr (lecture seule) | 2h | Phase 0 |
-| T-010-02 | [TEST] | Écrire les tests unitaires RED : lib/redirects.ts (contrat C6) | 3,5h | Phase 0 |
-| T-010-03 | [FE-WEB] | src/lib/redirects.ts : schéma, couverture et génération nginx | 3h | Phase 0 |
-| T-024-02 | [FE-WEB] | Contrat C5 : types de métadonnées de page et props de BaseLayout (sans comportement) | 2h | Phase 0 |
-| T-900-20 | [DOC] | Phase 4 : fusion des lots, CHANGELOG, index des guides et des ADR | 3h | Phase 4 |
 
 ## 🚫 Bloqué
 
 Aucune tâche.
+
+## Preuves de clôture (remédiation du 2026-10-15, W4)
+
+| Tâches | Preuve |
+|--------|--------|
+| T-900-04, T-900-11 | CI run 38698008560 : reporter strict, résumé « 603 exécutés / 3 ignorés (0 hors liste d'exceptions) », variables factices dans `ci.yml` |
+| T-013-09, T-024-16, T-025-11 | CI run 38698008560 (e2e `rss.spec.ts`, `seo.spec.ts`, `og.spec.ts`, contrôles `og`, `sitemap`, `jsonld` du build, Lighthouse ≥ 0,95) et code relu dans `dod-review.md` (tableau par user story). T-025-11 : la revue visuelle T-025-09 reste 🔄, le « maximum 3 lignes » n'est pas automatisé |
+| T-009-28, T-010-12, T-011-11, T-012-12 | Relecture du lot A (3 constats importants corrigés : `aria-live` du message de recherche, apostrophe interdite dans `to` des redirections, préfixe de slug dans `blog-schedule.test.ts`) et `dod-review.md` |
+| T-013-11, T-024-18, T-025-13, T-026-13 | `dod-review.md` (lot B : relecture du code, des tests et des journaux CI, aucun bloquant) |
+| T-900-22, T-900-23 | `tests/unit/checks/smoke.test.ts` (RED constaté, puis vert) ; fumée réelle verte contre l'image nginx locale servant le `dist/` courant |
+| T-900-24 | `tests/e2e/sprint-003.spec.ts` écrit, lint et types verts ; exécution confirmée par la CI (pas de Chromium Linux local) |
+| Reste ouvert | T-900-21 (garde du dépôt, job Lighthouse séparé, `REQUIRE_VALIDATED_CONTENT`), T-900-25 (mesures), T-900-26 et T-900-28 (production, PO), T-900-27 (seconde passe) |
 
 ## Jalons
 

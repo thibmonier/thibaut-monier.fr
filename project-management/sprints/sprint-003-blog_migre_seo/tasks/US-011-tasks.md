@@ -27,7 +27,7 @@
 | T-011-08 | [FE-WEB] | Page 404 : lien « Retour au blog » et tests de la 404 | 1h | T-009-24, T-011-04 | A | ✅ |
 | T-011-09 | [TEST] | Vérification GREEN d'US-011 | 2,5h | T-011-06, T-011-07, T-011-08, T-009-26 | A | ✅ |
 | T-011-10 | [DOC] | Guide de navigation du blog | 1h | T-011-09 | A | ✅ |
-| T-011-11 | [REV] | Revue d'US-011 | 2h | T-011-10 | A | 👀 |
+| T-011-11 | [REV] | Revue d'US-011 | 2h | T-011-10 | A | ✅ |
 
 **Total estimé** : 31h (11 tâches)
 

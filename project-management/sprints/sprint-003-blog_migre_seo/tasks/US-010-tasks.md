@@ -28,7 +28,7 @@
 | T-010-09 | [FE-WEB] | Composant OriginalNotice dans ArticleLayout | 2h | T-010-08, T-009-22 | A | ✅ |
 | T-010-10 | [TEST] | Vérification GREEN d'US-010 | 2h | T-010-06, T-010-07, T-010-09 | A | ✅ |
 | T-010-11 | [DOC] | Guide redirections-blog | 1,5h | T-010-10 | A | ✅ |
-| T-010-12 | [REV] | Revue d'US-010 | 2h | T-010-11 | A | 👀 |
+| T-010-12 | [REV] | Revue d'US-010 | 2h | T-010-11 | A | ✅ |
 
 **Total estimé** : 33,5h (12 tâches)
 

@@ -32,9 +32,9 @@
 | T-024-13 | [FE-WEB] | Sitemap, robots.txt, llms.txt et leurs contrôles | 7h | T-024-12, T-900-07 | B | ✅ |
 | T-024-14 | [OPS] | nginx : robots.txt, llms.txt et sitemaps (type, charset, cache) | 2h | T-013-07, T-900-07, T-024-12 | B | ✅ |
 | T-024-15 | [TEST] | Écrire les tests e2e RED : SEO technique | 4h | T-024-01 | B | ✅ |
-| T-024-16 | [TEST] | Vérification GREEN d'US-024 | 3h | T-024-08, T-024-10, T-024-11, T-024-13, T-024-14, T-024-15, T-009-23 | B | 🔲 |
+| T-024-16 | [TEST] | Vérification GREEN d'US-024 | 3h | T-024-08, T-024-10, T-024-11, T-024-13, T-024-14, T-024-15, T-009-23 | B | ✅ |
 | T-024-17 | [DOC] | Guide du SEO technique, variables et fragment de CHANGELOG | 1,5h | T-024-16 | B | 🔄 |
-| T-024-18 | [REV] | Revue d'US-024 | 2,5h | T-024-17 | B | 🔲 |
+| T-024-18 | [REV] | Revue d'US-024 | 2,5h | T-024-17 | B | ✅ |
 
 **Total estimé** : 63h (18 tâches)
 

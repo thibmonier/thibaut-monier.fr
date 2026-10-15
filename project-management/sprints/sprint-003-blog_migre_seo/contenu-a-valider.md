@@ -232,3 +232,7 @@ Reportés tels quels depuis `sprint-002-preuves_profil_open_source/sprint-review
 |---|---------|---------|--------|
 | 1 | Expérience `smile` | `src/data/cv/experiences/smile.yaml` | à valider |
 | 2 | Expérience `sqli` | `src/data/cv/experiences/sqli.yaml` | à valider |
+
+## Réserve PO : typographie française dans le corps des articles
+
+Les 19 titres d'articles concernés (`title` du front matter) portent désormais une espace insécable (U+00A0, convention du dépôt) avant `:`, `;`, `?` et `!`. Les **corps des 28 articles ne sont pas corrigés** : environ 507 passages gardent une espace ordinaire avant ces signes, ce qui expose à une coupure de ligne avant le signe. La correction demande une normalisation hors blocs de code (étape de `src/lib/blog-migration.ts` ou plugin de rendu) puis une relecture ; décision du PO à prendre, proposition pour le sprint 4. Aucun slug ni aucune URL n'est touché.

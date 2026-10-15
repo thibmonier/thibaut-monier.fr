@@ -27,9 +27,9 @@
 | T-025-08 | [TEST] | Écrire les tests e2e RED : partage et images Open Graph | 2,5h | T-025-01 | B | ✅ |
 | T-025-09 | [CONTENT] | Revue visuelle des images générées | 1,5h | T-025-04 | B | 🔄 |
 | T-025-10 | [OPS] | Durée de génération, cache et nginx pour /og/ | 2h | T-025-04, T-024-14 | B | ✅ |
-| T-025-11 | [TEST] | Vérification GREEN d'US-025 | 2h | T-025-07, T-025-08, T-025-09, T-025-10, T-009-23 | B | 🔲 |
+| T-025-11 | [TEST] | Vérification GREEN d'US-025 | 2h | T-025-07, T-025-08, T-025-09, T-025-10, T-009-23 | B | ✅ |
 | T-025-12 | [DOC] | Guide des images Open Graph, ADR-0012 et fragment de CHANGELOG | 2h | T-025-11 | B | 🔄 |
-| T-025-13 | [REV] | Revue d'US-025 | 1,5h | T-025-12 | B | 🔲 |
+| T-025-13 | [REV] | Revue d'US-025 | 1,5h | T-025-12 | B | ✅ |
 
 **Total estimé** : 34,5h (13 tâches)
 

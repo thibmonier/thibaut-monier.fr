@@ -9,24 +9,24 @@
 | T-900-01 | [OPS] | Contrôle no-global-prune (prompts, scripts, Makefile, workflows) | 3h | - | Phase 0 | ✅ |
 | T-900-02 | [OPS] | Cible make preflight (disque, sans prune global) | 2h | T-900-06 | Phase 0 | ✅ |
 | T-900-03 | [DOC] | Créer contenu-a-valider.md (28 articles par lots de 5, sprints 1 et 2) | 2h | - | Phase 0 | ✅ |
-| T-900-04 | [OPS] | Liste d'exceptions e2e versionnée et compte exécutés/ignorés dans la CI | 4h | - | Phase 0 | 👀 |
+| T-900-04 | [OPS] | Liste d'exceptions e2e versionnée et compte exécutés/ignorés dans la CI | 4h | - | Phase 0 | ✅ |
 | T-900-05 | [DOC] | Guide worktrees-agents et section « Pièges d'environnement » | 3h | T-900-01 | Phase 0 | ✅ |
 | T-900-06 | [OPS] | Zones anti-conflit : mk/, changelog.d/, propriété des fichiers | 1,5h | - | Phase 0 | ✅ |
 | T-900-07 | [OPS] | Dépendances du sprint en une passe et vérifications natives (Pagefind, MIME nginx) | 4h | T-900-06 | Phase 0 | ✅ |
 | T-900-08 | [OPS] | Chaîne de build : étape Pagefind après le build, avant les contrôles dist | 1,5h | T-900-07 | Phase 0 | ✅ |
 | T-900-09 | [TEST] | Écrire les tests RED du module d'URL absolue (site-url) | 1,5h | - | Phase 0 | ✅ |
 | T-900-10 | [FE-WEB] | Module unique d'URL absolue : src/lib/site-url.ts | 1,5h | T-900-09 | Phase 0 | ✅ |
-| T-900-11 | [OPS] | CI : variables factices PUBLIC_SITE_URL et PUBLIC_UMAMI_WEBSITE_ID | 1,5h | T-900-04 | Phase 0 | 👀 |
+| T-900-11 | [OPS] | CI : variables factices PUBLIC_SITE_URL et PUBLIC_UMAMI_WEBSITE_ID | 1,5h | T-900-04 | Phase 0 | ✅ |
 | T-900-12 | [TEST] | Écrire les tests RED de l'échantillonnage des gabarits répétés | 2,5h | - | Phase 0 | ✅ |
 | T-900-13 | [FE-WEB] | Échantillonnage dans axe, matrice responsive et Lighthouse (délai proportionnel) | 3,5h | T-900-12 | Phase 0 | ✅ |
 | T-900-20 | [DOC] | Phase 4 : fusion des lots, CHANGELOG, index des guides et des ADR | 3h | T-009-29, T-009-30, T-010-12, T-011-11, T-012-12, T-013-11, T-024-18, T-025-13, T-026-13 | Phase 4 | 🔲 |
-| T-900-21 | [OPS] | Phase 4 : ci.yml final (artefact de redirections, garde du dépôt, Lighthouse séparé, durées) | 3,5h | T-900-20, T-010-07 | Phase 4 | 🔲 |
-| T-900-22 | [TEST] | Phase 4 : tests RED du contrôle de fumée étendu | 1,5h | T-900-20 | Phase 4 | 🔲 |
-| T-900-23 | [OPS] | Phase 4 : contrôle de fumée étendu (OK_PATHS) | 1h | T-900-22 | Phase 4 | 🔲 |
-| T-900-24 | [TEST] | Phase 4 : scénarios e2e inter-US du sprint 3 | 4h | T-900-20 | Phase 4 | 🔲 |
+| T-900-21 | [OPS] | Phase 4 : ci.yml final (artefact de redirections, garde du dépôt, Lighthouse séparé, durées) | 3,5h | T-900-20, T-010-07 | Phase 4 | 🔄 |
+| T-900-22 | [TEST] | Phase 4 : tests RED du contrôle de fumée étendu | 1,5h | T-900-20 | Phase 4 | ✅ |
+| T-900-23 | [OPS] | Phase 4 : contrôle de fumée étendu (OK_PATHS) | 1h | T-900-22 | Phase 4 | ✅ |
+| T-900-24 | [TEST] | Phase 4 : scénarios e2e inter-US du sprint 3 | 4h | T-900-20 | Phase 4 | 👀 |
 | T-900-25 | [OPS] | Phase 4 : mesure de la durée de la CI et ajustements | 3h | T-900-21 | Phase 4 | 🔲 |
 | T-900-26 | [OPS] | Phase 4 : porte du sprint, build à blanc Railway et runner, déploiement | 4h | T-900-21, T-900-24, T-900-25 | Phase 4 | 🔲 |
-| T-900-27 | [REV] | Phase 4 : revue DoD indépendante transverse | 5h | T-900-26 | Phase 4 | 🔲 |
+| T-900-27 | [REV] | Phase 4 : revue DoD indépendante transverse | 5h | T-900-26 | Phase 4 | 🔄 |
 | T-900-28 | [OPS] | Phase 4 : actions en production avec le PO (Search Console, Rich Results, Umami) | 2,5h | T-900-26 | Phase 4 | 🔲 |
 
 **Total estimé** : 59h (22 tâches ; phase 0 : 31,5h, phase 4 : 27,5h)
