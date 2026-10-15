@@ -18,6 +18,20 @@ export function originOf(site: string | URL): string {
   return url.origin;
 }
 
+const DEFAULT_SITE = 'https://thibaut-monier.fr';
+
+/** Origine du site lue dans PUBLIC_SITE_URL (astro.config.mjs) ; repli sur le domaine cible si absente. */
+export function siteFromEnv(value: string | undefined): string {
+  if (value === undefined || value === '') return DEFAULT_SITE;
+  try {
+    return originOf(value);
+  } catch {
+    throw new Error(
+      `PUBLIC_SITE_URL invalide : ${JSON.stringify(value)} (URL absolue attendue, par exemple ${DEFAULT_SITE})`,
+    );
+  }
+}
+
 /** `'/blog/x/'` devient `'https://<origine>/blog/x/'` ; la barre finale est ajoutée aux pages, jamais aux fichiers. */
 export function absoluteUrl(
   path: string,

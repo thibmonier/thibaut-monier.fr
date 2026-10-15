@@ -5,9 +5,11 @@ import { satteri } from '@astrojs/markdown-satteri';
 import tailwindcss from '@tailwindcss/vite';
 import { rehypeArticleBlocks } from './src/lib/rehype-article-blocks.ts';
 import { isExcludedFromSitemap, lastmodFor, readContentDates } from './src/lib/sitemap.ts';
+import { siteFromEnv } from './src/lib/site-url.ts';
 
 // URL publique provisoire tant que le domaine n'est pas branché (PUBLIC_SITE_URL, voir .env.example).
-const site = process.env.PUBLIC_SITE_URL || 'https://thibaut-monier.fr';
+// Une valeur sans schéma (`thibaut-monier.fr`) échoue avec un message explicite, pas « Invalid URL ».
+const site = siteFromEnv(process.env.PUBLIC_SITE_URL);
 
 // `lastmod` du sitemap : date du contenu quand elle existe (articles, pages légales), sinon date du build (E18).
 const buildDate = new Date();

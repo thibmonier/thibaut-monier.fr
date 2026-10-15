@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { absoluteUrl, originOf } from '../../../src/lib/site-url.ts';
+import { absoluteUrl, originOf, siteFromEnv } from '../../../src/lib/site-url.ts';
 
 const SITE = 'https://thibaut-monier.fr';
 
@@ -54,5 +54,28 @@ describe('absoluteUrl', () => {
   it('échoue avec une origine invalide ou absente', () => {
     expect(() => absoluteUrl('/x/', 'pas une url')).toThrow(/origine/i);
     expect(() => absoluteUrl('/x/', undefined)).toThrow(/origine/i);
+  });
+});
+
+describe('siteFromEnv', () => {
+  it('retient la valeur par défaut quand PUBLIC_SITE_URL est absente ou vide', () => {
+    expect(siteFromEnv(undefined)).toBe('https://thibaut-monier.fr');
+    expect(siteFromEnv('')).toBe('https://thibaut-monier.fr');
+  });
+
+  it('normalise une URL absolue en origine, sans barre finale', () => {
+    expect(siteFromEnv('https://web-production-70714.up.railway.app/')).toBe(
+      'https://web-production-70714.up.railway.app',
+    );
+  });
+
+  it('refuse un domaine sans schéma avec un message qui nomme la variable', () => {
+    expect(() => siteFromEnv('thibaut-monier.fr')).toThrow(
+      'PUBLIC_SITE_URL invalide : "thibaut-monier.fr" (URL absolue attendue, par exemple https://thibaut-monier.fr)',
+    );
+  });
+
+  it('refuse un schéma autre que http(s)', () => {
+    expect(() => siteFromEnv('ftp://thibaut-monier.fr')).toThrow('PUBLIC_SITE_URL invalide');
   });
 });
