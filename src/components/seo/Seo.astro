@@ -1,5 +1,6 @@
 ---
 import { site } from '../../config/site.ts';
+import type { PageMetaProps } from '../../lib/page-meta.ts';
 import { buildOpenGraph, buildTitle, canonicalUrl } from '../../lib/seo.ts';
 
 /**
@@ -10,14 +11,15 @@ import { buildOpenGraph, buildTitle, canonicalUrl } from '../../lib/seo.ts';
  * - `description` : résumé de 50 à 160 caractères ;
  * - `canonical?` : chemin ou URL canonique ; par défaut l'URL courante, rendue absolue ;
  * - `noindex?` : `true` ajoute `robots noindex` et supprime la canonical ;
- * - `ogType?` : type Open Graph (`website` par défaut).
+ * - `ogType?` : type Open Graph (`website` par défaut) ;
+ * - `article?`, `breadcrumb?` : contrat C5 (`lib/page-meta.ts`), acceptés mais pas encore exploités (lot B :
+ *   JSON-LD, image Open Graph, fil d'Ariane).
  */
-interface Props {
+interface Props extends PageMetaProps {
   title: string;
   description: string;
   canonical?: string;
   noindex?: boolean;
-  ogType?: string;
 }
 
 const { title, description, canonical, noindex = false, ogType = 'website' } = Astro.props;

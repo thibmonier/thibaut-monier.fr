@@ -13,7 +13,8 @@
     "checks:content": "node scripts/checks/run.ts --phase=content",
     "checks:dist": "node scripts/checks/run.ts --phase=dist",
     "build:cv": "node scripts/build-cv.ts",
-    "build": "npm run checks:content && astro build && npm run build:cv && npm run checks:dist",
+    "build:search": "pagefind --site dist",
+    "build": "npm run checks:content && astro build && npm run build:cv && npm run build:search && npm run checks:dist",
     "preview": "astro preview --host 0.0.0.0 --port 4321",
     "check": "astro check",
     "lint": "eslint .",
@@ -27,9 +28,15 @@
     "checks:external": "node scripts/checks/external-links.ts"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.3",
     "@astrojs/mdx": "8.0.3",
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.3.8",
+    "astro-og-canvas": "0.13.2",
+    "pagefind": "1.5.2",
+    "satteri": "0.10.5",
     "tailwindcss": "4.3.3"
   },
   "devDependencies": {

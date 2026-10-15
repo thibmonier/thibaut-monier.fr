@@ -1,5 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { file, glob } from 'astro/loaders';
+import { blog } from './content/collections/blog.ts';
 import { experienceSchema } from './content/schemas/experiences.ts';
 import { homeSchema } from './content/schemas/home.ts';
 import { legalFrontmatterSchema } from './content/schemas/legal.ts';
@@ -61,4 +62,5 @@ export const collections = {
   achievements,
   plugins,
   projects,
+  blog,
 };

@@ -4,16 +4,17 @@ import Seo from '../components/seo/Seo.astro';
 import Footer from '../components/ui/Footer.astro';
 import Header from '../components/ui/Header.astro';
 import { site } from '../config/site.ts';
+import type { PageMetaProps } from '../lib/page-meta.ts';
 
-/** Props de `Seo` (contrat figé) ; seules ces quatre sont acceptées par le layout. */
-interface Props {
+/** Props de `Seo` (contrat figé) ; le contrat C5 (`PageMetaProps`) y ajoute `ogType`, `article` et `breadcrumb`. */
+interface Props extends PageMetaProps {
   title: string;
   description: string;
   noindex?: boolean;
   canonical?: string;
 }
 
-const { title, description, noindex, canonical } = Astro.props;
+const { title, description, noindex, canonical, ogType, article, breadcrumb } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,7 +25,15 @@ const { title, description, noindex, canonical } = Astro.props;
     <!-- Bloquant et externe (CSP sans script inline) : pose le thème avant le premier rendu. -->
     <script is:inline src="/theme-init.js"></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <Seo title={title} description={description} noindex={noindex} canonical={canonical} />
+    <Seo
+      title={title}
+      description={description}
+      noindex={noindex}
+      canonical={canonical}
+      ogType={ogType}
+      article={article}
+      breadcrumb={breadcrumb}
+    />
     <link
       rel="preload"
       href="/fonts/inter-latin-wght-normal.woff2"
