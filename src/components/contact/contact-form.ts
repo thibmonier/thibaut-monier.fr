@@ -1,5 +1,6 @@
 // Amélioration progressive du formulaire (ADR-0004, arbitrage A3) : sans JavaScript, le formulaire
 // s'envoie nativement vers Web3Forms ; ici on ajoute validation en ligne, anti-spam et états.
+import { motifValue, trackEvent } from '../../lib/analytics-events.ts';
 import {
   CONTACT_MESSAGES,
   buildPayload,
@@ -13,12 +14,6 @@ import {
 } from '../../lib/contact.ts';
 
 const FIELDS = ['name', 'email', 'motif', 'message'] as const;
-
-declare global {
-  interface Window {
-    umami?: { track: (event: string, data?: Record<string, string>) => void };
-  }
-}
 
 function init(form: HTMLFormElement): void {
   const openedAt = Date.now();
@@ -97,7 +92,7 @@ function init(form: HTMLFormElement): void {
       const body: unknown = await response.json().catch(() => null);
       const outcome = interpretResponse(response.status, body);
       if (outcome.kind === 'success') {
-        window.umami?.track('contact_submit', { motif: values.motif });
+        trackEvent('contact_submit', { motif: motifValue(values.motif) });
         done(values.motif);
         return;
       }

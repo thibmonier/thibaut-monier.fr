@@ -3,7 +3,7 @@ import type { NavItem } from '../lib/navigation.ts';
 
 // Navigation pilotée par configuration (arbitrage A4). Une entrée dont la page n'existe pas encore reste
 // `enabled: false` : aucun lien mort n'est rendu. L'US qui crée la page passe le drapeau à `true`.
-//   - parcours : US-005   - mentions-legales, vie-privee : US-029   - blog : US-009 (sprint 3)
+//   - parcours : US-005   - mentions-legales, vie-privee : US-029   - blog : US-009   - recherche : US-012
 const internalHref = z
   .string()
   .regex(/^\/(?:[a-z0-9-]+\/)*$/, "href interne avec barre finale (ex. '/contact/')");
@@ -54,6 +54,10 @@ const main: NavItem[] = [
   { id: 'competences', href: '/competences/', label: 'Compétences', enabled: true },
   // US-019
   { id: 'open-source', href: '/open-source/', label: 'Open source', enabled: true },
+  // US-009
+  { id: 'blog', href: '/blog/', label: 'Blog', enabled: true },
+  // US-012
+  { id: 'recherche', href: '/recherche/', label: 'Recherche', enabled: true },
   { id: 'contact', href: '/contact/', label: 'Contact', enabled: true },
 ];
 

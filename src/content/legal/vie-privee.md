@@ -1,7 +1,7 @@
 ---
 title: Vie privée
-description: Données collectées par le formulaire de contact, sous-traitants, durée de conservation, vos droits et absence de cookie.
-updatedDate: 2026-10-14
+description: Données du formulaire de contact, mesure d'audience sans cookie, sous-traitants, durée de conservation et vos droits.
+updatedDate: 2026-10-15
 ---
 
 **Ce site ne dépose aucun cookie.** Aucun bandeau de consentement n'est donc nécessaire.
@@ -21,7 +21,18 @@ Thibaut Monier, éditeur du site. Pour toute question, utilisez le [formulaire d
 
 ## Mesure d'audience
 
-Le site utilise Umami Cloud, un outil de mesure sans cookie. Il enregistre des pages vues et des événements anonymes (par exemple l'envoi du formulaire, avec son motif) mais jamais les données saisies. Le navigateur peut refuser cette mesure : elle respecte les signaux « Do Not Track » et « Global Privacy Control ».
+Le site utilise Umami Cloud, un outil de mesure d'audience sans cookie. Il enregistre des pages vues et quelques événements anonymes, jamais ce que vous saisissez :
+
+- l'envoi du formulaire de contact, avec son seul motif (mission, poste ou autre) ;
+- le clic sur le téléchargement du CV ;
+- le clic sur le lien de prise de rendez-vous ;
+- le clic sur un lien vers GitHub (avec le nom du dépôt), Packagist (avec le nom du paquet) ou LinkedIn.
+
+- **Finalité** : savoir quelles pages et quelles actions sont utiles, de façon agrégée.
+- **Base légale** : intérêt légitime, pour une mesure d'audience agrégée sans cookie ni identifiant personnel.
+- **Hébergement** : Umami Cloud, sur des serveurs situés aux États-Unis et dans l'Union européenne.
+- **Durée de conservation** : 6 mois, durée de l'offre utilisée.
+- **Refus** : la mesure respecte les signaux « Do Not Track » et « Global Privacy Control » de votre navigateur. Dans ce cas, aucun script de mesure n'est chargé.
 
 ## Prise de rendez-vous
 

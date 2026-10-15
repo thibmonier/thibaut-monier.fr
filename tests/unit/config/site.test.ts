@@ -10,11 +10,9 @@ describe('configuration du site', () => {
     expect(site.social.github).toMatch(/^https:\/\/github\.com\//);
   });
 
-  it('active Accueil et Contact et ne publie ni Blog ni Labo (arbitrage A4)', () => {
+  it('active Accueil, Contact, Blog et Recherche et ne publie pas Labo (arbitrage A4)', () => {
     const enabled = site.nav.main.filter((item) => item.enabled).map((item) => item.id);
-    expect(enabled).toContain('accueil');
-    expect(enabled).toContain('contact');
-    expect(site.nav.main.map((item) => item.id)).not.toContain('blog');
+    expect(enabled).toEqual(expect.arrayContaining(['accueil', 'contact', 'blog', 'recherche']));
     expect(site.nav.main.map((item) => item.id)).not.toContain('labo');
   });
 

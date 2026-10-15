@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
-import { discoverRoutes } from './helpers/routes.ts';
+import { discoverSampledRoutes } from './helpers/sample.ts';
 
 // WCAG 2.2 AA sur toutes les pages découvertes, thèmes clair et sombre.
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
@@ -10,9 +10,9 @@ test('axe : aucune violation serious ou critical sur les pages découvertes', as
   request,
   baseURL,
 }) => {
-  const routes = await discoverRoutes(request, baseURL as string);
+  const routes = await discoverSampledRoutes(request, baseURL as string);
   expect(routes).toContain('/');
-  // Le site grandit à chaque sprint (20 fiches plugins au sprint 2) : délai proportionnel au nombre de pages.
+  // Le site grandit à chaque sprint : délai proportionnel au nombre de pages réellement testées (échantillonnées).
   test.setTimeout(30_000 + routes.length * 2 * 5_000);
 
   const blocking: string[] = [];

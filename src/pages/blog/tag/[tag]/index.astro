@@ -1,0 +1,24 @@
+---
+import TaxonomyPage from '../../../../components/blog/TaxonomyPage.astro';
+import { articlesOfTag, categoryTitle, tagPages } from '../../../../lib/blog-taxonomy.ts';
+import { getPublishedPosts } from '../../../../lib/blog-source.ts';
+
+// Seulement les tags à 2 articles ou plus (E7) : pas de page mince, pas de noindex à gérer.
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return tagPages(posts).map((tag) => ({
+    params: { tag: tag.slug },
+    props: { label: tag.label, posts: articlesOfTag(posts, tag.slug) },
+  }));
+}
+
+const { label, posts } = Astro.props;
+---
+
+<TaxonomyPage
+  heading={categoryTitle(label, posts.length)}
+  title={`Tag ${label}`}
+  description={`Les ${posts.length} articles du blog de Thibaut Monier étiquetés « ${label} », du plus récent au plus ancien.`}
+  kind="Tag"
+  posts={posts}
+/>

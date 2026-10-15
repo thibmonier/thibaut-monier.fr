@@ -6,6 +6,7 @@ import { chromium } from '@playwright/test';
 import lighthouse from 'lighthouse';
 import { discoverRoutes } from './lib/dist-routes.ts';
 import { assertScores, AXES, medianScores, type Scores } from './lib/lighthouse-assert.ts';
+import { loadSampleRules, sampleRoutes } from './lib/sample-routes.ts';
 
 const baseURL = process.env.E2E_BASE_URL ?? 'http://localhost:8080';
 const threshold = Number(process.env.LIGHTHOUSE_THRESHOLD ?? '0.95');
@@ -15,7 +16,11 @@ const outDir = resolve('reports/lighthouse');
 const slugOf = (route: string) =>
   route === '/' ? 'accueil' : route.replaceAll('/', '-').replace(/^-|-$/g, '');
 
-const routes = await discoverRoutes(resolve('dist'));
+// Gabarits répétés du blog échantillonnés (tests/e2e/sample-routes.json) ; toutes les pages uniques restent mesurées.
+const routes = sampleRoutes(
+  await discoverRoutes(resolve('dist')),
+  loadSampleRules(resolve('tests/e2e/sample-routes.json')),
+);
 if (routes.length === 0) {
   console.error('Aucune page trouvée dans dist/ : lancer `make checks` (build) avant Lighthouse.');
   process.exit(2);

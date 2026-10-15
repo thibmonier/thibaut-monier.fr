@@ -72,7 +72,7 @@ Un recruteur télécharge un CV PDF à jour ; un intégrateur filtre les 20 plug
 ## Risques identifiés
 | Risque | Probabilité | Impact | Mitigation |
 |--------|-------------|--------|------------|
-| Espace disque insuffisant (5,0 Go libres le 2026-10-14, 98 % utilisé) : images Docker, Playwright, Typst | Élevée | Élevé | Vérification ≥ 5 Go avant implémentation (cible 10 Go, action 2 rétro), `docker system prune` proposé, CI comme référence |
+| Espace disque insuffisant (5,0 Go libres le 2026-10-14, 98 % utilisé) : images Docker, Playwright, Typst | Élevée | Élevé | Vérification ≥ 5 Go avant implémentation (cible 10 Go, action 2 rétro), nettoyage limité au projet proposé (jamais de prune global), CI comme référence |
 | Faux vert CI (tests e2e ignorés) | Moyenne | Élevé | Garde-fou « zéro test ignoré » (action 1), mode strict `E2E_EXPECT_FULL_CONFIG=1` |
 | Génération du PDF Typst 0.15.1 lourde ou non reproductible en CI/Docker (US-007) | Moyenne | Moyen | ADR-0005 ; binaire épinglé dans l'image ; test de présence et de contenu du PDF |
 | Limites de l'API GitHub/Packagist au build, `GITHUB_TOKEN` absent (US-021) | Moyenne | Moyen | ADR-0006 ; repli sur données figées versionnées ; échec de build évité |

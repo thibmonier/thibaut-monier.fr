@@ -21,7 +21,8 @@ interface Options {
   concurrency?: number;
 }
 
-const SHOWCASE_PREFIX = 'open-source/';
+// Pages dont les liens externes sont vérifiés : la vitrine open source et le blog (articles, listes, séries).
+const LINK_PREFIXES = ['open-source/', 'blog/'];
 const DEAD_STATUSES = new Set([404, 410]);
 const RETRY_DELAY_MS = 1000;
 const DEFAULT_RETRIES = 2;
@@ -31,7 +32,10 @@ const REQUEST_TIMEOUT_MS = 10_000;
 export async function collectShowcaseLinks(distDir: string): Promise<ShowcaseLink[]> {
   const files = (await walk(distDir))
     .map((file) => relative(distDir, file).split(sep).join('/'))
-    .filter((file) => file.startsWith(SHOWCASE_PREFIX) && file.endsWith('/index.html'));
+    .filter(
+      (file) =>
+        LINK_PREFIXES.some((prefix) => file.startsWith(prefix)) && file.endsWith('/index.html'),
+    );
   const byUrl = new Map<string, string[]>();
   for (const file of files) {
     const route = `/${file.slice(0, -'index.html'.length)}`;

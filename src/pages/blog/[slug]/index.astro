@@ -1,0 +1,25 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+import { slugOf } from '../../../lib/blog.ts';
+import { getPublishedPosts } from '../../../lib/blog-source.ts';
+import { seriesPosition, tagPages } from '../../../lib/blog-taxonomy.ts';
+
+// Un article `draft` ou daté du futur n'est pas dans getPublishedPosts() : aucune route (publication programmée).
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const linkedTags = tagPages(posts).map((tag) => tag.slug);
+  return posts.map((post) => ({
+    params: { slug: slugOf(post.id) },
+    props: { post, position: seriesPosition(posts, slugOf(post.id)), linkedTags },
+  }));
+}
+
+const { post, position, linkedTags } = Astro.props;
+// `getPublishedPosts` renvoie les entrées de la collection (type `BlogEntry` du contrat C3) : `render` en a besoin.
+const { Content } = await render(post as unknown as CollectionEntry<'blog'>);
+---
+
+<ArticleLayout post={post} position={position} linkedTags={linkedTags}>
+  <Content />
+</ArticleLayout>

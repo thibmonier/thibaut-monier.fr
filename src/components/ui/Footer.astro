@@ -11,8 +11,8 @@ const { locale = 'fr' } = Astro.props;
 const ui = getTranslations(locale);
 const legal = enabledItems(site.nav.footer);
 const social = [
-  { label: 'LinkedIn', href: site.social.linkedin },
-  { label: 'GitHub', href: site.social.github },
+  { label: 'LinkedIn', href: site.social.linkedin, event: 'outbound_linkedin' },
+  { label: 'GitHub', href: site.social.github, event: 'outbound_github' },
 ];
 const link =
   'inline-flex min-h-11 items-center rounded-md px-1 text-fg underline underline-offset-4 hover:text-accent';
@@ -32,9 +32,14 @@ const link =
             </a>
           </li>
         ))}
+        <li>
+          <a class={link} href="/rss.xml">
+            {ui.footer.rss}
+          </a>
+        </li>
         {social.map((item) => (
           <li>
-            <a class={link} href={item.href} rel="noopener noreferrer">
+            <a class={link} href={item.href} rel="noopener noreferrer" data-event={item.event}>
               {item.label}
             </a>
           </li>

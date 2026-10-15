@@ -1,0 +1,15 @@
+---
+interface Props {
+  date: Date;
+  class?: string;
+}
+
+// Date lisible en français (« 17 mars 2026 ») et valeur machine ISO ; `pubDate` sans heure vaut minuit UTC.
+const { date, class: className } = Astro.props;
+const iso = date.toISOString().slice(0, 10);
+const label = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'UTC' }).format(date);
+---
+
+<time datetime={iso} class={className}>
+  {label}
+</time>

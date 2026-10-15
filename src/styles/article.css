@@ -1,0 +1,147 @@
+/* Styles de lecture des articles du blog (US-009). Importé par ArticleLayout ; global.css n'est pas modifié.
+   Aucun attribut `style` en ligne : tout passe par ces classes (CSP `style-src 'self'`, ADR-0009). */
+
+.article-body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+.article-body > * + * {
+  margin-top: 1.25rem;
+}
+
+.article-body h2 {
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.article-body h3 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.article-body h4 {
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+.article-body a {
+  color: var(--c-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5rem;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li + li {
+  margin-top: 0.4rem;
+}
+
+.article-body blockquote {
+  border-left: 4px solid var(--c-accent);
+  padding-left: 1rem;
+  color: var(--c-muted);
+}
+
+.article-body hr {
+  border: 0;
+  border-top: 1px solid var(--c-border);
+  margin-block: 2rem;
+}
+
+/* Code : monospace défilant, focalisable au clavier (plugin rehype des blocs défilants). */
+.article-body code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--c-surface);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.3em;
+}
+
+.article-body pre {
+  overflow-x: auto;
+  white-space: pre;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.article-body pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Tableaux : région défilante atteignable au clavier, jamais de défilement de la page. */
+.article-body .table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+}
+
+.article-body table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.article-body th,
+.article-body td {
+  border-bottom: 1px solid var(--c-border);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-body th {
+  background: var(--c-surface);
+  font-weight: 600;
+}
+
+/* Schémas SVG intégrés : s'adaptent à la largeur, couleurs reprises des jetons du site (thèmes clair et sombre). */
+.article-body svg {
+  max-width: 100%;
+  height: auto;
+  --color-border: var(--c-border);
+  --color-primary: var(--c-accent);
+  --color-foreground: var(--c-fg);
+  --color-muted-foreground: var(--c-muted);
+}
+
+/* Schéma aux couleurs figées (palette claire) : fond clair dans les deux thèmes pour rester lisible. */
+.article-body .diagram-frame {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid var(--c-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color-scheme: light;
+}
+
+.article-cover {
+  aspect-ratio: 1200 / 630;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}

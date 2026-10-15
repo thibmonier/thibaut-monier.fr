@@ -15,7 +15,8 @@ EPIC-003 : Blog migré
 
 ### Conversation
 - Périmètre : articles seuls au départ ; le labo et les fiches plugins rejoindront l'index avec leurs EPICs.
-- Interface : page dédiée `/recherche` ou fenêtre modale depuis l'en-tête ?
+- Interface : page dédiée `/recherche/`, interface maison sur l'API JavaScript de Pagefind (l'interface par défaut n'est pas établie comme compatible avec la CSP sans style en ligne, E19).
+- Arbitrage sprint 3 (2026-10-14) : page dédiée `/recherche/` en `noindex`, interface maison sur l'API Pagefind, index limité aux articles (ADR-0013).
 - Index généré au build ; poids acceptable pour le chargement différé du module de recherche.
 - Les contenus `draft` ou futurs doivent rester exclus de l'index.
 
@@ -56,21 +57,21 @@ THEN l'article choisi s'ouvre et le focus est placé sur son titre
 Scenario: Aucun résultat
 GIVEN le terme "zzzzqq"
 WHEN P-004 lance la recherche
-THEN le message "Aucun résultat pour « zzzzqq ». Essayez un autre mot ou parcourez les catégories." s'affiche avec un lien vers le blog
+THEN le message "Aucun résultat pour « zzzzqq ». Essayez un autre mot ou parcourez les catégories." s'affiche avec un lien vers `/blog/` et les catégories
 
 Scenario: Module de recherche indisponible
 GIVEN l'échec du chargement de l'index
 WHEN P-004 ouvre la recherche
 THEN le message "La recherche est momentanément indisponible." s'affiche
-AND un lien vers la liste complète du blog reste visible
+AND un lien vers la liste complète du blog (`/blog/`) reste visible
 ```
 
 ### Critères techniques (site statique)
 - [ ] Index Pagefind généré au build après la construction du site ; échec du build si l'index est vide
-- [ ] Page `/recherche` et composant de recherche chargé à la demande
+- [ ] Page `/recherche/` (interface maison sur l'API JavaScript de Pagefind) et composant de recherche chargé à la demande
 - [ ] Responsive : champ pleine largeur sur mobile
 - [ ] WCAG 2.2 AA : champ étiqueté, résultats annoncés (`aria-live="polite"`), contrastes
-- [ ] SEO : page `/recherche` en `noindex`
+- [ ] SEO : page `/recherche/` en `noindex`
 - [ ] Performance : index chargé uniquement à la première interaction ; poids de l'index < 500 Ko ; Lighthouse ≥ 95
 
 ## Notes techniques (à confirmer en tech spec)

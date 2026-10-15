@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { postPath, slugOf, type BlogEntry } from '../../lib/blog.ts';
+import PostDate from './PostDate.astro';
+
+interface Props {
+  post: BlogEntry;
+}
+
+const { post } = Astro.props;
+const { data } = post;
+// Image décorative (alt vide) : le titre, juste en dessous, porte le sens.
+const cover = data.image as ImageMetadata | undefined;
+---
+
+<li
+  data-article-card
+  class="relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface focus-within:border-accent hover:border-accent"
+>
+  {cover && (
+    <Image
+      src={cover}
+      alt=""
+      widths={[320, 640]}
+      sizes="(min-width: 768px) 24rem, 100vw"
+      loading="lazy"
+      class="aspect-[1200/630] w-full object-cover"
+    />
+  )}
+  <div class="flex grow flex-col p-4">
+    <p class="text-sm text-muted">
+      <PostDate date={data.pubDate} />
+      <span aria-hidden="true"> · </span>
+      <span data-card-category>{data.category}</span>
+    </p>
+    <h2 class="mt-1 text-lg font-semibold tracking-tight">
+      <a
+        href={postPath(slugOf(post.id))}
+        class="after:absolute after:inset-0 after:content-[''] hover:text-accent"
+      >
+        {data.title}
+      </a>
+    </h2>
+    <p data-card-excerpt class="mt-2 grow">
+      {data.excerpt ?? data.description}
+    </p>
+  </div>
+</li>

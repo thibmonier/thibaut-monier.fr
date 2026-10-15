@@ -12,5 +12,8 @@
 | [0008](0008-structure-contenu-urls-i18n.md) | Modèle de contenu, structure des URL et i18n | Accepté |
 | [0009](0009-securite-en-tetes-supply-chain.md) | En-têtes de sécurité, CSP et supply chain (écarts assumés) | Accepté |
 | [0010](0010-theme-script-externe.md) | Thème sans flash avec un script externe et des jetons générés | Accepté |
+| [0011](0011-umami-chargement-et-evenements.md) | Chargement d'Umami et contrat des événements | Proposé (à valider par le PO) |
+| [0012](0012-images-og-astro-og-canvas.md) | Images Open Graph générées par astro-og-canvas | Proposé (à valider par le PO) |
+| [0013](0013-recherche-pagefind-interface-maison.md) | Recherche plein texte avec Pagefind et une interface maison | Accepté |
 
 Format : Contexte, Décision, Alternatives, Conséquences (règle 10 du projet). Un ADR accepté n'est jamais modifié : on le remplace par un nouvel ADR (statut « Remplacé par ADR-XXXX »).

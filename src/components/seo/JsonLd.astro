@@ -1,0 +1,14 @@
+---
+import { serializeJsonLd, type JsonLdObject } from '../../lib/jsonld/index.ts';
+
+/** Bloc de données non exécutable : hors du périmètre de `script-src` (ADR-0009). Une balise par objet. */
+interface Props {
+  data: (JsonLdObject | null | undefined)[];
+}
+
+const blocks = serializeJsonLd(Astro.props.data);
+---
+
+{blocks.map((json) => (
+  <script type="application/ld+json" set:html={json} />
+))}

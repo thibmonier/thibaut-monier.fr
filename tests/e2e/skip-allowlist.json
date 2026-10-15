@@ -1,0 +1,18 @@
+{
+  "skips": [
+    {
+      "file": "tests/e2e/contact.spec.ts",
+      "test": "[sans-clé]",
+      "projects": ["desktop", "mobile"],
+      "reason": "En CI la clé Web3Forms est fournie (valeur factice) : le formulaire existe, le scénario du message de repli est ignoré sur les deux projets (2 ignorés).",
+      "date": "2026-10-14"
+    },
+    {
+      "file": "tests/e2e/parcours.spec.ts",
+      "test": "impression",
+      "projects": ["mobile"],
+      "reason": "Le rendu PDF d'impression ne dépend pas du viewport : vérifié sur desktop seulement (1 ignoré).",
+      "date": "2026-10-14"
+    }
+  ]
+}

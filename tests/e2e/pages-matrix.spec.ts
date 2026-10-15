@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { discoverRoutes } from './helpers/routes.ts';
+import { discoverSampledRoutes } from './helpers/sample.ts';
 
 // T-002-11 : vérification transverse sur TOUTES les pages découvertes (aucune liste à maintenir) :
 // responsive (360, 768, 1280), JavaScript désactivé, préférence de mouvement réduit.
@@ -15,8 +15,9 @@ test.describe('Scénario : toutes les pages, responsive', () => {
       request,
       baseURL,
     }) => {
-      const routes = await discoverRoutes(request, baseURL as string);
+      const routes = await discoverSampledRoutes(request, baseURL as string);
       expect(routes.length).toBeGreaterThanOrEqual(5);
+      test.setTimeout(Math.max(30_000, routes.length * 2_000)); // une navigation par page : le délai suit le volume
       await page.setViewportSize({ width, height: 800 });
       for (const route of routes) {
         await page.goto(route);
@@ -39,7 +40,7 @@ test.describe('Scénario : toutes les pages, JavaScript désactivé', () => {
     request,
     baseURL,
   }) => {
-    const routes = await discoverRoutes(request, baseURL as string);
+    const routes = await discoverSampledRoutes(request, baseURL as string);
     for (const route of routes) {
       const response = await page.goto(route);
       expect(response?.status(), route).toBe(200);
@@ -62,7 +63,7 @@ test.describe('Scénario : toutes les pages, mouvement réduit', () => {
     request,
     baseURL,
   }) => {
-    const routes = await discoverRoutes(request, baseURL as string);
+    const routes = await discoverSampledRoutes(request, baseURL as string);
     for (const route of routes) {
       await page.goto(route);
       const { durations, behavior } = await page.evaluate(() => ({
@@ -91,7 +92,7 @@ test.describe('Scénario : toutes les pages, CSP', () => {
       }
     });
     page.on('pageerror', (e) => problems.push(`${page.url()} : ${e.message}`));
-    for (const route of await discoverRoutes(request, baseURL as string)) {
+    for (const route of await discoverSampledRoutes(request, baseURL as string)) {
       await page.goto(route);
       await page.waitForLoadState('networkidle');
     }

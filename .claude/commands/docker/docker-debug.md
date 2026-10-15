@@ -202,7 +202,7 @@ docker compose up -d --force-recreate <service>
 docker compose build --no-cache <service>
 
 # Nettoyer ressources
-docker system prune -af
+docker compose down --remove-orphans && docker builder prune -f  # jamais de prune global
 
 # Vérifier l'état
 docker compose ps

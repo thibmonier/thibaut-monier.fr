@@ -1,0 +1,19 @@
+---
+import BlogIndex from '../../components/blog/BlogIndex.astro';
+import { categories } from '../../lib/blog-taxonomy.ts';
+import { paginate } from '../../lib/blog.ts';
+import { getPublishedPosts } from '../../lib/blog-source.ts';
+
+// Page 1 de la liste (US-011) ; `/blog/page/<n>/` couvre les pages suivantes.
+const posts = await getPublishedPosts();
+const first = paginate(posts, 1);
+if (first === null) throw new Error('Liste du blog : page 1 introuvable');
+---
+
+<BlogIndex
+  posts={first.items}
+  page={1}
+  pages={first.pages}
+  total={posts.length}
+  categories={categories(posts)}
+/>

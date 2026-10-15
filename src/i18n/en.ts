@@ -5,7 +5,7 @@ export const en: Dictionary = {
   skipLink: '',
   nav: { main: '', menu: '' },
   theme: { toggle: '' },
-  footer: { label: '', social: '', rights: '' },
+  footer: { label: '', social: '', rights: '', rss: '' },
   // US-029
   legal: {
     updated: '',

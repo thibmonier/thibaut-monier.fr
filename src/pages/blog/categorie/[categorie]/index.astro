@@ -1,0 +1,24 @@
+---
+import TaxonomyPage from '../../../../components/blog/TaxonomyPage.astro';
+import { articlesOfCategory, categories, categoryTitle } from '../../../../lib/blog-taxonomy.ts';
+import { getPublishedPosts } from '../../../../lib/blog-source.ts';
+
+// Une page par catégorie ayant au moins un article publié : jamais de page vide.
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return categories(posts).map((category) => ({
+    params: { categorie: category.slug },
+    props: { name: category.name, posts: articlesOfCategory(posts, category.slug) },
+  }));
+}
+
+const { name, posts } = Astro.props;
+---
+
+<TaxonomyPage
+  heading={categoryTitle(name, posts.length)}
+  title={`Catégorie ${name}`}
+  description={`Les ${posts.length} articles de la catégorie ${name} du blog de Thibaut Monier, du plus récent au plus ancien.`}
+  kind="Catégorie"
+  posts={posts}
+/>

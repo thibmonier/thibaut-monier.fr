@@ -72,15 +72,17 @@ test.describe('Scénario : layout commun affiché sur chaque page', () => {
         item.href,
       );
     }
-    await expect(footer.locator('a[href^="/"]')).toHaveCount(footerItems.length);
+    // Pages du pied de page + le flux RSS (/rss.xml), seul lien interne qui n'est pas une page.
+    await expect(footer.locator('a[href^="/"]')).toHaveCount(footerItems.length + 1);
+    await expect(footer.locator('a[href="/rss.xml"]')).toHaveCount(1);
   });
 
-  test('aucun lien désactivé (Blog, Labo) ne figure dans la page', async ({ page }) => {
+  test('aucun lien désactivé (Labo) ne figure dans la page', async ({ page }) => {
     await page.goto('/');
     for (const item of [...site.nav.main, ...site.nav.footer].filter((i) => !i.enabled)) {
       await expect(page.locator(`a[href="${item.href}"]`)).toHaveCount(0);
     }
-    await expect(page.locator('a[href="/blog/"], a[href="/labo/"]')).toHaveCount(0);
+    await expect(page.locator('a[href="/labo/"]')).toHaveCount(0);
   });
 
   test("le lien d'évitement est le premier élément focalisable et mène au contenu", async ({

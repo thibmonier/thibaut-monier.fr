@@ -1,0 +1,10 @@
+---
+import { configuredWebsiteId } from '../../lib/analytics-events.ts';
+
+// Sans `PUBLIC_UMAMI_WEBSITE_ID` au build : aucune balise, aucun chargeur. Avec : une balise de données portant
+// l'identifiant ; `scripts/analytics.ts` décide ensuite du chargement (DNT, GPC).
+const websiteId = configuredWebsiteId();
+---
+
+{websiteId !== '' && <meta name="analytics-website-id" content={websiteId} />}
+{websiteId !== '' && <script src="../../scripts/analytics.ts"></script>}

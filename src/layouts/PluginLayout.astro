@@ -4,8 +4,10 @@ import CompatMatrix from '../components/oss/CompatMatrix.astro';
 import Gallery from '../components/oss/Gallery.astro';
 import InstallSnippet from '../components/oss/InstallSnippet.astro';
 import LiveStats from '../components/oss/LiveStats.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import PluginDeps from '../components/oss/PluginDeps.astro';
 import type { Dependencies } from '../lib/plugin-deps.ts';
+import { buildSoftwareSourceCode } from '../lib/jsonld/software-source-code.ts';
 import { composerRequire, installPackage } from '../lib/install.ts';
 import type { LiveStats as LiveStatsData } from '../lib/oss-metrics.ts';
 import { THEME_LABELS, splitInlineCode, type PluginTheme } from '../lib/plugins.ts';
@@ -34,17 +36,33 @@ interface Props {
   stats: LiveStatsData | null;
 }
 
-const { plugin, deps, names, stats } = Astro.props;
+const { slug, plugin, deps, names, stats } = Astro.props;
 const pkg = installPackage(plugin);
 const github = `https://github.com/${plugin.repo.owner}/${plugin.repo.name}`;
 const suffix = ' Compatibilité, dépendances et installation.';
 const description =
   plugin.tagline.length + suffix.length <= 160 ? plugin.tagline + suffix : plugin.tagline;
+const sourceCode = buildSoftwareSourceCode({
+  name: plugin.name,
+  description: plugin.tagline,
+  path: `/open-source/sylius/${slug}/`,
+  repoUrl: github,
+  license: plugin.license,
+});
 const link =
   'inline-flex min-h-11 items-center rounded-md text-accent underline underline-offset-4';
 ---
 
-<BaseLayout title={`${plugin.name}, plugin Sylius 2`} description={description}>
+<BaseLayout
+  title={`${plugin.name}, plugin Sylius 2`}
+  description={description}
+  breadcrumb={[
+    { label: 'Accueil', href: '/' },
+    { label: 'Open source', href: '/open-source/' },
+    { label: plugin.name },
+  ]}
+>
+  <JsonLd slot="head" data={[sourceCode]} />
   <nav aria-label="Fil d’Ariane" data-breadcrumb class="text-sm text-muted">
     <ol class="flex flex-wrap gap-x-2">
       <li>

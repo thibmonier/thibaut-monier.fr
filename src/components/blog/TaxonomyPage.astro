@@ -1,0 +1,44 @@
+---
+import type { BlogEntry } from '../../lib/blog.ts';
+import type { Crumb } from '../../lib/page-meta.ts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from './ArticleCard.astro';
+import Breadcrumb from './Breadcrumb.astro';
+
+interface Props {
+  /** Titre de page et de titre h1 : « Méthode (5 articles) ». */
+  heading: string;
+  /** Titre du document (`<title>`), sans le nom du site. */
+  title: string;
+  description: string;
+  kind: string;
+  posts: BlogEntry[];
+}
+
+// Page de catégorie, de tag ou de série : liste complète, sans pagination (limite contrôlée dans blog-taxonomy.ts).
+const { heading, title, description, kind, posts } = Astro.props;
+const crumbs: Crumb[] = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: heading },
+];
+---
+
+<BaseLayout title={title} description={description} breadcrumb={crumbs}>
+  <Breadcrumb crumbs={crumbs} />
+  <p class="mt-4 text-sm font-semibold tracking-wide text-muted uppercase">{kind}</p>
+  <h1 class="text-3xl font-bold tracking-tight">{heading}</h1>
+  <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {posts.map((post) => (
+      <ArticleCard post={post} />
+    ))}
+  </ul>
+  <p class="mt-8">
+    <a
+      href="/blog/"
+      class="inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4"
+    >
+      Tous les articles du blog
+    </a>
+  </p>
+</BaseLayout>

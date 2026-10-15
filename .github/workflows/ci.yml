@@ -15,7 +15,11 @@ concurrency:
   cancel-in-progress: true
 
 # Valeurs factices : exercent le formulaire et le lien de RDV en e2e (Web3Forms simulé par page.route).
+# PUBLIC_SITE_URL : valeur par défaut d'astro.config.mjs, rendue explicite. PUBLIC_UMAMI_WEBSITE_ID : UUID de test,
+# le script Umami est simulé par page.route et n'est jamais appelé.
 env:
+  PUBLIC_SITE_URL: https://thibaut-monier.fr
+  PUBLIC_UMAMI_WEBSITE_ID: 00000000-0000-4000-8000-0000000000a1
   PUBLIC_WEB3FORMS_KEY: 00000000-0000-4000-8000-000000000000
   PUBLIC_CALENDLY_URL: https://calendly.com/exemple/echange-decouverte
   E2E_EXPECT_FULL_CONFIG: '1'
@@ -37,6 +41,8 @@ jobs:
           context: .
           target: test
           build-args: |
+            PUBLIC_SITE_URL=${{ env.PUBLIC_SITE_URL }}
+            PUBLIC_UMAMI_WEBSITE_ID=${{ env.PUBLIC_UMAMI_WEBSITE_ID }}
             PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
             PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           cache-from: type=gha,scope=test
@@ -47,6 +53,8 @@ jobs:
           context: .
           target: dist
           build-args: |
+            PUBLIC_SITE_URL=${{ env.PUBLIC_SITE_URL }}
+            PUBLIC_UMAMI_WEBSITE_ID=${{ env.PUBLIC_UMAMI_WEBSITE_ID }}
             PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
             PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           outputs: type=local,dest=dist
@@ -57,11 +65,39 @@ jobs:
           path: dist
           retention-days: 7
 
+      # Redirections de l'ancien site (US-010, T-900-21) : générées dans Docker (étape `build` en cache, avec
+      # node_modules), publiées en artefact et jamais déployées.
+      - name: Image de génération des redirections
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: build
+          build-args: |
+            PUBLIC_SITE_URL=${{ env.PUBLIC_SITE_URL }}
+          load: true
+          tags: thibaut-monier-redirects
+          cache-from: type=gha,scope=test
+      - name: Génération des redirections nginx
+        run: |
+          mkdir -p redirections && chmod 777 redirections
+          docker run --rm -e PUBLIC_SITE_URL -v "$PWD/redirections:/app/redirections" \
+            thibaut-monier-redirects node scripts/build-redirects.ts redirections
+          test -s redirections/agentic-agency.nginx.conf
+          # 28 articles x 2 formes d'URL au minimum (table complète : US-010)
+          test "$(grep -c '^location = ' redirections/agentic-agency.nginx.conf)" -ge 56
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: redirections-nginx
+          path: redirections/agentic-agency.nginx.conf
+          if-no-files-found: error
+          retention-days: 30
+
   e2e:
     name: e2e
     needs: quality
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    # 603 e2e (~5 min) puis Lighthouse sur 26 pages échantillonnées × 3 passes (~10 min)
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -77,6 +113,8 @@ jobs:
           context: .
           target: runtime
           build-args: |
+            PUBLIC_SITE_URL=${{ env.PUBLIC_SITE_URL }}
+            PUBLIC_UMAMI_WEBSITE_ID=${{ env.PUBLIC_UMAMI_WEBSITE_ID }}
             PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
             PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           load: true
@@ -94,6 +132,13 @@ jobs:
           cache-to: type=gha,scope=e2e,mode=max
       - name: Playwright et axe contre preview
         run: docker compose --profile e2e run --rm e2e
+      # Reporter strict-skips (T-900-04) : un test ignoré hors tests/e2e/skip-allowlist.json fait échouer l'étape ;
+      # le compte « exécutés / ignorés » est repris dans le résumé de l'exécution.
+      - name: Résumé e2e (exécutés / ignorés)
+        if: ${{ !cancelled() }}
+        run: |
+          test -f reports/e2e-summary.md || { echo 'reports/e2e-summary.md absent'; exit 0; }
+          { echo '### e2e'; echo; cat reports/e2e-summary.md; } >> "$GITHUB_STEP_SUMMARY"
       - name: Lighthouse (médiane de 3, seuil 0,95)
         run: docker compose --profile e2e run --rm e2e node scripts/checks/lighthouse.ts
       - name: Rapports
@@ -135,6 +180,8 @@ jobs:
           context: .
           target: runtime
           build-args: |
+            PUBLIC_SITE_URL=${{ env.PUBLIC_SITE_URL }}
+            PUBLIC_UMAMI_WEBSITE_ID=${{ env.PUBLIC_UMAMI_WEBSITE_ID }}
             PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
             PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
           load: true

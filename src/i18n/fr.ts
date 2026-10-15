@@ -12,6 +12,7 @@ export const fr = {
     label: 'Liens du site',
     social: 'Réseaux',
     rights: 'Tous droits réservés',
+    rss: 'S’abonner (RSS)',
   },
   // US-029
   legal: {

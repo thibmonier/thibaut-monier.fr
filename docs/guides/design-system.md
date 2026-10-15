@@ -22,7 +22,7 @@ Sources : paquets Fontsource 5.2.8. La police principale est préchargée dans `
 **Ajouter un composant** : créer `src/components/ui/<Nom>.astro`, styler avec les classes Tailwind issues des jetons, tester l'accessibilité (axe, clavier), ne jamais écrire de `<script>` ou `<style>` inline dans le HTML final.
 
 ## Navigation
-`src/config/nav.ts` : chaque entrée a un drapeau `enabled`. Passer à `true` quand la page existe (Parcours : US-005 ; mentions légales et vie privée : US-029 ; Blog : sprint 3). Les entrées `accueil` et `contact` (en-tête) ne peuvent pas être retirées.
+`src/config/nav.ts` : chaque entrée a un drapeau `enabled`. Passer à `true` quand la page existe (Parcours : US-005 ; mentions légales et vie privée : US-029 ; Blog : US-009 ; Recherche : US-012). Les entrées `accueil` et `contact` (en-tête) ne peuvent pas être retirées.
 
 ## i18n
 `src/i18n/{fr,en,utils}.ts` : `en.ts` est un squelette (chaîne vide = repli sur le français).

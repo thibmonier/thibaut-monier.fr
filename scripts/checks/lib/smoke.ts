@@ -1,6 +1,11 @@
 // Logique du contrôle de fumée post-déploiement (T-001-15). `fetch` est injectable pour les tests.
 export type FetchLike = (url: string, init?: RequestInit) => Promise<Response>;
 
+// Article de référence du contrôle de fumée (série, FAQ, catégorie Méthode) : seul endroit à mettre à jour s'il est
+// renommé ; son image Open Graph suit le slug. Jamais dérivé du réseau.
+const SMOKE_ARTICLE = '/blog/la-spec-est-le-nouveau-code/';
+const SMOKE_OG_IMAGE = '/og/blog-la-spec-est-le-nouveau-code.png';
+
 export const OK_PATHS = [
   '/',
   '/parcours/',
@@ -10,8 +15,24 @@ export const OK_PATHS = [
   '/open-source/',
   '/open-source/career-ops/',
   '/open-source/tailsfadmin/',
+  '/blog/',
+  '/blog/page/2/',
+  SMOKE_ARTICLE,
+  '/blog/categorie/methode/',
+  '/recherche/',
+  '/rss.xml',
+  '/sitemap-index.xml',
+  '/robots.txt',
+  '/llms.txt',
+  SMOKE_OG_IMAGE,
 ] as const;
 export const UNKNOWN_PATH = '/__smoke-introuvable__/';
+
+// Type de contenu exigé (début de valeur) pour les ressources qui ne sont pas du HTML.
+const CONTENT_TYPES: Record<string, string> = {
+  '/rss.xml': 'application/rss+xml',
+  [SMOKE_OG_IMAGE]: 'image/png',
+};
 
 // En-têtes dont la simple présence est exigée (valeurs détaillées : tests e2e `headers.spec.ts`).
 const REQUIRED_HEADERS = ['content-security-policy', 'strict-transport-security'] as const;
@@ -34,6 +55,15 @@ export function checkSecurityHeaders(path: string, headers: Headers): string[] {
   return errors;
 }
 
+function checkContentType(label: string, path: string, headers: Headers): string[] {
+  const expected = CONTENT_TYPES[path];
+  if (!expected) return [];
+  const actual = (headers.get('content-type') ?? '').split(';')[0]?.trim().toLowerCase() ?? '';
+  return actual === expected
+    ? []
+    : [`${label} : type de contenu ${actual || 'absent'}, attendu ${expected}`];
+}
+
 async function expectStatus(
   fetchFn: FetchLike,
   baseUrl: string,
@@ -49,7 +79,11 @@ async function expectStatus(
         ? []
         : [`${method} ${path} : statut ${response.status}, attendu ${expected}`];
     // Les en-têtes sont contrôlés sur chaque réponse attendue (y compris le 404 et le 405).
-    return [...errors, ...checkSecurityHeaders(`${method} ${path}`, response.headers)];
+    return [
+      ...errors,
+      ...checkContentType(`${method} ${path}`, path, response.headers),
+      ...checkSecurityHeaders(`${method} ${path}`, response.headers),
+    ];
   } catch (error) {
     return [`${method} ${path} : requête impossible (${(error as Error).message})`];
   }

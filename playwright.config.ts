@@ -8,7 +8,12 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  reporter: [['list'], ['html', { open: 'never', outputFolder: 'reports/playwright' }]],
+  reporter: [
+    ['list'],
+    ['html', { open: 'never', outputFolder: 'reports/playwright' }],
+    // Échoue si un test est ignoré hors de tests/e2e/skip-allowlist.json ; affiche exécutés / ignorés.
+    ['./tests/e2e/reporters/strict-skips.ts'],
+  ],
   outputDir: 'reports/playwright-results',
   use: {
     baseURL,

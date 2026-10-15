@@ -1,0 +1,24 @@
+---
+// Remplace les pieds biographiques et les composants de marque du blog d'origine (E11, E12).
+const link =
+  'inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4';
+---
+
+<aside
+  data-author-note
+  data-pagefind-ignore
+  class="mt-12 rounded-lg border border-border bg-surface p-4"
+>
+  <p>
+    Écrit par <strong>Thibaut Monier</strong>, COO/CTO, delivery manager et architecte e-commerce,
+    spécialisé en IA appliquée au delivery.
+  </p>
+  <p class="mt-2 flex flex-wrap gap-x-6">
+    <a href="/parcours/" class={link}>
+      Voir mon parcours
+    </a>
+    <a href="/contact/" class={link}>
+      Me contacter
+    </a>
+  </p>
+</aside>

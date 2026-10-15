@@ -1,0 +1,23 @@
+---
+import TaxonomyPage from '../../../../components/blog/TaxonomyPage.astro';
+import { articlesOfSeries, categoryTitle, seriesList } from '../../../../lib/blog-taxonomy.ts';
+import { getPublishedPosts } from '../../../../lib/blog-source.ts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return seriesList(posts).map((series) => ({
+    params: { serie: series.slug },
+    props: { name: series.name, posts: articlesOfSeries(posts, series.slug) },
+  }));
+}
+
+const { name, posts } = Astro.props;
+---
+
+<TaxonomyPage
+  heading={categoryTitle(name, posts.length)}
+  title={`Série ${name}`}
+  description={`Série « ${name} » : ${posts.length} articles du blog de Thibaut Monier, à lire dans l'ordre.`}
+  kind="Série"
+  posts={posts}
+/>

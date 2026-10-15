@@ -2,8 +2,10 @@
 import { getCollection } from 'astro:content';
 import ProjectCard from '../../components/oss/ProjectCard.astro';
 import PluginGrid from '../../components/oss/PluginGrid.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
 import ThemeFilter from '../../components/oss/ThemeFilter.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildItemList } from '../../lib/jsonld/item-list.ts';
 import {
   THEME_LABELS,
   THEMES,
@@ -34,6 +36,14 @@ const groups = groupByTheme(entries).map((group) => ({
   })),
 }));
 const counts = themeCounts(entries);
+const catalogue = buildItemList(
+  groups.flatMap((group) =>
+    group.plugins.map((plugin) => ({
+      name: plugin.name,
+      path: `/open-source/sylius/${plugin.slug}/`,
+    })),
+  ),
+);
 const KIND_LABELS = { bundle: 'Bundle Symfony', contribution: 'Contributions' } as const;
 const projects = (await getCollection('projects'))
   .map((entry) => ({ slug: entry.id.replace(/^fr\//, ''), ...entry.data }))
@@ -44,6 +54,7 @@ const projects = (await getCollection('projects'))
   title="Plugins Sylius 2 open source : B2B, UE, IA"
   description="Vingt plugins Sylius 2 open source : B2B, conformité UE, back-office, IA et intégrations. Filtrez par thème, ouvrez la fiche, installez avec Composer."
 >
+  <JsonLd slot="head" data={[catalogue]} />
   <h1 class="text-3xl font-bold tracking-tight">Plugins Sylius 2 open source</h1>
   <p class="mt-3 max-w-3xl text-lg text-muted">
     {countLabel(entries.length)} publiés sur GitHub, que j’ai conçus et maintenus pour des boutiques

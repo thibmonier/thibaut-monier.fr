@@ -15,5 +15,13 @@ Un guide par sujet, rédigé par l'US qui l'introduit (un fichier par US pour é
 | [projets-open-source.md](projets-open-source.md) | Pages de projets (career-ops, tailsfadmin), collecte des métriques, liens externes | US-021, US-022, US-023 |
 | [cv-pdf.md](cv-pdf.md) | CV PDF généré par Typst, décisions, contrôles | US-007 |
 | [competences.md](competences.md) | Compétences et réalisations filtrables | US-006 |
+| [blog.md](blog.md) | Blog migré : inventaire, décisions de migration, navigation, images et licences, composants, écarts | US-009, US-011 |
+| [redirections-blog.md](redirections-blog.md) | Table de redirections 301 de l'ancien site, canonical, contrôles | US-010 |
+| [recherche.md](recherche.md) | Recherche plein texte Pagefind, interface maison, budget d'index | US-012 |
+| [seo-technique.md](seo-technique.md) | JSON-LD, sitemap, `robots.txt`, `llms.txt`, `PUBLIC_SITE_URL` | US-024 |
+| [flux-rss.md](flux-rss.md) | Flux RSS `/rss.xml`, décisions et contrôle | US-013 |
+| [images-og.md](images-og.md) | Images Open Graph générées au build | US-025 |
+| [analytics.md](analytics.md) | Mesure d'audience Umami sans cookie, contrat des événements | US-026 |
+| [worktrees-agents.md](worktrees-agents.md) | Worktrees d'agents : projet Compose, ports, propriété des fichiers, aucun prune global | rétro sprint 2 (T-900-05) |
 
 Le démarrage, les commandes `make` et le déploiement sont dans le [README](../../README.md).

@@ -1,0 +1,47 @@
+---
+import type { Facet } from '../../lib/blog-taxonomy.ts';
+
+interface Props {
+  label: string;
+  items: Facet[];
+  href: (slug: string) => string;
+}
+
+// Repliable sous 768 px (details/summary) et ouvert au-dessus, sans JavaScript : sur grand écran, le contenu
+// d'un details fermé est rendu visible par `::details-content` quand le navigateur le gère.
+const { label, items, href } = Astro.props;
+---
+
+<nav aria-label={label} class="taxonomy">
+  <details>
+    <summary class="flex min-h-11 cursor-pointer items-center rounded-md border border-border px-3 font-semibold">
+      {label}
+    </summary>
+    <ul class="mt-2 flex flex-col md:flex-row md:flex-wrap md:gap-x-4">
+      {items.map((item) => (
+        <li>
+          <a
+            href={href(item.slug)}
+            class="inline-flex min-h-11 items-center rounded-md text-accent underline underline-offset-4"
+          >
+            {item.name} ({item.count})
+          </a>
+        </li>
+      ))}
+    </ul>
+  </details>
+</nav>
+
+<style>
+  @media (min-width: 48rem) {
+    .taxonomy details::details-content {
+      content-visibility: visible;
+      display: block;
+    }
+    @supports selector(::details-content) {
+      .taxonomy summary {
+        display: none;
+      }
+    }
+  }
+</style>

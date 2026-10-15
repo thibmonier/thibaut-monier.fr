@@ -1,8 +1,8 @@
 import { relative, sep } from 'node:path';
 import { walk } from './fs.ts';
 
-// Pages sans intérêt pour Lighthouse et axe : page de confirmation du formulaire.
-const EXCLUDED = new Set(['/contact/merci/']);
+// Pages exclues de Lighthouse et axe : confirmation du formulaire et recherche (noindex voulu pour les deux).
+const EXCLUDED = new Set(['/contact/merci/', '/recherche/']);
 
 // Découvre les routes depuis dist/**/index.html : aucune liste de pages à maintenir.
 export async function discoverRoutes(distDir: string): Promise<string[]> {

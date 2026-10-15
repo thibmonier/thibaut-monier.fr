@@ -1,4 +1,21 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type APIRequestContext } from '@playwright/test';
+
+test.describe("Scénario : 'wasm-unsafe-eval' limité à la recherche", () => {
+  const cspOf = async (request: APIRequestContext, path: string) =>
+    (await request.get(path)).headers()['content-security-policy'] ?? '';
+
+  test('absent des pages courantes, de l’index et du flux', async ({ request }) => {
+    for (const path of ['/', '/blog/', '/rss.xml', '/inconnu-pour-la-csp/']) {
+      expect(await cspOf(request, path), path).not.toContain('wasm-unsafe-eval');
+    }
+  });
+
+  test('présent sur /recherche/ et sur les fichiers Pagefind', async ({ request }) => {
+    for (const path of ['/recherche/', '/pagefind/pagefind.js', '/pagefind/pagefind-worker.js']) {
+      expect(await cspOf(request, path), path).toMatch(/script-src[^;]*'wasm-unsafe-eval'/);
+    }
+  });
+});
 
 test.describe('Scénario : En-têtes de sécurité présents', () => {
   test("l'accueil porte tous les en-têtes de sécurité", async ({ request }) => {
@@ -11,6 +28,10 @@ test.describe('Scénario : En-têtes de sécurité présents', () => {
     expect(csp).toContain("frame-ancestors 'none'");
     expect(csp).not.toContain('unsafe-inline');
     expect(csp).not.toContain("'unsafe-eval'");
+    // Umami (ADR-0011) : domaines exacts, aucun joker.
+    expect(csp).toMatch(/script-src[^;]*https:\/\/cloud\.umami\.is(?=[\s;]|$)/);
+    expect(csp).toMatch(/connect-src[^;]*https:\/\/gateway\.umami\.is(?=[\s;]|$)/);
+    expect(csp).not.toMatch(/\*\.umami|api-gateway\.umami\.dev/);
 
     const hsts = h['strict-transport-security'] ?? '';
     expect(Number(/max-age=(\d+)/.exec(hsts)?.[1])).toBeGreaterThanOrEqual(31536000);
@@ -84,7 +105,8 @@ test.describe('Scénario : Redirection HTTP vers HTTPS', () => {
 test.describe('Scénario : aucun script ni style inline (CSP stricte)', () => {
   test("l'accueil n'a ni <script> inline, ni attribut on*, ni <style>", async ({ request }) => {
     const body = await (await request.get('/')).text();
-    expect(body).not.toMatch(/<script(?![^>]*\ssrc=)[^>]*>/i);
+    // Les blocs JSON-LD sont des données (type application/ld+json), pas du code exécutable.
+    expect(body).not.toMatch(/<script(?![^>]*\ssrc=)(?![^>]*type="application\/ld\+json")[^>]*>/i);
     expect(body).not.toMatch(/\son\w+\s*=/i);
     expect(body).not.toMatch(/<style[\s>]/i);
   });

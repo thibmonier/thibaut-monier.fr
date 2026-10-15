@@ -1,0 +1,45 @@
+---
+import { postPath, seriesPath, slugOf } from '../../lib/blog.ts';
+import type { SeriesPosition } from '../../lib/blog-taxonomy.ts';
+
+interface Props {
+  position: SeriesPosition;
+}
+
+const { position } = Astro.props;
+const { name, slug, previous, next } = position;
+const link =
+  'inline-flex min-h-11 items-center rounded-md font-medium text-accent underline underline-offset-4';
+---
+
+<nav
+  data-series-nav
+  data-pagefind-ignore
+  aria-label="Navigation dans la série"
+  class="mt-12 rounded-lg border border-border bg-surface p-4"
+>
+  <p class="font-semibold">
+    Série&nbsp;: {name} (article {position.position} sur {position.total})
+  </p>
+  <ul class="mt-2 flex flex-col gap-x-6 sm:flex-row sm:flex-wrap">
+    {previous && (
+      <li>
+        <a href={postPath(slugOf(previous.id))} class={link}>
+          ← Précédent&nbsp;: {previous.data.title}
+        </a>
+      </li>
+    )}
+    {next && (
+      <li>
+        <a href={postPath(slugOf(next.id))} class={link}>
+          Suivant&nbsp;: {next.data.title} →
+        </a>
+      </li>
+    )}
+    <li>
+      <a href={seriesPath(slug)} class={link}>
+        Voir toute la série
+      </a>
+    </li>
+  </ul>
+</nav>

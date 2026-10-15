@@ -17,6 +17,7 @@ EPIC-006 : SEO, GEO et mesure
 - **Décision PO du 2026-10-14 : Umami Cloud, offre Hobby** (gratuite : 100 000 événements par mois, 1 site, rétention de 6 mois ; sans cookie ; événements personnalisés). Cloudflare Web Analytics a été écarté car il ne gère pas les événements personnalisés, indispensables aux KPI O2 et O3.
 - Événements : envoi du formulaire avec motif (mission, poste, autre), clic « Réserver un créneau », téléchargement du CV, clics sortants vers GitHub et Packagist, et clic LinkedIn (KPI du PRD).
 - Les événements de conversion ne doivent contenir aucune donnée saisie par l'utilisateur (ni nom, ni e-mail, ni message).
+- Arbitrage sprint 3 (2026-10-14) : marquage par `data-event` (contrat C8, `analytics-events.ts`) ; en CI le script est simulé (aucun appel réel à Umami), l'enregistrement dans Umami est vérifié en production avec le PO (T-900-28) ; sans `PUBLIC_UMAMI_WEBSITE_ID`, aucun script n'est chargé et aucune erreur n'apparaît.
 - Blocage par les bloqueurs de publicité : acceptable ; la mesure est indicative.
 - Persona : P-001 est la visiteuse type dont on évite de dégrader l'expérience ; le bénéficiaire métier est le PO.
 
@@ -35,7 +36,8 @@ EPIC-006 : SEO, GEO et mesure
 Scenario: Conversion enregistrée sans cookie
 GIVEN le site déployé avec l'outil d'audience
 WHEN P-001 envoie le formulaire avec le motif "Poste"
-THEN un événement "contact_submit" avec la propriété motif = "poste" est enregistré dans Umami en moins de 5 s
+THEN un événement "contact_submit" avec la propriété motif = "poste" est émis vers le script d'audience simulé en CI, en moins de 5 s
+AND l'enregistrement dans Umami est vérifié en production avec le PO
 AND aucun cookie ni entrée de stockage local n'est créé par le site
 AND aucun bandeau de consentement n'est affiché
 ```
@@ -55,6 +57,12 @@ THEN aucune requête vers l'outil d'audience n'est émise
 
 ### Scénarios d'erreur
 ```gherkin
+Scenario: Identifiant de site absent
+GIVEN la variable "PUBLIC_UMAMI_WEBSITE_ID" non définie
+WHEN P-001 navigue sur le site construit
+THEN aucun script d'audience n'est chargé
+AND aucune erreur n'apparaît dans la console
+
 Scenario: Outil d'audience indisponible ou bloqué
 GIVEN un script d'audience bloqué ou en échec
 WHEN P-001 navigue et envoie le formulaire
@@ -76,7 +84,7 @@ THEN la CI échoue avec le message "Événement <nom> : propriété interdite '<
 - [ ] Mentions légales : section vie privée indiquant l'outil, l'absence de cookie et la base légale
 
 ## Notes techniques (à confirmer en tech spec)
-- Umami Cloud : script de suivi officiel en `defer` ; événements via les attributs `data-umami-event` et `data-umami-event-motif` ; choisir la région UE si l'offre gratuite le permet.
+- Umami Cloud : script de suivi officiel en `defer` ; événements déclenchés par l'attribut `data-event` (contrat C8) et transmis au script ; choisir la région UE si l'offre gratuite le permet.
 - Mise à jour de la CSP définie en US-001 ; test de non-régression des en-têtes.
 - Tableau de bord de suivi des objectifs O2 et O3 configuré dans l'outil.
 

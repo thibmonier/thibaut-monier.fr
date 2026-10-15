@@ -1,0 +1,30 @@
+---
+import type { Crumb } from '../../lib/page-meta.ts';
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+// Fil d'Ariane visible ; les mêmes maillons sont passés à `BaseLayout` (contrat C5) pour les données structurées.
+const { crumbs } = Astro.props;
+---
+
+<nav aria-label="Fil d’Ariane" data-breadcrumb data-pagefind-ignore class="text-sm text-muted">
+  <ol class="flex flex-wrap items-center gap-x-2">
+    {crumbs.map((crumb, index) => (
+      <li class="flex items-center gap-x-2">
+        {index > 0 && <span aria-hidden="true">/</span>}
+        {crumb.href ? (
+          <a
+            href={crumb.href}
+            class="inline-flex min-h-11 items-center rounded-md underline underline-offset-4"
+          >
+            {crumb.label}
+          </a>
+        ) : (
+          <span aria-current="page">{crumb.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -13,6 +13,9 @@ reports/
 .env.*
 !.env.example
 
+# Surcharge Compose locale d'un worktree d'agent (ports, voir docs/guides/worktrees-agents.md)
+compose.override.yaml
+
 # Réglages locaux Claude Code (permissions propres au poste)
 .claude/settings.local.json
 

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { discoverRoutes } from './helpers/routes.ts';
+import { discoverSampledRoutes } from './helpers/sample.ts';
 
 test.describe('Scénario : liens légaux dans le pied de page', () => {
   test('toutes les pages découvertes portent les liens légaux', async ({
@@ -7,7 +7,7 @@ test.describe('Scénario : liens légaux dans le pied de page', () => {
     request,
     baseURL,
   }) => {
-    const routes = await discoverRoutes(request, baseURL as string);
+    const routes = await discoverSampledRoutes(request, baseURL as string);
     for (const route of routes) {
       await page.goto(route);
       const footer = page.getByRole('contentinfo');

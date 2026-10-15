@@ -1,28 +1,55 @@
 ---
 import { site } from '../../config/site.ts';
-import { buildOpenGraph, buildTitle, canonicalUrl } from '../../lib/seo.ts';
+import type { PageMetaProps } from '../../lib/page-meta.ts';
+import { deriveBreadcrumb, toBreadcrumbItems } from '../../lib/breadcrumb.ts';
+import { buildBlogPosting } from '../../lib/jsonld/blog-posting.ts';
+import { buildBreadcrumbList } from '../../lib/jsonld/breadcrumb-list.ts';
+import { buildFaqPage } from '../../lib/jsonld/faq-page.ts';
+import { getOgImageUrl } from '../../lib/og.ts';
+import { buildOpenGraph, buildTitle, buildTwitterCard, canonicalUrl } from '../../lib/seo.ts';
+import { loadOgPages } from '../../lib/site-pages.ts';
+import JsonLd from './JsonLd.astro';
 
 /**
- * Métadonnées de page (US-024 les enrichira : hreflang, image Open Graph, JSON-LD).
+ * Métadonnées de page : titre, description, canonical, Open Graph (image générée au build, US-025), cartes Twitter
+ * et données structurées JSON-LD (US-024).
  *
  * Contrat de props (figé pour les lots 3A et 3B) :
  * - `title` : titre de la page, sans le nom du site (ajouté, 60 caractères au plus) ;
  * - `description` : résumé de 50 à 160 caractères ;
  * - `canonical?` : chemin ou URL canonique ; par défaut l'URL courante, rendue absolue ;
  * - `noindex?` : `true` ajoute `robots noindex` et supprime la canonical ;
- * - `ogType?` : type Open Graph (`website` par défaut).
+ * - `ogType?` : type Open Graph (`website` par défaut) ;
+ * - `article?`, `breadcrumb?` : contrat C5 (`lib/page-meta.ts`). `article` produit un `BlogPosting` (et un
+ *   `FAQPage` s'il a une FAQ) ; `breadcrumb` explicite, sinon dérivé du chemin, produit un `BreadcrumbList`
+ *   (toute page indexable, accueil compris). Les autres types (Person, ItemList, SoftwareSourceCode) sont
+ *   posés par les pages dans le slot `head` avec `JsonLd.astro`.
  */
-interface Props {
+interface Props extends PageMetaProps {
   title: string;
   description: string;
   canonical?: string;
   noindex?: boolean;
-  ogType?: string;
 }
 
-const { title, description, canonical, noindex = false, ogType = 'website' } = Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  noindex = false,
+  ogType = 'website',
+  article,
+  breadcrumb,
+} = Astro.props;
 const fullTitle = buildTitle(title, site.name);
 const url = canonicalUrl(canonical ?? Astro.url.pathname, Astro.site ?? Astro.url.origin);
+// Image de partage : `getOgImageUrl` (C9) est le seul module qui connaît `/og/` ; une page sans entrée du
+// registre reçoit l'image `default`. Les pages `noindex` gardent leurs balises de partage.
+const ogImage = getOgImageUrl(
+  Astro.url.pathname,
+  new Set(Object.keys(await loadOgPages())),
+  Astro.site ?? Astro.url.origin,
+);
 const openGraph = buildOpenGraph({
   title: fullTitle,
   description,
@@ -30,7 +57,26 @@ const openGraph = buildOpenGraph({
   siteName: site.name,
   locale: site.locale,
   type: ogType,
+  image: { url: ogImage, alt: title },
 });
+const twitter = buildTwitterCard({ title: fullTitle, description, image: ogImage });
+const path = Astro.url.pathname;
+const crumbs = breadcrumb ?? deriveBreadcrumb(path, title);
+const jsonLd = noindex
+  ? []
+  : [
+      buildBreadcrumbList(toBreadcrumbItems(crumbs, path)),
+      article
+        ? buildBlogPosting({
+            headline: title,
+            description,
+            image: article.image?.src ?? ogImage,
+            article,
+            author: { name: site.name, path: '/parcours/' },
+          })
+        : null,
+      buildFaqPage(article?.faq),
+    ];
 ---
 
 <title>{fullTitle}</title>
@@ -39,3 +85,8 @@ const openGraph = buildOpenGraph({
 {openGraph.map((tag) => (
   <meta property={tag.property} content={tag.content} />
 ))}
+{twitter.map((tag) => (
+  <meta name={tag.name} content={tag.content} />
+))}
+
+<JsonLd data={jsonLd} />
