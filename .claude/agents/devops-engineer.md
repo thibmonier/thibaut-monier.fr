@@ -15,7 +15,7 @@ disallowedTools:
   - "Bash(helm uninstall:*)"
   - "Bash(terraform destroy:*)"
   - "Bash(tofu destroy:*)"
-  - "Bash(docker system prune -a*)"
+  - "Bash(docker system prune -a*)" # interdit : nettoyage global
   - "Bash(docker volume rm:*)"
   - "Bash(curl * | sh*)"
   - "Bash(wget * | sh*)"

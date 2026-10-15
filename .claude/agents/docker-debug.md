@@ -225,9 +225,9 @@ docker compose up -d --force-recreate <service>
 docker compose build --no-cache <service>
 docker compose up -d <service>
 
-# Nettoyer ressources
-docker system prune -af
-docker volume prune -f
+# Nettoyer (limité au projet ; jamais de prune global, des volumes d'autres projets ont déjà été perdus)
+docker compose down --remove-orphans
+docker builder prune -f
 
 # Restaurer depuis backup
 docker run --rm -v <volume>:/data -v $(pwd):/backup \

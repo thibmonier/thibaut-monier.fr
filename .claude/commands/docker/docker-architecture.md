@@ -391,7 +391,7 @@ docker compose exec db pg_dump -U user app > backup_$(date +%Y%m%d).sql
 cat backup.sql | docker compose exec -T db psql -U user app
 
 # Nettoyer
-docker system prune -af
+docker compose down --remove-orphans && docker builder prune -f  # jamais de prune global
 \`\`\`
 
 ## Ressources
