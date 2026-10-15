@@ -13,7 +13,10 @@ describe('buildTitle', () => {
   });
 
   it('ne dépasse jamais 60 caractères', () => {
-    const title = buildTitle('Un titre de page beaucoup trop long pour tenir', 'Thibaut Monier');
+    const title = buildTitle(
+      `Un titre de page beaucoup trop long pour tenir ${'x'.repeat(30)}`,
+      'Thibaut Monier',
+    );
     expect(title.length).toBeLessThanOrEqual(60);
     expect(title.endsWith('…')).toBe(true);
   });
@@ -57,5 +60,34 @@ describe('buildOpenGraph', () => {
     expect(get('og:site_name')).toBe('Thibaut Monier');
     expect(get('og:locale')).toBe('fr_FR');
     expect(get('og:type')).toBe('website');
+  });
+});
+
+describe('buildTitle : suffixe seulement s’il tient dans 60 caractères', () => {
+  it('omet le suffixe quand le titre seul tient mais pas avec le suffixe', () => {
+    const title = 'x'.repeat(50);
+    expect(buildTitle(title, 'Thibaut Monier')).toBe(title);
+  });
+
+  it('ajoute le suffixe quand l’ensemble tient', () => {
+    expect(buildTitle('Contact', 'Thibaut Monier')).toBe('Contact — Thibaut Monier');
+  });
+});
+
+describe('buildOpenGraph : image', () => {
+  it('ajoute les propriétés de l’image quand elle est fournie', () => {
+    const og = buildOpenGraph({
+      title: 'T',
+      description: 'D',
+      url: 'https://x.fr/a/',
+      siteName: 'S',
+      locale: 'fr_FR',
+      image: { url: 'https://x.fr/og/a.png', alt: 'Texte alternatif' },
+    });
+    const get = (property: string) => og.find((tag) => tag.property === property)?.content;
+    expect(get('og:image')).toBe('https://x.fr/og/a.png');
+    expect(get('og:image:width')).toBe('1200');
+    expect(get('og:image:height')).toBe('630');
+    expect(get('og:image:alt')).toBe('Texte alternatif');
   });
 });

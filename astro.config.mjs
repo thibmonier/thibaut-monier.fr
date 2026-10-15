@@ -1,18 +1,34 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import tailwindcss from '@tailwindcss/vite';
 import { rehypeArticleBlocks } from './src/lib/rehype-article-blocks.ts';
+import { isExcludedFromSitemap, lastmodFor, readContentDates } from './src/lib/sitemap.ts';
 
 // URL publique provisoire tant que le domaine n'est pas branché (PUBLIC_SITE_URL, voir .env.example).
 const site = process.env.PUBLIC_SITE_URL || 'https://thibaut-monier.fr';
+
+// `lastmod` du sitemap : date du contenu quand elle existe (articles, pages légales), sinon date du build (E18).
+const buildDate = new Date();
+const contentDates = readContentDates(process.cwd());
 
 export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
   // US-019 : collection `plugins` en MDX (ADR-0001) ; les projets (`projects`) sont en Markdown simple, sans composant.
-  integrations: [mdx()],
+  // US-024 : sitemap sans les pages `noindex` (liste dans lib/sitemap.ts, vérifiée par le contrôle sitemap-coherence).
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !isExcludedFromSitemap(page),
+      serialize: (item) => ({
+        ...item,
+        lastmod: lastmodFor(new URL(item.url).pathname, { contentDates, buildDate }).toISOString(),
+      }),
+    }),
+  ],
   // Locales fr/en, le français sans préfixe (ADR-0008). Les pages en anglais arrivent au sprint 5.
   i18n: {
     defaultLocale: 'fr',

@@ -29,7 +29,7 @@ const links = [
 ].filter((link) => link !== null);
 ---
 
-<BaseLayout title={project.title} description={project.description}>
+<BaseLayout title={project.title} description={project.description} breadcrumb={trail}>
   <nav aria-label="Fil d’Ariane" data-breadcrumb class="text-sm text-muted">
     <ol class="flex flex-wrap items-center gap-x-2">
       {trail.map((crumb, index) => (

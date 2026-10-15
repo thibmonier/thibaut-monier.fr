@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content';
+import { site } from '../../config/site.ts';
+import { buildPerson } from '../../lib/jsonld/person.ts';
+import { buildProfilePage } from '../../lib/jsonld/profile-page.ts';
+import JsonLd from './JsonLd.astro';
+
+/** `home` : Person ; `profile` : ProfilePage dont l'entité principale est la même Person (liste blanche). */
+interface Props {
+  variant: 'home' | 'profile';
+  name?: string;
+}
+
+const { variant, name = site.name } = Astro.props;
+const profile = await getEntry('profile', 'fr');
+if (!profile) throw new Error("Entrée 'fr' introuvable dans la collection profile");
+const person = buildPerson({
+  name: profile.data.name,
+  jobTitle: profile.data.title,
+  sameAs: [site.social.linkedin, site.social.github],
+  country: 'FR',
+});
+const data =
+  variant === 'home' ? [person] : [buildProfilePage({ path: Astro.url.pathname, name, person })];
+---
+
+<JsonLd data={data} />

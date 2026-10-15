@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import CvDownload from '../components/cv/CvDownload.astro';
+import PersonJsonLd from '../components/seo/PersonJsonLd.astro';
 import EarlierCareer from '../components/cv/EarlierCareer.astro';
 import ExperienceCard from '../components/cv/ExperienceCard.astro';
 import Timeline from '../components/cv/Timeline.astro';
@@ -15,8 +16,10 @@ const { featured, earlier } = splitFeatured(
 
 <BaseLayout
   title="Parcours professionnel"
+  ogType="profile"
   description="Parcours de Thibaut Monier, de développeur à directeur technique : rôles, périodes, contextes et réalisations, de SQLI à aujourd'hui."
 >
+  <PersonJsonLd slot="head" variant="profile" name="Parcours professionnel" />
   <h1 class="text-3xl font-bold tracking-tight">Parcours professionnel</h1>
   <p class="mt-3 max-w-3xl text-lg text-muted">
     Du développement logiciel à la direction technique : les dix dernières années en détail, les
