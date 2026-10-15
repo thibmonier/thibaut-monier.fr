@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
-import { readFile, stat } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
+import { UNUSED_UI } from '../../lib/pagefind-prune.ts';
 import { walk } from './fs.ts';
 
 // Contrôle de l'index de recherche (US-012) : présent, non vide, une page par article publié, sous 500 Ko.
@@ -51,6 +52,15 @@ export async function checkPagefind(distDir: string, expectedPages: number): Pro
   const pages = await indexedPages(distDir);
   if (pages === 0) return ['Index Pagefind vide'];
   const errors: string[] = [];
+  if (!existsSync(join(distDir, DIR, 'pagefind.js'))) {
+    errors.push(`Index Pagefind : ${DIR}/pagefind.js absent (le site le charge à la recherche)`);
+  }
+  const leftovers = (await readdir(join(distDir, DIR))).filter((name) => UNUSED_UI.test(name));
+  if (leftovers.length > 0) {
+    errors.push(
+      `Index Pagefind : interface non chargée à supprimer (npm run build:search) : ${leftovers.join(', ')}`,
+    );
+  }
   if (pages !== expectedPages) {
     errors.push(
       `Index Pagefind : ${pages} pages indexées, ${expectedPages} articles publiés attendus`,

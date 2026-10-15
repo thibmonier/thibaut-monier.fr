@@ -50,8 +50,10 @@ function checkBlogPosting(route: string, post: Block, errors: string[]): void {
 
 function checkFaq(route: string, faq: Block, html: string, errors: string[]): void {
   const text = visibleText(html);
+  // visibleText replie les espaces (insécables compris) : le nom de la question reçoit le même traitement.
+  const squash = (value: string): string => value.replace(/\s+/g, ' ');
   const questions = (faq['mainEntity'] as { name?: string }[] | undefined) ?? [];
-  if (questions.length === 0 || questions.some((q) => !q.name || !text.includes(q.name))) {
+  if (questions.length === 0 || questions.some((q) => !q.name || !text.includes(squash(q.name)))) {
     errors.push(`FAQPage sans FAQ visible : ${route}`);
   }
 }

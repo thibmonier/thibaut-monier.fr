@@ -38,6 +38,22 @@ describe('cleanExcerpt', () => {
   });
 });
 
+describe('cleanExcerpt : entités de Pagefind', () => {
+  it("décode l'apostrophe numérique (&#x27; et &#39;) et l'espace insécable (&nbsp;)", () => {
+    expect(cleanExcerpt('l&#x27;<mark>agent</mark> d&#39;IA&nbsp;: oui')).toBe(
+      "l'<mark>agent</mark> d'IA : oui",
+    );
+  });
+
+  it('un caractère dangereux encodé en numérique reste échappé', () => {
+    expect(cleanExcerpt('&#x3C;img src=x&#62;')).toBe('&lt;img src=x&gt;');
+  });
+
+  it('laisse (échappée) une entité numérique hors plage', () => {
+    expect(cleanExcerpt('a&#x110000;b')).toBe('a&amp;#x110000;b');
+  });
+});
+
 describe('toResult', () => {
   it('convertit un résultat Pagefind en url, titre, extrait nettoyé et catégorie', () => {
     expect(

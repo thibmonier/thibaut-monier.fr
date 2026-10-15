@@ -21,7 +21,7 @@ const entry = (pages: number) =>
   });
 
 /** Dossier `dist/` minimal : l'entrée Pagefind, des fragments d'index et des fichiers qui ne comptent pas dans le budget. */
-async function dist(pages: number, indexSize = 1000): Promise<string> {
+async function dist(pages: number, indexSize = 1000, withUi = false): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), 'pagefind-'));
   roots.push(root);
   const files: Record<string, string | Buffer> = {
@@ -30,11 +30,11 @@ async function dist(pages: number, indexSize = 1000): Promise<string> {
     'pagefind/index/a.pf_index': Buffer.alloc(10),
     'pagefind/filter/a.pf_filter': Buffer.alloc(10),
     'pagefind/pagefind.fr_x.pf_meta': Buffer.alloc(10),
-    // Hors budget : scripts, module WebAssembly et interface par défaut (non chargée par le site).
+    // Hors budget : script d'entrée et module WebAssembly.
     'pagefind/pagefind.js': Buffer.alloc(200_000),
     'pagefind/wasm.fr.pagefind': Buffer.alloc(200_000),
-    'pagefind/pagefind-ui.js': Buffer.alloc(200_000),
   };
+  if (withUi) files['pagefind/pagefind-ui.js'] = Buffer.alloc(200_000);
   for (const [path, data] of Object.entries(files)) {
     await mkdir(join(root, dirname(path)), { recursive: true });
     await writeFile(join(root, path), data);
@@ -76,7 +76,21 @@ describe('checkPagefind', () => {
     ]);
   });
 
-  it('signale un index de plus de 500 Ko, interface par défaut et wasm exclus', async () => {
+  it('signale pagefind.js absent : le site ne pourrait plus chercher', async () => {
+    const root = await dist(28);
+    await rm(join(root, 'pagefind/pagefind.js'));
+    expect(await checkPagefind(root, 28)).toEqual([
+      'Index Pagefind : pagefind/pagefind.js absent (le site le charge à la recherche)',
+    ]);
+  });
+
+  it('signale les interfaces par défaut restées dans dist/', async () => {
+    expect(await checkPagefind(await dist(28, 1000, true), 28)).toEqual([
+      'Index Pagefind : interface non chargée à supprimer (npm run build:search) : pagefind-ui.js',
+    ]);
+  });
+
+  it('signale un index de plus de 500 Ko, wasm exclu', async () => {
     const heavy = await checkPagefind(await dist(28, MAX_INDEX_BYTES), 28);
     expect(heavy).toHaveLength(1);
     expect(heavy[0]).toMatch(/^Index Pagefind trop lourd : \d+ Ko \(budget 500 Ko\)$/);

@@ -15,8 +15,8 @@ export const REDIRECTS_FILE = 'src/data/redirects.yaml';
 
 const hasControl = (value: string): boolean =>
   [...value].some((char) => char.charCodeAt(0) < 0x20 || char.charCodeAt(0) === 0x7f);
-const FROM_FORBIDDEN = /["\u005c;{}$]/u;
-const TO_FORBIDDEN = /["\u005c;{}$\s]/u;
+const FROM_FORBIDDEN = /["'\u005c;{}$]/u;
+const TO_FORBIDDEN = /["'\u005c;{}$\s]/u;
 
 const isFile = (path: string): boolean => (path.split('/').pop() ?? '').includes('.');
 const hasDomain = (path: string): boolean => !path.startsWith('/') || path.startsWith('//');
@@ -40,7 +40,7 @@ export function fromProblems(raw: string): string[] {
   if (hasControl(value)) problems.push('caractère de contrôle interdit');
   if (value.includes('?')) problems.push('requête interdite');
   if (value.includes('#')) problems.push('fragment interdit');
-  if (FROM_FORBIDDEN.test(value)) problems.push('caractère interdit parmi " \\ ; { } $');
+  if (FROM_FORBIDDEN.test(value)) problems.push('caractère interdit parmi " \' \\ ; { } $');
   if (value.length > 1 && value.endsWith('/'))
     problems.push('barre finale interdite (forme de l’ancien site, E15)');
   return problems;
@@ -52,7 +52,7 @@ export function toProblems(value: string): string[] {
     problems.push('chemin attendu, commençant par une seule barre et sans domaine');
   if (hasControl(value)) problems.push('caractère de contrôle interdit');
   if (TO_FORBIDDEN.test(value) || value.includes('?') || value.includes('#')) {
-    problems.push('caractère interdit (espace, " \\ ; { } $ ? #)');
+    problems.push('caractère interdit (espace, " \' \\ ; { } $ ? #)');
   }
   if (!value.endsWith('/') && !isFile(value)) problems.push('barre finale requise (sauf fichier)');
   return problems;

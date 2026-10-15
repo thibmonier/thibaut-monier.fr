@@ -92,6 +92,26 @@ describe('checkJsonLdPage', () => {
     ).toEqual([]);
   });
 
+  it('compare la FAQ sans tenir compte de l’espace insécable avant « ? » (typographie française)', () => {
+    const faq = {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Pourquoi\u00a0?',
+          acceptedAnswer: { '@type': 'Answer', text: 'x' },
+        },
+      ],
+    };
+    const body = '<h3>Pourquoi\u00a0?</h3>';
+    expect(
+      checkJsonLdPage(
+        '/blog/a/',
+        page({ head: articleHead, jsonLd: [crumbs, article(), faq], body }),
+      ),
+    ).toEqual([]);
+  });
+
   it('refuse plus de 5 Ko de JSON-LD par page', () => {
     const big = article({ headline: 'x'.repeat(6000) });
     expect(

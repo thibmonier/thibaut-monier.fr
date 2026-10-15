@@ -19,11 +19,16 @@ export interface SearchResult {
   category: string;
 }
 
+// Pagefind encode l'apostrophe en `&#x27;` et l'espace insécable en `&nbsp;` dans ses extraits (vérifié sur dist/).
+function numericEntity(match: string, hex?: string, decimal?: string): string {
+  const code = hex === undefined ? Number(decimal) : Number.parseInt(hex, 16);
+  return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : match;
+}
+
 const ENTITIES: [RegExp, string][] = [
   [/&lt;/g, '<'],
   [/&gt;/g, '>'],
   [/&quot;/g, '"'],
-  [/&#39;/g, "'"],
   [/&amp;/g, '&'],
 ];
 const escapeHtml = (text: string): string =>
@@ -33,7 +38,10 @@ const escapeHtml = (text: string): string =>
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
 const decode = (text: string): string =>
-  ENTITIES.reduce((out, [pattern, to]) => out.replace(pattern, to), text);
+  ENTITIES.reduce(
+    (out, [pattern, to]) => out.replace(pattern, to),
+    text.replace(/&nbsp;/g, ' ').replace(/&#x([0-9a-f]+);|&#(\d+);/gi, numericEntity),
+  );
 
 /** L'extrait vient du contenu et est inséré en HTML : tout est échappé sauf `<mark>` et `</mark>` nus. */
 export function cleanExcerpt(html: string): string {

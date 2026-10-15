@@ -56,6 +56,9 @@ describe('redirectsSchema', () => {
     ['/blog/a\nreturn 200', 'contrôle'],
     ['/blog/"a"', 'interdit'],
     ['/blog/a;', 'interdit'],
+    ["/blog/l'a", 'interdit'],
+    ['/blog/a{b}', 'interdit'],
+    ['/blog/a\r\nreturn 200', 'contrôle'],
   ])('refuse un from invalide : %j', (from, message) => {
     expect(messages([{ ...article('a'), from }])).toContain(message);
   });
@@ -72,6 +75,11 @@ describe('redirectsSchema', () => {
     ['/blog/a/\nreturn 200', 'contrôle'],
     ['/blog/$host/', 'interdit'],
     ['/blog/a b/', 'interdit'],
+    ["/blog/l'a/", 'interdit'],
+    ['/blog/"a"/', 'interdit'],
+    ['/blog/a;/', 'interdit'],
+    ['/blog/{a}/', 'interdit'],
+    ['/blog/a\tb/', 'interdit'],
   ])('refuse un to invalide : %j', (to, message) => {
     expect(messages([{ ...article('a'), to }])).toContain(message);
   });

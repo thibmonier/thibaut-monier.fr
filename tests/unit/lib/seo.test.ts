@@ -6,6 +6,12 @@ describe('buildTitle', () => {
     expect(buildTitle('Contact', 'Thibaut Monier')).toBe('Contact — Thibaut Monier');
   });
 
+  it('ne suffixe pas deux fois le titre de la 404', () => {
+    expect(buildTitle('Page introuvable — Thibaut Monier', 'Thibaut Monier')).toBe(
+      'Page introuvable — Thibaut Monier',
+    );
+  });
+
   it('ne duplique pas le nom du site', () => {
     expect(buildTitle('Thibaut Monier — direction technique', 'Thibaut Monier')).toBe(
       'Thibaut Monier — direction technique',

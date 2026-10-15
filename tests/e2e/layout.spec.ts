@@ -72,7 +72,9 @@ test.describe('Scénario : layout commun affiché sur chaque page', () => {
         item.href,
       );
     }
-    await expect(footer.locator('a[href^="/"]')).toHaveCount(footerItems.length);
+    // Pages du pied de page + le flux RSS (/rss.xml), seul lien interne qui n'est pas une page.
+    await expect(footer.locator('a[href^="/"]')).toHaveCount(footerItems.length + 1);
+    await expect(footer.locator('a[href="/rss.xml"]')).toHaveCount(1);
   });
 
   test('aucun lien désactivé (Labo) ne figure dans la page', async ({ page }) => {

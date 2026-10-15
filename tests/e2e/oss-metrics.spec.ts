@@ -56,8 +56,12 @@ test.describe('Scénario : métriques affichées sur une fiche', () => {
     await expect(block.locator('[data-stats-date]')).toContainText('Données au');
   });
 
-  test('aucune donnée de métrique dans les données structurées', async ({ page }) => {
+  test('aucune métrique dans les données structurées (JSON-LD)', async ({ page }) => {
     await page.goto('/open-source/sylius/company-accounts/');
-    expect(await page.locator('script[type="application/ld+json"]').count()).toBe(0);
+    const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const text = blocks.join('\n');
+    expect(text).not.toMatch(
+      /stars?\b|stargazers|forks?\b|download|interactionStatistic|aggregateRating|ratingValue/i,
+    );
   });
 });

@@ -17,6 +17,7 @@ test.describe('Scénario : toutes les pages, responsive', () => {
     }) => {
       const routes = await discoverSampledRoutes(request, baseURL as string);
       expect(routes.length).toBeGreaterThanOrEqual(5);
+      test.setTimeout(Math.max(30_000, routes.length * 2_000)); // une navigation par page : le délai suit le volume
       await page.setViewportSize({ width, height: 800 });
       for (const route of routes) {
         await page.goto(route);

@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { parseRedirects } from '../../../src/lib/redirects.ts';
+import check from '../../../scripts/checks/redirects.content.check.ts';
 import {
   checkRedirectCoverage,
   checkRedirectTargets,
@@ -66,5 +67,20 @@ describe('checkRedirectCoverage', () => {
 
   it('ne signale rien quand tous les articles sont couverts', () => {
     expect(checkRedirectCoverage(['a'], entries)).toEqual([]);
+  });
+});
+
+describe('contrôle redirects (content)', () => {
+  it("échoue sur une apostrophe dans `to` : elle ouvrirait une chaîne dans le 'return 301' de nginx", async () => {
+    const root = await mkdtemp(join(tmpdir(), 'redirects-'));
+    roots.push(root);
+    await mkdir(join(root, 'src/data'), { recursive: true });
+    await writeFile(
+      join(root, 'src/data/redirects.yaml'),
+      `- { from: /blog/a, to: "/blog/l'a/", kind: article }\n`,
+    );
+    await expect(check({ root } as Parameters<typeof check>[0])).rejects.toThrow(
+      /entrée 1.*interdit/,
+    );
   });
 });
