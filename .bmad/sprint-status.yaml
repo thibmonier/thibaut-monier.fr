@@ -138,7 +138,7 @@ sprints:
         file: project-management/backlog/user-stories/US-023-etude-cas-contributions-career-ops.md
   - number: 3
     name: sprint-003-blog_migre_seo
-    status: ready
+    status: review
     points: 25
     metadata:
       sprint_id: sprint-003
@@ -151,7 +151,7 @@ sprints:
         title: "Migration des 28 articles d'Agentic Agency"
         epic: EPIC-003
         points: 5
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-009-migration-28-articles.md
@@ -159,7 +159,7 @@ sprints:
         title: "Canonical sur le nouveau domaine et table de correspondance prête pour les redirections"
         epic: EPIC-003
         points: 2
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-009]
         depends_on: [US-003, US-009]
         file: project-management/backlog/user-stories/US-010-redirections-301-canonical.md
@@ -167,7 +167,7 @@ sprints:
         title: "Navigation du blog : catégories, tags, séries, pagination"
         epic: EPIC-003
         points: 3
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-009]
         depends_on: [US-009]
         file: project-management/backlog/user-stories/US-011-navigation-blog.md
@@ -175,7 +175,7 @@ sprints:
         title: "Recherche plein texte côté client (Pagefind)"
         epic: EPIC-003
         points: 2
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-009]
         depends_on: [US-009]
         file: project-management/backlog/user-stories/US-012-recherche-pagefind.md
@@ -183,7 +183,7 @@ sprints:
         title: "Flux RSS"
         epic: EPIC-003
         points: 2
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-009]
         depends_on: [US-009]
         file: project-management/backlog/user-stories/US-013-flux-rss.md
@@ -191,7 +191,7 @@ sprints:
         title: "SEO technique et données structurées"
         epic: EPIC-006
         points: 5
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: [US-009]
         depends_on: [US-005, US-009, US-020]
         file: project-management/backlog/user-stories/US-024-seo-technique-donnees-structurees.md
@@ -199,7 +199,7 @@ sprints:
         title: "Images Open Graph générées par page"
         epic: EPIC-006
         points: 3
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-002]
         file: project-management/backlog/user-stories/US-025-images-open-graph.md
@@ -207,7 +207,7 @@ sprints:
         title: "Mesure d'audience sans cookie et suivi des conversions"
         epic: EPIC-006
         points: 3
-        status: ready-for-dev
+        status: done-pending-po
         blocked_by: []
         depends_on: [US-007, US-008]
         file: project-management/backlog/user-stories/US-026-mesure-audience-conversions.md
