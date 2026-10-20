@@ -2,7 +2,7 @@
 
 Site statique de Thibaut Monier (direction technique et delivery augmenté par IA) : profil, parcours, contact, puis blog et labo d'outils.
 
-Astro 7.3.8, TypeScript 6.0.3, Tailwind 4.3.3, nginx 1.30.5, déployé sur Railway. **Tout est dockerisé** : seul Docker est requis sur le poste (aucun Node, aucun gestionnaire de paquets).
+Astro 7.3.8, TypeScript 6.0.3, Tailwind 4.3.3, nginx 1.30.6, déployé sur Railway. **Tout est dockerisé** : seul Docker est requis sur le poste (aucun Node, aucun gestionnaire de paquets).
 
 ## Démarrage rapide
 

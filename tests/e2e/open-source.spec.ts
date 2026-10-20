@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
+import { settleReveal } from './helpers/reveal.ts';
 
 // US-019 : catalogue des 20 plugins Sylius 2 filtrable par thème.
 const COUNTS = { b2b: 9, 'conformite-ue': 3, 'back-office': 5, 'ia-integrations': 3 };
@@ -139,10 +140,12 @@ test.describe('Scénario : accessibilité', () => {
     test.setTimeout(90_000);
     for (const url of ['/open-source/', '/open-source/?theme=b2b']) {
       await page.goto(url);
+      await settleReveal(page);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
       expect(violations.map((v) => `${url} ${v.id}`)).toEqual([]);
     }
     await page.getByLabel('Rechercher un plugin').fill('facture');
+    await settleReveal(page);
     const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
     expect(violations.map((v) => v.id)).toEqual([]);
   });

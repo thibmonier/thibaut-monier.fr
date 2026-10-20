@@ -1,6 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import { discoverRoutes } from './helpers/routes.ts';
+import { settleReveal } from './helpers/reveal.ts';
 
 // US-020 : fiche détaillée d'un plugin.
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
@@ -196,6 +197,7 @@ test.describe('Scénario : les 20 fiches', () => {
   test('axe : aucune violation sur deux fiches types (avec et sans captures)', async ({ page }) => {
     for (const slug of ['purchase-approval', 'gpsr', 'b2b-mcp', 'audit-log']) {
       await page.goto(fiche(slug));
+      await settleReveal(page);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
       expect(violations.map((v) => `${slug} ${v.id}`)).toEqual([]);
     }

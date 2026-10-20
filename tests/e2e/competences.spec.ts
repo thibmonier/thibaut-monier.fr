@@ -3,6 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
+import { settleReveal } from './helpers/reveal.ts';
 
 // US-006 : scénarios Gherkin de /competences/. Aucun décompte en dur : tout est lu dans achievements.yaml.
 interface Achievement {
@@ -268,6 +269,7 @@ test.describe('Scénario : performance, responsive et accessibilité', () => {
       const context = await browser.newContext({ baseURL, colorScheme: scheme });
       const page = await context.newPage();
       await page.goto('/competences/?domaine=e-commerce');
+      await settleReveal(page);
       const { violations } = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
         .analyze();

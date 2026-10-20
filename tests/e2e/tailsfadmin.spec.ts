@@ -1,6 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { settleReveal } from './helpers/reveal.ts';
 
 const PATH = '/open-source/tailsfadmin/';
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
@@ -168,6 +169,7 @@ test.describe('Scénario : accessibilité et responsive', () => {
       const context = await browser.newContext({ baseURL, colorScheme });
       const page = await context.newPage();
       await page.goto(PATH);
+      await settleReveal(page);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
       const blocking = violations.filter((v) => ['serious', 'critical'].includes(v.impact ?? ''));
       expect(blocking.map((v) => `${v.id}: ${v.help}`)).toEqual([]);
