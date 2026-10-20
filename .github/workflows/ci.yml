@@ -96,8 +96,8 @@ jobs:
     name: e2e
     needs: quality
     runs-on: ubuntu-24.04
-    # 603 e2e (~5 min) puis Lighthouse sur 26 pages échantillonnées × 3 passes (~10 min)
-    timeout-minutes: 30
+    # 603 e2e (~5 min) ; Lighthouse tourne dans son propre job, en parallèle (action 2 de la rétro du sprint 3)
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -139,13 +139,59 @@ jobs:
         run: |
           test -f reports/e2e-summary.md || { echo 'reports/e2e-summary.md absent'; exit 0; }
           { echo '### e2e'; echo; cat reports/e2e-summary.md; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Rapports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rapports-qualite
+          path: reports
+          if-no-files-found: ignore
+          retention-days: 14
+
+  lighthouse:
+    name: lighthouse
+    needs: quality
+    runs-on: ubuntu-24.04
+    # 26 pages échantillonnées × 3 passes (~10 min)
+    timeout-minutes: 20
+    # Lecture seule du cache BuildKit : le job e2e, parallèle, est le seul à l'écrire.
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - name: Build de l'image de production (preview)
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: runtime
+          build-args: |
+            PUBLIC_SITE_URL=${{ env.PUBLIC_SITE_URL }}
+            PUBLIC_UMAMI_WEBSITE_ID=${{ env.PUBLIC_UMAMI_WEBSITE_ID }}
+            PUBLIC_WEB3FORMS_KEY=${{ env.PUBLIC_WEB3FORMS_KEY }}
+            PUBLIC_CALENDLY_URL=${{ env.PUBLIC_CALENDLY_URL }}
+          load: true
+          tags: thibaut-monier-preview
+          cache-from: type=gha,scope=runtime
+      - name: Build de l'image e2e (Playwright)
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: e2e
+          load: true
+          tags: thibaut-monier-e2e
+          cache-from: type=gha,scope=e2e
       - name: Lighthouse (médiane de 3, seuil 0,95)
         run: docker compose --profile e2e run --rm e2e node scripts/checks/lighthouse.ts
       - name: Rapports
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: rapports-qualite
+          name: rapports-lighthouse
           path: reports
           if-no-files-found: ignore
           retention-days: 14
@@ -235,13 +281,36 @@ jobs:
   ci:
     name: ci
     if: ${{ always() }}
-    needs: [quality, e2e, dockerfile, supply-chain, external-links]
+    needs: [quality, e2e, lighthouse, dockerfile, supply-chain, external-links]
     runs-on: ubuntu-24.04
+    permissions:
+      actions: read
     steps:
+      # Budget de durée (action 2 de la rétro du sprint 3) : 20 min au plus de bout en bout.
+      - name: Durée par job
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          api="repos/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo '### Durée par job (budget : 20 min de bout en bout)'
+            echo
+            echo '| Job | Résultat | Durée |'
+            echo '|-----|----------|-------|'
+            gh api "$api/attempts/${{ github.run_attempt }}/jobs" --jq '.jobs[]
+              | select(.completed_at != null)
+              | ((.completed_at | fromdate) - (.started_at | fromdate)) as $d
+              | "| \(.name) | \(.conclusion) | \($d / 60 | floor) min \($d % 60) s |"'
+            start=$(gh api "$api" --jq '.run_started_at | fromdate')
+            total=$(( $(date +%s) - start ))
+            echo
+            echo "**Total : $(( total / 60 )) min $(( total % 60 )) s**"
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Tous les jobs sont verts
         run: |
           test "${{ needs.quality.result }}" = success
           test "${{ needs.e2e.result }}" = success
+          test "${{ needs.lighthouse.result }}" = success
           test "${{ needs.dockerfile.result }}" = success
           test "${{ needs.supply-chain.result }}" = success
           test "${{ needs.external-links.result }}" = success

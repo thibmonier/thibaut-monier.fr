@@ -1,15 +1,15 @@
 #!/bin/sh
 # Contrôle d'environnement avant un lot de travail (make preflight, action 4 de la rétro du sprint 2).
-# Échoue (code 1) si l'espace libre est sous PREFLIGHT_MIN_GB (5 par défaut), si Docker n'est pas
+# Échoue (code 1) si l'espace libre est sous PREFLIGHT_MIN_GB (8 par défaut, action 4 de la rétro du sprint 3), si Docker n'est pas
 # démarré ou si la branche n'est pas propre. Ne lance JAMAIS de prune global : seules des
 # suggestions de nettoyage limité au projet sont affichées.
 #
-# Variables : PREFLIGHT_MIN_GB (seuil, défaut 5) ; PREFLIGHT_PATH (dossier mesuré, défaut .) ;
+# Variables : PREFLIGHT_MIN_GB (seuil, défaut 8) ; PREFLIGHT_PATH (dossier mesuré, défaut .) ;
 # PREFLIGHT_FREE_KB (espace libre simulé, pour les tests) ; PREFLIGHT_SKIP_DOCKER=1 et
 # PREFLIGHT_SKIP_GIT=1 (ignorent le contrôle correspondant, pour les tests et les worktrees d'agents).
 set -u
 
-min_gb="${PREFLIGHT_MIN_GB:-5}"
+min_gb="${PREFLIGHT_MIN_GB:-8}"
 failed=0
 
 if [ -n "${PREFLIGHT_FREE_KB:-}" ]; then

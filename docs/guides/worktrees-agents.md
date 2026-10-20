@@ -14,7 +14,7 @@ Procédure des sprints menés avec plusieurs agents (workers) en parallèle. Rep
 ## Avant de lancer un lot : `make preflight`
 
 ```bash
-make preflight                      # échoue sous 5 Go libres, Docker arrêté ou branche non propre
+make preflight                      # échoue sous 8 Go libres, Docker arrêté ou branche non propre
 make preflight PREFLIGHT_MIN_GB=3   # seuil explicite
 ```
 
@@ -86,7 +86,42 @@ Ne jamais modifier un contrat C1 à C11 : le demander à l'orchestrateur.
 
 ## Gabarit de prompt
 
-Le gabarit de référence est dans `tasks/README.md` (« Gabarit de prompt pour un worker »). Il contient au minimum : le périmètre en écriture (colonne « Propriété exclusive » du lot), l'absence d'accès à `git`, la lecture seule de la source du blog, l'interdiction des nettoyages Docker globaux, `COMPOSE_PROJECT_NAME` et les ports du worktree, le plafond d'un build à la fois, `PW_CHROMIUM_PATH`, les alias de shell (ci-dessous) et la consigne « un seul rapport puis arrêt ».
+Gabarit de référence, indépendant du sprint (actions 5 des rétros des sprints 2 et 3). Le `tasks/README.md` de chaque sprint le recopie tel quel et n'y ajoute que les IDs de tâches, le lot et la propriété exclusive.
+
+```text
+Mission : exécuter les tâches <liste d'IDs> de tasks/US-0XX-tasks.md, dans l'ordre des dépendances, en TDD
+(tests RED d'abord, constatés rouges, puis code, puis refactor). Lire tasks/README.md (contrats).
+
+Périmètre : écrire UNIQUEMENT dans les fichiers de la colonne « Propriété exclusive » de ton lot.
+Besoin hors périmètre (dépendance npm, ci.yml, Dockerfile, fichier d'un autre lot) : le signaler dans le
+rapport final, ne rien contourner. Tu n'as pas accès à git ; ne crée ni branche ni commit.
+
+Docker (interdits, sans exception) : docker system prune, docker volume prune, docker container prune,
+docker image prune -a, docker builder prune -a. Des volumes MySQL d'autres projets du PO ont déjà été
+perdus ainsi. Autorisés : docker compose -p <ton-projet> down -v, docker builder prune -f.
+Toujours COMPOSE_PROJECT_NAME=<tm-wN> et les ports de ton worktree. Un seul build d'image à la fois.
+make preflight avant chaque lot ; relever df -h avant et après ; sous 3 Go libres, arrêter et prévenir.
+Pas d'image Playwright en local : PW_CHROMIUM_PATH (Chromium système) ou la CI.
+
+Pièges d'environnement : ls, cat, grep, du, df sont des alias sur ce poste (command ls, command cat,
+command grep, chemins absolus, mv -f, command curl). PUBLIC_SITE_URL toujours avec son schéma
+(https://...). Les fichiers .env*, .env.example compris, sont bloqués en lecture et en écriture
+(.claude/settings.json) : demander leur contenu à l'orchestrateur.
+Un changement de Dockerfile ou de lockfile invalide le cache GHA : prévoir un premier run CI plus long.
+
+Qualité : aucune dépendance ajoutée ; aucun marqueur provisoire dans le contenu publié ; aucun test.skip
+hors tests/e2e/skip-allowlist.json ; français correct (accents, espaces insécables avant : ; ? !).
+Avant de rendre : make prepush vert (aucun push sans make prepush vert).
+
+Fin de mission : UN SEUL rapport, adressé à l'orchestrateur et à personne d'autre (tâches faites, fichiers
+modifiés, commandes de vérification et leurs résultats, points bloquants), puis arrêt. Pas de relance ni
+de rapport répété.
+```
+
+### Suivi des workers par l'orchestrateur
+
+- **Routage des rapports** : un worker rend un seul message de fin de mission à l'orchestrateur, jamais en boucle ni à un autre worker. L'orchestrateur seul consolide et relaie.
+- **Relance** : un worker sans sortie pendant **15 minutes** est relancé une fois ; s'il reste muet 15 minutes de plus, il est arrêté. Chaque relance ou arrêt est consigné au journal du sprint (heure, worker, décision).
 
 ## Pièges du poste
 

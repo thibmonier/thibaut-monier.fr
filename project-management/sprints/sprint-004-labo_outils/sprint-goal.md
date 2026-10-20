@@ -30,6 +30,12 @@
 3. US-015, US-016
 4. US-018
 
+## Plafonds de qualité (action 2 de la rétro du sprint 3)
+- **Durée de CI** : 20 min au plus de bout en bout (tableau « Durée par job » du résumé de chaque run).
+- **Runs rouges évitables** : 2 au plus sur le sprint ; une erreur détectable par `make prepush` compte comme évitable.
+- Tout nouveau contrôle qui parcourt toutes les pages déclare son coût par page.
+- Valeurs mesurées relevées à la Sprint Review.
+
 ## Incrément livrable
 Le labo publie 3 tests complets (protocole, mesures, limites, verdict) et l'annuaire des 57 outils signale ceux qui sont testés.
 
