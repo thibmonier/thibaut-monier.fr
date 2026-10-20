@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
+import { settleReveal } from './helpers/reveal.ts';
 
 const SUBMIT = 'https://api.web3forms.com/submit';
 const SUCCESS = 'Merci, votre message est bien envoyé. Réponse sous 48 h ouvrées.';
@@ -311,6 +312,7 @@ test.describe('Scénario : en-têtes et accessibilité de la page de remerciemen
 
   test('/contact/merci/ n’a aucune violation axe serious ou critical', async ({ page }) => {
     await page.goto('/contact/merci/');
+    await settleReveal(page);
     const { violations } = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
       .analyze();

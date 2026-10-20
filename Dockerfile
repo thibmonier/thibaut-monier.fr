@@ -69,7 +69,7 @@ COPY package.json package-lock.json .npmrc ./
 RUN npm ci --ignore-scripts && npm cache clean --force
 
 # ---- runtime : nginx non root servant dist/ ----------------------------------
-FROM nginxinc/nginx-unprivileged:1.30.5-alpine@sha256:56b8272e43a0525f67aed68d1e0794a712d10e3e45a563e118e9a77c817e6f86 AS runtime
+FROM nginxinc/nginx-unprivileged:1.30.6-alpine@sha256:f5116ed4606f3eb015dd4a8e28cb9b351476dc0ad4bc6e9f93b19cec130cdf03 AS runtime
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx/snippets/ /etc/nginx/snippets/
 COPY --from=build /app/dist /usr/share/nginx/html

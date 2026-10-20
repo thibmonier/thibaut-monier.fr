@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
+import { settleReveal } from './helpers/reveal.ts';
 
 // US-007 : scénarios Gherkin du CV PDF. Le contenu du PDF (texte, pages, métadonnées, données
 // personnelles) est vérifié au build par scripts/checks/cv-pdf.dist.check.ts.
@@ -47,6 +48,7 @@ test.describe('Scénario : lien de téléchargement', () => {
   for (const route of ['/parcours/', '/contact/']) {
     test(`axe : aucune violation sur la zone du lien (${route})`, async ({ page }) => {
       await page.goto(route);
+      await settleReveal(page);
       const { violations } = await new AxeBuilder({ page })
         .include('a[data-cv-download]')
         .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])

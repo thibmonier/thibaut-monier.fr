@@ -14,7 +14,7 @@ const { name, headline, valueProp, availability, metaTitle, metaDescription, cta
 
 <BaseLayout title={metaTitle} description={metaDescription}>
   <PersonJsonLd slot="head" variant="home" />
-  <div class="flex flex-col gap-6 sm:gap-8">
+  <div class="flex flex-col gap-6">
     <Hero name={name} headline={headline} valueProp={valueProp} availability={availability} />
     <CtaPair ctas={ctas} />
     <ProofList proofs={proofs} />

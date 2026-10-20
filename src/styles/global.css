@@ -4,6 +4,18 @@
 /* Variante « js » : actif quand public/theme-init.js a posé la classe .js sur <html>. */
 @custom-variant js (.js &);
 
+/* Variante « dark » calée sur les jetons : préférence système sauf choix clair, ou choix sombre explicite. */
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme='light']) *) {
+      @slot;
+    }
+  }
+  &:where([data-theme='dark'] *) {
+    @slot;
+  }
+}
+
 /* Polices auto-hébergées : WOFF2 latin, variables (SIL OFL, voir docs/guides/design-system.md). */
 @font-face {
   font-family: 'Inter';
@@ -27,12 +39,16 @@
     color: var(--c-fg);
     font-family: var(--font-sans);
     -webkit-text-size-adjust: 100%;
+    /* En-tête collant : les ancres ne passent pas dessous. */
+    scroll-padding-top: 5rem;
   }
 
   body {
     min-height: 100vh;
     background-color: var(--c-bg);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   :focus-visible {
@@ -43,6 +59,62 @@
   ::selection {
     background-color: var(--c-accent);
     color: var(--c-accent-fg);
+  }
+}
+
+/* Briques visuelles reprises d'Agentic Agency (docs/guides/design-system.md). */
+@utility card {
+  @apply rounded-2xl border border-border bg-card shadow-sm transition-all duration-300;
+}
+
+/* Carte entièrement cliquable (lien étiré) : bordure accent au survol et au focus. */
+@utility card-link {
+  @apply hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5 focus-within:border-accent;
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 text-base font-bold transition-all;
+}
+
+/* Fond inversé (couleur du texte) et halo accent, comme le bouton principal d'Agentic Agency. */
+@utility btn-primary {
+  @apply bg-fg text-bg shadow-lg shadow-accent/20 hover:scale-105 hover:bg-fg/90;
+}
+
+@utility btn-secondary {
+  @apply border border-border bg-surface text-fg hover:border-accent/50;
+}
+
+/* Pastille : étiquettes et boutons à bascule (aria-pressed). */
+@utility chip {
+  @apply inline-flex min-h-11 items-center rounded-full border border-border bg-card px-4 text-sm font-semibold text-fg transition-colors hover:border-accent/50 aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-accent-fg;
+}
+
+/* Halos du fond (haut gauche bleu, bas droite violet), décoratifs. */
+@utility glow {
+  background-image:
+    radial-gradient(circle at top left, rgb(59 130 246 / 0.15) 0%, transparent 50%),
+    radial-gradient(circle at bottom right, rgb(168 85 247 / 0.15) 0%, transparent 50%);
+}
+
+/* Titre en dégradé : teintes 600 en clair (contraste AA sur blanc), 400 en sombre. */
+@utility text-gradient {
+  @apply bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-pink-400;
+}
+
+/* Apparition au défilement (src/scripts/reveal.ts) : seulement avec JavaScript et sans mouvement réduit. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out,
+      border-color 0.3s,
+      box-shadow 0.3s;
+  }
+
+  .js .reveal:not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(30px);
   }
 }
 

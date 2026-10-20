@@ -14,14 +14,10 @@ const { command, note } = Astro.props;
 >
   <div class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
     <pre
-      class="grow overflow-x-auto rounded-md border border-border bg-surface p-3 text-sm"
+      class="grow overflow-x-auto rounded-xl border border-border bg-surface p-4 text-sm"
       tabindex="0"
     ><code class="font-mono">{command}</code></pre>
-    <button
-      type="button"
-      hidden
-      class="inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 font-medium hover:border-accent"
-    >
+    <button type="button" hidden class="btn btn-secondary min-h-11 text-sm">
       Copier la commande
     </button>
   </div>

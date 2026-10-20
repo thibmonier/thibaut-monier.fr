@@ -9,10 +9,7 @@ interface Props {
 const { slug, name, summary, kindLabel } = Astro.props;
 ---
 
-<li
-  data-project={slug}
-  class="relative flex flex-col rounded-lg border border-border bg-surface p-4 focus-within:border-accent hover:border-accent"
->
+<li data-project={slug} class="reveal card card-link relative flex flex-col p-6">
   <h3 class="text-lg font-semibold tracking-tight">
     <a
       href={`/open-source/${slug}/`}

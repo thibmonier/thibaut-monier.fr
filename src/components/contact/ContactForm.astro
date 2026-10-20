@@ -12,7 +12,7 @@ const { motif = 'mission' } = Astro.props;
 const ui = getTranslations('fr').contact;
 const redirect = new URL('/contact/merci/', Astro.site ?? Astro.url).href;
 const field =
-  'mt-1 block min-h-11 w-full rounded-md border border-line bg-bg px-3 py-2 text-fg aria-[invalid=true]:border-4';
+  'mt-1 block min-h-11 w-full rounded-xl border border-line bg-card px-4 py-2 text-fg aria-[invalid=true]:border-4';
 const label = 'block font-medium';
 const error = 'mt-1 border-l-4 border-line pl-2 text-sm font-medium';
 const fields = [
@@ -109,7 +109,7 @@ const fields = [
       type="submit"
       data-submit
       data-sending={ui.sending}
-      class="inline-flex min-h-11 items-center rounded-md bg-accent px-6 font-semibold text-accent-fg hover:opacity-90 disabled:opacity-60"
+      class="btn btn-primary disabled:scale-100 disabled:opacity-60"
     >
       {ui.submit}
     </button>

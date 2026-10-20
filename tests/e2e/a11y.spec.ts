@@ -1,6 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { discoverSampledRoutes } from './helpers/sample.ts';
+import { settleReveal } from './helpers/reveal.ts';
 
 // WCAG 2.2 AA sur toutes les pages découvertes, thèmes clair et sombre.
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
@@ -21,6 +22,7 @@ test('axe : aucune violation serious ou critical sur les pages découvertes', as
     const page = await context.newPage();
     for (const route of routes) {
       await page.goto(route);
+      await settleReveal(page);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
       for (const v of violations) {
         if (['serious', 'critical'].includes(v.impact ?? '')) {

@@ -16,10 +16,7 @@ const label = contributionLabel(contribution);
 const status = STATUS_LABELS[contribution.status];
 ---
 
-<article
-  data-contribution={contribution.number}
-  class="rounded-lg border border-border bg-surface p-5 sm:p-6"
->
+<article data-contribution={contribution.number} class="card p-6 sm:p-8">
   <h3 class="text-xl font-semibold tracking-tight">
     <span data-label>{label}</span>
     <span class="font-normal text-muted"> : {contribution.title}</span>

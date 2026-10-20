@@ -8,7 +8,8 @@ interface Props {
 }
 
 const { tags, linked } = Astro.props;
-const chip = 'inline-flex items-center rounded-md border border-border bg-surface px-3 text-sm';
+const chip =
+  'inline-flex items-center rounded-full border border-border bg-surface px-3 text-sm font-medium';
 ---
 
 {tags.length > 0 && (

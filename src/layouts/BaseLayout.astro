@@ -47,15 +47,23 @@ const { title, description, noindex, canonical, ogType, article, breadcrumb } = 
     />
     <slot name="head" />
   </head>
-  <body class="flex min-h-screen flex-col bg-bg text-fg">
+  <body class="relative flex min-h-screen flex-col overflow-x-clip bg-bg text-fg">
+    <div
+      aria-hidden="true"
+      class="glow pointer-events-none fixed inset-0 hidden md:block print:hidden"
+    ></div>
     <Header />
     <main
       id="contenu"
       tabindex="-1"
-      class="mx-auto w-full max-w-5xl grow px-4 py-12 focus:outline-none sm:px-6"
+      class="relative mx-auto w-full max-w-7xl grow px-4 py-12 focus:outline-none sm:px-6 lg:px-8"
     >
       <slot />
     </main>
     <Footer />
   </body>
 </html>
+
+<script>
+  import '../scripts/reveal.ts';
+</script>

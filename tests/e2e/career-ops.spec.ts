@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
+import { settleReveal } from './helpers/reveal.ts';
 
 const PATH = '/open-source/career-ops/';
 const PRS = [3496, 3808, 3866];
@@ -183,6 +184,7 @@ test.describe('Scénario : accessibilité, responsive et impression', () => {
       const page = await context.newPage();
       await page.goto(PATH);
       await page.locator('details[data-technical]').first().locator('> summary').click();
+      await settleReveal(page);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
       const blocking = violations.filter((v) => ['serious', 'critical'].includes(v.impact ?? ''));
       expect(blocking.map((v) => `${v.id}: ${v.help}`)).toEqual([]);

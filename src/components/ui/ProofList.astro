@@ -1,6 +1,7 @@
 ---
 import type { Home } from '../../content/schemas/home.ts';
 import { getTranslations } from '../../i18n/utils.ts';
+import Icon, { type IconName } from './Icon.astro';
 
 interface Props {
   proofs: Home['proofs'];
@@ -9,24 +10,43 @@ interface Props {
 const { proofs } = Astro.props;
 const ui = getTranslations('fr');
 const isExternal = (link: string) => link.startsWith('https://');
+type Badge = { icon: IconName; tint: string };
+// Pastilles colorées dans l'ordre des preuves (palette des atouts d'Agentic Agency).
+const BADGES: [Badge, ...Badge[]] = [
+  { icon: 'package', tint: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
+  { icon: 'git-pull-request', tint: 'bg-purple-500/10 text-purple-600 dark:text-purple-400' },
+  { icon: 'sparkles', tint: 'bg-pink-500/10 text-pink-600 dark:text-pink-400' },
+  { icon: 'shield-check', tint: 'bg-amber-500/10 text-amber-600 dark:text-amber-400' },
+];
+const items = proofs.map((proof, index) => ({
+  ...proof,
+  badge: BADGES[index % BADGES.length] ?? BADGES[0],
+}));
 ---
 
 <section aria-labelledby="preuves-titre">
   <h2 id="preuves-titre" class="sr-only">
     {ui.home.proofsHeading}
   </h2>
-  <ul data-proofs class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-    {proofs.map((proof) => (
+  <ul data-proofs class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {items.map((proof) => (
       <li>
         <a
           data-proof={proof.id}
           href={proof.link}
           rel={isExternal(proof.link) ? 'noopener noreferrer' : undefined}
-          class="flex h-full flex-col rounded-lg border border-border bg-surface p-4 hover:border-accent"
+          class="card card-link flex h-full flex-col p-5"
         >
-          <span class="text-3xl font-bold text-fg">{proof.value}</span>
-          <span class="mt-1 text-base text-fg">{proof.label}</span>
-          <span class="mt-2 text-sm font-medium text-accent underline underline-offset-4">
+          <span class="flex items-center gap-3">
+            <span
+              class={`inline-flex size-10 shrink-0 items-center justify-center rounded-lg ${proof.badge.tint}`}
+            >
+              <Icon name={proof.badge.icon} class="size-5" />
+            </span>
+            <span class="text-4xl font-extrabold tracking-tight text-fg">{proof.value}</span>
+          </span>
+          <span class="mt-2 grow text-base text-muted">{proof.label}</span>
+          <span class="mt-3 text-sm font-semibold text-accent underline underline-offset-4">
             {proof.source}
           </span>
         </a>

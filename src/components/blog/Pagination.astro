@@ -9,7 +9,7 @@ interface Props {
 const { page, pages } = Astro.props;
 const items = paginationItems(page, pages);
 const link =
-  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-border px-3 font-medium text-accent hover:bg-surface';
+  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-card px-3 font-medium text-accent transition-colors hover:border-accent/50';
 ---
 
 <nav aria-label="Pagination" class="mt-10 flex flex-col items-center gap-3">
@@ -27,7 +27,7 @@ const link =
         {entry.current ? (
           <span
             aria-current="page"
-            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-accent px-3 font-semibold text-accent-fg"
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-accent px-3 font-semibold text-accent-fg"
           >
             {entry.number}
           </span>
