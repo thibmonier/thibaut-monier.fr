@@ -45,10 +45,13 @@ test.describe('Scénario : profil et proposition de valeur visibles sans défile
     await expect(page.locator('[data-proof]')).toHaveCount(4);
   });
 
-  test('les preuves mentionnent 20 plugins, career-ops, 12 modules et 25 ans', async ({ page }) => {
+  test('les preuves mentionnent 24 plugins et la démo, career-ops, 12 modules et 25 ans', async ({
+    page,
+  }) => {
     await page.goto('/');
     const text = (await page.locator('[data-proofs]').textContent()) ?? '';
-    expect(text).toContain('20');
+    expect(text).toContain('24');
+    expect(text).toMatch(/démo en ligne/);
     expect(text).toMatch(/plugins/);
     expect(text).toMatch(/career-ops/);
     expect(text).toMatch(/12/);

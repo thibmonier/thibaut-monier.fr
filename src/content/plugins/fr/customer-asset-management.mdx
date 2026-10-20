@@ -1,0 +1,19 @@
+---
+name: 'Customer Asset Management'
+tagline: 'Parc d’équipements du client B2B et filtre de pièces compatibles pour Sylius 2. En conception : rien n’est encore livré.'
+theme: b2b
+status: design
+repo:
+  owner: thibmonier
+  name: sylius-customer-asset-management-plugin
+license: MIT
+features:
+  - 'Modèles d’équipement gérés par le marchand dans l’administration : un code et un nom traduit.'
+  - 'Compatibilité déclarée sur chaque variante de produit : la liste des modèles d’équipement sur lesquels elle se monte.'
+  - 'Page « Mes équipements » du compte client : ajouter, modifier et supprimer ses machines (modèle, libellé, plaque ou numéro de série).'
+  - 'Filtre « Compatible avec mon équipement » sur les listes de catégories et la recherche, pour les clients connectés qui ont un parc.'
+  - 'Un client ne voit et ne modifie que son propre parc (404 sinon) ; avec Company Accounts, le parc est partagé avec les membres de la société.'
+  - 'Plaque et numéro de série traités comme des données personnelles : supprimés avec le compte client, jamais journalisés ni placés dans une URL.'
+---
+
+Dans l’industrie et le bâtiment, une entreprise achète des pièces pour des machines qu’elle possède, et trouver la bonne pièce suppose de savoir laquelle va sur quelle machine. Aujourd’hui, l’acheteur filtre à la main ou téléphone au vendeur. Ce plugin vise à lui faire déclarer son parc dans son compte, puis à restreindre le catalogue aux pièces compatibles. Il est en conception : le squelette du plugin et la spécification existent, mais aucune fonctionnalité n’est livrée.

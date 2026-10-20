@@ -146,7 +146,7 @@ test.describe('Scénario : responsive', () => {
   });
 });
 
-test.describe('Scénario : les 20 fiches', () => {
+test.describe('Scénario : les 24 fiches', () => {
   test('sont explorées par le crawl, répondent 200 et portent chacune les sections attendues', async ({
     page,
     request,
@@ -155,16 +155,17 @@ test.describe('Scénario : les 20 fiches', () => {
     const routes = (await discoverRoutes(request, baseURL as string)).filter((r) =>
       r.startsWith('/open-source/sylius/'),
     );
-    expect(routes).toHaveLength(20);
+    expect(routes).toHaveLength(24);
     for (const route of routes) {
       const response = await page.goto(route);
       expect(response?.status(), route).toBe(200);
       await expect(page.locator('h1'), route).toHaveCount(1);
-      await expect(page.locator('[data-compat] tbody tr').first(), route).toBeVisible();
       expect(await page.locator('[data-features] li').count(), route).toBeGreaterThanOrEqual(5);
       await expect(page.locator('[data-deps]'), route).toBeVisible();
-      await expect(page.locator('[data-install-steps] li').first(), route).toBeVisible();
       await expect(page.locator('[data-breadcrumb]'), route).toContainText('Open source');
+      if (route === fiche('customer-asset-management')) continue; // en conception : voir son scénario
+      await expect(page.locator('[data-compat] tbody tr').first(), route).toBeVisible();
+      await expect(page.locator('[data-install-steps] li').first(), route).toBeVisible();
       const hasCapture = (await page.locator('[data-gallery] img').count()) > 0;
       const hasExcerpt = (await page.locator('[data-config-excerpt]').count()) > 0;
       expect(hasCapture !== hasExcerpt, `${route} : captures ou extrait de configuration`).toBe(
@@ -191,15 +192,107 @@ test.describe('Scénario : les 20 fiches', () => {
         expect(await img.getAttribute('height'), route).toBeTruthy();
       }
     }
-    expect(titles.size).toBe(20);
+    expect(titles.size).toBe(24);
   });
 
   test('axe : aucune violation sur deux fiches types (avec et sans captures)', async ({ page }) => {
-    for (const slug of ['purchase-approval', 'gpsr', 'b2b-mcp', 'audit-log']) {
+    for (const slug of [
+      'purchase-approval',
+      'gpsr',
+      'b2b-mcp',
+      'audit-log',
+      'punchout-cxml',
+      'customer-asset-management',
+    ]) {
       await page.goto(fiche(slug));
       await settleReveal(page);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
       expect(violations.map((v) => `${slug} ${v.id}`)).toEqual([]);
     }
+  });
+});
+
+test.describe('Scénario : lien « Voir dans la démo »', () => {
+  test('une fiche installée dans la démo renvoie vers la boutique, dans un nouvel onglet', async ({
+    page,
+  }) => {
+    await page.goto(fiche('purchase-approval'));
+    const link = page.locator('[data-link="demo"]');
+    await expect(link).toHaveAttribute('href', 'https://sylius-b2b.thibaut-monier.fr');
+    await expect(link).toHaveAttribute('target', '_blank');
+    await expect(link).toHaveAttribute('rel', /noopener/);
+    await expect(link).toContainText('Voir dans la démo');
+  });
+
+  test('les 23 fiches installées dans la démo portent le lien, pas Customer Asset Management', async ({
+    page,
+    request,
+    baseURL,
+  }) => {
+    const routes = (await discoverRoutes(request, baseURL as string)).filter((r) =>
+      r.startsWith('/open-source/sylius/'),
+    );
+    let withLink = 0;
+    for (const route of routes) {
+      await page.goto(route);
+      const count = await page.locator('[data-link="demo"]').count();
+      if (route === fiche('customer-asset-management')) expect(count, route).toBe(0);
+      else expect(count, route).toBe(1);
+      withLink += count;
+    }
+    expect(withLink).toBe(23);
+  });
+});
+
+test.describe('Scénario : plugin en conception', () => {
+  test('Customer Asset Management affiche « En conception », sans installation ni compatibilité', async ({
+    page,
+  }) => {
+    await page.goto(fiche('customer-asset-management'));
+    await expect(page.locator('[data-status="design"]')).toContainText('En conception');
+    await expect(page.locator('[data-status-note]')).toContainText('aucune fonctionnalité');
+    await expect(page.locator('[data-features] li')).not.toHaveCount(0);
+    await expect(page.locator('#features-titre')).toHaveText('Fonctionnalités prévues');
+    await expect(page.locator('[data-install]')).toHaveCount(0);
+    await expect(page.locator('[data-copy-root]')).toHaveCount(0);
+    await expect(page.locator('[data-compat]')).toHaveCount(0);
+    await expect(page.locator('[data-link="packagist"]')).toHaveCount(0);
+    await expect(page.locator('[data-link="demo"]')).toHaveCount(0);
+    await expect(page.locator('[data-link="github"]')).toHaveAttribute(
+      'href',
+      'https://github.com/thibmonier/sylius-customer-asset-management-plugin',
+    );
+  });
+
+  test('une fiche livrée n’affiche pas le badge de conception', async ({ page }) => {
+    await page.goto(fiche('channel-access'));
+    await expect(page.locator('[data-status="design"]')).toHaveCount(0);
+    await expect(page.locator('#features-titre')).toHaveText('Fonctionnalités');
+  });
+});
+
+test.describe('Scénario : les quatre fiches ajoutées le 2026-10-20', () => {
+  test('Registration Approval nécessite Channel Access, qui est utilisé par lui', async ({
+    page,
+  }) => {
+    await page.goto(fiche('registration-approval'));
+    await expect(
+      page.locator('[data-dep-group="requires"]').getByRole('link', { name: 'Channel Access' }),
+    ).toHaveAttribute('href', fiche('channel-access'));
+    await page.goto(fiche('channel-access'));
+    await expect(
+      page
+        .locator('[data-dep-group="used-by"]')
+        .getByRole('link', { name: 'Registration Approval' }),
+    ).toHaveAttribute('href', fiche('registration-approval'));
+  });
+
+  test('PunchOut cXML/OCI affiche ses deux captures avec un texte alternatif', async ({ page }) => {
+    await page.goto(fiche('punchout-cxml'));
+    await expect(page.locator('[data-gallery] img')).toHaveCount(2);
+    await expect(page.locator('[data-link="packagist"]')).toHaveAttribute(
+      'href',
+      'https://packagist.org/packages/tmonier/sylius-punchout-cxml-plugin',
+    );
   });
 });

@@ -1,0 +1,47 @@
+---
+name: 'Registration Approval'
+tagline: 'Inscription validée par un administrateur pour Sylius 2 : un compte en attente reste un visiteur anonyme jusqu’à son approbation.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-registration-approval-plugin
+packagist: tmonier/sylius-registration-approval-plugin
+license: MIT
+inDemo: true
+features:
+  - 'Toute inscription en libre-service (page, après commande, Shop API) crée un compte « en attente », quel que soit le canal ; la restriction ne s’applique qu’aux canaux listés.'
+  - 'Comptes créés dans l’administration, par fixtures ou par console, et clients existants : approuvés.'
+  - 'Un client en attente ou rejeté compte comme un visiteur non connecté : 403 avec page d’attente sur un canal fermé, aucun prix ni panier sur un canal à prix masqués.'
+  - 'Page « Clients > Inscriptions » : filtre sur le statut, approbation ou rejet par formulaire POST à jeton CSRF, motif interne facultatif, date et auteur conservés.'
+  - 'Une décision n’est jamais rejouée et prend effet à la requête suivante du client.'
+  - 'E-mails d’approbation et de rejet dans la langue par défaut du canal (sept langues) ; le motif interne n’est pas envoyé et un échec d’envoi ne bloque pas la décision.'
+  - 'Pas d’énumération de comptes : une adresse déjà inscrite reçoit la même réponse qu’une nouvelle, sur la page comme sur la Shop API.'
+  - 'Commande de contrôle des canaux listés et événement émis après chaque décision, pour notifier un CRM.'
+compatibility:
+  matrix:
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+requires:
+  - channel-access
+installSteps:
+  - 'Installer et configurer d’abord le plugin Channel Access, dont celui-ci dépend.'
+  - "Enregistrer le bundle `Tmonier\\SyliusRegistrationApprovalPlugin\\TmonierSyliusRegistrationApprovalPlugin` dans `config/bundles.php`, après celui de Channel Access."
+  - 'Ajouter le trait `ApprovalTrait` et l’interface `ApprovalAwareInterface` à l’entité client de l’application, puis la déclarer dans `sylius_customer.resources.customer.classes.model`.'
+  - 'Importer la configuration `@TmonierSyliusRegistrationApprovalPlugin/config/config.yaml` dans `config/packages/_sylius.yaml`.'
+  - 'Importer les routes `@TmonierSyliusRegistrationApprovalPlugin/config/routes.yaml` dans `config/routes.yaml`.'
+  - 'Lister les canaux concernés dans `config/packages/tmonier_sylius_registration_approval.yaml` : vide par défaut, le plugin ne change alors rien.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (quatre colonnes ajoutées à `sylius_customer`, les clients existants restent approuvés).'
+configExcerpt: |
+  tmonier_sylius_registration_approval:
+      channels: ['B2B_WEB']
+---
+
+Ouvrir un catalogue B2B aux seuls vrais clients suppose de contrôler qui s’inscrit. Ce plugin place chaque nouveau compte en attente et le traite comme un visiteur non connecté jusqu’à la décision d’un administrateur. Il s’appuie sur Channel Access, qui ferme le canal ou masque ses prix.

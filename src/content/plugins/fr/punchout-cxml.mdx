@@ -1,0 +1,52 @@
+---
+name: 'PunchOut cXML/OCI'
+tagline: 'PunchOut pour Sylius 2 : l’acheteur ouvre la boutique depuis Ariba, SAP ou Coupa, choisit ses articles à ses prix et renvoie le panier.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-punchout-cxml-plugin
+packagist: tmonier/sylius-punchout-cxml-plugin
+license: MIT
+inDemo: true
+features:
+  - 'PunchOut cXML « create », « edit » et « inspect » avec ProfileRequest ; acheteur authentifié par ses identités From et Sender et un secret partagé stocké en Argon2id.'
+  - 'Entrée SAP OCI 5.0 : retour, VALIDATE et DETAIL, avec transfert et annulation du panier.'
+  - 'Session ouverte comme client Sylius lié à l’acheteur, donc à ses prix et ses groupes, dans un panier dédié séparé de son panier habituel.'
+  - 'Bons de commande cXML (OrderRequest) transformés en commandes Sylius : une commande par acheteur et par orderID, un rejeu renvoie la même commande.'
+  - 'Retour du panier à l’outil d’achat (PunchOutOrderMessage) : prix nets, totaux hors taxes et hors livraison, codes et unités UNSPSC, taxes et livraison en option.'
+  - 'Garde-fous : rejeu refusé, limitation de débit (HTTP 429), URL de retour en HTTPS dans les domaines autorisés de l’acheteur, expiration de session, prise en charge de l’iframe.'
+  - 'Un panier ouvert par PunchOut ne peut pas être finalisé dans le tunnel de commande de la boutique, API comprise.'
+  - 'Administration des acheteurs, simulateur d’acheteur, journal des échanges, purge, effacement RGPD, commande de diagnostic et événement PunchoutOrderCreated.'
+compatibility:
+  matrix:
+    - sylius: '2.2.9+'
+      php: '>=8.2'
+      symfony:
+        - '6.4'
+        - '7.4'
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+complements:
+  - company-accounts
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusPunchoutCxmlPlugin\\TmonierSyliusPunchoutCxmlPlugin` dans `config/bundles.php`."
+  - 'Importer la configuration `@TmonierSyliusPunchoutCxmlPlugin/config/config.yaml` dans `config/packages/tmonier_punchout.yaml` (grilles d’administration, hooks Twig, identité du fournisseur).'
+  - 'Importer les routes `@TmonierSyliusPunchoutCxmlPlugin/config/routes.yaml` dans `config/routes/tmonier_punchout.yaml`.'
+  - 'Exécuter les migrations avec `php bin/console doctrine:migrations:migrate`.'
+  - 'Déclarer l’acheteur dans l’administration (« PunchOut buyers »), avec le client Sylius sous lequel les sessions s’ouvrent.'
+screenshots:
+  - src: ../../../assets/plugins/punchout-cxml/acheteurs-admin.webp
+    alt: 'Liste des acheteurs PunchOut dans le back-office : un acheteur cXML et un acheteur OCI, avec protocole, canal et état.'
+  - src: ../../../assets/plugins/punchout-cxml/simulateur-achats.webp
+    alt: 'Simulateur d’outil d’achat de la démo, depuis lequel une session PunchOut cXML ou SAP OCI est démarrée.'
+---
+
+Les grands comptes commandent depuis leur outil d’achat (SAP Ariba, Coupa, Jaggaer, Oracle), pas depuis la boutique d’un fournisseur. Ce plugin ouvre la boutique depuis cet outil, avec les prix de l’acheteur, puis renvoie le panier à sa demande d’achat. Une fois la demande approuvée, le bon de commande revient par le même point d’entrée et devient une commande Sylius.

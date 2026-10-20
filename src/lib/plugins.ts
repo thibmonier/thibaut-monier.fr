@@ -118,6 +118,8 @@ const FIELD_LABELS: Record<string, string> = {
   compatibility: 'compatibilité',
   screenshots: 'captures',
   installSteps: 'installation',
+  status: 'statut',
+  inDemo: 'démo',
   configExcerpt: 'extrait de configuration',
 };
 

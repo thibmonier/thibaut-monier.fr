@@ -122,7 +122,7 @@ describe('loadSampleRules', () => {
 });
 
 describe('règles du dépôt (tests/e2e/sample-routes.json)', () => {
-  // Les 20 fiches plugins et les catégories partagent un gabarit : sans plafond, Lighthouse (3 passes par page)
+  // Les 24 fiches plugins et les catégories partagent un gabarit : sans plafond, Lighthouse (3 passes par page)
   // dépasse le délai du job e2e en CI (sprint 3, run 38690417091).
   it.each([
     ['/open-source/sylius/', 3],

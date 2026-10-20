@@ -6,11 +6,21 @@
 
 ### Changed
 
+- Preuve de l'accueil « plugins Sylius » : 24 plugins, libellé mentionnant la démo en ligne.
+- Cibles de collecte des métriques : 25 dépôts (24 plugins et tailsfadmin) ; Punchout cXML n'est plus exclu, il est publié.
+- Contrôle de contenu des plugins : 24 fiches attendues, B2B 13.
+- Méta-description et guides (`plugins-sylius.md`, `projets-open-source.md`) : 24 plugins, champs `status` et `inDemo`, source unique de l'URL de démo.
 - Accueil recentré sur le profil (décision PO du 2026-10-20) : titre du profil LinkedIn en `h1` (« Delivery Manager · Directeur de projets IT · ex-CTO d’agence · E-commerce B2B/B2C »), section « Mon profil » issue du CV avec liens vers le parcours et le CV PDF, preuves déplacées sous le profil ; intitulé « directeur de projets IT » à la place de « direction technique » (accueil, parcours).
 - Refonte visuelle sans changer la structure ni le contenu : palette et jeton `card`, utilitaires `card`, `btn`, `chip`, `glow` et `text-gradient`, variante `dark:` calée sur `data-theme`, en-tête collant translucide, hero avec nom en dégradé, cartes et boutons harmonisés, icônes Lucide (`Icon.astro`), apparition au défilement (`reveal.ts`, désactivée sans JavaScript ou en mouvement réduit).
 
 ### Added
 
+- Catalogue : 4 fiches plugins (Channel Access, Registration Approval, PunchOut cXML/OCI, Customer Asset Management), toutes dans le thème B2B ; le catalogue passe de 20 à 24 plugins (B2B 13, conformité UE 3, back-office 5, IA et intégrations 3).
+- Schéma des plugins : champ `status` (`released` par défaut, `design`) ; un plugin en conception affiche un badge « En conception » sur sa carte et sa fiche, des fonctionnalités prévues, sans installation ni matrice de compatibilité.
+- Démo en ligne « Fournitures Pro » : bandeau « Voir les plugins en situation » en tête de `/open-source/` (liens vers la démo et la page de ses comptes, remise à zéro nocturne) et lien « Voir dans la démo » sur les fiches des 23 plugins installés (champ `inDemo`).
+- Module `src/config/demo.ts` : source unique de l'URL de la démo.
+- Fiche PunchOut cXML/OCI : 2 captures WebP (l'adresse e-mail de la liste des acheteurs est masquée).
+- Tests : schéma (statut, démo), catalogue réel (24 fiches, répartition par thème, démo), cibles de collecte des métriques, et scénarios e2e (badge « En conception », lien de démo présent ou absent, bandeau, comptage 24).
 - US-001 : socle Astro 7.3.8 / TypeScript 6.0.3 / Tailwind 4.3.3 entièrement dockerisé (Dockerfile multi-étapes, `compose.yaml`, `Makefile`), nginx durci (CSP stricte, HSTS, COOP, CORP), accueil minimale et 404, schéma de contenu `home`, `privacy.ts` et schémas communs, Renovate.
 - US-003 : contrôles de qualité (ESLint, Prettier, `astro check`, Vitest avec couverture, liens internes et ancres sur `dist/`, axe, Lighthouse 13.5 en médiane de 3), exécuteur de contrôles à découverte automatique, workflows `ci.yml` et `scheduled.yml`.
 - US-002 : design system et layout (`BaseLayout`, `Header` avec menu mobile accessible, `Footer`, `SkipLink`, `ThemeToggle`, composant `Seo`), jetons de design `src/data/tokens.json` convertis en CSS Tailwind 4, thème clair et sombre sans flash (`/theme-init.js` externe), Inter et JetBrains Mono auto-hébergées, navigation pilotée par `src/config/nav.ts`, dictionnaire `src/i18n/`.

@@ -15,8 +15,8 @@ accueil:
       motif: poste
   proofs:
     - id: plugins-sylius
-      value: '20'
-      label: plugins open source pour Sylius 2
+      value: '24'
+      label: plugins open source pour Sylius 2, démo en ligne
       link: /open-source/
       source: Catalogue open source
     - id: pr-career-ops

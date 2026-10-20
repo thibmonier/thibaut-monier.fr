@@ -8,6 +8,9 @@ const required = {
 };
 const text = z.string(required).min(1, 'est requis');
 
+export const PLUGIN_STATUSES = ['released', 'design'] as const;
+export type PluginStatus = (typeof PLUGIN_STATUSES)[number];
+
 const MAX_SCREENSHOTS = 4; // E17 : 4 captures au plus par fiche
 const PACKAGE = /^[a-z0-9_.-]+\/[a-z0-9_.-]+$/;
 
@@ -23,6 +26,10 @@ export const pluginCoreShape = {
   packagist: z.string().regex(PACKAGE).optional(),
   license: z.string().default('MIT'),
   draft: z.boolean().default(false),
+  // `design` : plugin en conception, rien de livré (pas d'installation ni de matrice de compatibilité).
+  status: z.enum(PLUGIN_STATUSES).default('released'),
+  // Plugin installé dans la démo en ligne : la fiche affiche le lien « Voir dans la démo » (src/config/demo.ts).
+  inDemo: z.boolean().default(false),
 };
 
 const matrixRow = z.strictObject({
@@ -34,17 +41,20 @@ const matrixRow = z.strictObject({
 // Partie 2 (US-020) : contenu de la fiche. Le corps MDX porte le problème résolu.
 export const pluginExtensionShape = <I extends z.ZodType>(image: () => I) => ({
   features: z.array(safeText.max(200), required).min(5).max(8),
-  compatibility: z.strictObject(
-    {
-      matrix: z.array(matrixRow, required).min(1, 'est requis'),
-      databases: z.array(z.enum(['mysql', 'mariadb', 'postgresql']), required).min(1),
-    },
-    required,
-  ),
+  // Facultatives pour un plugin en conception ; exigées sinon (voir `createPluginSchema`).
+  compatibility: z
+    .strictObject(
+      {
+        matrix: z.array(matrixRow, required).min(1, 'est requis'),
+        databases: z.array(z.enum(['mysql', 'mariadb', 'postgresql']), required).min(1),
+      },
+      required,
+    )
+    .optional(),
   requires: z.array(slug).default([]), // `require` Composer entre plugins
   complements: z.array(slug).default([]), // `suggest` Composer entre plugins
   externalRequires: z.array(z.string().regex(PACKAGE)).default([]), // E6
-  installSteps: z.array(z.string().min(1), required).min(2).max(8),
+  installSteps: z.array(z.string().min(1), required).max(8).default([]),
   screenshots: z
     .array(
       z.strictObject({ src: image(), alt: z.string().min(10, 'alt de 10 caractères au moins') }),
@@ -61,8 +71,21 @@ export function createPluginSchema<I extends z.ZodType>(image: () => I) {
       path: ['complements'],
       message: 'requis et complémentaire à la fois',
     })
-    .refine((p) => p.screenshots.length > 0 || Boolean(p.configExcerpt), {
-      path: ['screenshots'],
-      message: 'ou configExcerpt est requis',
+    .superRefine((p, ctx) => {
+      const issue = (path: string, message: string) =>
+        ctx.addIssue({ code: 'custom', path: [path], message });
+      if (p.status === 'design') {
+        if (p.compatibility) issue('compatibility', 'est sans objet pour un plugin en conception');
+        if (p.installSteps.length > 0)
+          issue('installSteps', 'est sans objet pour un plugin en conception');
+        if (p.packagist) issue('packagist', 'est sans objet pour un plugin en conception');
+        if (p.inDemo) issue('inDemo', 'est incompatible avec un plugin en conception');
+        return;
+      }
+      if (!p.compatibility) issue('compatibility', 'est requis');
+      if (p.installSteps.length < 2) issue('installSteps', 'doit compter 2 étapes au moins');
+      if (p.screenshots.length === 0 && !p.configExcerpt) {
+        issue('screenshots', 'ou configExcerpt est requis');
+      }
     });
 }

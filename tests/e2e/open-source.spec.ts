@@ -2,18 +2,18 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { settleReveal } from './helpers/reveal.ts';
 
-// US-019 : catalogue des 20 plugins Sylius 2 filtrable par thème.
-const COUNTS = { b2b: 9, 'conformite-ue': 3, 'back-office': 5, 'ia-integrations': 3 };
+// US-019 : catalogue des 24 plugins Sylius 2 filtrable par thème.
+const COUNTS = { b2b: 13, 'conformite-ue': 3, 'back-office': 5, 'ia-integrations': 3 };
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
 const visibleCards = (page: import('@playwright/test').Page) =>
   page.locator('[data-plugin]:visible');
 
 test.describe('Scénario : catalogue complet puis filtre par thème', () => {
-  test('20 cartes, avec nom, accroche, thème et lien vers la fiche', async ({ page }) => {
+  test('24 cartes, avec nom, accroche, thème et lien vers la fiche', async ({ page }) => {
     await page.goto('/open-source/');
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('[data-plugin]')).toHaveCount(20);
+    await expect(page.locator('[data-plugin]')).toHaveCount(24);
     for (const card of await page.locator('[data-plugin]').all()) {
       await expect(card.locator('h3 a')).toHaveAttribute(
         'href',
@@ -22,17 +22,19 @@ test.describe('Scénario : catalogue complet puis filtre par thème', () => {
       await expect(card.locator('p').first()).not.toBeEmpty();
       await expect(card.locator('[data-card-theme]')).not.toBeEmpty();
     }
-    await expect(page.locator('[data-count]')).toHaveText('20 plugins');
+    await expect(page.locator('[data-count]')).toHaveText('24 plugins');
   });
 
-  test('le thème « B2B » affiche 9 cartes, « 9 plugins » et l’URL ?theme=b2b', async ({ page }) => {
+  test('le thème « B2B » affiche 13 cartes, « 13 plugins » et l’URL ?theme=b2b', async ({
+    page,
+  }) => {
     await page.goto('/open-source/');
     const b2b = page.getByRole('button', { name: 'B2B', exact: true });
     await expect(b2b).toHaveAttribute('aria-pressed', 'false');
     await b2b.click();
     await expect(b2b).toHaveAttribute('aria-pressed', 'true');
     await expect(visibleCards(page)).toHaveCount(COUNTS.b2b);
-    await expect(page.locator('[data-count]')).toHaveText('9 plugins');
+    await expect(page.locator('[data-count]')).toHaveText('13 plugins');
     await expect(page).toHaveURL(/\?theme=b2b$/);
   });
 
@@ -43,7 +45,7 @@ test.describe('Scénario : catalogue complet puis filtre par thème', () => {
       'aria-pressed',
       'true',
     );
-    await expect(page.locator('[data-count]')).toHaveText('9 plugins');
+    await expect(page.locator('[data-count]')).toHaveText('13 plugins');
   });
 
   for (const [theme, expected] of Object.entries(COUNTS)) {
@@ -56,13 +58,13 @@ test.describe('Scénario : catalogue complet puis filtre par thème', () => {
   test('« Tous » retire le filtre et l’URL', async ({ page }) => {
     await page.goto('/open-source/?theme=b2b');
     await page.getByRole('button', { name: 'Tous', exact: true }).click();
-    await expect(visibleCards(page)).toHaveCount(20);
+    await expect(visibleCards(page)).toHaveCount(24);
     await expect(page).toHaveURL(/\/open-source\/$/);
   });
 
   test('un thème inconnu dans l’URL affiche tous les plugins', async ({ page }) => {
     await page.goto('/open-source/?theme=paiement');
-    await expect(visibleCards(page)).toHaveCount(20);
+    await expect(visibleCards(page)).toHaveCount(24);
   });
 });
 
@@ -75,7 +77,7 @@ test.describe('Scénario : recherche par mot-clé', () => {
     await expect(visibleCards(page).first().locator('h3')).toHaveText('Factur-X');
     const count = await visibleCards(page).count();
     expect(count).toBeGreaterThanOrEqual(1);
-    expect(count).toBeLessThan(20);
+    expect(count).toBeLessThan(24);
     await expect(page.locator('[data-count]')).toHaveText(
       count === 1 ? '1 plugin' : `${count} plugins`,
     );
@@ -103,7 +105,7 @@ test.describe('Scénario : recherche par mot-clé', () => {
     const search = page.getByLabel('Rechercher un plugin');
     await search.fill('facture');
     await search.fill('');
-    await expect(visibleCards(page)).toHaveCount(20);
+    await expect(visibleCards(page)).toHaveCount(24);
     await expect(page.locator('[data-theme-section]:visible')).toHaveCount(4);
   });
 });
@@ -111,9 +113,9 @@ test.describe('Scénario : recherche par mot-clé', () => {
 test.describe('Scénario : accès sans JavaScript', () => {
   test.use({ javaScriptEnabled: false });
 
-  test('les 20 plugins sont listés, groupés par thème avec des ancres', async ({ page }) => {
+  test('les 24 plugins sont listés, groupés par thème avec des ancres', async ({ page }) => {
     await page.goto('/open-source/');
-    await expect(page.locator('[data-plugin]:visible')).toHaveCount(20);
+    await expect(page.locator('[data-plugin]:visible')).toHaveCount(24);
     await expect(page.locator('[data-filter]')).toBeHidden();
     for (const [theme, expected] of Object.entries(COUNTS)) {
       await expect(page.locator(`[data-theme-section="${theme}"] [data-plugin]`)).toHaveCount(
@@ -208,11 +210,11 @@ test.describe('Scénario : SEO et réseau', () => {
 });
 
 test.describe('Scénario : autres projets depuis le hub', () => {
-  test('tailsfadmin et career-ops sont accessibles, le catalogue reste à 20 plugins', async ({
+  test('tailsfadmin et career-ops sont accessibles, le catalogue reste à 24 plugins', async ({
     page,
   }) => {
     await page.goto('/open-source/');
-    await expect(visibleCards(page)).toHaveCount(20);
+    await expect(visibleCards(page)).toHaveCount(24);
     const section = page.locator('[data-other-projects]');
     await expect(section.getByRole('heading', { name: 'Autres projets', level: 2 })).toBeVisible();
     await expect(section.locator('[data-project]')).toHaveCount(2);
@@ -221,5 +223,71 @@ test.describe('Scénario : autres projets depuis le hub', () => {
     await page.goto('/open-source/');
     await page.locator('[data-other-projects]').getByRole('link', { name: 'career-ops' }).click();
     await expect(page).toHaveURL(/\/open-source\/career-ops\/$/);
+  });
+});
+
+test.describe('Scénario : démo en ligne', () => {
+  test('le bandeau « Voir les plugins en situation » ouvre la démo et la page des comptes', async ({
+    page,
+  }) => {
+    await page.goto('/open-source/');
+    const banner = page.locator('[data-demo-banner]');
+    await expect(banner.getByRole('heading', { level: 2 })).toHaveText(
+      'Voir les plugins en situation',
+    );
+    await expect(banner).toContainText('remise à zéro chaque nuit à 3 h');
+    const shop = banner.locator('[data-demo-link="shop"]');
+    const accounts = banner.locator('[data-demo-link="accounts"]');
+    await expect(shop).toHaveAttribute('href', 'https://sylius-b2b.thibaut-monier.fr');
+    await expect(accounts).toHaveAttribute(
+      'href',
+      'https://sylius-b2b.thibaut-monier.fr/demo/accounts',
+    );
+    for (const link of [shop, accounts]) {
+      await expect(link).toHaveAttribute('target', '_blank');
+      await expect(link).toHaveAttribute('rel', /noopener/);
+    }
+  });
+
+  test('le bandeau précède le catalogue et ne recopie aucun identifiant', async ({ page }) => {
+    await page.goto('/open-source/');
+    const bannerBox = await page.locator('[data-demo-banner]').boundingBox();
+    const catalogueBox = await page.locator('[data-catalogue]').boundingBox();
+    expect(bannerBox?.y ?? 0).toBeLessThan(catalogueBox?.y ?? 0);
+    expect(await page.locator('[data-demo-banner]').textContent()).not.toMatch(/@|mot de passe/i);
+  });
+
+  test('axe : aucune violation sur le bandeau', async ({ page }) => {
+    await page.goto('/open-source/');
+    await settleReveal(page);
+    const { violations } = await new AxeBuilder({ page })
+      .include('[data-demo-banner]')
+      .withTags(TAGS)
+      .analyze();
+    expect(violations.map((v) => v.id)).toEqual([]);
+  });
+});
+
+test.describe('Scénario : plugin en conception dans le catalogue', () => {
+  test('Customer Asset Management porte le badge « En conception », les autres cartes non', async ({
+    page,
+  }) => {
+    await page.goto('/open-source/');
+    const badges = page.locator('[data-card-status="design"]');
+    await expect(badges).toHaveCount(1);
+    await expect(badges).toHaveText('En conception');
+    const card = page.locator('[data-plugin="customer-asset-management"]');
+    await expect(card.locator('[data-card-status="design"]')).toBeVisible();
+    await expect(card).not.toContainText('Sylius 2.');
+    await expect(page.locator('[data-plugin="channel-access"]')).toContainText('Sylius 2.3');
+  });
+
+  test('la recherche « conception » retrouve la carte', async ({ page }) => {
+    await page.goto('/open-source/');
+    await page.getByLabel('Rechercher un plugin').fill('conception');
+    await expect(visibleCards(page).first()).toHaveAttribute(
+      'data-plugin',
+      'customer-asset-management',
+    );
   });
 });

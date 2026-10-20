@@ -2,18 +2,35 @@ import { describe, expect, it } from 'vitest';
 import { OSS_TARGETS, metricsKey, slugFromRepo } from '../../../scripts/lib/oss-targets.ts';
 
 describe('OSS_TARGETS', () => {
-  it('compte 21 cibles : 20 plugins Sylius 2 et tailsfadmin', () => {
-    expect(OSS_TARGETS).toHaveLength(21);
-    expect(OSS_TARGETS.filter((t) => t.repo.includes('sylius-'))).toHaveLength(20);
+  it('compte 25 cibles : 24 plugins Sylius 2 et tailsfadmin', () => {
+    expect(OSS_TARGETS).toHaveLength(25);
+    expect(OSS_TARGETS.filter((t) => t.repo.includes('sylius-'))).toHaveLength(24);
   });
 
   it('a des dépôts et des slugs uniques', () => {
-    expect(new Set(OSS_TARGETS.map((t) => t.repo)).size).toBe(21);
-    expect(new Set(OSS_TARGETS.map((t) => t.slug)).size).toBe(21);
+    expect(new Set(OSS_TARGETS.map((t) => t.repo)).size).toBe(25);
+    expect(new Set(OSS_TARGETS.map((t) => t.slug)).size).toBe(25);
   });
 
-  it('exclut Punchout cXML (E4)', () => {
-    expect(OSS_TARGETS.some((t) => t.repo.includes('punchout'))).toBe(false);
+  it('inclut les quatre plugins ajoutés le 2026-10-20, dont Punchout cXML publié depuis', () => {
+    const slugs = OSS_TARGETS.map((t) => t.slug);
+    expect(slugs).toEqual(
+      expect.arrayContaining([
+        'channel-access',
+        'registration-approval',
+        'punchout-cxml',
+        'customer-asset-management',
+      ]),
+    );
+    expect(OSS_TARGETS.find((t) => t.slug === 'punchout-cxml')?.packagist).toBe(
+      'tmonier/sylius-punchout-cxml-plugin',
+    );
+  });
+
+  it('ne déclare aucun paquet pour customer-asset-management (en conception, sans version)', () => {
+    const target = OSS_TARGETS.find((t) => t.slug === 'customer-asset-management');
+    expect(target?.repo).toBe('thibmonier/sylius-customer-asset-management-plugin');
+    expect(target?.packagist).toBeUndefined();
   });
 
   it('ne déclare aucun paquet Packagist pour agentic-feeds (non publié, E20)', () => {

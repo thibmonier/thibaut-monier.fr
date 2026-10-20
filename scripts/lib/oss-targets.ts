@@ -1,6 +1,7 @@
-// Dépôts dont on relève les métriques (ADR-0006) : les 20 plugins Sylius 2 du catalogue (Punchout cXML
-// exclu, E4) et le bundle tailsfadmin. Organisation GitHub `thibmonier`, vendor Packagist `tmonier` (E5).
+// Dépôts dont on relève les métriques (ADR-0006) : les 24 plugins Sylius 2 du catalogue (Punchout cXML,
+// exclu au sprint 2 faute de dépôt distant, est inclus depuis sa publication) et le bundle tailsfadmin. Organisation GitHub `thibmonier`, vendor Packagist `tmonier` (E5).
 // `sylius-agentic-feeds-plugin` n'est pas publié sur Packagist (E20, vérifié le 2026-10-14) : pas de paquet.
+// `sylius-customer-asset-management-plugin` est en conception, sans version publiée : pas de paquet.
 export interface Target {
   slug: string;
   repo: string; // owner/name
@@ -30,15 +31,19 @@ export const OSS_TARGETS: readonly Target[] = [
   plugin('sylius-audit-log-plugin'),
   plugin('sylius-b2b-mcp-plugin'),
   plugin('sylius-bulk-actions-plugin'),
+  plugin('sylius-channel-access-plugin'),
   plugin('sylius-command-palette-plugin'),
   plugin('sylius-company-accounts-plugin'),
   plugin('sylius-container-fill-plugin'),
+  plugin('sylius-customer-asset-management-plugin', false),
   plugin('sylius-facturx-plugin'),
   plugin('sylius-gpsr-plugin'),
   plugin('sylius-order-hold-plugin'),
+  plugin('sylius-punchout-cxml-plugin'),
   plugin('sylius-purchase-approval-plugin'),
   plugin('sylius-quick-order-plugin'),
   plugin('sylius-quote-request-plugin'),
+  plugin('sylius-registration-approval-plugin'),
   plugin('sylius-tier-pricing-plugin'),
   plugin('sylius-timeline-plugin'),
   plugin('sylius-trade-credit-plugin'),
