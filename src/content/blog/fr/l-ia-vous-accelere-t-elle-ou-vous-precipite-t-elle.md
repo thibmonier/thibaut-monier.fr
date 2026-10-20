@@ -9,15 +9,13 @@ imageAlt: 'Traînées lumineuses blanches et rouges de véhicules sur une autoro
 series: 'Les nouveaux risques projet'
 seriesOrder: 4
 draft: false
-originalUrl: https://agentic-agency.fr/blog/l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle
-originalPublishedAt: 2026-09-22
 ---
 
 Une équipe hésitait depuis trois semaines sur un choix d'architecture. Le sujet revenait à chaque point, personne ne tranchait. Un lundi matin, quelqu'un pose la question à un agent, obtient en quatre minutes une analyse structurée, argumentée, avec les compromis explicités. La décision est prise dans la foulée. Tout le monde ressort soulagé.
 
 Trois mois plus tard, la décision est remise en cause. Non parce que l'analyse était mauvaise — elle était bonne. Mais parce qu'elle répondait précisément à la question posée, et que la question posée était incomplète. Les trois semaines d'hésitation n'étaient pas du temps perdu : c'était le temps pendant lequel l'équipe était en train de comprendre que le problème n'était pas celui qu'elle croyait.
 
-OCTO a formulé cette tension dans un article dont le titre dit l'essentiel : quand l'IA accélère, ralentir devient essentiel. L'argument tient en une observation — la vitesse d'exécution est devenue une commodité, donc elle a cessé d'être un avantage.
+Cette tension se résume ainsi : quand l'IA accélère, ralentir devient essentiel. L'argument tient en une observation — la vitesse d'exécution est devenue une commodité, donc elle a cessé d'être un avantage.
 
 _Accélérer, c'est réduire le temps entre la décision et sa réalisation. Précipiter, c'est réduire le temps entre la question et la décision. Le premier est un gain. Le second est un transfert de risque vers plus tard._
 
@@ -127,5 +125,3 @@ La question n'est pas de choisir entre vitesse et réflexion. C'est de savoir o�
 L'IA a rendu l'exécution presque gratuite. Ce faisant, elle a déplacé la valeur vers le seul endroit qu'elle n'accélère pas : la qualité de la question posée. Une organisation qui investit tout son gain de vitesse dans plus de production n'a rien capitalisé. Une organisation qui en réinvestit une part dans le cadrage transforme un gain d'exécution en avantage durable.
 
 _Accélérer est un gain d'exécution. Précipiter est une dette de décision, et elle se rembourse au moment le plus coûteux : quand il faut défaire ce qu'on a construit vite et bien sur une base fausse._
-
-_Prochain article : « Certifications IA : signal ou bruit au recrutement ? »._

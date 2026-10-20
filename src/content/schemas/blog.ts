@@ -1,16 +1,11 @@
 import { z } from 'astro/zod';
-import { httpsUrl, safeText } from './common.ts';
+import { safeText } from './common.ts';
 
 // Contrat C1 : schéma de la collection `blog`. Lecteur unique : ce fichier (voir tasks/README.md).
 export const BLOG_CATEGORIES = ['Business', 'Méthode', 'Métiers', 'Outils', 'Pilotage'] as const;
 export const MAX_SEO_TITLE = 60;
-const ORIGINAL_HOST = 'agentic-agency.fr';
 
 const faqEntry = z.strictObject({ question: safeText.min(1), answer: safeText.min(1) });
-
-const originalUrl = httpsUrl.refine((value) => new URL(value).hostname === ORIGINAL_HOST, {
-  message: `originalUrl doit être une URL https de ${ORIGINAL_HOST}`,
-});
 
 /** Le champ `image` est injecté (`image()` d'Astro en collection, `z.string()` en test), comme `createProjectSchema`. */
 export function createBlogSchema(image: z.ZodType) {
@@ -32,8 +27,6 @@ export function createBlogSchema(image: z.ZodType) {
       draft: z.boolean().default(false),
       validated: z.boolean().default(false), // validation du PO du lot d'articles (écart E22)
       faq: z.array(faqEntry).min(1).optional(),
-      originalUrl: originalUrl.optional(),
-      originalPublishedAt: z.coerce.date().optional(),
     })
     .superRefine((post, ctx) => {
       const need = (present: boolean, field: string, message: string) => {
@@ -63,11 +56,6 @@ export function createBlogSchema(image: z.ZodType) {
         post.seriesOrder === undefined || post.series !== undefined,
         'series',
         'series requis avec seriesOrder',
-      );
-      need(
-        post.originalUrl === undefined || post.originalPublishedAt !== undefined,
-        'originalPublishedAt',
-        'originalPublishedAt requis avec originalUrl',
       );
       need(
         post.updatedDate === undefined || post.updatedDate >= post.pubDate,

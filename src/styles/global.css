@@ -62,7 +62,7 @@
   }
 }
 
-/* Briques visuelles reprises d'Agentic Agency (docs/guides/design-system.md). */
+/* Briques visuelles du site (docs/guides/design-system.md). */
 @utility card {
   @apply rounded-2xl border border-border bg-card shadow-sm transition-all duration-300;
 }
@@ -76,7 +76,7 @@
   @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 text-base font-bold transition-all;
 }
 
-/* Fond inversé (couleur du texte) et halo accent, comme le bouton principal d'Agentic Agency. */
+/* Fond inversé (couleur du texte) et halo accent, comme le bouton principal. */
 @utility btn-primary {
   @apply bg-fg text-bg shadow-lg shadow-accent/20 hover:scale-105 hover:bg-fg/90;
 }

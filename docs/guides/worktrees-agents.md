@@ -80,7 +80,7 @@ Un fichier a un seul écrivain (leçon n°2 de la rétro du sprint 2). Besoin ho
 | Journal des changements d'un lot | un fragment `changelog.d/lot-a.md` ou `lot-b.md`, assemblé en phase 4 |
 | `tests/e2e/skip-allowlist.json` | phase 0 seule (demande à l'orchestrateur) |
 | `src/layouts/BaseLayout.astro`, `src/components/seo/`, `nginx.conf`, `nginx/snippets/` | lot B |
-| `src/content/blog/`, `src/pages/blog/`, `src/config/nav.ts`, `src/data/redirects.yaml` | lot A |
+| `src/content/blog/`, `src/pages/blog/`, `src/config/nav.ts` | lot A |
 
 Ne jamais modifier un contrat C1 à C11 : le demander à l'orchestrateur.
 

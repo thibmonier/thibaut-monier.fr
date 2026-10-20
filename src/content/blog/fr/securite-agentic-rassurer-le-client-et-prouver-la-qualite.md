@@ -9,8 +9,6 @@ series: "Les métiers à l'ère agentic"
 seriesOrder: 5
 image: '../../../assets/blog/blog_post_9_1768850568154.webp'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/securite-agentic-rassurer-le-client-et-prouver-la-qualite
-originalPublishedAt: 2026-05-23
 imageAlt: "Un homme en chemise bleue sourit à une femme de dos qui tient un stylo et un bloc-notes, assis face à elle à un bureau devant un ordinateur à l'écran vert"
 ---
 
@@ -97,5 +95,3 @@ Une fonction sécurité dédiée devient indispensable dans une agence agentic �
 Cette fonction définit la politique de contexte, audite les permissions des agents, valide les outils intégrés au pipeline, et représente l'interlocuteur unique côté client sur ces sujets. Sans cette fonction, la sécurité se dilue dans la responsabilité de tous — et finit dans la responsabilité de personne.
 
 _La sécurité agentic n'est pas un sujet technique périphérique. C'est devenu un critère de sélection majeur côté client. Les agences qui l'intègrent dans leur méthode dès maintenant prennent une avance qui sera difficile à rattraper. Celles qui attendent le premier incident pour s'en occuper perdront la confiance qu'elles auraient pu construire en amont._
-
-_Fin de la série « Les métiers à l'ère agentic ». Prochaine série : « Composer son pipeline agentic »._

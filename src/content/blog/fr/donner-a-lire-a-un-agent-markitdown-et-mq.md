@@ -9,8 +9,6 @@ imageAlt: 'Piles de dossiers et de documents papier annotés de marque-pages jau
 series: 'La boîte à outils agentic'
 seriesOrder: 3
 draft: false
-originalUrl: https://agentic-agency.fr/blog/donner-a-lire-a-un-agent-markitdown-et-mq
-originalPublishedAt: 2026-09-22
 ---
 
 Un cadrage commence rarement par une page blanche. Il commence par une pièce jointe : un cahier des charges en PDF de cent vingt pages, un tableur de règles de gestion, un jeu de présentations qui contient les seules maquettes existantes, et un export de tickets.

@@ -10,8 +10,6 @@ imageAlt: 'Câbles réseau bleus et gris branchés sur un Cloud Router Switch Mi
 series: 'Les nouveaux risques projet'
 seriesOrder: 2
 draft: false
-originalUrl: https://agentic-agency.fr/blog/shadow-it-agentique-perdre-la-trace-de-ses-agents
-originalPublishedAt: 2026-09-21
 ---
 
 Un DSI ouvre son inventaire d'outils IA. Il y trouve ce qu'il a validé : un assistant de code sous licence entreprise, un copilote bureautique, deux POC encadrés. Puis il regarde les logs de sortie réseau, les clés API émises, les webhooks actifs. Le compte ne tombe pas juste. Il y a des agents qui tournent, qui appellent des services, qui écrivent dans des systèmes — et qui ne figurent nulle part.

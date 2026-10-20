@@ -11,7 +11,7 @@ const { proofs } = Astro.props;
 const ui = getTranslations('fr');
 const isExternal = (link: string) => link.startsWith('https://');
 type Badge = { icon: IconName; tint: string };
-// Pastilles colorées dans l'ordre des preuves (palette des atouts d'Agentic Agency).
+// Pastilles colorées dans l'ordre des preuves.
 const BADGES: [Badge, ...Badge[]] = [
   { icon: 'package', tint: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
   { icon: 'git-pull-request', tint: 'bg-purple-500/10 text-purple-600 dark:text-purple-400' },

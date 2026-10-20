@@ -10,8 +10,6 @@ seriesOrder: 4
 image: '../../../assets/blog/blog_post_4_1768848735398.webp'
 imageAlt: "Deux femmes regardent côte à côte un écran d'ordinateur portable affichant du code sur fond sombre, l'une pointant une ligne du doigt"
 draft: false
-originalUrl: https://agentic-agency.fr/blog/agence-digitale-le-binome-augmente-remplace-t-il
-originalPublishedAt: 2026-03-11
 ---
 
 Il y a une affirmation qu'on entend de plus en plus dans les conversations sur l'IA et le développement : un binôme de développeurs augmentés peut produire en 48 heures ce qu'une agence livrerait en quinze à vingt semaines.

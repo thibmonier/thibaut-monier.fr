@@ -9,8 +9,6 @@ series: "Les métiers à l'ère agentic"
 seriesOrder: 4
 image: '../../../assets/blog/blog_post_7_1768850538178.webp'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/mesurer-le-gain-reel-de-l-agentic-coding
-originalPublishedAt: 2026-05-22
 imageAlt: "Salle de réunion lumineuse : une femme debout présente au tableau blanc à une vingtaine de collègues assis autour d'une longue table en bois"
 ---
 
@@ -52,7 +50,7 @@ Gain net = (Coût projet classique estimé) − (Coût cadrage + Coût générat
 
 Cette formule a deux propriétés utiles. Elle force à expliciter chaque poste — donc à le mesurer. Et elle évite l'auto-félicitation : le gain affiché est ce qui reste après tous les coûts, pas ce qui apparaît sur la première ligne du devis.
 
-Sur les projets que j'ai pu observer en pratique sur les douze derniers mois, le gain net se situe rarement au-delà de 30% à 60% du coût classique — avec une grande variance selon la maturité de l'équipe. Loin des 80% à 90% annoncés dans les pitchs, mais largement positif et durable si la méthode est saine. Chacun devra mesurer chez soi pour ne pas se baser sur des moyennes étrangères à son contexte.
+D'après les projets que j'ai pu observer en pratique sur les douze derniers mois, j'estime que le gain net se situe rarement au-delà de 30% à 60% du coût classique, avec une grande variance selon la maturité de l'équipe. C'est une estimation personnelle issue de mes projets, pas une mesure. Loin des 80% à 90% annoncés dans les pitchs, mais largement positif et durable si la méthode est saine. Chacun devra mesurer chez soi pour ne pas se baser sur des moyennes étrangères à son contexte.
 
 ## Les indicateurs financiers de pilotage
 

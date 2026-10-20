@@ -9,8 +9,6 @@ seriesOrder: 1
 image: '../../../assets/blog/blog_post_6_1768848765056.webp'
 imageAlt: 'Écran noir de tableau de bord analytique affichant des histogrammes bleus et des courbes roses de temps de chargement et de taux de rebond, avec des indicateurs de sessions'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/comment-mesurer-le-roi-reel-d-un-workflow
-originalPublishedAt: 2026-03-05
 ---
 
 Tout le monde annonce des gains de productivité spectaculaires avec l'IA. Deux fois plus vite. Dix fois plus vite. Des features en deux jours au lieu de deux semaines.
@@ -63,7 +61,7 @@ Ces données, accumulées sur plusieurs projets, permettent de répondre à la v
 
 Il y a une asymétrie d'information dans la relation agence-client autour du ROI IA. Le client voit la vélocité — des prototypes plus rapides, des cycles de feedback plus courts. Il ne voit pas la dette évitée, la clarification forcée par la spec, la qualité du code généré.
 
-C'est une erreur de communication de la part des agences. Ce que le client devrait entendre, c'est : nous allons plus vite ET nous contractons moins de dette ET nous clarifions mieux votre besoin en amont. Ces trois arguments ensemble constituent une proposition de valeur bien plus solide que la simple accélération.
+C'est une erreur de communication de la part des agences. Ce que le client devrait entendre, c'est : je vais plus vite ET je contracte moins de dette ET je clarifie mieux votre besoin en amont. Ces trois arguments ensemble constituent une proposition de valeur bien plus solide que la simple accélération.
 
 La bonne pratique : partager avec le client les scores de gates à chaque fin de phase. Un PRD à 85% est un indicateur concret que son projet est bien cadré. Une spec INVEST 6/6 lui signifie que chaque user story est testable et livrable. Ces chiffres lui parlent plus que les story points.
 
@@ -77,4 +75,4 @@ La courbe d'apprentissage d'un workflow IA ressemble moins à une rampe qu'à un
 
 _Mesurer le ROI d'un workflow IA sur le premier projet, c'est mesurer le coût de la transition. Il faut au moins trois projets pour mesurer le ROI du workflow lui-même._
 
-_Prochain article de la série 2 : « Recruter et évaluer un développeur à l'ère du vibecoding »._
+_Prochain article : « Recruter et évaluer un développeur à l'ère du vibecoding »._

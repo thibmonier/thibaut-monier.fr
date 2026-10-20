@@ -9,8 +9,6 @@ series: "Les métiers à l'ère agentic"
 seriesOrder: 2
 image: '../../../assets/blog/blog_post_5_1768848750922.webp'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/chiffrer-et-rassurer-autour-de-l-agentic-coding
-originalPublishedAt: 2026-05-20
 imageAlt: "Une main robotique noire et argentée et une main humaine tatouée qui s'approchent, index contre index, sur fond gris clair"
 faq:
   - question: 'Comment chiffrer un projet agentic coding sans facturer en jours-homme ?'
@@ -79,9 +77,9 @@ Quelques formulations qui fonctionnent en pratique, sur des clients qui hésiten
 
 « Vous n'achetez pas un code généré. Vous achetez un cadrage qui rend la génération fiable. » Cette phrase repositionne immédiatement la valeur. Le client comprend qu'il paie l'amont, pas le code.
 
-« Le gain de vitesse est pour nous. Le gain de qualité est pour vous. » Cette répartition explicite désamorce la suspicion. Le client sait que la productivité de l'agence ne se traduit pas par un moins-disant qualitatif.
+« Le gain de vitesse est pour moi. Le gain de qualité est pour vous. » Cette répartition explicite désamorce la suspicion. Le client sait que la productivité de l'agence ne se traduit pas par un moins-disant qualitatif.
 
-« Nos gates qualité sont contractuels. Un sprint qui ne les passe pas n'est pas facturé. » Cet engagement transforme la promesse en assurance. Peu d'agences osent — celles qui le font convertissent.
+« Mes gates qualité sont contractuels. Un sprint qui ne les passe pas n'est pas facturé. » Cet engagement transforme la promesse en assurance. Peu d'agences osent — celles qui le font convertissent.
 
 ## Le commercial qui survit
 

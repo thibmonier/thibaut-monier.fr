@@ -121,35 +121,6 @@ describe('schéma blog (contrat C1)', () => {
     });
   });
 
-  describe('originalUrl et originalPublishedAt', () => {
-    const origin = 'https://agentic-agency.fr/blog/la-spec-est-le-nouveau-code';
-    it('accepte une URL https d’agentic-agency.fr avec la date de première publication', () => {
-      expect(
-        schema.safeParse({ ...valid, originalUrl: origin, originalPublishedAt: '2026-09-20' })
-          .success,
-      ).toBe(true);
-    });
-    it('refuse originalUrl sans originalPublishedAt', () => {
-      expect(fields({ ...valid, originalUrl: origin })).toEqual(['originalPublishedAt']);
-    });
-    it('refuse un autre domaine ou http', () => {
-      expect(
-        fields({
-          ...valid,
-          originalUrl: 'https://exemple.fr/x',
-          originalPublishedAt: '2026-09-20',
-        }),
-      ).toEqual(['originalUrl']);
-      expect(
-        fields({
-          ...valid,
-          originalUrl: 'http://agentic-agency.fr/x',
-          originalPublishedAt: '2026-09-20',
-        }),
-      ).toEqual(['originalUrl']);
-    });
-  });
-
   describe('updatedDate', () => {
     it('accepte la même date ou une date postérieure', () => {
       expect(schema.safeParse({ ...valid, updatedDate: '2026-09-22' }).success).toBe(true);

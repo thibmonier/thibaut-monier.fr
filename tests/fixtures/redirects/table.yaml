@@ -1,5 +1,0 @@
-# Table minimale des tests de contrôle des redirections (contrat C6).
-- { from: /blog/la-spec, to: /blog/la-spec/, kind: article }
-- { from: /blog, to: /blog/, kind: index }
-- { from: /blog/category/methode, to: /blog/categorie/methode/, kind: categorie }
-- { from: /rss.xml, to: /rss.xml, kind: flux }

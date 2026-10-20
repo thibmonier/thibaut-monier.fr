@@ -10,8 +10,6 @@ seriesOrder: 3
 image: '../../../assets/blog/blog_post_3_1768848720552.webp'
 imageAlt: 'Trois post-it colorés « To Do », « Doing » et « Done » collés en escalier sur un avant-bras tendu, devant un canapé rouge'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/du-vibe-coding-a-l-agentic-engineering
-originalPublishedAt: 2026-05-18
 ---
 
 Le vibe coding a été un choc culturel. En quelques mois, des équipes entières ont découvert qu'on pouvait livrer en un week-end ce qui prenait un trimestre. Le ratio effort-résultat a basculé, les démos se sont multipliées, et l'idée qu'un agent puisse écrire la majorité du code est devenue une évidence opérationnelle, pas une promesse marketing.
@@ -99,5 +97,3 @@ Le vibe coding restera utile pour le prototypage, l'exploration, les démos. C'e
 L'agentic engineering, structuré par le SDD, est ce qui permet aux équipes de transformer la vitesse en valeur durable. Pas en générant plus de code — en générant du code qui ne se déchire pas au premier sprint suivant.
 
 _Les équipes qui auront industrialisé leur workflow agentic dans les douze prochains mois auront un avantage structurel difficilement rattrapable. Celles qui resteront en vibe coding livreront de plus en plus vite des produits de moins en moins maintenables — jusqu'au mur._
-
-_Prochain article : « Les agents spécialisés : comment composer un pipeline qui ne dérive pas »._

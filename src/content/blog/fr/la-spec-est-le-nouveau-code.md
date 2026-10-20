@@ -9,8 +9,6 @@ seriesOrder: 2
 image: '../../../assets/blog/blog_post_2_1768848698871.webp'
 imageAlt: "Ordinateur portable posé sur une table en bois, affichant un site dont le titre dit « I design and develop experiences that make people's lives simple »"
 draft: false
-originalUrl: https://agentic-agency.fr/blog/la-spec-est-le-nouveau-code
-originalPublishedAt: 2026-03-17
 faq:
   - question: "Qu'est-ce qu'une spec exécutable ?"
     answer: "C'est une spec qui définit un contrat plutôt qu'une direction générale. Elle contient des user stories au format Gherkin, des critères d'acceptation mesurables, des ADR qui documentent les décisions d'architecture et les invariants métier. Par exemple, « l'utilisateur complète l'action principale en moins de 3 clics depuis la page d'accueil » plutôt que « l'interface est intuitive »."

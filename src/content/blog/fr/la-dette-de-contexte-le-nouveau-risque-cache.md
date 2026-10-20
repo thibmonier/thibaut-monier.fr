@@ -10,8 +10,6 @@ seriesOrder: 1
 image: '../../../assets/blog/blog_post_11_1768850597259.webp'
 imageAlt: 'Colonnes de caractères verts lumineux qui défilent sur fond noir, façon code informatique en cascade'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/la-dette-de-contexte-le-nouveau-risque-cache
-originalPublishedAt: 2026-02-18
 ---
 
 Dans un projet classique, la dette technique s'accumule dans le code. Elle est visible — à condition de savoir la lire. Un audit de code, une analyse statique, une revue d'architecture suffisent à la cartographier. Elle est coûteuse à rembourser, mais elle est localisée.
@@ -122,4 +120,4 @@ Les équipes qui comprendront ça en premier prendront une longueur d'avance qui
 
 _Dans un projet vibecoding, la spec est un actif de production au même titre que le code. La laisser se dégrader, c'est laisser se dégrader le projet lui-même — en silence, et avec un décalage._
 
-_Cet article ouvre la série 3 sur les nouveaux risques des projets IA._
+_Cet article ouvre la série « Les nouveaux risques projet »._

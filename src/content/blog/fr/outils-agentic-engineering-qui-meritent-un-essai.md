@@ -10,8 +10,6 @@ imageAlt: "Coffre d'établi de menuisier ouvert, avec scies, rabot, ciseaux à b
 series: 'La boîte à outils agentic'
 seriesOrder: 1
 draft: false
-originalUrl: https://agentic-agency.fr/blog/outils-agentic-engineering-qui-meritent-un-essai
-originalPublishedAt: 2026-09-22
 ---
 
 Le rythme de sortie des outils autour des agents de code est devenu ingérable pour une équipe qui a aussi des projets à livrer. On en voit passer plusieurs par semaine, portés par des démonstrations convaincantes et des courbes flatteuses. La plupart ne survivent pas au contact d'un vrai dépôt, d'une vraie base de code et d'un vrai client.
@@ -88,7 +86,7 @@ Deux outils s'attaquent directement au poste de coût qui décide de la rentabil
 
 **[CodeGraph](https://github.com/colbymchenry/codegraph)** pré-indexe une base de code dans un graphe local — symboles, dépendances, chemins d'appel — pour que l'agent obtienne le contexte dont il a besoin en une requête au lieu d'explorer les fichiers un par un. Environ 74 000 étoiles (relevé du 15 octobre 2026, comme tous les nombres d'étoiles de cette sélection), licence MIT, index entièrement local. Ses auteurs annoncent des réductions importantes du nombre d'appels d'outils et de tokens consommés, mesurées sur leurs propres jeux de tests. C'est une annonce d'éditeur, pas un audit externe — mais l'effet se contrôle soi-même en une après-midi, ce qui rend l'annonce peu risquée à croire.
 
-**[Caveman](https://github.com/JuliusBrussee/caveman)** s'attaque au même problème par un autre bout : compresser le langage échangé avec l'agent. Environ 112 000 étoiles, écrit en Go. Attention sur ce projet : il est sous licence double — MIT pour la compétence, BSL 1.1 pour le moteur et le relais, une licence _source-available_ qui n'est pas open source au sens de l'OSI. La distinction commande l'usage qu'on peut en faire en prestation client. Et le travail académique auquel il renvoie aboutit à une conclusion plus nuancée que son argumentaire — nous y consacrons un article entier.
+**[Caveman](https://github.com/JuliusBrussee/caveman)** s'attaque au même problème par un autre bout : compresser le langage échangé avec l'agent. Environ 112 000 étoiles, écrit en Go. Côté licence, le dépôt est entièrement sous Apache 2.0 depuis la version 3.0.0 (relevé du 20 octobre 2026) ; les versions antérieures mêlaient MIT et BSL 1.1, une licence _source-available_ non open source au sens de l'OSI, ce qui valait la peine de vérifier la version installée avant un usage en prestation. Et le travail académique auquel il renvoie aboutit à une conclusion plus nuancée que son argumentaire — j'y consacre un article entier.
 
 ## Ce qui prépare la matière
 
@@ -120,15 +118,15 @@ Les émulateurs de terminal nouvelle génération et les outils de supervision �
 
 ## Synthèse
 
-| Outil               | Ce qu'il résout                | Licence       | Effort avant de juger |
-| ------------------- | ------------------------------ | ------------- | --------------------- |
-| CodeGraph           | Coût d'exploration du code     | MIT           | Une après-midi        |
-| Caveman             | Volume de tokens échangés      | MIT / BSL 1.1 | Une journée           |
-| MarkItDown          | Ingestion de documents clients | MIT           | Une heure             |
-| mq                  | Découpe de specs volumineuses  | MIT           | Une demi-journée      |
-| Hallmark            | Rendu visuel générique         | MIT           | Une demi-journée      |
-| Modern Web Guidance | Code web obsolète              | Apache 2.0    | Une heure             |
-| DESIGN.md           | Cohérence design inter-projets | Apache 2.0    | Une heure             |
+| Outil               | Ce qu'il résout                | Licence    | Effort avant de juger |
+| ------------------- | ------------------------------ | ---------- | --------------------- |
+| CodeGraph           | Coût d'exploration du code     | MIT        | Une après-midi        |
+| Caveman             | Volume de tokens échangés      | Apache 2.0 | Une journée           |
+| MarkItDown          | Ingestion de documents clients | MIT        | Une heure             |
+| mq                  | Découpe de specs volumineuses  | MIT        | Une demi-journée      |
+| Hallmark            | Rendu visuel générique         | MIT        | Une demi-journée      |
+| Modern Web Guidance | Code web obsolète              | Apache 2.0 | Une heure             |
+| DESIGN.md           | Cohérence design inter-projets | Apache 2.0 | Une heure             |
 
 ## Comment essayer sans se disperser
 

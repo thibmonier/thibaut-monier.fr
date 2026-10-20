@@ -8,15 +8,13 @@ category: 'Outils'
 image: '../../../assets/blog/boite-a-outils-poweruser.webp'
 imageAlt: 'Clavier mécanique rétroéclairé et tasse de café sur un bureau'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/la-boite-a-outils-du-poweruser
-originalPublishedAt: 2026-09-22
 ---
 
 Il circule beaucoup de listes d'outils. Elles se ressemblent toutes : trente noms, un lien chacun, aucun contexte. On en installe quatre dans l'enthousiasme, on en garde un par hasard, et on oublie les trois autres jusqu'au prochain nettoyage de disque.
 
 Le problème de ces listes n'est pas leur contenu. C'est qu'elles répondent à la mauvaise question. Elles disent ce qui existe, alors que la seule question utile est : qu'est-ce qui tient après six mois.
 
-Nous publions donc une [boîte à outils](https://agentic-agency.fr/boite-a-outils) plutôt qu'un article : cinquante-sept outils classés par contexte d'exécution, avec ce que chacun remplace et un signalement explicite de ceux dont l'absence se remarque immédiatement.
+Je prépare donc une boîte à outils plutôt qu'un article : cinquante-sept outils classés par contexte d'exécution, avec ce que chacun remplace et un signalement explicite de ceux dont l'absence se remarque immédiatement.
 
 _Un outil adopté ne se reconnaît pas au plaisir qu'on a eu à l'installer. Il se reconnaît à l'agacement qu'on ressent sur une machine où il n'est pas._
 
@@ -47,7 +45,7 @@ alias find="fd"
 
 Le geste ne change pas, l'outil change dessous. C'est la différence entre un outil installé et un outil adopté, et elle explique l'essentiel des échecs d'adoption.
 
-Cette bascule a une contrepartie qu'il faut assumer : sur une machine partagée, en démonstration, ou en pair programming, `grep` ne fait plus tout à fait ce que l'écran laisse croire. C'est gérable, à condition de le savoir. La configuration complète est détaillée sur la [fiche zsh](https://agentic-agency.fr/boite-a-outils/zsh).
+Cette bascule a une contrepartie qu'il faut assumer : sur une machine partagée, en démonstration, ou en pair programming, `grep` ne fait plus tout à fait ce que l'écran laisse croire. C'est gérable, à condition de le savoir.
 
 ## Ce que « indispensable » veut dire ici
 
@@ -75,8 +73,6 @@ Elle ne contient pas non plus l'outillage d'agentic engineering, qui relève d'u
 
 Le caractère indispensable d'un outil est un jugement d'usage, daté. Certains de ces outils seront remplacés, d'autres absorbés par le système — c'est déjà arrivé à la gestion des fenêtres en mosaïque, longtemps réservée à des utilitaires tiers.
 
-C'est précisément pour cette raison que la boîte à outils est une page maintenue et non un article figé : un statut se met à jour en une ligne, un article se réécrit.
+C'est précisément pour cette raison que la boîte à outils sera une page maintenue et non un article figé : un statut se met à jour en une ligne, un article se réécrit.
 
 _La bonne question devant une liste d'outils n'est jamais « lesquels sont les meilleurs », mais « lequel supprime une friction que je subis aujourd'hui ». Il y en a rarement plus de deux à la fois. Les installer un par un vaut mieux que les installer tous._
-
-_[Parcourir la boîte à outils →](https://agentic-agency.fr/boite-a-outils)_
