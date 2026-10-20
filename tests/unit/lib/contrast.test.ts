@@ -36,10 +36,15 @@ describe('contrastRatio', () => {
 const PAIRS: ReadonlyArray<[string, string, number]> = [
   ['fg', 'bg', 4.5],
   ['fg', 'surface', 4.5],
+  ['fg', 'card', 4.5],
   ['muted', 'bg', 4.5],
   ['muted', 'surface', 4.5],
+  ['muted', 'card', 4.5],
   ['accent', 'bg', 4.5],
   ['accent', 'surface', 4.5],
+  ['accent', 'card', 4.5],
+  // Bouton principal : texte sur fond inversé (fond = couleur du texte, texte = couleur du fond).
+  ['bg', 'fg', 4.5],
   ['accent-fg', 'accent', 4.5],
   ['focus', 'bg', 3],
   ['focus', 'surface', 3],

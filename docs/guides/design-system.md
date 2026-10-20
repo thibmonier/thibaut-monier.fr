@@ -8,6 +8,25 @@ Source unique : `src/data/tokens.json` (`color` avec `light` et `dark`, `font`, 
 ## Thème
 `prefers-color-scheme` par défaut, `data-theme` (posé par `/theme-init.js` ou `ThemeToggle`) prioritaire. Voir ADR-0010. Aucun script ni style inline (CSP).
 
+La variante Tailwind `dark:` est redéfinie dans `global.css` (`@custom-variant dark`) pour suivre la même règle : `data-theme="dark"`, ou préférence système sombre sans `data-theme="light"`. Ne pas utiliser `media` directement.
+
+## Utilitaires (`src/styles/global.css`)
+À préférer aux longues listes de classes :
+
+| Utilitaire | Usage |
+|------------|-------|
+| `card` / `card-link` | Carte sur jeton `card` ; `card-link` ajoute le survol pour une carte cliquable |
+| `btn` + `btn-primary` / `btn-secondary` | Boutons et liens d'action (cible ≥ 24 px) |
+| `chip` | Pastille de filtre ou d'étiquette |
+| `glow` | Halo décoratif (fond de `BaseLayout`) |
+| `text-gradient` | Texte en dégradé (nom du hero), teintes 600 en clair pour le contraste AA |
+
+## Icônes
+`src/components/ui/Icon.astro` : icônes Lucide copiées à la main (sans dépendance), toujours décoratives (`aria-hidden`). Ajouter une icône : coller le contenu du SVG Lucide sous une nouvelle clé de `ICONS`.
+
+## Apparition au défilement
+Ajouter la classe `reveal` à un bloc ; `src/scripts/reveal.ts` (importé par `BaseLayout`) pose `is-revealed` à l'entrée dans la vue. Sans JavaScript (variante `js`) ou avec `prefers-reduced-motion`, le contenu est visible immédiatement.
+
 ## Polices (auto-hébergées, WOFF2 latin, `font-display: swap`)
 | Famille | Fichier | Licence |
 |---------|---------|---------|

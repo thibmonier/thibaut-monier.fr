@@ -1,22 +1,21 @@
 ---
 import type { Home } from '../../content/schemas/home.ts';
+import Icon, { type IconName } from './Icon.astro';
 
 interface Props {
   ctas: Home['ctas'];
 }
 
 const { ctas } = Astro.props;
-const base =
-  'inline-flex min-h-12 items-center justify-center rounded-md border-2 border-accent px-6 text-base font-semibold';
-const styles = [
-  `${base} bg-accent text-accent-fg hover:opacity-90`,
-  `${base} bg-bg text-accent hover:bg-surface`,
-];
+// Première action principale (fond inversé), seconde secondaire ; icônes Lucide comme les CTA d'Agentic Agency.
+const styles = ['btn btn-primary w-full sm:w-auto', 'btn btn-secondary w-full sm:w-auto'];
+const icons: IconName[] = ['briefcase', 'user-check'];
 ---
 
-<p class="flex flex-col gap-3 sm:flex-row">
+<p class="flex flex-col items-center justify-center gap-4 sm:flex-row">
   {ctas.map((cta, index) => (
     <a href={`/contact/?motif=${cta.motif}`} class={styles[index]}>
+      {icons[index] && <Icon name={icons[index]} />}
       {cta.label}
     </a>
   ))}

@@ -26,8 +26,8 @@ const crumbs: Crumb[] = [
 
 <BaseLayout title={title} description={description} breadcrumb={crumbs}>
   <Breadcrumb crumbs={crumbs} />
-  <p class="mt-4 text-sm font-semibold tracking-wide text-muted uppercase">{kind}</p>
-  <h1 class="text-3xl font-bold tracking-tight">{heading}</h1>
+  <p class="mt-4 text-sm font-semibold tracking-widest text-accent uppercase">{kind}</p>
+  <h1 class="text-4xl font-bold tracking-tight md:text-5xl">{heading}</h1>
   <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
     {posts.map((post) => (
       <ArticleCard post={post} />

@@ -17,7 +17,7 @@ const { groups } = Astro.props;
 ---
 
 <div data-results-wrap hidden>
-  <h2 class="text-2xl font-semibold tracking-tight">Résultats de la recherche</h2>
+  <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Résultats de la recherche</h2>
   <ul data-results class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></ul>
 </div>
 
@@ -27,7 +27,7 @@ const { groups } = Astro.props;
     aria-labelledby={`theme-${group.theme}`}
     class="mt-10 scroll-mt-20 first:mt-0"
   >
-    <h2 id={`theme-${group.theme}`} class="text-2xl font-semibold tracking-tight">
+    <h2 id={`theme-${group.theme}`} class="text-2xl font-bold tracking-tight sm:text-3xl">
       {group.label}
       <span class="text-base font-normal text-muted"> ({countLabel(group.plugins.length)})</span>
     </h2>

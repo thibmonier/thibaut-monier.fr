@@ -3,6 +3,7 @@ import { site } from '../../config/site.ts';
 import { getTranslations, type Locale } from '../../i18n/utils.ts';
 import { enabledItems, isActive } from '../../lib/navigation.ts';
 import SkipLink from './SkipLink.astro';
+import Icon from './Icon.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
@@ -13,14 +14,23 @@ const { locale = 'fr' } = Astro.props;
 const ui = getTranslations(locale);
 const items = enabledItems(site.nav.main);
 const path = Astro.url.pathname;
+// Lien courant : couleur accent et soulignement (repère non porté par la seule couleur).
+const current =
+  'aria-[current=page]:text-accent aria-[current=page]:underline aria-[current=page]:underline-offset-8';
+const navLink = `inline-flex min-h-11 w-full items-center rounded-md px-3 text-sm font-medium text-fg transition-colors hover:text-accent md:w-auto ${current}`;
+// Contact en pastille, comme l'appel à l'action de l'en-tête d'Agentic Agency.
+const contactLink = `inline-flex min-h-11 w-full items-center rounded-full bg-fg/10 px-4 text-sm font-semibold text-fg transition-all hover:bg-fg/20 md:ml-2 md:w-auto ${current}`;
 ---
 
 <SkipLink locale={locale} />
-<header class="border-b border-border bg-bg" data-menu-scope>
-  <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-2 px-4 py-2 sm:px-6">
+<header
+  class="sticky top-0 z-50 border-b border-border bg-bg md:bg-bg/50 md:backdrop-blur"
+  data-menu-scope
+>
+  <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-x-2 px-4 py-3 sm:px-6 lg:px-8">
     <a
       href="/"
-      class="order-1 inline-flex min-h-11 items-center rounded-md pr-2 text-lg font-semibold tracking-tight text-fg"
+      class="order-1 inline-flex min-h-11 items-center rounded-md pr-2 text-xl font-bold tracking-tight text-fg transition-colors hover:text-accent"
     >
       {site.name}
     </a>
@@ -30,8 +40,9 @@ const path = Astro.url.pathname;
         data-menu-button
         aria-expanded="false"
         aria-controls="site-nav"
-        class="hidden min-h-11 items-center rounded-md px-3 font-medium text-fg hover:bg-surface js:max-md:inline-flex"
+        class="hidden min-h-11 items-center gap-2 rounded-md px-3 font-medium text-fg hover:bg-fg/10 js:max-md:inline-flex"
       >
+        <Icon name="menu" />
         {ui.nav.menu}
       </button>
       <ThemeToggle locale={locale} />
@@ -42,13 +53,13 @@ const path = Astro.url.pathname;
       aria-label={ui.nav.main}
       class="site-nav order-3 w-full md:order-2 md:ml-auto md:w-auto"
     >
-      <ul class="flex flex-col pb-2 md:flex-row md:gap-1 md:pb-0">
+      <ul class="flex flex-col pb-2 md:flex-row md:items-center md:gap-2 md:pb-0">
         {items.map((item) => (
           <li>
             <a
               href={item.href}
               aria-current={isActive(path, item.href) ? 'page' : undefined}
-              class="inline-flex min-h-11 w-full items-center rounded-md px-3 text-fg hover:bg-surface aria-[current=page]:font-semibold aria-[current=page]:text-accent aria-[current=page]:underline aria-[current=page]:underline-offset-8 md:w-auto"
+              class={item.id === 'contact' ? contactLink : navLink}
             >
               {item.label}
             </a>

@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Refonte visuelle sans changer la structure ni le contenu : palette et jeton `card`, utilitaires `card`, `btn`, `chip`, `glow` et `text-gradient`, variante `dark:` calée sur `data-theme`, en-tête collant translucide, hero avec nom en dégradé, cartes et boutons harmonisés, icônes Lucide (`Icon.astro`), apparition au défilement (`reveal.ts`, désactivée sans JavaScript ou en mouvement réduit).
+
 ### Added
 
 - US-001 : socle Astro 7.3.8 / TypeScript 6.0.3 / Tailwind 4.3.3 entièrement dockerisé (Dockerfile multi-étapes, `compose.yaml`, `Makefile`), nginx durci (CSP stricte, HSTS, COOP, CORP), accueil minimale et 404, schéma de contenu `home`, `privacy.ts` et schémas communs, Renovate.
