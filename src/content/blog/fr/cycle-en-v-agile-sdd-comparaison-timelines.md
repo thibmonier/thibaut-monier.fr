@@ -10,8 +10,6 @@ seriesOrder: 1
 image: '../../../assets/blog/kanban-timelines-methodes.webp'
 imageAlt: 'Trois papiers adhésifs « To Do », « Doing » et « Done » tenus sur un avant-bras'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/cycle-en-v-agile-sdd-comparaison-timelines
-originalPublishedAt: 2026-02-09
 ---
 
 Il y a une question qu'on pose systématiquement en début de projet : _combien de temps ça va prendre ?_
@@ -90,7 +88,7 @@ Le premier est structurel : l'Agile classe accélère la livraison de valeur, ma
 
 Le second est organisationnel : l'Agile à grande échelle (SAFe, LeSS, multi-équipes) réintroduit une partie de la lourdeur du cycle en V sous forme de PI Planning, de ceremonies de synchronisation et de dépendances inter-équipes. La vélocité s'érode avec la taille.
 
-L'infographie d'Octo Technology le formule très bien : en Agile classique, le premier livrable réellement testable par les utilisateurs arrive en fin de semaine 3 ou 4 au mieux. Le feedback réel — pas le feedback sur des maquettes, mais sur du code qui tourne — arrive avec deux sprints de décalage. Et le risque principal n'est pas la lenteur, c'est la rigidité qui se réinstalle subrepticement sous forme de backlog figé et de rituels devenus des fins en soi.
+Le constat est simple : en Agile classique, le premier livrable réellement testable par les utilisateurs arrive en fin de semaine 3 ou 4 au mieux. Le feedback réel — pas le feedback sur des maquettes, mais sur du code qui tourne — arrive avec deux sprints de décalage. Et le risque principal n'est pas la lenteur, c'est la rigidité qui se réinstalle subrepticement sous forme de backlog figé et de rituels devenus des fins en soi.
 
 ---
 
@@ -113,7 +111,7 @@ Sur le même projet applicatif métier :
 | Déploiement                               | 1 jour             |
 | **Total**                                 | **3 à 6 semaines** |
 
-C'est l'ordre de grandeur que l'infographie Octo documente pour le développement IA-assisté : un premier livrable testable en 2 à 3 jours (contre 3 à 4 semaines en Agile), une version candidate en fin de semaine 2.
+C'est l'ordre de grandeur que j'estime pour le développement IA-assisté : un premier livrable testable en 2 à 3 jours (contre 3 à 4 semaines en Agile), une version candidate en fin de semaine 2.
 
 ### Le schéma ci-dessous illustre la structure d'un projet SDD type :
 
@@ -189,7 +187,7 @@ C'est l'ordre de grandeur que l'infographie Octo documente pour le développemen
 
 Trois facteurs expliquent la compression radicale des délais.
 
-**La vitesse de génération.** Claude Code avec des agents spécialisés génère en une heure ce qu'un développeur solo écrirait en une journée. Ce n'est pas une extrapolation — c'est ce que les équipes qui ont adopté le vibecoding structuré mesurent. L'infographie Octo cite un ratio de 10x sur la quantité de code produite. Le chiffre exact varie selon les contextes, mais l'ordre de grandeur est cohérent avec ce que j'observe.
+**La vitesse de génération.** Claude Code avec des agents spécialisés génère en une heure ce qu'un développeur solo écrirait en une journée. Ce n'est pas une extrapolation — c'est ce que les équipes qui ont adopté le vibecoding structuré mesurent. Un ratio de 10x sur la quantité de code produite est une estimation raisonnable. Le chiffre exact varie selon les contextes, mais l'ordre de grandeur est cohérent avec ce que j'observe.
 
 **L'élimination des aller-retours spec → maquette → intégration.** En SDD, le design system est la spec. Ce qu'on dessine, on le code. Il n'y a pas de phase d'intégration où l'on découvre que la maquette Figma ne correspond pas aux contraintes techniques. Les composants sont générés directement depuis les décisions d'architecture.
 
@@ -213,11 +211,9 @@ Trois facteurs expliquent la compression radicale des délais.
 
 ## Ce que ça change dans la pratique
 
-L'accélération n'est pas magique — elle est conditionnelle. Octo Technology l'identifie bien : le SDD IA-assisté introduit ses propres pièges. La fatigue du feedback, la réactivité sans recul, la convergence floue sur la fin. Ce ne sont pas des problèmes insolubles — ce sont des problèmes qui se gèrent avec de la discipline méthodologique.
+L'accélération n'est pas magique — elle est conditionnelle. Le SDD IA-assisté introduit ses propres pièges. La fatigue du feedback, la réactivité sans recul, la convergence floue sur la fin. Ce ne sont pas des problèmes insolubles — ce sont des problèmes qui se gèrent avec de la discipline méthodologique.
 
 C'est précisément pourquoi la méthode SDD intègre des gates qualité bloquants. L'IA génère vite, très vite. Mais générer vite sans contrôler crée de la dette technique à une vitesse elle aussi inédite. Le rôle du senior dans un workflow SDD n'est pas de coder — c'est de définir les règles dans lesquelles l'IA opère, et de valider que ce qui est produit correspond à ce qui a été spécifié.
-
-La citation de l'infographie Octo mérite d'être retenue : _l'IA démocratise la capacité à produire. Elle ne démocratise pas le jugement sur ce qui vaut la peine d'être produit._ C'est la phrase la plus juste sur le développement IA-assisté que j'aie lue ces derniers mois.
 
 L'expérience senior reste le goulot d'étranglement. Pas pour produire — pour décider.
 
@@ -233,6 +229,4 @@ La maturité, c'est de savoir distinguer les trois.
 
 ---
 
-_Cet article fait partie de la série **Software-Driven Development**. Si vous êtes curieux de voir à quoi ressemble concrètement un projet livré avec cette méthode, les [réalisations sont disponibles ici](https://agentic-agency.fr/services/sites-ia) — avec les captures d'écran des applications livrées._
-
-_La méthode SDD est documentée en détail sur la [page Méthode](https://agentic-agency.fr/methode)._
+_Cet article fait partie de la série **Software-Driven Development**._

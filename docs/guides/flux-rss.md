@@ -11,7 +11,7 @@ Statut : proposées par le lot B, **à valider par le PO**.
 | Périmètre | Un seul flux (YAGNI : pas de flux par catégorie) |
 | Contenu | Les 20 articles publiés les plus récents ; `description` = `excerpt ?? description` (extrait, pas l'article complet, pour conserver la visite du site) ; la catégorie en `<category>` |
 | Canal | `<language>fr</language>`, auteur Thibaut Monier, `lastBuildDate` à la date du build |
-| Adresse | `/rss.xml`, la même que l'ancien site (entrée de type `flux` de la table de redirections, lot A) |
+| Adresse | `/rss.xml` |
 | Filtre | Le même `isPublished` que la liste du blog (`src/lib/blog.ts`) : ni brouillon, ni article daté du futur |
 | Erreur | Si `excerpt` et `description` manquent : « Flux RSS : description manquante pour <slug> » |
 

@@ -9,8 +9,6 @@ seriesOrder: 3
 image: '../../../assets/blog/blog_post_3_1768848720552.webp'
 imageAlt: 'Trois notes adhésives tenues sur un avant-bras, « To Do », « Doing » et « Done », étagées de bas en haut'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/le-junior-n-est-pas-le-probleme-le
-originalPublishedAt: 2026-03-14
 ---
 
 Quand on parle de l'IA et des développeurs juniors, la conversation tourne toujours autour du même diagnostic : le risque de dépendance. Le junior voit du code apparaître, l'admire, le pousse, et ne construit pas les réflexes qu'il aurait construits en le produisant lui-même.

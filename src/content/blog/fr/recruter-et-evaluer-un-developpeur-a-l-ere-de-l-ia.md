@@ -9,8 +9,6 @@ seriesOrder: 2
 image: '../../../assets/blog/blog_post_7_1768850538178.webp'
 imageAlt: 'Entretien de recrutement : un candidat souriant en chemise bleue fait face à une recruteuse de dos qui tient un bloc-notes et un stylo, devant un ordinateur de bureau'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia
-originalPublishedAt: 2026-03-02
 ---
 
 Si 70% du code d'un projet est généré par IA, que teste-t-on encore en entretien technique ?
@@ -29,7 +27,7 @@ Soyons précis — pas radical. La compréhension algorithmique fondamentale res
 
 Mémoriser des APIs, des configurations, des paramètres spécifiques à un framework. Cette compétence a toujours été plus proche de la capacité de consultation rapide que du raisonnement réel — et l'IA la rend clairement secondaire.
 
-La vitesse de production brute. Un développeur qui genère vite mais ne sait pas valider est plus dangereux qu'un développeur plus lent qui comprend ce qu'il produit.
+La vitesse de production brute. Un développeur qui génère vite mais ne sait pas valider est plus dangereux qu'un développeur plus lent qui comprend ce qu'il produit.
 
 ## Ce qui devient critique
 

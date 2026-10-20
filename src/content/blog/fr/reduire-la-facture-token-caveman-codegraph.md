@@ -17,8 +17,6 @@ faq:
   - question: 'Comment mesurer chez soi l’effet d’un outil de réduction de tokens ?'
     answer: 'Il faut choisir cinq tâches représentatives de son travail réel, avec un critère de réussite objectif, les exécuter sans outil en relevant le coût total et la réussite, puis installer un seul des deux outils et réexécuter les mêmes tâches. La comparaison se fait sur le coût total par tâche réussie, jamais sur le volume de tokens. Un outil qui divise par deux les tokens envoyés mais fait échouer une tâche sur cinq coûte plus cher que pas d’outil du tout.'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/reduire-la-facture-token-caveman-codegraph
-originalPublishedAt: 2026-09-22
 ---
 
 Sur un projet agentic, la facture de consommation arrive à la fin du mois et elle ne ressemble à rien de ce qu'on connaissait. Elle n'est pas proportionnelle au nombre de développeurs, ni aux heures passées, ni même vraiment au code produit. Elle est proportionnelle à une chose difficile à se représenter : le volume de texte qui a transité, dans les deux sens, entre l'équipe et les modèles.
@@ -78,7 +76,7 @@ C'est ce gisement que visent les deux outils, par deux angles différents.
   </g>
 </svg>
 
-Les deux chiffres portés sur ce schéma sont ceux que l'éditeur de CodeGraph relève sur un dépôt précis ; nous revenons plus bas sur ce qu'ils valent.
+Les deux chiffres portés sur ce schéma sont ceux que l'éditeur de CodeGraph relève sur un dépôt précis ; j'y reviens plus bas sur ce qu'ils valent.
 
 ## CodeGraph : supprimer le tâtonnement
 
@@ -122,11 +120,9 @@ npx skills add JuliusBrussee/caveman -g
 npm install -g @caveman-ai/cli && caveman setup --install
 ```
 
-Cette séparation n'est pas un détail d'installation. Elle recoupe exactement les deux résultats de l'étude dont nous parlons plus bas, et elle recoupe aussi la licence.
+Cette séparation n'est pas un détail d'installation. Elle recoupe exactement les deux résultats de l'étude dont je parle plus bas.
 
-**Le projet est sous licence double**, et c'est un point sérieux pour une structure qui facture. La compétence, les SDK et la ligne de commande sont sous MIT. En revanche le moteur, le relais et le cache sont sous BSL 1.1 : une licence _source-available_, explicitement non open source au sens de l'OSI, chaque version basculant en Apache 2.0 à la plus proche de deux échéances — le 21 juin 2030, ou quatre ans après sa publication.
-
-Autrement dit : la couche que vous pouvez adopter sans arrière-pensée contractuelle est précisément la couche MIT. Celle qui demande une lecture juridique est le relais. Retenez cette correspondance, elle va se répéter.
+**Côté licence, le point est réglé depuis la version 3.0.0.** Avant, le dépôt était partagé : MIT pour la compétence, les SDK et la ligne de commande, BSL 1.1 (une licence _source-available_, non open source au sens de l'OSI) pour le moteur, le relais et le cache. Le fichier `LICENSING.md` du dépôt indique désormais que tout le contenu est sous Apache 2.0 depuis la 3.0.0, sans restriction d'hébergement ni échéance de bascule (relevé du 20 octobre 2026 sur le dépôt GitHub ; les versions antérieures gardent les conditions avec lesquelles elles ont été publiées). Pour une structure qui facture, il suffit donc de vérifier la version installée.
 
 ## Ce que dit la recherche, et que l'argumentaire ne dit pas
 
@@ -140,18 +136,18 @@ Sur la compression de l'**entrée** — comprimer ce qu'on envoie au modèle —
 
 ## La conséquence pratique
 
-Cette distinction n'est pas un détail académique. Elle change ce qu'il faut installer — et c'est ici que la correspondance annoncée plus haut se referme.
+Cette distinction n'est pas un détail académique. Elle change ce qu'il faut installer.
 
-| Couche     | Ce qu'elle comprime | Ce qu'en dit l'étude   | Licence |
-| ---------- | ------------------- | ---------------------- | ------- |
-| Compétence | la sortie           | économie de 1,4 à 2,4× | MIT     |
-| Relais     | l'entrée            | coût net en hausse     | BSL 1.1 |
+| Couche     | Ce qu'elle comprime | Ce qu'en dit l'étude   |
+| ---------- | ------------------- | ---------------------- |
+| Compétence | la sortie           | économie de 1,4 à 2,4× |
+| Relais     | l'entrée            | coût net en hausse     |
 
-Les deux lignes ne se ressemblent pas. La couche dont le bénéfice est établi par une publication indépendante est aussi celle dont la licence ne pose aucune question : on peut l'adopter et passer à autre chose.
+Les deux lignes ne se ressemblent pas. La couche dont le bénéfice est établi par une publication indépendante est celle qu'on peut adopter et oublier.
 
-La couche qui comprime l'entrée cumule au contraire les deux réserves — celle de l'étude que le projet cite lui-même, et celle d'une licence non open source à lire avant tout usage en prestation. Cela ne veut pas dire qu'elle ne marche jamais : cela veut dire qu'elle doit être mesurée sur vos propres tâches, en coût total et non en tokens envoyés, avant d'être généralisée.
+La couche qui comprime l'entrée est celle que l'étude, citée par le projet lui-même, met en défaut. Cela ne veut pas dire qu'elle ne marche jamais : cela veut dire qu'elle doit être mesurée sur vos propres tâches, en coût total et non en tokens envoyés, avant d'être généralisée.
 
-Que la frontière technique, la frontière des preuves et la frontière juridique tombent exactement au même endroit est une coïncidence commode. Elle donne une règle d'adoption qui tient en une phrase : prenez la compétence, instruisez le relais.
+La règle d'adoption tient en une phrase : prenez la compétence, instruisez le relais.
 
 Il y a une leçon plus large là-dedans, qui vaut au-delà de cet outil. Le nombre de tokens envoyés est un indicateur commode parce qu'il est facile à compter. Le coût total d'une tâche accomplie correctement est le seul indicateur qui compte. Optimiser le premier en croyant optimiser le second est une erreur classique, et elle est ici documentée.
 

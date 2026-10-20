@@ -99,12 +99,12 @@ describe('checkCanonicals', () => {
     ]);
   });
 
-  it('signale le domaine de l’ancien site', async () => {
+  it('signale un autre domaine', async () => {
     const root = await dist({
-      'blog/a/index.html': page(canonical('https://agentic-agency.fr/blog/a/')),
+      'blog/a/index.html': page(canonical('https://autre.example/blog/a/')),
     });
     expect(await checkCanonicals(root, ORIGIN)).toEqual([
-      `/blog/a/ : Canonical invalide : https://agentic-agency.fr/blog/a/ (attendu ${ORIGIN}/…)`,
+      `/blog/a/ : Canonical invalide : https://autre.example/blog/a/ (attendu ${ORIGIN}/…)`,
     ]);
   });
 

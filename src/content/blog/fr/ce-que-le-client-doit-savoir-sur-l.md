@@ -10,8 +10,6 @@ seriesOrder: 4
 image: '../../../assets/blog/blog_post_9_1768850568154.webp'
 imageAlt: 'Salle de réunion vitrée où une présentatrice debout désigne un tableau blanc devant une longue table occupée par une douzaine de participants avec ordinateurs portables'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/ce-que-le-client-doit-savoir-sur-l
-originalPublishedAt: 2026-02-24
 ---
 
 Quand l'agence utilise l'IA pour produire du code, qui le sait ?
@@ -32,7 +30,7 @@ Ces deux raisons conduisent au même comportement : le silence. Et le silence, d
 
 ## La question du prix — et la vraie réponse
 
-Que l'IA génère une partie du code ne signifie pas que la valeur de l'agence a diminué. Ce que l'agence vend n'est pas des lignes de code — ce sont des décisions prises correctement, un produit qui répond au vrai besoin du client, une architecture qui tiendra dans le temps, une relation de confiance qui survive aux turbulences.
+Que l'IA génère une partie du code ne signifie pas que la valeur de l'agence a diminué. Ce que l'agence vend n'est pas des lignes de code — ce sont des décisions prises correctement, un produit qui répond au vrai besoin du client, une architecture qui tiendra dans le temps, une relation de confiance qui survit aux turbulences.
 
 Ce que l'IA change, c'est l'allocation du temps humain : moins sur la production répétitive, plus sur le cadrage, la validation, l'architecture, la relation. Si l'agence fait ce travail bien, la valeur livrée est supérieure — pas inférieure — à ce qu'elle livrait avant.
 
@@ -42,7 +40,7 @@ La bonne réponse à la question du prix n'est donc pas de cacher l'usage de l'I
 
 Le bon moment pour cette conversation, c'est le début du projet — pas après que le client a trouvé un prompt dans un commit message.
 
-Ce que je dis maintenant en phase de cadrage : nous utilisons un workflow augmenté par IA pour la génération de code, les tests, la documentation et une partie de la recette. Cela nous permet de livrer plus vite et avec moins de dette technique. Mais chaque décision d'architecture, chaque validation de spec, chaque gate qualité, chaque déploiement reste sous contrôle humain. Vous ne payez pas pour des lignes de code — vous payez pour notre jugement sur ce que ces lignes de code doivent faire et comment elles doivent durer.
+Ce que je dis maintenant en phase de cadrage : j'utilise un workflow augmenté par IA pour la génération de code, les tests, la documentation et une partie de la recette. Cela me permet de livrer plus vite et avec moins de dette technique. Mais chaque décision d'architecture, chaque validation de spec, chaque gate qualité, chaque déploiement reste sous contrôle humain. Vous ne payez pas pour des lignes de code — vous payez pour mon jugement sur ce que ces lignes de code doivent faire et comment elles doivent durer.
 
 Cette transparence produit invariablement l'une de deux réactions : soit le client est enthousiaste et veut comprendre comment ça marche, soit il est prudent et veut des garanties. Les deux sont des conversations productives. Les deux sont bien meilleures que la découverte tardive.
 
@@ -50,9 +48,9 @@ Cette transparence produit invariablement l'une de deux réactions : soit le cli
 
 La transparence sur l'usage de l'IA appelle naturellement des questions sur la qualité et la responsabilité. Voici les trois garanties que j'apporte systématiquement.
 
-La spec reste la vôtre. Tout ce que l'agent génère est piloté par une spécification co-construite et validée avec vous. Rien ne part en développement sans votre accord sur les critères d'acceptation. Si le code ne correspond pas à la spec, c'est notre responsabilité de le corriger.
+La spec reste la vôtre. Tout ce que l'agent génère est piloté par une spécification co-construite et validée avec vous. Rien ne part en développement sans votre accord sur les critères d'acceptation. Si le code ne correspond pas à la spec, c'est ma responsabilité de le corriger.
 
-Le code est relu et validé avant d'entrer dans le dépôt. Aucun code généré n'est poussé sans revue humaine et sans passer les gates qualité automatiques. L'IA peut halluciner — nos guardrails sont conçus pour le détecter.
+Le code est relu et validé avant d'entrer dans le dépôt. Aucun code généré n'est poussé sans revue humaine et sans passer les gates qualité automatiques. L'IA peut halluciner — mes guardrails sont conçus pour le détecter.
 
 Vous êtes propriétaire du code livré. L'IA est un outil de production, pas un auteur. Tout le code livré vous appartient, sans dépendance à un modèle tiers, sans licence cachée.
 

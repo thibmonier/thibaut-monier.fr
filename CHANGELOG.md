@@ -4,6 +4,22 @@
 
 ## [Unreleased]
 
+### Removed
+
+- Mention d'origine des articles (`OriginalNotice`) et champ `originalUrl` / `originalPublishedAt` du frontmatter et du schéma du blog.
+- Table de redirections 301 de l'ancien site : `src/data/redirects.yaml`, `src/lib/redirects.ts`, `scripts/build-redirects.ts`, contrôles `redirects.content` et `redirects.dist`, cible `make redirects`, étapes et artefact `redirections-nginx` de la CI, guide `docs/guides/redirections-blog.md`.
+- Outil de migration ponctuelle de l'ancien blog (`src/lib/blog-migration.ts`, `scripts/migrate-blog.ts`) et ses tests.
+- Liens vers l'ancien site dans les corps d'articles (texte conservé), citations d'un tiers dans trois articles, pieds « Prochain article » vers des contenus inexistants.
+- Références à l'ancien site dans les commentaires de `Header.astro`, `ThemeToggle.astro` et `global.css`.
+
+### Fixed
+
+- Licence de Caveman corrigée dans deux articles : dépôt entièrement sous Apache 2.0 depuis la version 3.0.0 (relevé du 20 octobre 2026).
+- Numéros de série périmés retirés ou remplacés par le nom de la série.
+- Faute « products » (`esn-agence-freelance-augmente-qui-survit-a-l-ia`), « genère » (`recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia`) et « survive » (`ce-que-le-client-doit-savoir-sur-l`).
+- Estimation « 30 % à 60 % du coût classique » présentée comme une estimation personnelle et non comme une mesure.
+- Articles reformulés à la première personne du singulier là où le texte parlait au nom d'une agence.
+
 ### Changed
 
 - Refonte visuelle sans changer la structure ni le contenu : palette et jeton `card`, utilitaires `card`, `btn`, `chip`, `glow` et `text-gradient`, variante `dark:` calée sur `data-theme`, en-tête collant translucide, hero avec nom en dégradé, cartes et boutons harmonisés, icônes Lucide (`Icon.astro`), apparition au défilement (`reveal.ts`, désactivée sans JavaScript ou en mouvement réduit).

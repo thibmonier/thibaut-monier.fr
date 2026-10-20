@@ -10,8 +10,6 @@ seriesOrder: 2
 image: '../../../assets/blog/team-equipes-humaines.webp'
 imageAlt: "Quatre collègues souriants, assis et debout autour d'un ordinateur portable ouvert sur une table en verre, dans un bureau clair avec étagères de plantes"
 draft: false
-originalUrl: https://agentic-agency.fr/blog/projet-classique-vs-sdd-ia-quelles-equipes-humaines
-originalPublishedAt: 2026-02-08
 ---
 
 Dans l'article précédent, j'ai comparé les [timelines de trois méthodes projet](/blog/cycle-en-v-agile-sdd-comparaison-timelines/) — cycle en V, Agile et SDD × IA. Les durées s'effondrent. Mais une question reste ouverte : _qu'est-ce que ça change pour les équipes humaines ?_
@@ -245,4 +243,4 @@ C'est pour cette raison que le SDD ne remplace pas l'expérience par l'outillage
 
 ---
 
-_Cet article fait partie de la série **Software-Driven Development** et complète la [comparaison des timelines projet](/blog/cycle-en-v-agile-sdd-comparaison-timelines/). La méthode SDD est documentée en détail sur la [page Méthode](https://agentic-agency.fr/methode)._
+_Cet article fait partie de la série **Software-Driven Development** et complète la [comparaison des timelines projet](/blog/cycle-en-v-agile-sdd-comparaison-timelines/)._

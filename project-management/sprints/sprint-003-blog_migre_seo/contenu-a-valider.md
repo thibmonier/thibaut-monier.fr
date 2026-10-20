@@ -13,59 +13,59 @@ Chaque article est soumis avec ses réécritures (description 50 à 160 caractè
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 1 | Article `reduire-la-facture-token-caveman-codegraph` | `src/content/blog/fr/reduire-la-facture-token-caveman-codegraph.md` | à valider |
-| 2 | Article `cycle-en-v-agile-sdd-comparaison-timelines` | `src/content/blog/fr/cycle-en-v-agile-sdd-comparaison-timelines.md` | à valider |
-| 3 | Article `le-vrai-developpeur-augmente-c-est-le-chef` | `src/content/blog/fr/le-vrai-developpeur-augmente-c-est-le-chef.md` | à valider |
-| 4 | Article `certifications-ia-signal-ou-bruit-au-recrutement` | `src/content/blog/fr/certifications-ia-signal-ou-bruit-au-recrutement.md` | à valider |
-| 5 | Article `la-boite-a-outils-du-poweruser` | `src/content/blog/fr/la-boite-a-outils-du-poweruser.md` | à valider |
+| 1 | Article `reduire-la-facture-token-caveman-codegraph` | `src/content/blog/fr/reduire-la-facture-token-caveman-codegraph.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 2 | Article `cycle-en-v-agile-sdd-comparaison-timelines` | `src/content/blog/fr/cycle-en-v-agile-sdd-comparaison-timelines.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 3 | Article `le-vrai-developpeur-augmente-c-est-le-chef` | `src/content/blog/fr/le-vrai-developpeur-augmente-c-est-le-chef.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 4 | Article `certifications-ia-signal-ou-bruit-au-recrutement` | `src/content/blog/fr/certifications-ia-signal-ou-bruit-au-recrutement.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 5 | Article `la-boite-a-outils-du-poweruser` | `src/content/blog/fr/la-boite-a-outils-du-poweruser.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
 
 ### Lot 2 (5 articles, tâche T-009-14)
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 6 | Article `ce-que-l-ia-ne-fera-jamais-a-votre-place` | `src/content/blog/fr/ce-que-l-ia-ne-fera-jamais-a-votre-place.md` | à valider |
-| 7 | Article `agence-digitale-le-binome-augmente-remplace-t-il` | `src/content/blog/fr/agence-digitale-le-binome-augmente-remplace-t-il.md` | à valider |
-| 8 | Article `le-junior-n-est-pas-le-probleme-le` | `src/content/blog/fr/le-junior-n-est-pas-le-probleme-le.md` | à valider |
-| 9 | Article `la-spec-est-le-nouveau-code` | `src/content/blog/fr/la-spec-est-le-nouveau-code.md` | à valider |
-| 10 | Article `donner-a-lire-a-un-agent-markitdown-et-mq` | `src/content/blog/fr/donner-a-lire-a-un-agent-markitdown-et-mq.md` | à valider |
+| 6 | Article `ce-que-l-ia-ne-fera-jamais-a-votre-place` | `src/content/blog/fr/ce-que-l-ia-ne-fera-jamais-a-votre-place.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 7 | Article `agence-digitale-le-binome-augmente-remplace-t-il` | `src/content/blog/fr/agence-digitale-le-binome-augmente-remplace-t-il.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 8 | Article `le-junior-n-est-pas-le-probleme-le` | `src/content/blog/fr/le-junior-n-est-pas-le-probleme-le.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 9 | Article `la-spec-est-le-nouveau-code` | `src/content/blog/fr/la-spec-est-le-nouveau-code.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 10 | Article `donner-a-lire-a-un-agent-markitdown-et-mq` | `src/content/blog/fr/donner-a-lire-a-un-agent-markitdown-et-mq.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
 
 ### Lot 3 (5 articles, tâche T-009-15)
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 11 | Article `amorcer-un-projet-agentic-coding-le-role-amoa` | `src/content/blog/fr/amorcer-un-projet-agentic-coding-le-role-amoa.md` | à valider |
-| 12 | Article `chiffrer-et-rassurer-autour-de-l-agentic-coding` | `src/content/blog/fr/chiffrer-et-rassurer-autour-de-l-agentic-coding.md` | à valider |
-| 13 | Article `mesurer-le-gain-reel-de-l-agentic-coding` | `src/content/blog/fr/mesurer-le-gain-reel-de-l-agentic-coding.md` | à valider |
-| 14 | Article `piloter-un-projet-agentic-les-nouveaux-indicateurs` | `src/content/blog/fr/piloter-un-projet-agentic-les-nouveaux-indicateurs.md` | à valider |
-| 15 | Article `securite-agentic-rassurer-le-client-et-prouver-la-qualite` | `src/content/blog/fr/securite-agentic-rassurer-le-client-et-prouver-la-qualite.md` | à valider |
+| 11 | Article `amorcer-un-projet-agentic-coding-le-role-amoa` | `src/content/blog/fr/amorcer-un-projet-agentic-coding-le-role-amoa.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 12 | Article `chiffrer-et-rassurer-autour-de-l-agentic-coding` | `src/content/blog/fr/chiffrer-et-rassurer-autour-de-l-agentic-coding.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 13 | Article `mesurer-le-gain-reel-de-l-agentic-coding` | `src/content/blog/fr/mesurer-le-gain-reel-de-l-agentic-coding.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 14 | Article `piloter-un-projet-agentic-les-nouveaux-indicateurs` | `src/content/blog/fr/piloter-un-projet-agentic-les-nouveaux-indicateurs.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 15 | Article `securite-agentic-rassurer-le-client-et-prouver-la-qualite` | `src/content/blog/fr/securite-agentic-rassurer-le-client-et-prouver-la-qualite.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
 
 ### Lot 4 (5 articles, tâche T-009-16)
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 16 | Article `esn-agence-freelance-augmente-qui-survit-a-l-ia` | `src/content/blog/fr/esn-agence-freelance-augmente-qui-survit-a-l-ia.md` | à valider |
-| 17 | Article `ce-que-le-client-doit-savoir-sur-l` | `src/content/blog/fr/ce-que-le-client-doit-savoir-sur-l.md` | à valider |
-| 18 | Article `la-gestion-de-projet-ia-est-une-discipline` | `src/content/blog/fr/la-gestion-de-projet-ia-est-une-discipline.md` | à valider |
-| 19 | Article `recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia` | `src/content/blog/fr/recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia.md` | à valider |
-| 20 | Article `comment-mesurer-le-roi-reel-d-un-workflow` | `src/content/blog/fr/comment-mesurer-le-roi-reel-d-un-workflow.md` | à valider |
+| 16 | Article `esn-agence-freelance-augmente-qui-survit-a-l-ia` | `src/content/blog/fr/esn-agence-freelance-augmente-qui-survit-a-l-ia.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 17 | Article `ce-que-le-client-doit-savoir-sur-l` | `src/content/blog/fr/ce-que-le-client-doit-savoir-sur-l.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 18 | Article `la-gestion-de-projet-ia-est-une-discipline` | `src/content/blog/fr/la-gestion-de-projet-ia-est-une-discipline.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 19 | Article `recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia` | `src/content/blog/fr/recruter-et-evaluer-un-developpeur-a-l-ere-de-l-ia.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 20 | Article `comment-mesurer-le-roi-reel-d-un-workflow` | `src/content/blog/fr/comment-mesurer-le-roi-reel-d-un-workflow.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
 
 ### Lot 5 (5 articles, tâche T-009-17)
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 21 | Article `projet-classique-vs-sdd-ia-quelles-equipes-humaines` | `src/content/blog/fr/projet-classique-vs-sdd-ia-quelles-equipes-humaines.md` | à valider |
-| 22 | Article `du-vibe-coding-a-l-agentic-engineering` | `src/content/blog/fr/du-vibe-coding-a-l-agentic-engineering.md` | à valider |
-| 23 | Article `outils-agentic-engineering-qui-meritent-un-essai` | `src/content/blog/fr/outils-agentic-engineering-qui-meritent-un-essai.md` | à valider |
-| 24 | Article `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance` | `src/content/blog/fr/sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance.md` | à valider |
-| 25 | Article `la-dette-de-contexte-le-nouveau-risque-cache` | `src/content/blog/fr/la-dette-de-contexte-le-nouveau-risque-cache.md` | à valider |
+| 21 | Article `projet-classique-vs-sdd-ia-quelles-equipes-humaines` | `src/content/blog/fr/projet-classique-vs-sdd-ia-quelles-equipes-humaines.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 22 | Article `du-vibe-coding-a-l-agentic-engineering` | `src/content/blog/fr/du-vibe-coding-a-l-agentic-engineering.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 23 | Article `outils-agentic-engineering-qui-meritent-un-essai` | `src/content/blog/fr/outils-agentic-engineering-qui-meritent-un-essai.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 24 | Article `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance` | `src/content/blog/fr/sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 25 | Article `la-dette-de-contexte-le-nouveau-risque-cache` | `src/content/blog/fr/la-dette-de-contexte-le-nouveau-risque-cache.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
 
 ### Lot 6 (3 articles, tâche T-009-18)
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 26 | Article `shadow-it-agentique-perdre-la-trace-de-ses-agents` | `src/content/blog/fr/shadow-it-agentique-perdre-la-trace-de-ses-agents.md` | à valider |
-| 27 | Article `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle` | `src/content/blog/fr/l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle.md` | à valider |
-| 28 | Article `le-cout-cache-de-la-supervision-agentique` | `src/content/blog/fr/le-cout-cache-de-la-supervision-agentique.md` | à valider |
+| 26 | Article `shadow-it-agentique-perdre-la-trace-de-ses-agents` | `src/content/blog/fr/shadow-it-agentique-perdre-la-trace-de-ses-agents.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 27 | Article `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle` | `src/content/blog/fr/l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
+| 28 | Article `le-cout-cache-de-la-supervision-agentique` | `src/content/blog/fr/le-cout-cache-de-la-supervision-agentique.md` | validé (PO, 2026-10-20, déjà validés sur l'ancien site) |
 
 ### Décisions éditoriales, lot A (5 éléments)
 
@@ -106,25 +106,31 @@ Rédigées à partir du contenu de l'article seul (écart E5), 3 questions chacu
 
 ### Anomalies de contenu à arbitrer, 1re série (5 éléments)
 
-Venues de l'ancien site ou relevées à la migration ; textes conservés tels quels, rien n'a été corrigé sans le PO. Détail : `docs/guides/blog.md`.
+Venues de l'ancien site ou relevées à la migration ; arbitrées par le PO le 2026-10-20. Détail : `docs/guides/blog.md`.
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 1 | Pieds « Prochain article » vers des contenus inexistants : « Les agents spécialisés… » après `du-vibe-coding-a-l-agentic-engineering`, « Composer son pipeline agentic » après `securite-agentic-rassurer-le-client-et-prouver-la-qualite`, « Mesurer l'effet réel d'un outil » après `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance`, et « Certifications IA… » annoncé par `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle` (hors série) | `src/content/blog/fr/*.md` (corps des 4 articles) | à valider |
-| 2 | Numéros de série périmés : « série 2 » dans `comment-mesurer-le-roi-reel-d-un-workflow` (ambigu), « La série 3 s'ouvre sur les nouveaux risques projet » dans `esn-agence-freelance-augmente-qui-survit-a-l-ia` (cette série est la 5e), « série 3 » dans `la-dette-de-contexte-le-nouveau-risque-cache` | `src/content/blog/fr/*.md` | à valider |
-| 3 | Lien `/methode` vers `agentic-agency.fr` dans `cycle-en-v-agile-sdd-comparaison-timelines` (page non migrée) | `src/content/blog/fr/cycle-en-v-agile-sdd-comparaison-timelines.md` | à valider |
-| 4 | « Huit » outils : l'ancienne description de `outils-agentic-engineering-qui-meritent-un-essai` en annonçait huit, l'article en liste sept (description réécrite à « sept », corps à relire) | `src/content/blog/fr/outils-agentic-engineering-qui-meritent-un-essai.md` | à valider |
-| 5 | Fautes relevées à la migration : « genere », « products » (`esn-agence-freelance-augmente-qui-survit-a-l-ia`, ligne 41) et « survive » ; à corriger ou conserver | `src/content/blog/fr/esn-agence-freelance-augmente-qui-survit-a-l-ia.md` et lot 4 | à valider |
+| 1 | Pieds « Prochain article » vers des contenus inexistants : « Les agents spécialisés… » après `du-vibe-coding-a-l-agentic-engineering`, « Composer son pipeline agentic » après `securite-agentic-rassurer-le-client-et-prouver-la-qualite`, « Mesurer l'effet réel d'un outil » après `sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance`, et « Certifications IA… » annoncé par `l-ia-vous-accelere-t-elle-ou-vous-precipite-t-elle` (hors série) | `src/content/blog/fr/*.md` (corps des 4 articles) | corrigée : les pieds « Prochain article » vers des contenus inexistants sont supprimés dans les 4 articles |
+| 2 | Numéros de série périmés : « série 2 » dans `comment-mesurer-le-roi-reel-d-un-workflow` (ambigu), « La série 3 s'ouvre sur les nouveaux risques projet » dans `esn-agence-freelance-augmente-qui-survit-a-l-ia` (cette série est la 5e), « série 3 » dans `la-dette-de-contexte-le-nouveau-risque-cache` | `src/content/blog/fr/*.md` | corrigée : « série 2 » et « série 3 » retirés ou remplacés par le nom réel de la série |
+| 3 | Lien `/methode` vers `agentic-agency.fr` dans `cycle-en-v-agile-sdd-comparaison-timelines` (page non migrée) | `src/content/blog/fr/cycle-en-v-agile-sdd-comparaison-timelines.md` | corrigée : lien retiré, texte conservé (décision du 2026-10-20) |
+| 4 | « Huit » outils : l'ancienne description de `outils-agentic-engineering-qui-meritent-un-essai` en annonçait huit, l'article en liste sept (description réécrite à « sept », corps à relire) | `src/content/blog/fr/outils-agentic-engineering-qui-meritent-un-essai.md` | corrigée : le corps et la description annoncent sept outils, comme la liste réelle (aucune occurrence de « huit » ne subsistait) |
+| 5 | Fautes relevées à la migration : « genere », « products » (`esn-agence-freelance-augmente-qui-survit-a-l-ia`, ligne 41) et « survive » ; à corriger ou conserver | `src/content/blog/fr/esn-agence-freelance-augmente-qui-survit-a-l-ia.md` et lot 4 | corrigée : « products » devient « produits », « genère » devient « génère », « survive » devient « survit » |
 
 ### Anomalies de contenu à arbitrer, 2e série (5 éléments)
 
 | # | Élément | Fichier | Statut |
 |---|---------|---------|--------|
-| 1 | Chiffre « 30 % à 60 % du coût classique » non sourcé (« sur les projets que j'ai pu observer… ») | `src/content/blog/fr/mesurer-le-gain-reel-de-l-agentic-coding.md` (ligne 55) | à valider |
-| 2 | Citations d'OCTO introuvables au 2026-10-15 (titre « quand l'IA accélère, ralentir devient essentiel » et « lorsqu'une équipe de deux à quatre experts… »), aucun lien source : sourcer ou retirer | `src/content/blog/fr/le-cout-cache-de-la-supervision-agentique.md` | à valider |
-| 3 | Licence de Caveman : GitHub affiche Apache-2.0, l'article décrit une double licence MIT et BSL 1.1 | `src/content/blog/fr/reduire-la-facture-token-caveman-codegraph.md` | à valider |
-| 4 | 6 liens vers des pages non migrées d'`agentic-agency.fr` (`/methode`, `/boite-a-outils`, `/boite-a-outils/zsh`, `/services/sites-ia`...) : le site répond 401. Garder l'URL absolue (E10) ou retirer le lien en gardant le texte ; reprise vers `/labo/` au sprint 4 | `src/content/blog/fr/*.md` | à valider |
-| 5 | Limite de 24 articles par page de taxonomie (non paginée, erreur de build au-delà) : « IA générative » en compte 17 et « Agentic engineering » 10 ; à rouvrir si un tag dépasse 24 | `docs/guides/blog.md` (écart A1), `src/lib/blog-taxonomy.ts` | à valider |
+| 1 | Chiffre « 30 % à 60 % du coût classique » non sourcé (« sur les projets que j'ai pu observer… ») | `src/content/blog/fr/mesurer-le-gain-reel-de-l-agentic-coding.md` (ligne 55) | corrigée : formulé comme une estimation personnelle issue des projets de l'auteur, pas comme une mesure |
+| 2 | Citations d'OCTO introuvables au 2026-10-15 (titre « quand l'IA accélère, ralentir devient essentiel » et « lorsqu'une équipe de deux à quatre experts… »), aucun lien source : sourcer ou retirer | `src/content/blog/fr/le-cout-cache-de-la-supervision-agentique.md` | corrigée : citations d'OCTO retirées dans trois articles, l'argument tient seul sans attribution |
+| 3 | Licence de Caveman : GitHub affiche Apache-2.0, l'article décrit une double licence MIT et BSL 1.1 | `src/content/blog/fr/reduire-la-facture-token-caveman-codegraph.md` | corrigée : le dépôt est entièrement sous Apache 2.0 depuis la version 3.0.0 (LICENSING.md, relevé du 2026-10-20), les deux articles sont mis à jour |
+| 4 | 6 liens vers des pages non migrées d'`agentic-agency.fr` (`/methode`, `/boite-a-outils`, `/boite-a-outils/zsh`, `/services/sites-ia`...) : le site répond 401. Garder l'URL absolue (E10) ou retirer le lien en gardant le texte ; reprise vers `/labo/` au sprint 4 | `src/content/blog/fr/*.md` | corrigée : liens vers l'ancien site retirés, texte conservé (décision du 2026-10-20) |
+| 5 | Limite de 24 articles par page de taxonomie (non paginée, erreur de build au-delà) : « IA générative » en compte 17 et « Agentic engineering » 10 ; à rouvrir si un tag dépasse 24 | `docs/guides/blog.md` (écart A1), `src/lib/blog-taxonomy.ts` | sans action (décision du 2026-10-20) |
+
+### Retrait de l'ancien site
+
+| # | Élément | Fichier | Statut |
+|---|---------|---------|--------|
+| 1 | Mentions d'Agentic Agency et d'OCTO : retirées (décision PO du 2026-10-20) | `src/content/blog/fr/*.md`, `src/`, `docs/guides/` | validé (PO, 2026-10-20) |
 
 ### Décisions du lot B : SEO, flux, partage, audience (5 éléments)
 

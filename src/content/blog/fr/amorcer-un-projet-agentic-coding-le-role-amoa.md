@@ -8,8 +8,6 @@ series: "Les métiers à l'ère agentic"
 seriesOrder: 1
 image: '../../../assets/blog/blog_post_4_1768848735398.webp'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/amorcer-un-projet-agentic-coding-le-role-amoa
-originalPublishedAt: 2026-05-19
 imageAlt: "Deux femmes de dos devant un ordinateur portable affichant du code sur fond sombre, l'une pointant une ligne de l'écran du doigt"
 ---
 

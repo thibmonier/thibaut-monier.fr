@@ -9,8 +9,6 @@ seriesOrder: 1
 image: '../../../assets/blog/blog_post_1_1768848683359.webp'
 imageAlt: 'Quatre collègues souriants regardent ensemble l’écran d’un ordinateur portable'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/le-vrai-developpeur-augmente-c-est-le-chef
-originalPublishedAt: 2026-03-20
 ---
 
 Il y a un angle mort dans presque tous les débats sur l'IA et le développement. On parle du dev senior qui pilote des agents. Du dev junior qui risque de perdre ses réflexes. De l'architecte qui monte en abstraction.

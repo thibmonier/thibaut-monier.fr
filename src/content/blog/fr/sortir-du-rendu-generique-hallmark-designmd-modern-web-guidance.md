@@ -10,8 +10,6 @@ imageAlt: 'Nuancier Pantone déployé en éventail, dégradé de jaunes, verts, 
 series: 'La boîte à outils agentic'
 seriesOrder: 4
 draft: false
-originalUrl: https://agentic-agency.fr/blog/sortir-du-rendu-generique-hallmark-designmd-modern-web-guidance
-originalPublishedAt: 2026-09-22
 ---
 
 Il y a un commentaire que les agences entendent de plus en plus souvent en présentation client, et il est difficile à contester : « ça fait IA ».
@@ -200,5 +198,3 @@ Ajouter ensuite Hallmark, d'abord en mode audit sur une interface existante. On 
 Garder designmd.sh pour les projets internes tant que la question de la publicité du registre n'a pas été tranchée avec le client — et en faire un point explicite du contrat le jour où elle se pose.
 
 _La production générée n'a pas de mauvais goût. Elle n'a pas de goût du tout, ce qui est un problème différent et plus difficile à corriger. Ces outils suppriment la banalité ; le parti pris reste le travail de quelqu'un._
-
-_Fin de la série « La boîte à outils agentic ». Prochaine série : « Mesurer l'effet réel d'un outil »._

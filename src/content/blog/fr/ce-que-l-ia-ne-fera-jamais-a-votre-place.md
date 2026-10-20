@@ -9,8 +9,6 @@ seriesOrder: 5
 image: '../../../assets/blog/blog_post_5_1768848750922.webp'
 imageAlt: "Une main robotique noire et argent approche son index de celui d'une main humaine tatouée, sur fond gris clair"
 draft: false
-originalUrl: https://agentic-agency.fr/blog/ce-que-l-ia-ne-fera-jamais-a-votre-place
-originalPublishedAt: 2026-03-08
 ---
 
 Après plusieurs mois de vibecoding intensif, après quatre articles sur la spec exécutable, les juniors, les équipes augmentées et le rôle du chef de projet, voici la question qui m'a été posée le plus souvent :

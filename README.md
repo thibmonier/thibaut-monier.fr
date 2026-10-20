@@ -64,7 +64,7 @@ Railway construit la dernière étape (`runtime`) du `Dockerfile` à chaque push
 - `nginx.conf` et `nginx/snippets/security-headers.conf` : CSP stricte sans `unsafe-inline`, HSTS, COOP, CORP, pas de COEP (ADR-0009).
 - `scripts/checks/` : exécuteur de contrôles. Déposer `<nom>.content.check.ts` (avant le build) ou `<nom>.dist.check.ts` (sur `dist/`) suffit, sans modifier `run.ts`.
 - `.github/workflows/` : `ci.yml` (PR et `main` : qualité, e2e, Hadolint, Trivy et SBOM), `scheduled.yml` (redéploiement quotidien à 06:00 UTC si `RAILWAY_TOKEN` est défini, puis contrôle de fumée si `SMOKE_URL` l'est), `deploy.yml` (déploiement manuel de repli).
-- Blog (28 articles, flux `/rss.xml`, recherche Pagefind), SEO technique (JSON-LD, sitemap, `llms.txt`), images Open Graph et mesure d'audience : voir l'index des guides, [`docs/guides/README.md`](docs/guides/README.md). La table de redirections de l'ancien site (`make redirects`) est décrite dans `docs/guides/redirections-blog.md`.
+- Blog (28 articles, flux `/rss.xml`, recherche Pagefind), SEO technique (JSON-LD, sitemap, `llms.txt`), images Open Graph et mesure d'audience : voir l'index des guides, [`docs/guides/README.md`](docs/guides/README.md).
 - Guides : `docs/guides/`. Décisions : `docs/adr/`. Spécification : `project-management/tech-spec.md`.
 
 ## Versions (relevé du 2026-10-14)

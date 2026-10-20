@@ -15,8 +15,7 @@ Un guide par sujet, rédigé par l'US qui l'introduit (un fichier par US pour é
 | [projets-open-source.md](projets-open-source.md) | Pages de projets (career-ops, tailsfadmin), collecte des métriques, liens externes | US-021, US-022, US-023 |
 | [cv-pdf.md](cv-pdf.md) | CV PDF généré par Typst, décisions, contrôles | US-007 |
 | [competences.md](competences.md) | Compétences et réalisations filtrables | US-006 |
-| [blog.md](blog.md) | Blog migré : inventaire, décisions de migration, navigation, images et licences, composants, écarts | US-009, US-011 |
-| [redirections-blog.md](redirections-blog.md) | Table de redirections 301 de l'ancien site, canonical, contrôles | US-010 |
+| [blog.md](blog.md) | Blog : inventaire, décisions de reprise, navigation, images et licences, composants, écarts | US-009, US-011 |
 | [recherche.md](recherche.md) | Recherche plein texte Pagefind, interface maison, budget d'index | US-012 |
 | [seo-technique.md](seo-technique.md) | JSON-LD, sitemap, `robots.txt`, `llms.txt`, `PUBLIC_SITE_URL` | US-024 |
 | [flux-rss.md](flux-rss.md) | Flux RSS `/rss.xml`, décisions et contrôle | US-013 |

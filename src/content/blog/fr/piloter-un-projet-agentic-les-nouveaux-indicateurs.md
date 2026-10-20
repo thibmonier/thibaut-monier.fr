@@ -9,8 +9,6 @@ series: "Les métiers à l'ère agentic"
 seriesOrder: 3
 image: '../../../assets/blog/blog_post_6_1768848765056.webp'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/piloter-un-projet-agentic-les-nouveaux-indicateurs
-originalPublishedAt: 2026-05-21
 imageAlt: "Écran d'ordinateur sombre affichant un tableau de bord d'analyse web, avec histogrammes bleus, courbes roses de taux de rebond et indicateurs chiffrés en bas"
 ---
 

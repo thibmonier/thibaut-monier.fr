@@ -7,8 +7,6 @@ category: 'Métiers'
 image: '../../../assets/blog/certifications-ia.webp'
 imageAlt: 'Certificat signé portant un sceau rouge'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/certifications-ia-signal-ou-bruit-au-recrutement
-originalPublishedAt: 2026-09-22
 ---
 
 Un CV arrive. Six certifications IA en douze mois, toutes obtenues en ligne, certaines portant des noms prestigieux. La question que se pose le recruteur est mal formulée, et c'est pour cela qu'il n'arrive pas à trancher. Il se demande : est-ce que ça vaut quelque chose ? La bonne question est : qu'est-ce que ça mesure exactement ?

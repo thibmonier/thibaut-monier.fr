@@ -10,13 +10,11 @@ imageAlt: 'Mains sur un clavier devant un ordinateur portable et un écran Samsu
 series: 'Les nouveaux risques projet'
 seriesOrder: 3
 draft: false
-originalUrl: https://agentic-agency.fr/blog/le-cout-cache-de-la-supervision-agentique
-originalPublishedAt: 2026-09-22
 ---
 
-Une idée circule, et elle est solidement argumentée. OCTO l'a formulée dans sa série sur l'organisation des équipes de développement à l'ère de l'IA : « lorsqu'une équipe de deux à quatre experts orchestre plusieurs dizaines d'agents spécialisés, la capacité de production n'est plus proportionnelle au nombre de personnes ».
+Une idée circule, et elle est solidement argumentée : lorsqu'une équipe de deux à quatre experts orchestre plusieurs dizaines d'agents spécialisés, la capacité de production n'est plus proportionnelle au nombre de personnes.
 
-C'est exact. Et c'est précisément ce qui rend l'idée dangereuse quand on la lit trop vite.
+Elle est exacte. Et c'est précisément ce qui rend l'idée dangereuse quand on la lit trop vite.
 
 Car une direction qui entend cette phrase en retient une conséquence pratique immédiate : on peut faire la même chose avec moins de monde. Le raisonnement semble tenir — la production n'est plus le facteur limitant, donc réduisons l'effectif à la portion qui pilote. Sauf que la production n'a jamais été le seul travail d'une équipe de développement. Elle en était la partie la plus visible, pas la plus coûteuse.
 
@@ -132,7 +130,7 @@ Trois règles pratiques en découlent. Limiter le nombre de chantiers simultané
 
 ## L'erreur de lecture à éviter
 
-L'argument d'OCTO n'est pas « il faut moins de gens ». Il est que la capacité de production cesse d'être proportionnelle à l'effectif — ce qui est une observation sur la nature du goulot d'étranglement, pas une recommandation de réduction d'effectif.
+L'argument n'est pas « il faut moins de gens ». Il est que la capacité de production cesse d'être proportionnelle à l'effectif — ce qui est une observation sur la nature du goulot d'étranglement, pas une recommandation de réduction d'effectif.
 
 La lecture qui consiste à traduire cette observation en objectif de réduction commet une erreur classique : elle optimise la contrainte qui vient d'être levée et ignore celle qui vient de la remplacer.
 

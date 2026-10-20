@@ -10,8 +10,6 @@ seriesOrder: 3
 image: '../../../assets/blog/blog_post_8_1768850554501.webp'
 imageAlt: 'Une femme présente des post-it roses, jaunes et orange collés sur un mur blanc devant une équipe attablée avec des ordinateurs portables'
 draft: false
-originalUrl: https://agentic-agency.fr/blog/la-gestion-de-projet-ia-est-une-discipline
-originalPublishedAt: 2026-02-27
 ---
 
 Scrum a été conçu pour des équipes qui écrivent du code. Kanban pour des flux de travail humains. Prince2 pour des projets à périmètre fixe. Aucun de ces frameworks n'a été pensé pour un contexte où l'agent génère en deux heures ce qu'un développeur faisait en deux semaines.
