@@ -13,7 +13,7 @@ Tout s'exécute dans Docker (ADR-0003) : aucun Node sur le poste. Décisions : A
 | `make e2e` | Playwright et axe (WCAG 2.2 AA, thèmes clair et sombre) contre `preview` | un scénario ou une violation axe `serious`/`critical` |
 | `make lighthouse` | Lighthouse 13.5, 3 exécutions par page, médiane | un axe (performance, accessibilité, bonnes pratiques, SEO) sous 0,95 |
 | `make smoke URL=...` | contrôle de fumée d'un site déployé | un statut ou un en-tête inattendu |
-| `make preflight` | disque libre (5 Go par défaut), Docker démarré, branche propre | un des trois contrôles échoue (voir Préflight) |
+| `make preflight` | disque libre (8 Go par défaut), Docker démarré, branche propre | un des trois contrôles échoue (voir Préflight) |
 | `make ci` | enchaîne exactement les étapes de la CI | l'une d'elles |
 
 ## Ajouter un contrôle (sans modifier `run.ts`)
@@ -42,7 +42,7 @@ Règle (rétro du sprint 2, T-900-01) : des volumes MySQL d'autres projets ont �
 
 | Contrôle | Échec si |
 |----------|----------|
-| Espace libre | sous `PREFLIGHT_MIN_GB` (5 Go par défaut ; décision de l'orchestrateur du 2026-10-14, la tâche T-900-02 prévoyait 8 Go) |
+| Espace libre | sous `PREFLIGHT_MIN_GB` (8 Go par défaut depuis l'action 4 de la rétro du sprint 3) |
 | Docker | `docker info` échoue |
 | Branche | `git status --porcelain` n'est pas vide |
 
@@ -64,6 +64,10 @@ Le blog ajoute environ 62 pages aux 30 existantes ; axe (2 thèmes × 2 projets)
 - **Aucune écriture hors `dist/`** pendant `npm run build` (le build Railway n'a pas de volume).
 - **Disque** : `make preflight` avant chaque lot ; jamais de prune global ; pas d'image Playwright en local (`PW_CHROMIUM_PATH` ou CI).
 - **Astro 7 et Markdown** : le rendu par défaut est Sätteri ; `markdown.rehypePlugins` exige `@astrojs/markdown-remark` (non installé). Les plugins sont des plugins HAST de `satteri()` (voir `astro.config.mjs` et `src/lib/rehype-article-blocks.ts`).
+- **`PUBLIC_SITE_URL` avec schéma** (`https://...`) en local, en CI et sur Railway : sans schéma, la canonical et le sitemap sont faux.
+- **Fichiers `.env*`** : `.claude/settings.json` en interdit la lecture (`permissions.deny`) et l'écriture (hook `PreToolUse`), `.env.example` compris ; l'orchestrateur ou le PO le lit et le modifie à la main.
+- **Cache GHA** : un changement du `Dockerfile` ou de `package-lock.json` invalide le cache BuildKit (`scope=test`, `runtime`, `e2e`) ; le premier run qui suit est nettement plus long.
+- **`make prepush`** avant chaque push : il rejoue le job `quality` dans Docker (contexte limité par `.dockerignore`).
 - Fichiers de phase 0 : `package.json` et `package-lock.json` ne sont écrits que par l'orchestrateur (`--save-exact --ignore-scripts`).
 
 ## Vérifications natives du sprint 3 (T-900-07, relevées le 2026-10-14)
@@ -82,14 +86,15 @@ Le blog ajoute environ 62 pages aux 30 existantes ; axe (2 thèmes × 2 projets)
 | Job | Contenu |
 |-----|---------|
 | `quality` | cible Docker `test` (npm ci, build et contrôles, lint, types, Vitest) ; export de `dist/` |
-| `e2e` | images `runtime` et `e2e`, Playwright et axe, Lighthouse |
+| `e2e` | images `runtime` et `e2e`, Playwright et axe |
+| `lighthouse` | images `runtime` et `e2e`, Lighthouse (en parallèle de `e2e`, depuis l'action 2 de la rétro du sprint 3) |
 | `dockerfile` | Hadolint (image épinglée par digest) |
 | `supply-chain` | SBOM CycloneDX (artefact `sbom-cyclonedx`, 30 jours), scan Trivy de l'image `runtime` : échec sur HIGH ou CRITICAL **avec correctif disponible** (`ignore-unfixed`) |
 | `ci` | statut unique requis pour la protection de `main` et pour *Wait for CI* de Railway |
 
 Toutes les actions sont épinglées par SHA complet (le tag est en commentaire), `permissions: contents: read`, Renovate propose les mises à jour. Trivy : `aquasecurity/trivy-action` v0.36.0, postérieure à la compromission de mars 2026 des anciens tags. Pas de signature cosign (ADR-0009).
 
-**Lire un échec** : l'onglet Actions affiche l'étape en rouge ; les rapports Playwright, axe et Lighthouse sont dans l'artefact `rapports-qualite` (14 jours) ; localement, `reports/` après `make e2e` ou `make lighthouse`. Reproduire avec la commande `make` correspondante. Une vulnérabilité Trivy sans correctif n'échoue pas la CI ; si elle bloque quand même un jour, documenter une exception dans un fichier `.trivyignore` avec date et justification.
+**Lire un échec** : l'onglet Actions affiche l'étape en rouge ; les rapports Playwright et axe sont dans l'artefact `rapports-qualite`, ceux de Lighthouse dans `rapports-lighthouse` (14 jours) ; le job `ci` publie la durée de chaque job dans le résumé du run (budget : 20 min) ; localement, `reports/` après `make e2e` ou `make lighthouse`. Reproduire avec la commande `make` correspondante. Une vulnérabilité Trivy sans correctif n'échoue pas la CI ; si elle bloque quand même un jour, documenter une exception dans un fichier `.trivyignore` avec date et justification.
 
 ## Contrôle de fumée post-déploiement
 

@@ -62,7 +62,10 @@ phases:
       architecture: done     # architecture/c4.md, content-model.md, integrations.md, security.md
       adr: done              # docs/adr/0001..0009 (statut Proposé, validation PO attendue)
   implementation:
-    status: pending
+    status: in_progress
+    started_at: 2026-10-14
+    sprints_done: [1, 2, 3]  # PR #1 (f4f0df1), #2 (a52ce85), #3 (1feeab7)
+    current_sprint: 4
 
-next_action: "Valider les ADR (Proposé → Accepté), lever les prérequis du sprint 1 (domaine, dépôt GitHub, Railway, Umami, Calendly, Web3Forms), puis démarrer le sprint 1"
-next_command: "/workflow:implement"
+next_action: "Sprint 4 (labo outils) après les préparatifs d'ouverture : domaine thibaut-monier.fr, déploiement auto Railway, variables publiques, anomalies de contenu, accueil recentré sur le profil"
+next_command: "/workflow:start 4"

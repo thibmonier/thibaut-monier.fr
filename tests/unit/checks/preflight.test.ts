@@ -20,9 +20,9 @@ function run(env: Record<string, string>) {
 
 describe('scripts/preflight.sh (make preflight)', () => {
   it('réussit avec assez d’espace et affiche espace libre et plafond de workers', () => {
-    const { code, out } = run({ PREFLIGHT_FREE_KB: String(6 * GB) });
+    const { code, out } = run({ PREFLIGHT_FREE_KB: String(9 * GB) });
     expect(code).toBe(0);
-    expect(out).toContain('Espace libre : 6.0 Go (seuil 5 Go)');
+    expect(out).toContain('Espace libre : 9.0 Go (seuil 8 Go)');
     expect(out).toContain('Plafond de workers : 2');
   });
 
@@ -32,6 +32,11 @@ describe('scripts/preflight.sh (make preflight)', () => {
     expect(err).toContain('espace libre insuffisant');
     expect(err).toContain('docker builder prune -f');
     expect(err).toContain('Jamais de prune global');
+  });
+
+  it('seuil par défaut de 8 Go (action 4 de la rétro du sprint 3)', () => {
+    expect(run({ PREFLIGHT_FREE_KB: String(Math.round(7.9 * GB)) }).code).toBe(1);
+    expect(run({ PREFLIGHT_FREE_KB: String(Math.round(8.1 * GB)) }).code).toBe(0);
   });
 
   it('le seuil est paramétrable (PREFLIGHT_MIN_GB)', () => {

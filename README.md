@@ -23,6 +23,7 @@ Sur macOS, si les modifications de fichiers ne sont pas détectées : `CHOKIDAR_
 | `make check`      | `astro check` (types)                                                      |
 | `make test`       | Vitest avec couverture (80 % lignes, 75 % branches sur `src/lib/`)         |
 | `make checks`     | Build complet : contrôles de contenu, `astro build`, contrôles de `dist/`  |
+| `make prepush`    | Avant chaque push : rejoue le job `quality` de la CI dans Docker (~1 min)  |
 | `make e2e`        | Playwright et axe (WCAG 2.2 AA) contre `preview`                           |
 | `make lighthouse` | Lighthouse mobile : 3 exécutions, médiane, seuil 0,95 sur les 4 axes       |
 | `make smoke URL=` | Contrôle de fumée d'un site déployé (statuts, en-têtes, 404, 405)          |
@@ -73,4 +74,4 @@ Node 26.11.1, npm 11.19, Astro 7.3.8, TypeScript 6.0.3 (la 7 n'est pas prise en 
 
 ## Contribuer
 
-GitHub Flow, branches `feature/US-XXX-...`, Conventional Commits, squash merge, CI verte obligatoire. Tests écrits avant le code (TDD).
+GitHub Flow, branches `feature/US-XXX-...`, Conventional Commits, squash merge, `make prepush` vert avant chaque push, CI verte obligatoire. Tests écrits avant le code (TDD).
