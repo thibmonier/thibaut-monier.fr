@@ -2,11 +2,12 @@
 # Typographie française : espace insécable ( ) avant « : ; ? ! » dans les chaînes entre guillemets doubles.
 accueil:
   name: Thibaut Monier
-  headline: Direction technique et delivery augmenté par IA
-  valueProp: Je pilote vos livraisons logicielles, sécurise vos engagements et mets l'IA au service de vos équipes.
+  # Titre du profil LinkedIn (décision PO du 2026-10-20).
+  headline: Delivery Manager · Directeur de projets IT · ex-CTO d’agence · E-commerce B2B/B2C
+  valueProp: Expert des solutions open source (Symfony, Laravel, Sylius, PHP, Java/J2EE), j’applique l’IA au delivery et aux produits.
   availability: Missions au forfait, depuis Nantes ou à distance.
-  metaTitle: Thibaut Monier, direction technique et IA
-  metaDescription: Directeur technique de transition, delivery augmenté par IA. 20 plugins Sylius 2 open source, 25 ans d'expérience.
+  metaTitle: Thibaut Monier, directeur de projets IT
+  metaDescription: Delivery Manager et directeur de projets IT, ex-CTO d’agence, e-commerce B2B/B2C. 25 ans d’expérience, IA appliquée au delivery, open source Sylius.
   ctas:
     - label: Me confier une mission
       motif: mission
@@ -30,6 +31,6 @@ accueil:
       source: Parcours professionnel
     - id: experience
       value: 25+
-      label: ans d'expérience, de développeur à directeur technique
+      label: ans d'expérience, de développeur à directeur de projets IT
       link: /parcours/
       source: Parcours professionnel

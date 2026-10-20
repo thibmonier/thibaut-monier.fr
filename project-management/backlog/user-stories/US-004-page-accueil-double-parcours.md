@@ -15,7 +15,7 @@ EPIC-002 : Profil et CV
 
 ### Conversation
 - Formulation de la proposition de valeur unique (« direction technique et delivery augmenté par IA ») et du statut de disponibilité (question ouverte n°5).
-- Les quatre preuves au-dessus de la ligne de flottaison : 20 plugins Sylius 2, PR mergées sur career-ops, ERP de 12 modules livré en agentique, 25 ans d'expérience. Les liens vers les pages plugins et career-ops (EPIC-005, Sprint 2) pointent vers des destinations provisoires au Sprint 1 : à décider avec le PO.
+- Révision PO du 2026-10-20 : l'accueil met le profil en avant (titre LinkedIn en h1, section « Mon profil » issue du CV) ; les quatre preuves passent sous le profil. Preuves d'origine : 20 plugins Sylius 2, PR mergées sur career-ops, ERP de 12 modules livré en agentique, 25 ans d'expérience. Les liens vers les pages plugins et career-ops (EPIC-005, Sprint 2) pointent vers des destinations provisoires au Sprint 1 : à décider avec le PO.
 - Les deux appels à l'action mènent à la page contact avec le motif pré-sélectionné (US-008).
 - Aucun chiffre non sourcé : chaque preuve doit renvoyer à un contenu consultable.
 
@@ -31,12 +31,12 @@ EPIC-002 : Profil et CV
 
 ### Scénario nominal
 ```gherkin
-Scenario: Proposition de valeur et preuves visibles sans défilement
+Scenario: Profil et proposition de valeur visibles sans défilement (révisé le 2026-10-20)
 GIVEN la page d'accueil ouverte sur un écran de 1280 x 720 px
 WHEN P-001 charge la page
 THEN le titre h1 et une phrase de proposition de valeur de 25 mots maximum sont visibles
-AND les boutons "Me confier une mission" et "Me recruter" sont visibles
-AND les 4 preuves (20 plugins, PR career-ops, ERP 12 modules, 25 ans) sont visibles sans défilement
+AND les boutons "Me confier une mission" et "Me recruter" sont visibles sans défilement
+AND la section « Mon profil » (résumé du CV, liens vers le parcours et le CV PDF) précède les 4 preuves
 ```
 
 ### Scénarios alternatifs

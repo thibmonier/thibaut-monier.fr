@@ -11,7 +11,7 @@ const { proofs } = Astro.props;
 const ui = getTranslations('fr');
 const isExternal = (link: string) => link.startsWith('https://');
 type Badge = { icon: IconName; tint: string };
-// Pastilles colorées dans l'ordre des preuves (palette des atouts d'Agentic Agency).
+// Pastilles colorées dans l'ordre des preuves.
 const BADGES: [Badge, ...Badge[]] = [
   { icon: 'package', tint: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
   { icon: 'git-pull-request', tint: 'bg-purple-500/10 text-purple-600 dark:text-purple-400' },
@@ -25,12 +25,12 @@ const items = proofs.map((proof, index) => ({
 ---
 
 <section aria-labelledby="preuves-titre">
-  <h2 id="preuves-titre" class="sr-only">
+  <h2 id="preuves-titre" class="mb-6 text-center text-2xl font-bold tracking-tight sm:text-3xl">
     {ui.home.proofsHeading}
   </h2>
   <ul data-proofs class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
     {items.map((proof) => (
-      <li>
+      <li class="reveal">
         <a
           data-proof={proof.id}
           href={proof.link}

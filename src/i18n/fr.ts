@@ -48,7 +48,9 @@ export const fr = {
   },
   // US-004
   home: {
-    proofsHeading: 'Quelques preuves',
+    proofsHeading: 'Quelques réalisations',
+    profileHeading: 'Mon profil',
+    profileLink: 'Voir mon parcours',
   },
   // US-007
   cv: {

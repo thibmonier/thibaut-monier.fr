@@ -6,6 +6,7 @@
 
 ### Changed
 
+- Accueil recentré sur le profil (décision PO du 2026-10-20) : titre du profil LinkedIn en `h1` (« Delivery Manager · Directeur de projets IT · ex-CTO d’agence · E-commerce B2B/B2C »), section « Mon profil » issue du CV avec liens vers le parcours et le CV PDF, preuves déplacées sous le profil ; intitulé « directeur de projets IT » à la place de « direction technique » (accueil, parcours).
 - Refonte visuelle sans changer la structure ni le contenu : palette et jeton `card`, utilitaires `card`, `btn`, `chip`, `glow` et `text-gradient`, variante `dark:` calée sur `data-theme`, en-tête collant translucide, hero avec nom en dégradé, cartes et boutons harmonisés, icônes Lucide (`Icon.astro`), apparition au défilement (`reveal.ts`, désactivée sans JavaScript ou en mouvement réduit).
 
 ### Added
