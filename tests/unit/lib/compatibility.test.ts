@@ -58,10 +58,12 @@ describe('fiches réelles', () => {
   it('aucune des fiches ne déclare de combinaison incohérente', async () => {
     const dir = 'src/content/plugins/fr';
     const names = (await readdir(dir)).filter((n) => n.endsWith('.mdx'));
-    expect(names.length).toBe(20);
+    expect(names.length).toBe(24);
     for (const name of names) {
       const { data } = parseFrontmatter(await readFile(`${dir}/${name}`, 'utf8'));
-      const matrix = (data as { compatibility: { matrix: MatrixRow[] } }).compatibility.matrix;
+      // Un plugin en conception (customer-asset-management) n'a pas de matrice de compatibilité.
+      const matrix =
+        (data as { compatibility?: { matrix: MatrixRow[] } }).compatibility?.matrix ?? [];
       expect({ name, errors: findCompatibilityErrors(matrix) }).toEqual({ name, errors: [] });
     }
   });

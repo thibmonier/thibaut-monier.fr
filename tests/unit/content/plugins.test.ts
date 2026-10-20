@@ -96,3 +96,53 @@ describe('schéma plugins', () => {
     expect(schema.safeParse({ ...valid(), externalRequires: ['Invalide'] }).success).toBe(false);
   });
 });
+
+describe('schéma plugins : statut et démo', () => {
+  const design = () => {
+    const {
+      compatibility: _c,
+      installSteps: _i,
+      configExcerpt: _e,
+      packagist: _p,
+      ...rest
+    } = valid();
+    return { ...rest, status: 'design' };
+  };
+
+  it('prend « released » par défaut et n’est pas dans la démo par défaut', () => {
+    const parsed = schema.parse(valid());
+    expect(parsed.status).toBe('released');
+    expect(parsed.inDemo).toBe(false);
+  });
+
+  it('accepte un plugin « design » sans compatibilité, installation, capture ni paquet', () => {
+    const parsed = schema.parse(design());
+    expect(parsed.status).toBe('design');
+    expect(parsed.compatibility).toBeUndefined();
+    expect(parsed.installSteps).toEqual([]);
+  });
+
+  it('refuse un statut inconnu', () => {
+    expect(schema.safeParse({ ...valid(), status: 'beta' }).success).toBe(false);
+  });
+
+  it('exige compatibilité et 2 étapes d’installation pour un plugin livré', () => {
+    const { compatibility: _c, ...noCompat } = valid();
+    expect(issues(noCompat)).toEqual(['Plugin « order-hold » invalide : compatibilité est requis']);
+    expect(issues({ ...valid(), installSteps: ['Une seule.'] })).toEqual([
+      'Plugin « order-hold » invalide : installation doit compter 2 étapes au moins',
+    ]);
+  });
+
+  it('refuse les champs de livraison sur un plugin « design »', () => {
+    expect(issues({ ...design(), installSteps: ['a', 'b'] })).toEqual([
+      'Plugin « order-hold » invalide : installation est sans objet pour un plugin en conception',
+    ]);
+    expect(issues({ ...design(), packagist: 'tmonier/sylius-order-hold-plugin' })).toEqual([
+      'Plugin « order-hold » invalide : paquet est sans objet pour un plugin en conception',
+    ]);
+    expect(issues({ ...design(), inDemo: true })).toEqual([
+      'Plugin « order-hold » invalide : démo est incompatible avec un plugin en conception',
+    ]);
+  });
+});

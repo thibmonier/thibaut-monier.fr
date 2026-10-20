@@ -3,8 +3,8 @@ import { homeSchema } from '../../../src/content/schemas/home.ts';
 
 const proof = (id: string, link = 'https://github.com/thibmonier') => ({
   id,
-  value: '20',
-  label: 'plugins open source pour Sylius 2',
+  value: '24',
+  label: 'plugins open source pour Sylius 2, démo en ligne',
   link,
   source: 'GitHub',
 });

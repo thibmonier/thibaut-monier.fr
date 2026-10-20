@@ -1,9 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
+import Icon from '../../components/ui/Icon.astro';
 import ProjectCard from '../../components/oss/ProjectCard.astro';
 import PluginGrid from '../../components/oss/PluginGrid.astro';
 import JsonLd from '../../components/seo/JsonLd.astro';
 import ThemeFilter from '../../components/oss/ThemeFilter.astro';
+import { demo } from '../../config/demo.ts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { buildItemList } from '../../lib/jsonld/item-list.ts';
 import {
@@ -26,12 +28,18 @@ const groups = groupByTheme(entries).map((group) => ({
     slug: plugin.slug,
     name: plugin.name,
     tagline: plugin.tagline,
-    syliusVersions: syliusVersions(plugin.compatibility.matrix),
+    syliusVersions: syliusVersions(plugin.compatibility?.matrix ?? []),
+    status: plugin.status,
     search: buildSearchEntry({
       id: plugin.slug,
       name: plugin.name,
       tagline: plugin.tagline,
-      keywords: [group.label, plugin.slug, ...plugin.features],
+      keywords: [
+        group.label,
+        plugin.slug,
+        ...(plugin.status === 'design' ? ['en conception'] : []),
+        ...plugin.features,
+      ],
     }),
   })),
 }));
@@ -52,7 +60,7 @@ const projects = (await getCollection('projects'))
 
 <BaseLayout
   title="Plugins Sylius 2 open source : B2B, UE, IA"
-  description="Vingt plugins Sylius 2 open source : B2B, conformité UE, back-office, IA et intégrations. Filtrez par thème, ouvrez la fiche, installez avec Composer."
+  description="24 plugins Sylius 2 open source et une démo en ligne : B2B, conformité UE, back-office, IA et intégrations. Filtrez par thème, ouvrez la fiche."
 >
   <JsonLd slot="head" data={[catalogue]} />
   <h1 class="text-4xl font-bold tracking-tight md:text-5xl">Plugins Sylius 2 open source</h1>
@@ -61,6 +69,45 @@ const projects = (await getCollection('projects'))
     Sylius 2 : vente entre professionnels, conformité européenne, outils d’administration, IA et
     intégrations.
   </p>
+
+  <section
+    aria-labelledby="demo-titre"
+    data-demo-banner
+    class="card mt-6 flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between"
+  >
+    <div class="max-w-2xl">
+      <h2 id="demo-titre" class="flex items-center gap-2 font-semibold">
+        <Icon name="sparkles" />
+        Voir les plugins en situation
+      </h2>
+      <p class="mt-1">
+        23 de ces plugins fonctionnent ensemble dans « {demo.name} », une boutique B2B Sylius 2.3 en
+        ligne. La démo est remise à zéro chaque nuit à {demo.resetTime} ; les identifiants de test
+        sont publics et listés sur la page des comptes de démo.
+      </p>
+    </div>
+    <div class="flex flex-col gap-3 sm:flex-row md:shrink-0">
+      <a
+        href={demo.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary"
+        data-demo-link="shop"
+      >
+        Ouvrir la démo<span class="sr-only"> (nouvel onglet)</span>
+        <Icon name="arrow-right" />
+      </a>
+      <a
+        href={demo.accountsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-secondary"
+        data-demo-link="accounts"
+      >
+        Comptes de démo<span class="sr-only"> (nouvel onglet)</span>
+      </a>
+    </div>
+  </section>
 
   <aside aria-labelledby="intro-titre" class="card mt-6 max-w-3xl p-6">
     <h2 id="intro-titre" class="font-semibold">

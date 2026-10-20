@@ -2,12 +2,12 @@
 
 ## Où sont les données
 
-`src/data/home.yaml`, entrée `accueil`. Le schéma est `src/content/schemas/home.ts` (`strictObject` : une clé inconnue fait échouer le build). Les composants sont `Hero`, `CtaPair` et `ProofList` (`src/components/ui/`), composés par `src/pages/index.astro`.
+`src/data/home.yaml`, entrée `accueil`. Le schéma est `src/content/schemas/home.ts` (`strictObject` : une clé inconnue fait échouer le build). Les composants sont `Hero`, `CtaPair`, `ProfileSummary` et `ProofList` (`src/components/ui/`), composés par `src/pages/index.astro` dans cet ordre : le profil passe avant les preuves (décision PO du 2026-10-20).
 
 | Champ | Règle |
 |-------|-------|
 | `name` | Nom affiché au-dessus du `h1` |
-| `headline` | Le `h1` de la page, 80 caractères au plus |
+| `headline` | Le `h1` de la page, 90 caractères au plus : le titre du profil LinkedIn, rôles séparés par ` · ` (chaque rôle reste insécable à l'affichage) |
 | `valueProp` | Phrase de valeur, **25 mots au plus** (compte vérifié au build) |
 | `availability` | Statut de disponibilité, 120 caractères au plus |
 | `metaTitle` | `title` de la page, 60 caractères au plus |
@@ -16,6 +16,10 @@
 | `proofs` | Exactement 4 preuves : `id` (kebab-case unique), `value`, `label`, `link`, `source` |
 
 Une erreur de schéma cite le champ : `Champ 'headline' requis dans la collection home`.
+
+## Section « Mon profil »
+
+Le texte vient de `summary` dans `src/data/cv/profile.yaml` (source unique avec le CV PDF) : le modifier là, jamais dans `home.yaml`. La section renvoie vers `/parcours/` et vers le CV PDF.
 
 ## Règles des preuves
 

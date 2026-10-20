@@ -64,7 +64,7 @@ Comportement (testé avec un client simulé, `tests/unit/oss-metrics/fetch.test.
 - réponse Packagist sans `downloads` : bloc Packagist omis pour ce dépôt seul ; plugin non publié (`sylius-agentic-feeds-plugin`, vérifié le 2026-10-14) : aucune requête Packagist ni avertissement ;
 - code de sortie 0 même en panne réseau.
 
-Liste des 21 dépôts : `scripts/lib/oss-targets.ts` (20 plugins Sylius 2, Punchout cXML exclu, et tailsfadmin ; vendor Packagist `tmonier`, sauf tailsfadmin). Ajouter un plugin au catalogue demande d'ajouter sa ligne ici : le contrôle `oss-metrics` avertit des clés absentes ou orphelines.
+Liste des 25 dépôts : `scripts/lib/oss-targets.ts` (24 plugins Sylius 2, Punchout cXML inclus depuis sa publication, et tailsfadmin ; vendor Packagist `tmonier`, sauf tailsfadmin). Ajouter un plugin au catalogue demande d'ajouter sa ligne ici : le contrôle `oss-metrics` avertit des clés absentes ou orphelines.
 
 Contrôle de contenu `oss-metrics` : n'échoue que si le schéma est invalide ; avertit si `fetchedAt` dépasse 7 jours ou si une clé attendue manque (V10).
 

@@ -34,7 +34,7 @@ const hasUnique = (values: readonly string[]) => new Set(values).size === values
 
 export const homeSchema = z.strictObject({
   name: text('name'),
-  headline: text('headline').max(80),
+  headline: text('headline').max(90),
   valueProp: text('valueProp').refine((v) => countWords(v) <= MAX_VALUE_PROP_WORDS, {
     error: (issue) =>
       `valueProp : ${MAX_VALUE_PROP_WORDS} mots maximum (reçu : ${countWords(String(issue.input))})`,

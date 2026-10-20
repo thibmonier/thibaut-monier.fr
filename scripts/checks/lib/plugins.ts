@@ -9,9 +9,9 @@ import { findDependencyErrors } from '../../../src/lib/plugin-deps.ts';
 import { THEMES, formatPluginIssue, type PluginTheme } from '../../../src/lib/plugins.ts';
 import { detectPii, formatPiiError } from '../../../src/lib/privacy.ts';
 
-export const EXPECTED_PLUGINS = 20;
+export const EXPECTED_PLUGINS = 24;
 export const EXPECTED_THEME_COUNTS: Record<PluginTheme, number> = {
-  b2b: 9,
+  b2b: 13,
   'conformite-ue': 3,
   'back-office': 5,
   'ia-integrations': 3,
@@ -63,7 +63,7 @@ async function checkFile(root: string, name: string, loaded: Loaded[]): Promise<
     ];
   }
   const plugin = result.data;
-  for (const message of findCompatibilityErrors(plugin.compatibility.matrix))
+  for (const message of findCompatibilityErrors(plugin.compatibility?.matrix ?? []))
     errors.push(`${prefix} : compatibilité : ${message}`);
   for (const shot of plugin.screenshots) {
     if (!existsSync(resolve(root, DIR, dirname(shot.src), shot.src.split('/').pop() ?? ''))) {

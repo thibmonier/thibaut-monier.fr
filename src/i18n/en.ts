@@ -36,7 +36,7 @@ export const en: Dictionary = {
     linkedin: '',
   },
   // US-004
-  home: { proofsHeading: '' },
+  home: { proofsHeading: '', profileHeading: '', profileLink: '' },
   // US-007
   cv: { download: '' },
 };

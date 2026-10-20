@@ -1,0 +1,46 @@
+---
+name: 'Channel Access'
+tagline: 'Catalogue ouvert, prix masqués ou boutique fermée derrière une connexion, réglé par canal pour Sylius 2 et appliqué côté serveur.'
+theme: b2b
+repo:
+  owner: thibmonier
+  name: sylius-channel-access-plugin
+packagist: tmonier/sylius-channel-access-plugin
+license: MIT
+inDemo: true
+features:
+  - 'Trois modes par canal : « open » (comme Sylius), « prices_hidden » (catalogue sans prix) et « closed » (connexion exigée).'
+  - 'Prix masqués : ni prix, ni promotion, ni bouton d’achat, ni mini-panier pour un visiteur anonyme, remplacés par un lien de connexion.'
+  - 'Canal fermé : seuls l’accueil, la connexion, l’inscription, la réinitialisation du mot de passe et vos routes exemptées restent accessibles.'
+  - 'Appliqué côté serveur : la Shop API ne renvoie aucun prix et refuse les paniers (401 JSON sur un canal fermé), et un garde bloque tout ajout au panier anonyme.'
+  - 'Mode choisi dans le formulaire du canal de l’administration ; une valeur invalide est refusée et un mode inconnu se lit comme « closed ».'
+  - 'Routes et chemins exemptés ou restreints configurables, avec motifs à étoile ; la restriction l’emporte sur l’exemption.'
+  - 'Réponses d’un canal restreint en « private, no-store » : aucun cache partagé ne mélange les visiteurs.'
+  - 'Contrat pour d’autres plugins (résolveur d’accès, fonctions Twig, attributs de sécurité), sept langues, MySQL, MariaDB et PostgreSQL.'
+compatibility:
+  matrix:
+    - sylius: '2.3'
+      php: '>=8.3'
+      symfony:
+        - '6.4'
+        - '7.4'
+        - '8.0 (PHP 8.4 requis)'
+  databases:
+    - mysql
+    - mariadb
+    - postgresql
+installSteps:
+  - "Enregistrer le bundle `Tmonier\\SyliusChannelAccessPlugin\\TmonierSyliusChannelAccessPlugin` dans `config/bundles.php`."
+  - 'Ajouter le trait `AccessModeTrait` et l’interface `AccessModeAwareInterface` à l’entité canal de l’application, puis la déclarer dans `sylius_channel.resources.channel.classes.model` : le plugin ne modifie aucune entité Sylius.'
+  - 'Importer la configuration `@TmonierSyliusChannelAccessPlugin/config/config.yaml` dans `config/packages/_sylius.yaml`.'
+  - 'Exécuter les migrations avec `bin/console doctrine:migrations:migrate` (une colonne `access_mode`, `open` par défaut : les canaux existants restent ouverts).'
+  - 'Choisir le mode d’accès dans le formulaire du canal de l’administration.'
+configExcerpt: |
+  tmonier_sylius_channel_access:
+      login_route: sylius_shop_login
+      exempt_routes: ['app_mcp_*']
+      exempt_paths: ['/punchout/*', '/feeds/*']
+      restricted_routes: ['app_quote_*']
+---
+
+Dans le négoce B2B, masquer un prix dans un gabarit ne suffit pas : le même prix reste lisible dans la Shop API et l’ajout au panier fonctionne quelle que soit la page affichée. Ce plugin applique le mode d’accès du canal côté serveur : catalogue ouvert, prix masqués ou boutique fermée derrière une connexion. Le visiteur anonyme est traité de la même façon sur les pages, l’API et le panier.

@@ -65,7 +65,7 @@ const MAIN_PAGES: LlmsEntry[] = [
     title: 'Parcours professionnel',
     path: '/parcours/',
     description:
-      'Rôles, périodes, contextes et réalisations, de développeur à directeur technique.',
+      'Rôles, périodes, contextes et réalisations, de développeur à directeur de projets IT.',
   },
   {
     section: 'Profil',

@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { name, headline, valueProp, availability } = Astro.props;
+// Titre façon LinkedIn « rôle · rôle » : chaque rôle reste insécable, le séparateur suit le rôle qui le précède.
+const roles = headline.split(' · ');
 ---
 
 <section class="mx-auto max-w-4xl pt-4 text-center sm:pt-6">
@@ -18,8 +20,17 @@ const { name, headline, valueProp, availability } = Astro.props;
     {availability}
   </p>
   <p class="text-gradient mt-4 text-2xl font-bold tracking-tight sm:text-3xl">{name}</p>
-  <h1 class="mt-2 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">{headline}</h1>
-  <p data-value-prop class="mx-auto mt-4 max-w-2xl text-lg text-muted sm:text-xl">
+  <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-balance sm:text-5xl">
+    {roles.map((role, index) => (
+      <>
+        <span class="whitespace-nowrap">
+          {role}
+          {index < roles.length - 1 && ' ·'}
+        </span>{' '}
+      </>
+    ))}
+  </h1>
+  <p data-value-prop class="mx-auto mt-4 max-w-2xl text-base text-muted sm:text-xl">
     {valueProp}
   </p>
 </section>
