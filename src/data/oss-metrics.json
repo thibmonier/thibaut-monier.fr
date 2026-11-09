@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-10-14T17:17:37.991Z",
+  "generatedAt": "2026-11-09T13:28:10.790Z",
   "entries": {
     "thibmonier/sylius-admin-order-creation-plugin": {
-      "fetchedAt": "2026-10-14T17:17:22.587Z",
+      "fetchedAt": "2026-11-09T13:27:54.010Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T11:21:52.000Z",
+        "pushedAt": "2026-11-04T06:20:57.000Z",
         "latestRelease": {
-          "tag": "v1.0.0",
-          "publishedAt": "2026-10-11T17:38:27.000Z"
+          "tag": "v1.1.0",
+          "publishedAt": "2026-10-22T00:59:10.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 191,
-        "downloadsMonthly": 191,
-        "latestVersion": "v1.0.0"
+        "downloadsTotal": 2030,
+        "downloadsMonthly": 2030,
+        "latestVersion": "v1.1.0"
       }
     },
     "thibmonier/sylius-agentic-feeds-plugin": {
-      "fetchedAt": "2026-10-14T17:17:23.451Z",
+      "fetchedAt": "2026-11-09T13:27:55.162Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T12:30:41.000Z",
+        "pushedAt": "2026-11-04T06:20:56.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-13T05:53:28.000Z"
@@ -29,295 +29,295 @@
       }
     },
     "thibmonier/sylius-ai-catalog-copilot-plugin": {
-      "fetchedAt": "2026-10-14T17:17:24.050Z",
+      "fetchedAt": "2026-11-09T13:27:55.731Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T11:21:29.000Z",
+        "pushedAt": "2026-11-03T20:18:17.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-11T17:59:59.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 1,
-        "downloadsMonthly": 1,
+        "downloadsTotal": 1357,
+        "downloadsMonthly": 1357,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/sylius-audit-log-plugin": {
-      "fetchedAt": "2026-10-14T17:17:24.658Z",
+      "fetchedAt": "2026-11-09T13:27:56.492Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:04:01.000Z",
+        "pushedAt": "2026-11-04T06:20:54.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-11T07:38:09.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 53,
-        "downloadsMonthly": 53,
+        "downloadsTotal": 1685,
+        "downloadsMonthly": 1685,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/sylius-b2b-mcp-plugin": {
-      "fetchedAt": "2026-10-14T17:17:25.283Z",
+      "fetchedAt": "2026-11-09T13:27:57.231Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:04:08.000Z",
+        "pushedAt": "2026-11-04T06:20:59.000Z",
         "latestRelease": {
-          "tag": "v1.1.0",
-          "publishedAt": "2026-10-13T05:35:04.000Z"
+          "tag": "v1.2.3",
+          "publishedAt": "2026-10-24T10:03:23.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 2,
-        "downloadsMonthly": 2,
-        "latestVersion": "v1.1.0"
+        "downloadsTotal": 1438,
+        "downloadsMonthly": 1438,
+        "latestVersion": "v1.2.3"
       }
     },
     "thibmonier/sylius-bulk-actions-plugin": {
-      "fetchedAt": "2026-10-14T17:17:25.928Z",
+      "fetchedAt": "2026-11-09T13:27:57.965Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T12:30:47.000Z",
+        "pushedAt": "2026-11-03T20:17:53.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-11T07:32:22.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 1,
-        "downloadsMonthly": 1,
+        "downloadsTotal": 1339,
+        "downloadsMonthly": 1339,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/sylius-command-palette-plugin": {
-      "fetchedAt": "2026-10-14T17:17:27.610Z",
+      "fetchedAt": "2026-11-09T13:27:58.808Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T11:21:34.000Z",
+        "pushedAt": "2026-11-04T06:21:03.000Z",
         "latestRelease": {
-          "tag": "v1.0.0",
-          "publishedAt": "2026-10-10T19:39:33.000Z"
+          "tag": "v1.1.0",
+          "publishedAt": "2026-10-21T13:00:49.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 1,
-        "downloadsMonthly": 1,
-        "latestVersion": "v1.0.0"
+        "downloadsTotal": 1354,
+        "downloadsMonthly": 1353,
+        "latestVersion": "v1.1.0"
       }
     },
     "thibmonier/sylius-company-accounts-plugin": {
-      "fetchedAt": "2026-10-14T17:17:28.168Z",
+      "fetchedAt": "2026-11-09T13:27:59.581Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:04:18.000Z",
+        "pushedAt": "2026-11-03T20:25:38.000Z",
         "latestRelease": {
-          "tag": "v1.1.0",
-          "publishedAt": "2026-10-12T20:06:59.000Z"
+          "tag": "v1.3.0",
+          "publishedAt": "2026-10-22T01:08:37.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 162,
-        "downloadsMonthly": 162,
-        "latestVersion": "v1.1.0"
+        "downloadsTotal": 5131,
+        "downloadsMonthly": 5131,
+        "latestVersion": "v1.3.0"
       }
     },
     "thibmonier/sylius-container-fill-plugin": {
-      "fetchedAt": "2026-10-14T17:17:28.906Z",
+      "fetchedAt": "2026-11-09T13:28:00.333Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:04:23.000Z",
+        "pushedAt": "2026-11-03T20:27:19.000Z",
         "latestRelease": {
-          "tag": "v1.1.0",
-          "publishedAt": "2026-10-13T05:49:50.000Z"
+          "tag": "v1.1.1",
+          "publishedAt": "2026-10-16T13:41:54.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 2,
-        "downloadsMonthly": 2,
-        "latestVersion": "v1.1.0"
+        "downloadsTotal": 1233,
+        "downloadsMonthly": 1233,
+        "latestVersion": "v1.1.1"
       }
     },
     "thibmonier/sylius-facturx-plugin": {
-      "fetchedAt": "2026-10-14T17:17:29.531Z",
+      "fetchedAt": "2026-11-09T13:28:01.081Z",
       "github": {
         "stars": 1,
-        "pushedAt": "2026-10-14T11:21:57.000Z",
+        "pushedAt": "2026-11-03T20:26:58.000Z",
         "latestRelease": {
-          "tag": "v1.1.0",
-          "publishedAt": "2026-10-12T06:32:39.000Z"
+          "tag": "v1.2.0",
+          "publishedAt": "2026-11-01T11:10:43.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 87,
-        "downloadsMonthly": 87,
-        "latestVersion": "v1.1.0"
+        "downloadsTotal": 1847,
+        "downloadsMonthly": 1847,
+        "latestVersion": "v1.2.0"
       }
     },
     "thibmonier/sylius-gpsr-plugin": {
-      "fetchedAt": "2026-10-14T17:17:30.125Z",
+      "fetchedAt": "2026-11-09T13:28:01.926Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:04:34.000Z",
+        "pushedAt": "2026-11-04T06:21:10.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-10T18:03:17.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 1,
-        "downloadsMonthly": 1,
+        "downloadsTotal": 1339,
+        "downloadsMonthly": 1338,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/sylius-order-hold-plugin": {
-      "fetchedAt": "2026-10-14T17:17:30.798Z",
+      "fetchedAt": "2026-11-09T13:28:02.648Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:04:40.000Z",
+        "pushedAt": "2026-11-03T20:16:53.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-12T14:52:15.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 353,
-        "downloadsMonthly": 353,
+        "downloadsTotal": 3195,
+        "downloadsMonthly": 3195,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/sylius-purchase-approval-plugin": {
-      "fetchedAt": "2026-10-14T17:17:31.455Z",
+      "fetchedAt": "2026-11-09T13:28:03.542Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:04:48.000Z",
+        "pushedAt": "2026-11-04T06:21:08.000Z",
         "latestRelease": {
-          "tag": "v1.1.0",
-          "publishedAt": "2026-10-13T05:28:08.000Z"
+          "tag": "v1.4.0",
+          "publishedAt": "2026-10-25T19:08:21.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 55,
-        "downloadsMonthly": 55,
-        "latestVersion": "v1.1.0"
+        "downloadsTotal": 2068,
+        "downloadsMonthly": 2068,
+        "latestVersion": "v1.4.0"
       }
     },
     "thibmonier/sylius-quick-order-plugin": {
-      "fetchedAt": "2026-10-14T17:17:32.019Z",
+      "fetchedAt": "2026-11-09T13:28:04.355Z",
       "github": {
         "stars": 1,
-        "pushedAt": "2026-10-14T11:21:40.000Z",
+        "pushedAt": "2026-11-03T20:19:25.000Z",
         "latestRelease": {
-          "tag": "v1.1.0",
-          "publishedAt": "2026-10-12T13:31:10.000Z"
+          "tag": "v1.3.0",
+          "publishedAt": "2026-10-21T13:00:45.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 163,
-        "downloadsMonthly": 163,
-        "latestVersion": "v1.1.0"
+        "downloadsTotal": 1841,
+        "downloadsMonthly": 1841,
+        "latestVersion": "v1.3.0"
       }
     },
     "thibmonier/sylius-quote-request-plugin": {
-      "fetchedAt": "2026-10-14T17:17:32.633Z",
+      "fetchedAt": "2026-11-09T13:28:05.128Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T11:21:46.000Z",
+        "pushedAt": "2026-11-03T20:21:53.000Z",
         "latestRelease": {
-          "tag": "v1.0.0",
-          "publishedAt": "2026-10-12T01:31:17.000Z"
+          "tag": "v1.1.0",
+          "publishedAt": "2026-10-21T13:00:41.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 69,
-        "downloadsMonthly": 69,
-        "latestVersion": "v1.0.0"
+        "downloadsTotal": 1595,
+        "downloadsMonthly": 1595,
+        "latestVersion": "v1.1.0"
       }
     },
     "thibmonier/sylius-tier-pricing-plugin": {
-      "fetchedAt": "2026-10-14T17:17:33.261Z",
+      "fetchedAt": "2026-11-09T13:28:06.023Z",
       "github": {
         "stars": 1,
-        "pushedAt": "2026-10-14T09:04:59.000Z",
+        "pushedAt": "2026-11-04T06:21:14.000Z",
         "latestRelease": {
           "tag": "v1.1.0",
           "publishedAt": "2026-10-12T17:27:22.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 2,
-        "downloadsMonthly": 2,
+        "downloadsTotal": 1231,
+        "downloadsMonthly": 1231,
         "latestVersion": "v1.1.0"
       }
     },
     "thibmonier/sylius-timeline-plugin": {
-      "fetchedAt": "2026-10-14T17:17:33.848Z",
+      "fetchedAt": "2026-11-09T13:28:06.810Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T12:50:25.000Z",
+        "pushedAt": "2026-11-04T06:21:18.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-10T19:22:52.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 1,
-        "downloadsMonthly": 1,
+        "downloadsTotal": 1339,
+        "downloadsMonthly": 1338,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/sylius-trade-credit-plugin": {
-      "fetchedAt": "2026-10-14T17:17:34.666Z",
+      "fetchedAt": "2026-11-09T13:28:07.600Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:05:04.000Z",
+        "pushedAt": "2026-11-03T21:06:34.000Z",
         "latestRelease": {
           "tag": "v1.1.0",
           "publishedAt": "2026-10-12T17:27:27.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 77,
-        "downloadsMonthly": 77,
+        "downloadsTotal": 1916,
+        "downloadsMonthly": 1916,
         "latestVersion": "v1.1.0"
       }
     },
     "thibmonier/sylius-webhook-outbox-plugin": {
-      "fetchedAt": "2026-10-14T17:17:35.284Z",
+      "fetchedAt": "2026-11-09T13:28:08.516Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T09:17:10.000Z",
+        "pushedAt": "2026-11-03T20:19:52.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-11T18:16:38.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 222,
-        "downloadsMonthly": 222,
+        "downloadsTotal": 2327,
+        "downloadsMonthly": 2327,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/sylius-withdrawal-plugin": {
-      "fetchedAt": "2026-10-14T17:17:35.819Z",
+      "fetchedAt": "2026-11-09T13:28:09.281Z",
       "github": {
         "stars": 0,
-        "pushedAt": "2026-10-14T11:21:22.000Z",
+        "pushedAt": "2026-11-03T20:19:07.000Z",
         "latestRelease": {
           "tag": "v1.0.0",
           "publishedAt": "2026-10-10T16:11:35.000Z"
         }
       },
       "packagist": {
-        "downloadsTotal": 1,
-        "downloadsMonthly": 1,
+        "downloadsTotal": 1231,
+        "downloadsMonthly": 1230,
         "latestVersion": "v1.0.0"
       }
     },
     "thibmonier/tailsfadmin": {
-      "fetchedAt": "2026-10-14T17:17:37.359Z",
+      "fetchedAt": "2026-11-09T13:28:10.050Z",
       "github": {
         "stars": 0,
         "pushedAt": "2026-09-14T06:50:11.000Z",
@@ -328,7 +328,7 @@
       },
       "packagist": {
         "downloadsTotal": 230,
-        "downloadsMonthly": 46,
+        "downloadsMonthly": 1,
         "latestVersion": "v1.6.2"
       }
     }
